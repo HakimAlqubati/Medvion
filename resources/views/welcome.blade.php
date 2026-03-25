@@ -4,6 +4,8 @@
 
     <x-frontend.features />
 
+    <x-frontend.faq />
+
     <x-frontend.latest-courses />
 
 </x-layouts.frontend>

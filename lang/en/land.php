@@ -94,4 +94,25 @@ return [
     'about_value_3_desc'     => 'Making training opportunities accessible to all health professionals regardless of their geographic location.',
     'about_value_4_title'    => 'Integrity',
     'about_value_4_desc'     => 'Transparency and professionalism in everything we offer — programmes, content, and certificates.',
+
+    // ---------------------------------------------------------------
+    // FAQ Section
+    // ---------------------------------------------------------------
+    'faq_heading'    => 'Frequently Asked Questions',
+    'faq_subheading' => 'Answers to the most common questions from our trainees and visitors.',
+
+    'faq_1_q' => 'Are the courses officially accredited?',
+    'faq_1_a' => 'Yes, all courses offered on the Medvion platform are accredited and come with completion certificates recognised by the relevant medical and academic authorities.',
+
+    'faq_2_q' => 'Can I learn from any smart device?',
+    'faq_2_a' => 'Absolutely. The platform is fully responsive and compatible with smartphones, tablets, and computers without any limitations.',
+
+    'faq_3_q' => 'How do I receive my completion certificate?',
+    'faq_3_a' => 'After completing all course units and passing the final assessment, you will automatically receive a verified digital completion certificate that can be shared and printed.',
+
+    'faq_4_q' => 'Are there registration fees?',
+    'faq_4_a' => 'Registration on Medvion is completely free. Some specialised courses may be paid, while a large number of courses are available free of charge for everyone.',
+
+    'faq_5_q' => 'Who is eligible to enrol in the courses?',
+    'faq_5_a' => 'Courses are open to all healthcare professionals, including doctors, nurses, pharmacists, medical students, and anyone interested in continuing professional health development.',
 ];
