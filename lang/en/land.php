@@ -4,33 +4,94 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Landing Page - English
+    | Landing Page – English
     |--------------------------------------------------------------------------
     */
 
-    'title'              => 'Medvion Platform | Health Training & Rehabilitation',
-    'dashboard'          => 'Dashboard',
-    'login'              => 'Log In',
-    'register'           => 'Create Account',
+    // Meta
+    'title'                  => 'Medvion Platform | Digital Health Training & Rehabilitation',
+    'meta_description'       => 'Advance your healthcare career with accredited courses and verified certificates.',
 
-    // Hero
-    'hero_heading'       => 'The Leading Platform for Digital Health Training & Rehabilitation',
-    'hero_subheading'    => 'Elevate your professional career in the healthcare sector through specialised courses designed to the highest academic quality standards.',
-    'browse_courses'     => 'Browse Courses',
-    'about_us'           => 'About Us',
-
-    // Features
-    'features_heading'   => 'Why Choose Medvion?',
-
-    'feature_1_title'    => 'Accredited Content',
-    'feature_1_desc'     => 'Training curricula designed by a distinguished group of medical field experts.',
-
-    'feature_2_title'    => 'Flexible Learning',
-    'feature_2_desc'     => 'Learn anytime, anywhere through an interface that supports all smart devices.',
-
-    'feature_3_title'    => 'Verified Certificates',
-    'feature_3_desc'     => 'Earn completion certificates to support your CV in the job market.',
+    // Navbar
+    'nav_home'               => 'Home',
+    'nav_about'              => 'About Us',
+    'nav_courses'            => 'Courses',
+    'nav_contact'            => 'Contact',
+    'nav_login'              => 'Log In',
+    'nav_register'           => 'Create Account',
+    'nav_dashboard'          => 'Dashboard',
 
     // Footer
-    'footer_copy'        => '© :year Medvion Training & Rehabilitation Platform. All rights reserved.',
+    'footer_copy'            => '© :year Medvion Health Training & Rehabilitation Platform. All rights reserved.',
+    'footer_tagline'         => 'Towards a distinguished digital healthcare ecosystem.',
+
+    // ---------------------------------------------------------------
+    // Hero Section
+    // ---------------------------------------------------------------
+    'hero_title'             => 'The Leading Platform for Digital Health Training & Rehabilitation',
+    'hero_subtitle'          => 'Advance your professional career in healthcare through specialised courses designed to the highest academic and professional quality standards.',
+    'hero_cta_primary'       => 'Browse Courses',
+    'hero_cta_secondary'     => 'Discover the Platform',
+
+    // ---------------------------------------------------------------
+    // Features Section
+    // ---------------------------------------------------------------
+    'features_heading'       => 'Why Choose Medvion?',
+    'features_subheading'    => 'We provide a comprehensive learning environment that empowers you to elevate your professional competencies in the healthcare sector.',
+
+    'feature_1_title'        => 'Accredited Scientific Content',
+    'feature_1_desc'         => 'Training curricula designed by elite experts and academics in the medical field, aligned with the highest international standards.',
+
+    'feature_2_title'        => 'Flexible & Smart Learning',
+    'feature_2_desc'         => 'Learn anytime, anywhere through a modern interface that supports all devices and delivers a seamless learning experience.',
+
+    'feature_3_title'        => 'Recognised Verified Certificates',
+    'feature_3_desc'         => 'Earn professionally recognised completion certificates to strengthen your CV and career opportunities.',
+
+    // ---------------------------------------------------------------
+    // Latest Courses Section
+    // ---------------------------------------------------------------
+    'courses_heading'        => 'Latest Training Courses',
+    'courses_subheading'     => 'Explore a diverse range of specialised courses in healthcare and medical rehabilitation.',
+    'courses_view_all'       => 'View All Courses',
+    'course_enroll'          => 'Enrol Now',
+    'course_hours'           => 'hrs',
+    'course_students'        => 'students',
+    'course_level_beginner'  => 'Beginner',
+    'course_level_inter'     => 'Intermediate',
+    'course_level_advanced'  => 'Advanced',
+
+    // Dummy course cards (for demo)
+    'course_1_title'         => 'Fundamentals of Emergency Assessment',
+    'course_1_category'      => 'Emergency Medicine',
+    'course_2_title'         => 'Health Education & Communication Skills',
+    'course_2_category'      => 'Communication Skills',
+    'course_3_title'         => 'Chronic Disease Management & Rehabilitation Programs',
+    'course_3_category'      => 'Chronic Care',
+
+    // ---------------------------------------------------------------
+    // About Page
+    // ---------------------------------------------------------------
+    'about_page_title'       => 'About Us | Medvion Platform',
+    'about_hero_title'       => 'Towards a Distinguished Digital Health Training Ecosystem',
+    'about_hero_subtitle'    => 'Medvion is your premier destination for professional training in the healthcare sector.',
+
+    'about_definition_title' => 'Platform Definition',
+    'about_definition_body'  => 'Medvion is a specialised digital learning platform focused on health training and rehabilitation, aiming to elevate the competence of medical and healthcare professionals through high-quality training programmes aligned with global best practices.',
+
+    'about_vision_title'     => 'Our Vision',
+    'about_vision_body'      => 'To be the leading regional platform for the digital development and rehabilitation of healthcare professionals, contributing to building a professional healthcare system capable of meeting the challenges of the 21st century.',
+
+    'about_mission_title'    => 'Our Mission',
+    'about_mission_body'     => 'To deliver accredited, up-to-date scientific training content that empowers healthcare individuals with the knowledge and skills necessary to improve the quality of patient care.',
+
+    'about_values_title'     => 'Our Values',
+    'about_value_1_title'    => 'Quality',
+    'about_value_1_desc'     => 'Commitment to the highest standards of quality in training content and assessment.',
+    'about_value_2_title'    => 'Innovation',
+    'about_value_2_desc'     => 'Leveraging the latest educational technologies to deliver an exceptional learning experience.',
+    'about_value_3_title'    => 'Inclusivity',
+    'about_value_3_desc'     => 'Making training opportunities accessible to all health professionals regardless of their geographic location.',
+    'about_value_4_title'    => 'Integrity',
+    'about_value_4_desc'     => 'Transparency and professionalism in everything we offer — programmes, content, and certificates.',
 ];
