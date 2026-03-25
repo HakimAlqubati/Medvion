@@ -14,6 +14,19 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            // إضافة الألوان العالمية لمنصة Medvion هنا
+            colors: {
+                primary: {
+                    DEFAULT: '#0A4A7B', // اللون الأساسي (أزرق طبي يعكس الثقة والاحترافية)
+                    light: '#1E69A3',   // درجة أفتح (ممتازة لتأثيرات الـ Hover)
+                    dark: '#063052',    // درجة أغمق (للعناوين أو التذييل)
+                },
+                secondary: {
+                    DEFAULT: '#0D9488', // اللون الثانوي (أخضر/تيل يعكس الصحة والنمو)
+                    light: '#14B8A6',
+                    dark: '#0F766E',
+                }
+            }
         },
     },
 
