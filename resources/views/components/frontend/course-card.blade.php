@@ -72,7 +72,7 @@
             </span>
         </div>
 
-        <a href="#"
+        <a href="{{ route('courses.show', ['slug' => \Illuminate\Support\Str::slug($title ?? 'course')]) }}"
            class="mt-4 w-full text-center py-2.5 bg-primary text-white text-xs font-bold rounded-lg hover:bg-primary-light transition">
             {{ __('land.course_enroll') }}
         </a>

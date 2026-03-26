@@ -41,6 +41,14 @@ Route::get('/contact', function () {
 Route::view('/privacy-policy', 'privacy')->name('privacy');
 Route::view('/terms-conditions', 'terms')->name('terms');
 
+Route::get('/courses', function () {
+    return view('frontend.courses.index');
+})->name('courses.index');
+
+Route::get('/courses/{slug}', function ($slug) {
+    return view('frontend.courses.show', compact('slug'));
+})->name('courses.show');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

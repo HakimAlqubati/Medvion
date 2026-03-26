@@ -48,7 +48,7 @@
 
         {{-- View All CTA --}}
         <div class="mt-12 text-center reveal delay-200">
-            <a href="#"
+            <a href="{{ route('courses.index') }}"
                class="inline-flex items-center gap-2 px-8 py-3 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition text-sm">
                 {{ __('land.courses_view_all') }}
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
