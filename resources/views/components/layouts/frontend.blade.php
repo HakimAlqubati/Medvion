@@ -16,6 +16,8 @@
     <style>
         body { font-family: 'Tajawal', sans-serif; }
     </style>
+
+    @stack('styles')
 </head>
 
 <body class="bg-gray-50 text-gray-800 antialiased">
@@ -94,5 +96,6 @@
         </div>
     </footer>
 
+    @stack('scripts')
 </body>
 </html>

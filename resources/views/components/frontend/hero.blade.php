@@ -131,8 +131,8 @@
 /* ── Slide overlays (Medical Theme: Navy/Blue base) ── */
 .hero-overlay {
     background:
-        linear-gradient(to {{ app()->getLocale() === 'ar' ? 'left' : 'right' }}, rgba(1,5,15,0.95) 0%, rgba(2,10,25,0.85) 45%, rgba(5,20,40,0.4) 80%, transparent 100%),
-        linear-gradient(0deg,   rgba(1,5,15,0.95) 0%, rgba(2,10,25,0.6) 40%, transparent 100%);
+        linear-gradient(to {{ app()->getLocale() === 'ar' ? 'left' : 'right' }}, rgba(2,12,27,0.85) 0%, rgba(5,20,40,0.5) 55%, transparent 100%),
+        linear-gradient(0deg,   rgba(2,12,27,0.7) 0%, rgba(5,20,40,0.2) 40%, transparent 100%);
 }
 
 /* ── Orbs (Trust/Medical Colors: Sky Blue & Deep Azure) ── */

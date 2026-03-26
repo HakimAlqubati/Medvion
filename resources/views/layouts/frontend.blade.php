@@ -15,6 +15,8 @@
     <style>
         body { font-family: 'Tajawal', sans-serif; background: #030a18; }
     </style>
+
+    @stack('styles')
 </head>
 
 <body class="text-gray-800 antialiased">
@@ -225,5 +227,6 @@
         </div>
     </footer>
 
+    @stack('scripts')
 </body>
 </html>
