@@ -35,22 +35,26 @@
                 </a>
 
                 {{-- Desktop Nav --}}
-                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
-                    <a href="{{ url('/') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark">
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+                    <a href="{{ url('/') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark {{ request()->is('/') ? 'text-primary font-bold' : 'text-gray-600' }}">
                         {{ __('land.nav_home') }}
-                        <span class="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
+                        <span class="absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ request()->is('/') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full' }}"></span>
                     </a>
-                    <a href="{{ url('/about') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark">
+                    <a href="{{ url('/about') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark {{ request()->is('about') ? 'text-primary font-bold' : 'text-gray-600' }}">
                         {{ __('land.nav_about') }}
-                        <span class="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
+                        <span class="absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ request()->is('about') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full' }}"></span>
                     </a>
-                    <a href="{{ url('/#courses') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark">
+                    <a href="{{ url('/#courses') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark text-gray-600">
                         {{ __('land.nav_courses') }}
                         <span class="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
                     </a>
-                    <a href="{{ url('/#faq') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark">
+                    <a href="{{ url('/#faq') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark text-gray-600">
                         {{ __('land.nav_faq') }}
                         <span class="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
+                    </a>
+                    <a href="{{ route('contact') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark {{ request()->routeIs('contact') ? 'text-primary font-bold' : 'text-gray-600' }}">
+                        {{ __('land.nav_contact') }}
+                        <span class="absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ request()->routeIs('contact') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full' }}"></span>
                     </a>
                 </nav>
 

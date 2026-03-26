@@ -141,4 +141,21 @@ return [
 
     'faq_5_q' => 'Who is eligible to enrol in the courses?',
     'faq_5_a' => 'Courses are open to all healthcare professionals, including doctors, nurses, pharmacists, medical students, and anyone interested in continuing professional health development.',
+
+    // ---------------------------------------------------------------
+    // Contact Us Page
+    // ---------------------------------------------------------------
+    'contact_page_title'     => 'Contact Us | Medvion Platform',
+    'contact_hero_title'     => 'We Are Here to Help',
+    'contact_hero_subtitle'  => 'Do not hesitate to reach out with any questions or suggestions. Our team is available to assist you as soon as possible.',
+    'contact_form_title'     => 'Send Us a Message',
+    'contact_name'           => 'Full Name',
+    'contact_email'          => 'Email Address',
+    'contact_phone'          => 'Phone Number',
+    'contact_subject'        => 'Subject',
+    'contact_message'        => 'Message',
+    'contact_submit'         => 'Send Message',
+    'contact_info_title'     => 'Direct Contact Information',
+    'contact_whatsapp'       => 'WhatsApp',
+    'contact_support_email'  => 'Support Email',
 ];
