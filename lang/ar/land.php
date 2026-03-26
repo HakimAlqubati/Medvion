@@ -158,4 +158,5 @@ return [
     'contact_info_title'     => 'معلومات التواصل المباشر',
     'contact_whatsapp'       => 'واتساب',
     'contact_support_email'  => 'البريد الإلكتروني للدعم',
+    'whatsapp_message'       => 'مرحباً فريق منصة Medvion، أود الاستفسار عن: ',
 ];

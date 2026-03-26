@@ -158,4 +158,5 @@ return [
     'contact_info_title'     => 'Direct Contact Information',
     'contact_whatsapp'       => 'WhatsApp',
     'contact_support_email'  => 'Support Email',
+    'whatsapp_message'       => 'Hello Medvion Platform team, I would like to inquire about: ',
 ];
