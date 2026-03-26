@@ -159,4 +159,14 @@ return [
     'contact_whatsapp'       => 'WhatsApp',
     'contact_support_email'  => 'Support Email',
     'whatsapp_message'       => 'Hello Medvion Platform team, I would like to inquire about: ',
+
+    // ---------------------------------------------------------------
+    // Legal Pages
+    // ---------------------------------------------------------------
+    'nav_privacy'          => 'Privacy Policy',
+    'nav_terms'            => 'Terms & Conditions',
+    'privacy_title'        => 'Privacy Policy',
+    'privacy_content'      => '<div class="space-y-6 text-relaxed leading-8"><p>At Medvion, we are committed to protecting our users\' privacy. This policy explains how we collect, use, and protect your personal data.</p><h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">1. Data Collection</h3><p>We collect data that you directly provide to us upon registration, such as name, email, and phone number.</p><h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">2. Data Usage</h3><p>Your data is used to improve user experience, provide technical support, and issue training certificates.</p><h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">3. Data Protection</h3><p>We follow the best security standards to ensure no unauthorized third party can access your personal data.</p></div>',
+    'terms_title'          => 'Terms & Conditions',
+    'terms_content'        => '<div class="space-y-6 text-relaxed leading-8"><p>Welcome to Medvion Platform. By using our platform, you agree to comply with the following Terms and Conditions.</p><h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">1. Accounts and Registration</h3><p>Users must provide accurate information during registration and are fully responsible for maintaining the confidentiality of their accounts.</p><h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">2. Intellectual Property</h3><p>All training materials available on the platform are the exclusive property of Medvion. Unauthorized reproduction or distribution is strictly prohibited.</p><h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">3. Certificates and Assessment</h3><p>Certificates are awarded only upon full completion of course requirements. Medvion reserves the right to revoke certificates if any fraudulent activity is detected.</p></div>',
 ];

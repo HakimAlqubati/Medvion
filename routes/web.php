@@ -38,6 +38,9 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+Route::view('/privacy-policy', 'privacy')->name('privacy');
+Route::view('/terms-conditions', 'terms')->name('terms');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -102,10 +102,12 @@
                     <p class="text-gray-400 text-sm mt-1">{{ __('land.footer_tagline') }}</p>
                 </div>
 
-                <nav class="flex gap-6 text-sm text-gray-300">
-                    <a href="{{ url('/') }}" class="hover:text-white transition">{{ __('land.nav_home') }}</a>
-                    <a href="{{ url('/about') }}" class="hover:text-white transition">{{ __('land.nav_about') }}</a>
-                    <a href="#courses" class="hover:text-white transition">{{ __('land.nav_courses') }}</a>
+                <nav class="flex flex-wrap gap-4 md:gap-6 text-sm text-gray-300 justify-center">
+                    <a href="{{ url('/') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_home') }}</a>
+                    <a href="{{ url('/about') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_about') }}</a>
+                    <a href="{{ url('/#courses') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_courses') }}</a>
+                    <a href="{{ route('privacy') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_privacy') }}</a>
+                    <a href="{{ route('terms') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_terms') }}</a>
                 </nav>
 
             </div>
