@@ -36,7 +36,25 @@
     @stack('styles')
 </head>
 
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body class="bg-gray-50 text-gray-800 antialiased relative">
+
+    {{-- Page Loader (Ultra-lightweight Medical Theme) --}}
+    <div id="medvion-loader" class="fixed inset-0 z-[99999] bg-white flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out pointer-events-none">
+        <div class="relative w-16 h-16 mb-4">
+            {{-- Static Ring --}}
+            <div class="absolute inset-0 border-4 border-primary/10 rounded-full"></div>
+            {{-- Spinning Dual-color Pulse --}}
+            <div class="absolute inset-0 border-4 border-primary border-r-transparent border-t-secondary border-l-transparent rounded-full animate-spin" style="animation-duration: 1.5s;"></div>
+            {{-- Center Medical Cross --}}
+            <div class="absolute inset-0 flex items-center justify-center text-primary animate-pulse">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/>
+                </svg>
+            </div>
+        </div>
+        {{-- Brand Name Pulse --}}
+        <div class="text-primary font-bold tracking-[0.2em] text-sm md:text-base animate-pulse">MEDVION</div>
+    </div>
     @php
         $navLinks = [
             ['name' => __('land.nav_home'), 'url' => url('/'), 'active' => request()->is('/'), 'target' => null],
@@ -196,6 +214,19 @@
 
     @stack('scripts')
     <script>
+        // --- Prevent body scroll before load ---
+        document.body.style.overflow = 'hidden';
+        
+        // --- Page Loader Removal ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('medvion-loader');
+            if (loader) {
+                loader.style.opacity = '0';
+                document.body.style.overflow = ''; // Restore scroll
+                setTimeout(() => loader.remove(), 700);
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             const header = document.getElementById('main-header');
             const mobileBtn = document.getElementById('mobile-menu-btn');
