@@ -1,333 +1,365 @@
 {{-- ============================================================
-     Hero Section – Medvion Platform (Luxury Launch Edition)
+     Hero Section – Medvion Platform | Cinematic Slider
      ============================================================ --}}
-<section class="hero-section relative overflow-hidden min-h-screen flex items-center" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
-    {{-- ── Animated background image (Ken Burns) ── --}}
-    <div class="absolute inset-0 hero-img-wrap">
-        <div class="absolute inset-0 hero-img-layer"></div>
-        {{-- Dark overlay to keep readability --}}
-        <div class="absolute inset-0 hero-img-overlay"></div>
+{{-- Slide data (no fake numbers, pure promotional) --}}
+@php
+$slides = [
+    [
+        'image'    => '/images/hero-slide-1.png',
+        'badge'    => __('land.hero_badge'),
+        'title_1'  => __('land.slide1_title1'),
+        'title_2'  => __('land.slide1_title2'),
+        'subtitle' => __('land.slide1_subtitle'),
+    ],
+    [
+        'image'    => '/images/hero-slide-2.png',
+        'badge'    => __('land.hero_badge'),
+        'title_1'  => __('land.slide2_title1'),
+        'title_2'  => __('land.slide2_title2'),
+        'subtitle' => __('land.slide2_subtitle'),
+    ],
+    [
+        'image'    => '/images/hero-slide-3.png',
+        'badge'    => __('land.hero_badge'),
+        'title_1'  => __('land.slide3_title1'),
+        'title_2'  => __('land.slide3_title2'),
+        'subtitle' => __('land.slide3_subtitle'),
+    ],
+];
+@endphp
+
+<section id="hero-root"
+    class="relative overflow-hidden min-h-screen flex items-end pb-20 md:items-center md:pb-0"
+    dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}"
+>
+
+    {{-- ══════════════════════════════════════════
+         SLIDE IMAGES – stacked, crossfade
+    ══════════════════════════════════════════ --}}
+    <div id="hero-slides" class="absolute inset-0 z-0">
+        @foreach ($slides as $i => $slide)
+        <div
+            class="hero-slide absolute inset-0 transition-opacity duration-[1400ms] ease-in-out {{ $i === 0 ? 'opacity-100' : 'opacity-0' }}"
+            data-index="{{ $i }}"
+        >
+            {{-- The image with its own Ken Burns animation (staggered per slide) --}}
+            <div
+                class="absolute inset-0 bg-center bg-cover hero-slide-img"
+                style="background-image: url('{{ $slide['image'] }}');
+                       animation: kenburns-{{ $i }} {{ 14 + $i * 2 }}s ease-in-out infinite alternate;"
+            ></div>
+
+            {{-- Gradient overlay: strong left vignette + bottom fade --}}
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        @endforeach
     </div>
 
-    {{-- ── Floating orbs / glows ── --}}
-    <div class="absolute top-[-10%] start-[-8%] w-[520px] h-[520px] hero-orb orb-1 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-[-15%] end-[-5%]  w-[420px] h-[420px] hero-orb orb-2 rounded-full blur-3xl"></div>
-    <div class="absolute top-[40%]   start-[30%]  w-[280px] h-[280px] hero-orb orb-3 rounded-full blur-3xl"></div>
+    {{-- ══════════════════════════════════════════
+         FLOATING ORBS
+    ══════════════════════════════════════════ --}}
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="orb orb-a absolute w-[500px] h-[500px] -top-20 -start-32 rounded-full blur-3xl"></div>
+        <div class="orb orb-b absolute w-[380px] h-[380px] bottom-0 end-0 rounded-full blur-3xl"></div>
+    </div>
 
-    {{-- ── Animated grid overlay ── --}}
-    <div class="absolute inset-0 hero-grid opacity-[0.04]"></div>
+    {{-- ══════════════════════════════════════════
+         CONTENT
+    ══════════════════════════════════════════ --}}
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-36 pb-24 md:py-0 md:min-h-screen md:flex md:items-center">
 
-    {{-- ── Content wrapper ── --}}
-    <div class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 lg:py-36">
+        <div class="max-w-2xl lg:max-w-3xl {{ app()->getLocale() === 'ar' ? 'ms-auto text-right' : 'me-auto text-left' }}">
 
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            {{-- Badge --}}
+            <div id="hero-badge" class="hero-enter inline-flex items-center gap-2 mb-7 px-4 py-2 rounded-full hero-badge-glass" style="animation-delay:0.05s">
+                <span class="pulse-dot"></span>
+                <span class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300" id="slide-badge">
+                    {{ $slides[0]['badge'] }}
+                </span>
+            </div>
 
-            {{-- ── LEFT COLUMN – text ── --}}
-            <div class="hero-text-col text-{{ app()->getLocale() === 'ar' ? 'right' : 'left' }}">
+            {{-- Headline --}}
+            <h1 class="hero-enter font-black text-white leading-[1.06] tracking-tight mb-6" style="animation-delay:0.15s">
+                <span id="slide-title-1" class="block text-4xl sm:text-5xl xl:text-6xl slide-text-fade">
+                    {{ $slides[0]['title_1'] }}
+                </span>
+                <span id="slide-title-2" class="block text-4xl sm:text-5xl xl:text-6xl hero-grad-text slide-text-fade mt-1">
+                    {{ $slides[0]['title_2'] }}
+                </span>
+            </h1>
 
-                {{-- Launch badge --}}
-                <div class="hero-anim-1 inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full hero-badge">
-                    <span class="live-dot"></span>
-                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-secondary-light">
-                        {{ __('land.hero_badge') }}
-                    </span>
-                </div>
+            {{-- Subtitle --}}
+            <p id="slide-subtitle" class="hero-enter text-base sm:text-lg text-white/60 leading-relaxed mb-10 max-w-xl slide-text-fade" style="animation-delay:0.25s">
+                {{ $slides[0]['subtitle'] }}
+            </p>
 
-                {{-- Headline --}}
-                <h1 class="hero-anim-2 text-4xl sm:text-5xl xl:text-[3.75rem] font-black leading-[1.08] text-white mb-6 tracking-tight">
-                    <span class="block">{{ __('land.hero_title_line1') }}</span>
-                    <span class="block hero-gradient-text mt-1">{{ __('land.hero_title_line2') }}</span>
-                </h1>
+            {{-- CTAs --}}
+            <div class="hero-enter flex flex-wrap gap-4 mb-16 {{ app()->getLocale() === 'ar' ? 'justify-end sm:justify-start' : 'justify-start' }}" style="animation-delay:0.35s">
+                <a href="#courses" class="cta-primary group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm text-white">
+                    <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                    {{ __('land.hero_cta_primary') }}
+                </a>
+                <a href="{{ url('/about') }}" class="cta-secondary inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white/85">
+                    {{ __('land.hero_cta_secondary') }}
+                </a>
+            </div>
 
-                {{-- Subtitle --}}
-                <p class="hero-anim-3 text-base sm:text-lg text-white/65 leading-relaxed mb-10 max-w-xl">
-                    {{ __('land.hero_subtitle') }}
-                </p>
+            {{-- ── Slide indicators (dots + progress line) ── --}}
+            <div class="hero-enter flex items-center gap-5 {{ app()->getLocale() === 'ar' ? 'justify-end sm:justify-start' : 'justify-start' }}" style="animation-delay:0.45s">
 
-                {{-- CTAs --}}
-                <div class="hero-anim-4 flex flex-wrap gap-4 {{ app()->getLocale() === 'ar' ? 'justify-end sm:justify-start' : 'justify-start' }}">
-                    <a href="#courses" class="hero-cta-primary group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-sm text-white transition-all duration-300">
-                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                        {{ __('land.hero_cta_primary') }}
-                    </a>
-                    <a href="{{ url('/about') }}" class="hero-cta-secondary inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-sm text-white/85 transition-all duration-300">
-                        {{ __('land.hero_cta_secondary') }}
-                    </a>
-                </div>
-
-                {{-- Trust line --}}
-                <div class="hero-anim-5 mt-12 flex items-center gap-3 {{ app()->getLocale() === 'ar' ? 'justify-end sm:justify-start' : 'justify-start' }}">
-                    {{-- Avatars stack --}}
-                    <div class="flex -space-x-2 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : '' }}">
-                        @foreach(['bg-sky-400','bg-teal-400','bg-violet-400','bg-pink-400'] as $color)
-                        <div class="w-8 h-8 rounded-full border-2 border-white/10 {{ $color }} flex items-center justify-center">
-                            <svg class="w-4 h-4 text-white/90" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-                        </div>
-                        @endforeach
-                    </div>
-                    <p class="text-white/50 text-xs leading-snug">
-                        {{ __('land.hero_trust_line') }}
-                    </p>
-                </div>
-
-            </div>{{-- /text col --}}
-
-            {{-- ── RIGHT COLUMN – visual card stack ── --}}
-            <div class="hero-anim-right relative hidden lg:flex items-center justify-center">
-
-                {{-- Central glowing card --}}
-                <div class="hero-main-card relative z-10 w-full max-w-sm mx-auto rounded-2xl p-8 hero-card-glass">
-
-                    {{-- Card top row --}}
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl hero-icon-bg flex items-center justify-center">
-                                <svg class="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.966 8.966 0 00-6 2.292m0-14.25v14.25"/></svg>
-                            </div>
-                            <div>
-                                <p class="text-white font-bold text-sm">{{ __('land.hero_card_title') }}</p>
-                                <p class="text-white/40 text-xs">{{ __('land.hero_card_subtitle') }}</p>
-                            </div>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">{{ __('land.hero_card_live') }}</span>
-                    </div>
-
-                    {{-- Simulated course list --}}
-                    @foreach([
-                        ['land.course_1_title', 'land.course_1_category', 'bg-sky-500/20 text-sky-300'],
-                        ['land.course_2_title', 'land.course_2_category', 'bg-violet-500/20 text-violet-300'],
-                        ['land.course_3_title', 'land.course_3_category', 'bg-teal-500/20 text-teal-300'],
-                    ] as [$titleKey, $catKey, $badgeClass])
-                    <div class="flex items-center gap-3 mb-4 p-3 rounded-xl hero-course-row">
-                        <div class="w-9 h-9 rounded-lg flex-shrink-0 {{ explode(' ', $badgeClass)[0] }} flex items-center justify-center">
-                            <svg class="w-4 h-4 {{ explode(' ', $badgeClass)[1] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-white text-xs font-semibold truncate">{{ __($titleKey) }}</p>
-                            <p class="text-white/40 text-[10px] mt-0.5">{{ __($catKey) }}</p>
-                        </div>
-                        <svg class="w-3.5 h-3.5 text-white/20 flex-shrink-0 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-                    </div>
+                {{-- Dot + label per slide --}}
+                <div class="flex items-center gap-3">
+                    @foreach ($slides as $i => $slide)
+                    <button
+                        class="hero-dot-btn group flex items-center gap-2 cursor-pointer"
+                        data-slide="{{ $i }}"
+                        aria-label="Slide {{ $i + 1 }}"
+                    >
+                        <span class="hero-dot {{ $i === 0 ? 'is-active' : '' }}"></span>
+                    </button>
                     @endforeach
-
-                    {{-- CTA inside card --}}
-                    <a href="#courses" class="mt-2 w-full flex items-center justify-center gap-2 py-3 rounded-xl hero-card-btn text-white text-xs font-bold transition-all duration-300">
-                        {{ __('land.hero_cta_primary') }}
-                    </a>
                 </div>
 
-                {{-- Floating badge – top right --}}
-                <div class="absolute -top-6 -end-4 hero-float-badge rounded-2xl px-4 py-3 text-center shadow-2xl animate-float-a">
-                    <div class="w-8 h-8 mx-auto mb-1 rounded-full bg-secondary/20 flex items-center justify-center">
-                        <svg class="w-4 h-4 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
-                    </div>
-                    <p class="text-white text-xs font-bold">{{ __('land.hero_badge_cert') }}</p>
-                    <p class="text-white/40 text-[9px] mt-0.5">{{ __('land.hero_badge_cert_sub') }}</p>
+                {{-- Progress bar --}}
+                <div class="flex-1 max-w-[160px] h-0.5 bg-white/15 rounded-full overflow-hidden">
+                    <div id="hero-progress" class="h-full bg-gradient-to-r from-cyan-400 to-indigo-400 rounded-full" style="width:0%"></div>
                 </div>
 
-                {{-- Floating badge – bottom left --}}
-                <div class="absolute -bottom-4 -start-6 hero-float-badge rounded-2xl px-4 py-3 text-center shadow-2xl animate-float-b">
-                    <div class="w-8 h-8 mx-auto mb-1 rounded-full bg-violet-500/20 flex items-center justify-center">
-                        <svg class="w-4 h-4 text-violet-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
-                    </div>
-                    <p class="text-white text-xs font-bold">{{ __('land.hero_badge_expert') }}</p>
-                    <p class="text-white/40 text-[9px] mt-0.5">{{ __('land.hero_badge_expert_sub') }}</p>
-                </div>
+                {{-- Counter --}}
+                <span class="text-white/35 text-xs font-bold tracking-widest tabular-nums">
+                    <span id="hero-counter">01</span> / 0{{ count($slides) }}
+                </span>
+            </div>
 
-            </div>{{-- /visual col --}}
-
-        </div>{{-- /grid --}}
-
-    </div>{{-- /content wrapper --}}
-
-    {{-- ── Scroll indicator ── --}}
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40">
-        <p class="text-white text-[10px] uppercase tracking-widest">{{ __('land.hero_scroll') }}</p>
-        <div class="scroll-mouse">
-            <div class="scroll-wheel"></div>
         </div>
+    </div>
+
+    {{-- Scroll hint --}}
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 opacity-30 pointer-events-none">
+        <span class="text-white text-[9px] uppercase tracking-[0.2em]">{{ __('land.hero_scroll') }}</span>
+        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
     </div>
 
 </section>
 
 {{-- ============================================================
-     Hero Styles (scoped inline – no build tool dependency)
+     STYLES
      ============================================================ --}}
 <style>
-/* ── Background image + Ken Burns ── */
-.hero-img-wrap {
-    overflow: hidden;
-}
-.hero-img-layer {
-    background: url('/images/hero-bg.png') center center / cover no-repeat;
-    animation: kenburns 30s ease-in-out infinite alternate;
-    will-change: transform;
-    transform-origin: center center;
-}
-.hero-img-overlay {
+/* ── Slide overlays ── */
+.hero-overlay {
     background:
-        linear-gradient(180deg, rgba(3,11,26,0.55) 0%, rgba(3,11,26,0.75) 100%),
-        linear-gradient(90deg, rgba(3,11,26,0.45) 0%, transparent 60%);
-}
-@keyframes kenburns {
-    0%   { transform: scale(1.00) translate(0%,   0%); }
-    25%  { transform: scale(1.06) translate(-1.5%, 0.8%); }
-    50%  { transform: scale(1.10) translate(1%,   -1%); }
-    75%  { transform: scale(1.06) translate(0.5%, 1%); }
-    100% { transform: scale(1.00) translate(0%,   0%); }
+        linear-gradient(105deg, rgba(3,10,24,0.82) 0%, rgba(3,10,24,0.45) 50%, transparent 100%),
+        linear-gradient(0deg,   rgba(3,10,24,0.60) 0%, transparent 55%);
 }
 
 /* ── Orbs ── */
-.hero-orb { position: absolute; }
-.orb-1 { background: radial-gradient(circle, rgba(6,182,212,0.18) 0%, transparent 70%); animation: orb-drift 14s ease-in-out infinite; }
-.orb-2 { background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%); animation: orb-drift 18s ease-in-out infinite reverse; }
-.orb-3 { background: radial-gradient(circle, rgba(20,184,166,0.10) 0%, transparent 70%); animation: orb-drift 10s ease-in-out infinite 4s; }
-
-@keyframes orb-drift {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33%       { transform: translate(30px, -25px) scale(1.06); }
-    66%       { transform: translate(-20px, 20px) scale(0.96); }
+.orb { animation: orb-pulse 16s ease-in-out infinite alternate; }
+.orb-a { background: radial-gradient(circle, rgba(6,182,212,0.14) 0%, transparent 70%); animation-duration: 14s; }
+.orb-b { background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%); animation-duration: 18s; }
+@keyframes orb-pulse {
+    from { transform: scale(1) translate(0,0); opacity: 0.7; }
+    to   { transform: scale(1.15) translate(20px,-15px); opacity: 1; }
 }
 
-/* ── Grid ── */
-.hero-grid {
-    background-image:
-        linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
-    background-size: 60px 60px;
+/* ── Ken Burns per slide ── */
+@keyframes kenburns-0 {
+    0%   { transform: scale(1.00) translate(0%,   0%); }
+    50%  { transform: scale(1.08) translate(-1%,  0.5%); }
+    100% { transform: scale(1.04) translate(1%, -0.5%); }
+}
+@keyframes kenburns-1 {
+    0%   { transform: scale(1.05) translate(0.5%, 0%); }
+    50%  { transform: scale(1.00) translate(-0.5%, -1%); }
+    100% { transform: scale(1.08) translate(0%, 0.5%); }
+}
+@keyframes kenburns-2 {
+    0%   { transform: scale(1.03) translate(-0.5%, 0.5%); }
+    50%  { transform: scale(1.08) translate(0.5%, -0.5%); }
+    100% { transform: scale(1.00) translate(0%, 0%); }
 }
 
-/* ── Launch badge ── */
-.hero-badge {
-    background: rgba(6,182,212,0.08);
-    border: 1px solid rgba(6,182,212,0.25);
-    backdrop-filter: blur(10px);
-}
-.live-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #06b6d4;
-    box-shadow: 0 0 0 0 rgba(6,182,212,0.6);
-    animation: pulse-dot 2s infinite;
-    display: inline-block;
-    flex-shrink: 0;
-}
-@keyframes pulse-dot {
-    0%   { box-shadow: 0 0 0 0 rgba(6,182,212,0.6); }
-    70%  { box-shadow: 0 0 0 7px rgba(6,182,212,0); }
-    100% { box-shadow: 0 0 0 0 rgba(6,182,212,0); }
-}
-
-/* ── Gradient text ── */
-.hero-gradient-text {
-    background: linear-gradient(90deg, #06b6d4 0%, #818cf8 50%, #a78bfa 100%);
+/* ── Hero gradient text ── */
+.hero-grad-text {
+    background: linear-gradient(90deg, #22d3ee 0%, #818cf8 55%, #a78bfa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-/* ── CTA Buttons ── */
-.hero-cta-primary {
+/* ── Badge glass ── */
+.hero-badge-glass {
+    background: rgba(6,182,212,0.10);
+    border: 1px solid rgba(6,182,212,0.28);
+    backdrop-filter: blur(10px);
+}
+.pulse-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #22d3ee;
+    flex-shrink: 0;
+    animation: dot-pulse 2s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(34,211,238,0.6); }
+    50%      { box-shadow: 0 0 0 6px rgba(34,211,238,0); }
+}
+
+/* ── CTA buttons ── */
+.cta-primary {
     background: linear-gradient(135deg, #06b6d4, #6366f1);
-    box-shadow: 0 6px 30px rgba(6,182,212,0.35);
+    box-shadow: 0 5px 24px rgba(6,182,212,0.38);
+    transition: box-shadow 0.3s, transform 0.25s;
 }
-.hero-cta-primary:hover {
-    box-shadow: 0 10px 40px rgba(6,182,212,0.5);
-    transform: translateY(-2px);
-}
-.hero-cta-secondary {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
+.cta-primary:hover { box-shadow: 0 8px 36px rgba(6,182,212,0.6); transform: translateY(-2px); }
+.cta-secondary {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
     backdrop-filter: blur(8px);
+    transition: background 0.3s, transform 0.25s;
 }
-.hero-cta-secondary:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.25);
-    transform: translateY(-2px);
+.cta-secondary:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+
+/* ── Dot indicators ── */
+.hero-dot {
+    display: block;
+    width: 6px; height: 6px;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.3);
+    transition: all 0.4s cubic-bezier(.22,1,.36,1);
+}
+.hero-dot.is-active {
+    width: 28px;
+    background: #22d3ee;
+    box-shadow: 0 0 10px rgba(34,211,238,0.5);
 }
 
-/* ── Main card ── */
-.hero-card-glass {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.10);
-    backdrop-filter: blur(24px);
-    box-shadow:
-        0 0 0 1px rgba(6,182,212,0.08),
-        0 30px 80px rgba(0,0,0,0.4),
-        inset 0 1px 0 rgba(255,255,255,0.06);
-}
-.hero-icon-bg {
-    background: rgba(6,182,212,0.12);
-    border: 1px solid rgba(6,182,212,0.2);
-}
-.hero-course-row {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    transition: background 0.2s;
-}
-.hero-course-row:hover {
-    background: rgba(255,255,255,0.06);
-}
-.hero-card-btn {
-    background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(99,102,241,0.2));
-    border: 1px solid rgba(6,182,212,0.25);
-}
-.hero-card-btn:hover {
-    background: linear-gradient(135deg, rgba(6,182,212,0.35), rgba(99,102,241,0.35));
-}
-
-/* ── Floating badges ── */
-.hero-float-badge {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.10);
-    backdrop-filter: blur(20px);
-    min-width: 100px;
-}
-@keyframes float-a {
-    0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(-10px); }
-}
-@keyframes float-b {
-    0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(8px); }
-}
-.animate-float-a { animation: float-a 6s ease-in-out infinite; }
-.animate-float-b { animation: float-b 7s ease-in-out infinite 1s; }
+/* ── Text crossfade ── */
+.slide-text-fade { transition: opacity 0.5s ease, transform 0.5s ease; }
+.slide-text-fade.fading { opacity: 0; transform: translateY(8px); }
 
 /* ── Entry animations ── */
-.hero-anim-1  { animation: hero-rise 0.7s cubic-bezier(.22,1,.36,1) both; animation-delay: 0.1s; }
-.hero-anim-2  { animation: hero-rise 0.7s cubic-bezier(.22,1,.36,1) both; animation-delay: 0.22s; }
-.hero-anim-3  { animation: hero-rise 0.7s cubic-bezier(.22,1,.36,1) both; animation-delay: 0.34s; }
-.hero-anim-4  { animation: hero-rise 0.7s cubic-bezier(.22,1,.36,1) both; animation-delay: 0.46s; }
-.hero-anim-5  { animation: hero-rise 0.7s cubic-bezier(.22,1,.36,1) both; animation-delay: 0.58s; }
-.hero-anim-right { animation: hero-rise-right 0.9s cubic-bezier(.22,1,.36,1) both; animation-delay: 0.35s; }
-
+.hero-enter { animation: hero-rise 0.75s cubic-bezier(.22,1,.36,1) both; }
 @keyframes hero-rise {
-    from { opacity: 0; transform: translateY(28px); }
+    from { opacity: 0; transform: translateY(30px); }
     to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes hero-rise-right {
-    from { opacity: 0; transform: translateX(40px) scale(0.97); }
-    to   { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 /* ── Scroll mouse ── */
-.scroll-mouse {
-    width: 22px; height: 34px;
-    border: 1.5px solid rgba(255,255,255,0.25);
-    border-radius: 11px;
-    display: flex; justify-content: center; padding-top: 6px;
-}
-.scroll-wheel {
-    width: 3px; height: 6px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 3px;
-    animation: scroll-anim 2s ease-in-out infinite;
-}
+.scroll-mouse { width: 22px; height: 34px; border: 1.5px solid rgba(255,255,255,0.25); border-radius: 11px; display: flex; justify-content: center; padding-top: 6px; }
+.scroll-wheel  { width: 3px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 3px; animation: scroll-anim 2s ease-in-out infinite; }
 @keyframes scroll-anim {
-    0%   { opacity: 1; transform: translateY(0); }
-    70%  { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 0; transform: translateY(0); }
+    0%   { opacity:1; transform: translateY(0); }
+    70%  { opacity:0; transform: translateY(10px); }
+    100% { opacity:0; transform: translateY(0); }
 }
 </style>
+
+{{-- ============================================================
+     SLIDER SCRIPT
+     ============================================================ --}}
+<script>
+(function () {
+    const TOTAL        = {{ count($slides) }};
+    const INTERVAL_MS  = 6000;   // 6s per slide
+    const PROGRESS_TICK = 50;    // ms per progress tick
+
+    let current   = 0;
+    let timer     = null;
+    let progTimer = null;
+    let progVal   = 0;
+
+    const slides    = document.querySelectorAll('.hero-slide');
+    const dots      = document.querySelectorAll('.hero-dot');
+    const dotBtns   = document.querySelectorAll('.hero-dot-btn');
+    const progressEl = document.getElementById('hero-progress');
+    const counterEl  = document.getElementById('hero-counter');
+
+    // Text elements
+    const title1El   = document.getElementById('slide-title-1');
+    const title2El   = document.getElementById('slide-title-2');
+    const subtitleEl = document.getElementById('slide-subtitle');
+    const badgeEl    = document.getElementById('slide-badge');
+
+    const texts = [
+        @foreach ($slides as $i => $slide)
+        {
+            badge:    {{ json_encode($slide['badge']) }},
+            title1:   {{ json_encode($slide['title_1']) }},
+            title2:   {{ json_encode($slide['title_2']) }},
+            subtitle: {{ json_encode($slide['subtitle']) }},
+        },
+        @endforeach
+    ];
+
+    function goTo(index) {
+        // Fade out old text
+        [title1El, title2El, subtitleEl].forEach(el => el.classList.add('fading'));
+
+        // Crossfade images
+        slides[current].style.opacity = '0';
+        current = index;
+        slides[current].style.opacity = '1';
+
+        // Update dots
+        dots.forEach(d => d.classList.remove('is-active'));
+        dots[current].classList.add('is-active');
+
+        // Update counter
+        counterEl.textContent = String(current + 1).padStart(2, '0');
+
+        // Update text after short fade
+        setTimeout(function () {
+            badgeEl.textContent    = texts[current].badge;
+            title1El.textContent  = texts[current].title1;
+            title2El.textContent  = texts[current].title2;
+            subtitleEl.textContent = texts[current].subtitle;
+            [title1El, title2El, subtitleEl].forEach(el => el.classList.remove('fading'));
+        }, 300);
+
+        // Reset progress
+        clearInterval(progTimer);
+        progVal = 0;
+        progressEl.style.width = '0%';
+        startProgress();
+    }
+
+    function next() { goTo((current + 1) % TOTAL); }
+
+    function startProgress() {
+        const step = (PROGRESS_TICK / INTERVAL_MS) * 100;
+        progTimer = setInterval(function () {
+            progVal = Math.min(progVal + step, 100);
+            progressEl.style.width = progVal + '%';
+            if (progVal >= 100) {
+                clearInterval(progTimer);
+                next();
+            }
+        }, PROGRESS_TICK);
+    }
+
+    // Dot button clicks
+    dotBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            const idx = parseInt(btn.dataset.slide);
+            if (idx !== current) {
+                clearInterval(progTimer);
+                progVal = 0;
+                goTo(idx);
+            }
+        });
+    });
+
+    // Pause on hover
+    const root = document.getElementById('hero-root');
+    root.addEventListener('mouseenter', function () { clearInterval(progTimer); });
+    root.addEventListener('mouseleave', function () { startProgress(); });
+
+    // Init
+    startProgress();
+})();
+</script>

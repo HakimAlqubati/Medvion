@@ -45,6 +45,19 @@ return [
     'hero_badge_expert_sub'  => 'Medical field specialists',
     'hero_scroll'            => 'Explore',
 
+    // Slider slides
+    'slide1_title1'          => 'Your Premier Destination for',
+    'slide1_title2'          => 'Digital Health Training',
+    'slide1_subtitle'        => 'Advance your professional career in healthcare through specialised training programmes designed to the highest academic and professional quality standards.',
+
+    'slide2_title1'          => 'Accredited Content Meets',
+    'slide2_title2'          => 'Cutting-Edge Learning Technology',
+    'slide2_subtitle'        => 'We harness the latest digital learning methods to deliver an exceptional training experience — accessible anytime, anywhere.',
+
+    'slide3_title1'          => 'Join an Elite Community of',
+    'slide3_title2'          => 'Healthcare Professionals',
+    'slide3_subtitle'        => 'Become part of a network of dedicated health professionals committed to developing their competencies and advancing their careers with Medvion.',
+
     // ---------------------------------------------------------------
     // Features Section
     // ---------------------------------------------------------------
