@@ -34,8 +34,8 @@
     @endphp
 
     {{-- ========== NAVBAR ========== --}}
-    <!-- Wrapper to reserve 64px space on inner pages -->
-    <div class="{{ request()->is('/') ? 'absolute w-full z-50 pointer-events-none' : 'h-16 w-full' }}">
+    <!-- Absolute wrapper so the navbar floats over page content -->
+    <div class="absolute w-full z-50 pointer-events-none">
         <header id="main-header" data-scrolled="false" class="fixed left-0 right-0 z-50 transition-all duration-500 top-4 data-[scrolled=true]:top-0 pointer-events-auto group">
             <div id="navbar-container" class="mx-auto bg-white transition-all duration-500 flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8 max-w-5xl rounded-full shadow-lg border border-black/5 group-data-[scrolled=true]:max-w-full group-data-[scrolled=true]:rounded-none group-data-[scrolled=true]:shadow-sm group-data-[scrolled=true]:border-transparent group-data-[scrolled=true]:border-b-gray-100">
 
