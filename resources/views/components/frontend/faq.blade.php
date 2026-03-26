@@ -1,5 +1,7 @@
+@props(['altBg' => false])
+
 {{-- FAQ Section - Modern UI Redesign --}}
-<section class="py-24 bg-gray-50 relative overflow-hidden" id="faq">
+<section class="py-24 {{ $altBg ? 'bg-gray-50' : 'bg-white' }} relative overflow-hidden" id="faq">
     
     {{-- Decorative Background Blob (اختياري للمسة عصرية) --}}
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 blur-[80px] rounded-full pointer-events-none"></div>

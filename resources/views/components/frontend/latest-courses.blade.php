@@ -1,5 +1,7 @@
+@props(['altBg' => false])
+
 {{-- Latest Courses Section --}}
-<section id="courses" class="py-20 bg-gray-50">
+<section id="courses" class="py-20 {{ $altBg ? 'bg-gray-50' : 'bg-white' }}">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Header --}}

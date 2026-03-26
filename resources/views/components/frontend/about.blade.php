@@ -1,4 +1,6 @@
-<section id="about" class="py-20 md:py-32 bg-white relative overflow-hidden">
+@props(['altBg' => false])
+
+<section id="about" class="py-20 md:py-32 {{ $altBg ? 'bg-gray-50' : 'bg-white' }} relative overflow-hidden">
     {{-- Decorative Background --}}
     <div class="absolute inset-0 z-0 opacity-30 pointer-events-none">
         <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>

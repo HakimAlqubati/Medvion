@@ -1,10 +1,10 @@
 <x-layouts.frontend :title="__('land.title')">
 
     <x-frontend.hero :slides="$slides" />
-    <x-frontend.about />
-    <x-frontend.features />
-    <x-frontend.latest-courses />
-    <x-frontend.faq />
+    <x-frontend.about :alt-bg="false" />
+    <x-frontend.features :alt-bg="true" />
+    <x-frontend.latest-courses :alt-bg="false" />
+    <x-frontend.faq :alt-bg="true" />
 
 
 
