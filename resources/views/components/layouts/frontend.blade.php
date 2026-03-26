@@ -59,17 +59,27 @@
                     </a>
                 </nav>
 
-                {{-- Auth Links --}}
-                <div class="flex items-center gap-3 flex-shrink-0">
+                {{-- Auth Links & Mobile Menu --}}
+                <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
+                    
+                    {{-- Mobile Menu Button --}}
+                    <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 text-primary hover:bg-gray-100 rounded-full transition-colors focus:outline-none" aria-label="Toggle Menu">
+                        <svg id="burger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                     @if (Route::has('login'))
                     @auth
                     <a href="{{ url('/dashboard') }}"
-                        class="text-sm font-semibold text-primary hover:text-primary-dark transition">
+                        class="hidden md:inline-flex text-sm font-semibold text-primary hover:text-primary-dark transition">
                         {{ __('land.nav_dashboard') }}
                     </a>
                     @else
                     <a href="{{ route('login') }}"
-                        class="inline-flex items-center justify-center px-6 py-2 border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-bold rounded-full shadow-sm hover:shadow transition-all duration-300">
+                        class="hidden md:inline-flex items-center justify-center px-6 py-2 border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-bold rounded-full shadow-sm hover:shadow transition-all duration-300">
                         {{ __('land.nav_login_register') }}
                     </a>
                     @endauth
@@ -78,6 +88,28 @@
 
             </div>
         </header>
+
+        {{-- Mobile Menu Drawer --}}
+        <div id="mobile-menu" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 md:hidden flex flex-col pt-24 px-6 pb-8 overflow-y-auto">
+            <nav class="flex flex-col gap-5 text-xl font-bold text-center mt-6">
+                <a href="{{ url('/') }}" class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4">{{ __('land.nav_home') }}</a>
+                <a href="{{ url('/about') }}" class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4">{{ __('land.nav_about') }}</a>
+                <a href="{{ url('/#courses') }}" class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4">{{ __('land.nav_courses') }}</a>
+                <a href="{{ url('/#faq') }}" class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4">{{ __('land.nav_faq') }}</a>
+                <a href="{{ route('contact') }}" class="mobile-link text-gray-800 hover:text-primary transition-colors pb-4 border-b border-gray-100">{{ __('land.nav_contact') }}</a>
+
+                {{-- Auth Links on Mobile --}}
+                @if (Route::has('login'))
+                <div class="mt-4 flex justify-center">
+                    @auth
+                    <a href="{{ url('/dashboard') }}" class="mobile-link inline-flex items-center justify-center w-full max-w-xs px-8 py-3 bg-primary text-white font-bold rounded-full shadow-md hover:bg-primary-dark transition-all duration-300">{{ __('land.nav_dashboard') }}</a>
+                    @else
+                    <a href="{{ route('login') }}" class="mobile-link inline-flex items-center justify-center w-full max-w-xs px-8 py-3 bg-primary text-white font-bold rounded-full shadow-md hover:bg-primary-dark transition-all duration-300">{{ __('land.nav_login_register') }}</a>
+                    @endauth
+                </div>
+                @endif
+            </nav>
+        </div>
     </div>
 
     {{-- ========== MAIN CONTENT ========== --}}
@@ -132,22 +164,24 @@
         document.addEventListener('DOMContentLoaded', () => {
             const header = document.getElementById('main-header');
             const nav = document.getElementById('navbar-container');
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const burgerIcon = document.getElementById('burger-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            let isMenuOpen = false;
             
             const handleScroll = () => {
                 if (window.scrollY > 20) {
-                    // Scrolled down (normal full width)
                     header.classList.remove('top-4');
                     header.classList.add('top-0');
-                    
                     nav.classList.remove('max-w-5xl', 'rounded-full', 'shadow-lg', 'border-black/5');
                     if (!nav.classList.contains('max-w-full')) {
                         nav.classList.add('max-w-full', 'rounded-none', 'shadow-sm', 'border-b', 'border-gray-100');
                     }
                 } else {
-                    // At top (floating pill)
                     header.classList.add('top-4');
                     header.classList.remove('top-0');
-                    
                     if (!nav.classList.contains('max-w-5xl')) {
                         nav.classList.add('max-w-5xl', 'rounded-full', 'shadow-lg', 'border-black/5');
                     }
@@ -155,8 +189,35 @@
                 }
             };
 
+            const toggleMenu = () => {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                    mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+                    burgerIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+                    burgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            };
+
             window.addEventListener('scroll', handleScroll);
             handleScroll(); // Initialize on load
+            
+            if (mobileBtn) {
+                mobileBtn.addEventListener('click', toggleMenu);
+            }
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) toggleMenu();
+                });
+            });
         });
     </script>
 </body>
