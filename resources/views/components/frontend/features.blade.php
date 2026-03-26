@@ -1,8 +1,29 @@
 @props(['altBg' => false])
 
 {{-- Features Section --}}
-<section class="py-20 {{ $altBg ? 'bg-primary' : 'bg-white' }}">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="py-20 {{ $altBg ? 'bg-primary' : 'bg-white' }} relative overflow-hidden">
+    
+    {{-- Decorative Background Image (Only when altBg is true) --}}
+    @if($altBg)
+        <style>
+            @keyframes breatheFade {
+                0%, 100% { opacity: 0.04; transform: scale(1.05); }
+                50% { opacity: 0.12; transform: scale(1); }
+            }
+            .animate-breathe-fade {
+                animation: breatheFade 14s ease-in-out infinite;
+            }
+        </style>
+        <div class="absolute inset-0 z-0 pointer-events-none mix-blend-overlay">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=2000&q=80" 
+                 alt="Medical Background" 
+                 class="w-full h-full object-cover animate-breathe-fade">
+        </div>
+        {{-- Gradient Overlay for better text readability at edges --}}
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-primary via-transparent to-primary opacity-60 pointer-events-none"></div>
+    @endif
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {{-- Section Header --}}
         <div class="text-center max-w-2xl mx-auto mb-14 reveal">
