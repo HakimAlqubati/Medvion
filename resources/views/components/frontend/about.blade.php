@@ -11,7 +11,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             
             {{-- Text Content --}}
-            <div class="order-2 lg:order-1 text-center lg:text-start">
+            <div class="order-2 lg:order-1 text-center lg:text-start reveal">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary mb-6">
                     <span class="w-2 h-2 rounded-full bg-secondary"></span>
                     <span class="text-sm font-bold tracking-wide uppercase">{{ __('land.nav_about') }}</span>
@@ -37,7 +37,7 @@
             </div>
 
             {{-- Image/Visual --}}
-            <div class="order-1 lg:order-2 relative mx-auto w-full max-w-md lg:max-w-none">
+            <div class="order-1 lg:order-2 relative mx-auto w-full max-w-md lg:max-w-none reveal delay-200">
                 {{-- Abstract Shapes / Image Wrapper --}}
                 <div class="relative rounded-3xl overflow-hidden aspect-square lg:aspect-auto lg:h-[500px] shadow-2xl border border-gray-100 bg-gray-50 flex items-center justify-center p-8 group hover:shadow-primary/20 transition-all duration-700">
                     {{-- Decorative pattern --}}

@@ -5,7 +5,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Header --}}
-        <div class="text-center max-w-2xl mx-auto mb-14">
+        <div class="text-center max-w-2xl mx-auto mb-14 reveal">
             <h2 class="text-3xl sm:text-4xl font-extrabold {{ $altBg ? 'text-white' : 'text-primary' }}">
                 {{ __('land.features_heading') }}
             </h2>
@@ -18,7 +18,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
             {{-- Feature 1 --}}
-            <div class="group p-8 rounded-2xl border transition-all duration-300 flex flex-col items-start {{ $altBg ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-gray-100 shadow-sm hover:border-primary/20 hover:shadow-xl' }}">
+            <div class="group p-8 rounded-2xl border transition-all duration-300 flex flex-col items-start {{ $altBg ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-gray-100 shadow-sm hover:border-primary/20 hover:shadow-xl' }} reveal delay-100">
                 <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition {{ $altBg ? 'bg-white/20 group-hover:bg-white/30' : 'bg-primary/10 group-hover:bg-primary/20' }}">
                     <svg class="w-7 h-7 {{ $altBg ? 'text-white' : 'text-primary' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -30,7 +30,7 @@
             </div>
 
             {{-- Feature 2 --}}
-            <div class="group p-8 rounded-2xl border transition-all duration-300 flex flex-col items-start {{ $altBg ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-gray-100 shadow-sm hover:border-secondary/20 hover:shadow-xl' }}">
+            <div class="group p-8 rounded-2xl border transition-all duration-300 flex flex-col items-start {{ $altBg ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-gray-100 shadow-sm hover:border-secondary/20 hover:shadow-xl' }} reveal delay-200">
                 <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition {{ $altBg ? 'bg-white/20 group-hover:bg-white/30' : 'bg-secondary/10 group-hover:bg-secondary/20' }}">
                     <svg class="w-7 h-7 {{ $altBg ? 'text-white' : 'text-secondary' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -42,7 +42,7 @@
             </div>
 
             {{-- Feature 3 --}}
-            <div class="group p-8 rounded-2xl border transition-all duration-300 flex flex-col items-start {{ $altBg ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-gray-100 shadow-sm hover:border-primary/20 hover:shadow-xl' }}">
+            <div class="group p-8 rounded-2xl border transition-all duration-300 flex flex-col items-start {{ $altBg ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-gray-100 shadow-sm hover:border-primary/20 hover:shadow-xl' }} reveal delay-300">
                 <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition {{ $altBg ? 'bg-white/20 group-hover:bg-white/30' : 'bg-primary/10 group-hover:bg-primary/20' }}">
                     <svg class="w-7 h-7 {{ $altBg ? 'text-white' : 'text-primary' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

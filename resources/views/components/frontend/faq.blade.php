@@ -9,7 +9,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {{-- Section Header --}}
-        <div class="text-center mb-16">
+        <div class="text-center mb-16 reveal">
             <span class="inline-block py-1.5 px-4 rounded-full {{ $altBg ? 'bg-white/10 text-white' : 'bg-secondary/10 text-secondary' }} font-bold text-sm mb-4 tracking-wide">
                 الدعم والمساعدة
             </span>
@@ -22,7 +22,7 @@
         </div>
 
         {{-- Accordion Container --}}
-        <div x-data="{ activeAccordion: null }" class="space-y-5">
+        <div x-data="{ activeAccordion: null }" class="space-y-5 reveal delay-100">
 
             @foreach([
                 ['q' => __('land.faq_1_q'), 'a' => __('land.faq_1_a')],

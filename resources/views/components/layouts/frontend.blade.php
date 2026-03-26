@@ -17,6 +17,20 @@
         body {
             font-family: 'Tajawal', sans-serif;
         }
+
+        /* --- Scroll Reveal Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
     </style>
 
     @stack('styles')
@@ -249,6 +263,21 @@
                     closeMenu();
                 }
             });
+
+            // --- Scroll Reveal Animations ---
+            const revealElements = document.querySelectorAll('.reveal');
+            if (revealElements.length > 0) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { rootMargin: '0px 0px -50px 0px' });
+                
+                revealElements.forEach(el => revealObserver.observe(el));
+            }
 
             // --- Active Hash Detection via IntersectionObserver ---
             const isHomePage = document.getElementById('hero-root') !== null;
