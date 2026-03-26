@@ -23,63 +23,68 @@
 </head>
 
 <body class="bg-gray-50 text-gray-800 antialiased">
+    @php
+        $navLinks = [
+            ['name' => __('land.nav_home'), 'url' => url('/'), 'active' => request()->is('/'), 'target' => null],
+            ['name' => __('land.nav_about'), 'url' => url('/about'), 'active' => request()->is('about'), 'target' => null],
+            ['name' => __('land.nav_courses'), 'url' => url('/#courses'), 'active' => false, 'target' => 'courses'],
+            ['name' => __('land.nav_faq'), 'url' => url('/#faq'), 'active' => false, 'target' => 'faq'],
+            ['name' => __('land.nav_contact'), 'url' => route('contact'), 'active' => request()->routeIs('contact'), 'target' => null],
+        ];
+    @endphp
 
     {{-- ========== NAVBAR ========== --}}
     <!-- Wrapper to reserve 64px space on inner pages -->
     <div class="{{ request()->is('/') ? 'absolute w-full z-50 pointer-events-none' : 'h-16 w-full' }}">
-        <header id="main-header" class="fixed left-0 right-0 z-50 transition-all duration-500 top-4 pointer-events-auto">
-            <div id="navbar-container" class="mx-auto bg-white transition-all duration-500 flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8 max-w-5xl rounded-full shadow-lg border border-black/5">
+        <header id="main-header" data-scrolled="false" class="fixed left-0 right-0 z-50 transition-all duration-500 top-4 data-[scrolled=true]:top-0 pointer-events-auto group">
+            <div id="navbar-container" class="mx-auto bg-white transition-all duration-500 flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8 max-w-5xl rounded-full shadow-lg border border-black/5 group-data-[scrolled=true]:max-w-full group-data-[scrolled=true]:rounded-none group-data-[scrolled=true]:shadow-sm group-data-[scrolled=true]:border-transparent group-data-[scrolled=true]:border-b-gray-100">
 
                 {{-- Brand --}}
-                <a href="{{ url('/') }}" class="text-2xl font-extrabold text-primary tracking-tight flex-shrink-0">
+                <a href="{{ url('/') }}" aria-label="Medvion Home" class="text-2xl font-extrabold text-primary tracking-tight flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg px-2">
                     Medvion<span class="text-secondary">+</span>
                 </a>
 
                 {{-- Desktop Nav --}}
-                <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-                    <a href="{{ url('/') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark {{ request()->is('/') ? 'text-primary font-bold' : 'text-gray-600' }}">
-                        {{ __('land.nav_home') }}
-                        <span class="absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ request()->is('/') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full' }}"></span>
-                    </a>
-                    <a href="{{ url('/about') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark {{ request()->is('about') ? 'text-primary font-bold' : 'text-gray-600' }}">
-                        {{ __('land.nav_about') }}
-                        <span class="absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ request()->is('about') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full' }}"></span>
-                    </a>
-                    <a href="{{ url('/#courses') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark text-gray-600">
-                        {{ __('land.nav_courses') }}
-                        <span class="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
-                    </a>
-                    <a href="{{ url('/#faq') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark text-gray-600">
-                        {{ __('land.nav_faq') }}
-                        <span class="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
-                    </a>
-                    <a href="{{ route('contact') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark {{ request()->routeIs('contact') ? 'text-primary font-bold' : 'text-gray-600' }}">
-                        {{ __('land.nav_contact') }}
-                        <span class="absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ request()->routeIs('contact') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full' }}"></span>
-                    </a>
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main Navigation">
+                    @foreach ($navLinks as $link)
+                        <a href="{{ $link['url'] }}" 
+                           class="nav-link group relative px-2 py-1 transition-all duration-300 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded-lg active:scale-95 active:text-primary-dark {{ $link['active'] ? 'text-primary font-bold' : 'text-gray-600' }}"
+                           @if($link['active']) aria-current="page" @endif
+                           @if($link['target']) data-target="{{ $link['target'] }}" @endif>
+                            {{ $link['name'] }}
+                            <span class="nav-underline absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ $link['active'] ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full' }}"></span>
+                        </a>
+                    @endforeach
                 </nav>
 
                 {{-- Auth Links & Mobile Menu --}}
                 <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
                     
                     {{-- Mobile Menu Button --}}
-                    <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 text-primary hover:bg-gray-100 rounded-full transition-colors focus:outline-none" aria-label="Toggle Menu">
-                        <svg id="burger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <button id="mobile-menu-btn" 
+                            data-open="false"
+                            aria-expanded="false" 
+                            aria-controls="mobile-menu"
+                            aria-label="Toggle navigation menu"
+                            class="md:hidden flex items-center justify-center p-2 text-primary hover:bg-gray-100 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary group/btn">
+                        {{-- Burger Icon (Shows when closed) --}}
+                        <svg class="h-6 w-6 transition-transform duration-300 group-data-[open=true]/btn:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
-                        <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        {{-- Close Icon (Shows when open) --}}
+                        <svg class="h-6 w-6 transition-transform duration-300 hidden group-data-[open=true]/btn:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                     @if (Route::has('login'))
                     @auth
                     <a href="{{ url('/dashboard') }}"
-                        class="hidden md:inline-flex text-sm font-semibold text-primary hover:text-primary-dark transition">
+                        class="hidden md:inline-flex text-sm font-semibold text-primary hover:text-primary-dark focus:outline-none focus:ring-2 focus:ring-primary rounded-lg px-2 transition">
                         {{ __('land.nav_dashboard') }}
                     </a>
                     @else
                     <a href="{{ route('login') }}"
-                        class="hidden md:inline-flex items-center justify-center px-6 py-2 border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-bold rounded-full shadow-sm hover:shadow transition-all duration-300">
+                        class="hidden md:inline-flex items-center justify-center px-6 py-2 border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-bold rounded-full shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300">
                         {{ __('land.nav_login_register') }}
                     </a>
                     @endauth
@@ -90,25 +95,41 @@
         </header>
 
         {{-- Mobile Menu Drawer --}}
-        <div id="mobile-menu" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 md:hidden flex flex-col pt-24 px-6 pb-8 overflow-y-auto">
-            <nav class="flex flex-col gap-5 text-xl font-bold text-center mt-6">
-                <a href="{{ url('/') }}" class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4">{{ __('land.nav_home') }}</a>
-                <a href="{{ url('/about') }}" class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4">{{ __('land.nav_about') }}</a>
-                <a href="{{ url('/#courses') }}" class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4">{{ __('land.nav_courses') }}</a>
-                <a href="{{ url('/#faq') }}" class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4">{{ __('land.nav_faq') }}</a>
-                <a href="{{ route('contact') }}" class="mobile-link text-gray-800 hover:text-primary transition-colors pb-4 border-b border-gray-100">{{ __('land.nav_contact') }}</a>
+        <div id="mobile-menu" 
+             role="dialog" 
+             aria-modal="true" 
+             aria-hidden="true"
+             aria-label="Mobile Navigation"
+             data-open="false" 
+             class="fixed inset-0 z-40 pointer-events-none group/menu md:hidden">
+             
+            <!-- Overlay Background -->
+            <div id="mobile-overlay" aria-hidden="true" class="absolute inset-0 bg-white/95 backdrop-blur-md opacity-0 transition-opacity duration-300 group-data-[open=true]/menu:opacity-100 group-data-[open=true]/menu:pointer-events-auto cursor-pointer"></div>
 
-                {{-- Auth Links on Mobile --}}
-                @if (Route::has('login'))
-                <div class="mt-4 flex justify-center">
-                    @auth
-                    <a href="{{ url('/dashboard') }}" class="mobile-link inline-flex items-center justify-center w-full max-w-xs px-8 py-3 bg-primary text-white font-bold rounded-full shadow-md hover:bg-primary-dark transition-all duration-300">{{ __('land.nav_dashboard') }}</a>
-                    @else
-                    <a href="{{ route('login') }}" class="mobile-link inline-flex items-center justify-center w-full max-w-xs px-8 py-3 bg-primary text-white font-bold rounded-full shadow-md hover:bg-primary-dark transition-all duration-300">{{ __('land.nav_login_register') }}</a>
-                    @endauth
-                </div>
-                @endif
-            </nav>
+            <!-- Content -->
+            <div class="relative z-10 flex flex-col pt-24 px-6 pb-8 h-full overflow-y-auto opacity-0 translate-y-4 transition-all duration-300 group-data-[open=true]/menu:opacity-100 group-data-[open=true]/menu:translate-y-0 group-data-[open=true]/menu:pointer-events-auto">
+                <nav class="flex flex-col gap-5 text-xl font-bold mt-6 text-center max-w-sm mx-auto w-full">
+                    @foreach ($navLinks as $link)
+                        <a href="{{ $link['url'] }}" 
+                           class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg px-4 {{ $link['active'] ? 'text-primary' : '' }}"
+                           @if($link['active']) aria-current="page" @endif
+                           @if($link['target']) data-target="{{ $link['target'] }}" @endif>
+                           {{ $link['name'] }}
+                        </a>
+                    @endforeach
+
+                    {{-- Auth Links on Mobile --}}
+                    @if (Route::has('login'))
+                    <div class="mt-4 flex justify-center w-full">
+                        @auth
+                        <a href="{{ url('/dashboard') }}" class="mobile-link inline-flex items-center justify-center w-full px-8 py-3 bg-primary text-white font-bold rounded-full shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300">{{ __('land.nav_dashboard') }}</a>
+                        @else
+                        <a href="{{ route('login') }}" class="mobile-link inline-flex items-center justify-center w-full px-8 py-3 bg-primary text-white font-bold rounded-full shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300">{{ __('land.nav_login_register') }}</a>
+                        @endauth
+                    </div>
+                    @endif
+                </nav>
+            </div>
         </div>
     </div>
 
@@ -163,61 +184,106 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const header = document.getElementById('main-header');
-            const nav = document.getElementById('navbar-container');
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-            const burgerIcon = document.getElementById('burger-icon');
-            const closeIcon = document.getElementById('close-icon');
+            const overlay = document.getElementById('mobile-overlay');
             const mobileLinks = document.querySelectorAll('.mobile-link');
-            let isMenuOpen = false;
             
+            // --- Scroll Handling via Data Attribute ---
             const handleScroll = () => {
-                if (window.scrollY > 20) {
-                    header.classList.remove('top-4');
-                    header.classList.add('top-0');
-                    nav.classList.remove('max-w-5xl', 'rounded-full', 'shadow-lg', 'border-black/5');
-                    if (!nav.classList.contains('max-w-full')) {
-                        nav.classList.add('max-w-full', 'rounded-none', 'shadow-sm', 'border-b', 'border-gray-100');
-                    }
-                } else {
-                    header.classList.add('top-4');
-                    header.classList.remove('top-0');
-                    if (!nav.classList.contains('max-w-5xl')) {
-                        nav.classList.add('max-w-5xl', 'rounded-full', 'shadow-lg', 'border-black/5');
-                    }
-                    nav.classList.remove('max-w-full', 'rounded-none', 'shadow-sm', 'border-b', 'border-gray-100');
+                const isScrolled = window.scrollY > 20;
+                if(header.getAttribute('data-scrolled') !== String(isScrolled)) {
+                    header.setAttribute('data-scrolled', isScrolled);
                 }
+            };
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll();
+
+            // --- Mobile Menu A11y & Toggle ---
+            const openMenu = () => {
+                mobileMenu.setAttribute('data-open', 'true');
+                mobileMenu.setAttribute('aria-hidden', 'false');
+                mobileBtn.setAttribute('data-open', 'true');
+                mobileBtn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden'; // Scroll lock
+                
+                // Focus trap enhancement - focus first link slightly delayed
+                const firstLink = mobileMenu.querySelector('a');
+                if(firstLink) setTimeout(() => firstLink.focus(), 300);
+            };
+
+            const closeMenu = () => {
+                mobileMenu.setAttribute('data-open', 'false');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+                mobileBtn.setAttribute('data-open', 'false');
+                mobileBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = ''; // Release scroll
+                mobileBtn.focus();
             };
 
             const toggleMenu = () => {
-                isMenuOpen = !isMenuOpen;
-                if (isMenuOpen) {
-                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
-                    mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
-                    burgerIcon.classList.add('hidden');
-                    closeIcon.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
+                if (mobileMenu.getAttribute('data-open') === 'true') {
+                    closeMenu();
                 } else {
-                    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-                    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
-                    burgerIcon.classList.remove('hidden');
-                    closeIcon.classList.add('hidden');
-                    document.body.style.overflow = '';
+                    openMenu();
                 }
             };
 
-            window.addEventListener('scroll', handleScroll);
-            handleScroll(); // Initialize on load
-            
-            if (mobileBtn) {
-                mobileBtn.addEventListener('click', toggleMenu);
-            }
+            if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
+            if (overlay) overlay.addEventListener('click', closeMenu);
 
             mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (isMenuOpen) toggleMenu();
-                });
+                link.addEventListener('click', closeMenu);
             });
+
+            // Close on Escape
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && mobileMenu.getAttribute('data-open') === 'true') {
+                    closeMenu();
+                }
+            });
+
+            // Close on Resize (if transitions to desktop)
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768 && mobileMenu.getAttribute('data-open') === 'true') {
+                    closeMenu();
+                }
+            });
+
+            // --- Active Hash Detection via IntersectionObserver ---
+            const isHomePage = document.getElementById('hero-root') !== null;
+            if (isHomePage) {
+                const spyTargets = document.querySelectorAll('section[id]');
+                if(spyTargets.length > 0) {
+                    const observer = new IntersectionObserver((entries) => {
+                        let activeId = null;
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                activeId = entry.target.id;
+                            }
+                        });
+
+                        if (activeId) {
+                            document.querySelectorAll('a[data-target]').forEach(link => {
+                                const target = link.getAttribute('data-target');
+                                const underline = link.querySelector('.nav-underline');
+                                
+                                if (target === activeId) {
+                                    link.classList.add('text-primary', 'font-bold');
+                                    link.classList.remove('text-gray-600');
+                                    if(underline) underline.classList.replace('w-0', 'w-full');
+                                } else {
+                                    link.classList.remove('text-primary', 'font-bold');
+                                    link.classList.add('text-gray-600');
+                                    if(underline) underline.classList.replace('w-full', 'w-0');
+                                }
+                            });
+                        }
+                    }, { rootMargin: '-20% 0px -60% 0px' });
+                    
+                    spyTargets.forEach(el => observer.observe(el));
+                }
+            }
         });
     </script>
 </body>
