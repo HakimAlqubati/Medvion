@@ -80,17 +80,17 @@ $slides = [
             </div>
 
             {{-- Headline --}}
-            <h1 class="hero-enter font-black text-white leading-[1.06] tracking-tight mb-6" style="animation-delay:0.15s">
+            <h1 class="hero-enter font-black text-white leading-[1.06] tracking-tight mb-6 drop-shadow-xl" style="animation-delay:0.15s">
                 <span id="slide-title-1" class="block text-4xl sm:text-5xl xl:text-6xl slide-text-fade">
                     {{ $slides[0]['title_1'] }}
                 </span>
-                <span id="slide-title-2" class="block text-4xl sm:text-5xl xl:text-6xl hero-grad-text slide-text-fade mt-1">
+                <span id="slide-title-2" class="block text-4xl sm:text-5xl xl:text-6xl hero-grad-text slide-text-fade mt-1 drop-shadow-2xl">
                     {{ $slides[0]['title_2'] }}
                 </span>
             </h1>
 
             {{-- Subtitle --}}
-            <p id="slide-subtitle" class="hero-enter text-base sm:text-lg text-white/60 leading-relaxed mb-10 max-w-xl slide-text-fade" style="animation-delay:0.25s">
+            <p id="slide-subtitle" class="hero-enter text-base sm:text-lg text-white/80 leading-relaxed mb-10 max-w-xl slide-text-fade drop-shadow-md font-medium" style="animation-delay:0.25s">
                 {{ $slides[0]['subtitle'] }}
             </p>
 
@@ -152,8 +152,8 @@ $slides = [
 /* ── Slide overlays ── */
 .hero-overlay {
     background:
-        linear-gradient(105deg, rgba(3,10,24,0.82) 0%, rgba(3,10,24,0.45) 50%, transparent 100%),
-        linear-gradient(0deg,   rgba(3,10,24,0.60) 0%, transparent 55%);
+        linear-gradient(105deg, rgba(1,6,17,0.95) 0%, rgba(3,10,24,0.65) 50%, transparent 100%),
+        linear-gradient(0deg,   rgba(1,6,17,0.85) 0%, rgba(3,10,24,0.3) 50%, transparent 100%);
 }
 
 /* ── Orbs ── */
@@ -265,7 +265,7 @@ $slides = [
 <script>
 (function () {
     var TOTAL        = {{ count($slides) }};
-    var INTERVAL_MS  = 6000;
+    var INTERVAL_MS  = 4000;
     var TICK         = 50;
     var current      = 0;
     var progTimer    = null;
