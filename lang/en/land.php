@@ -28,10 +28,22 @@ return [
     // ---------------------------------------------------------------
     // Hero Section
     // ---------------------------------------------------------------
+    'hero_badge'             => 'Coming Soon • Official Launch',
+    'hero_title_line1'       => 'The Leading Platform for',
+    'hero_title_line2'       => 'Digital Health Training',
     'hero_title'             => 'The Leading Platform for Digital Health Training & Rehabilitation',
-    'hero_subtitle'          => 'Advance your professional career in healthcare through specialised courses designed to the highest academic and professional quality standards.',
+    'hero_subtitle'          => 'Advance your professional career in healthcare through specialised courses designed to the highest academic and professional quality standards. Be among the first to join.',
     'hero_cta_primary'       => 'Browse Courses',
     'hero_cta_secondary'     => 'Discover the Platform',
+    'hero_trust_line'        => 'Join the elite healthcare professionals who trust Medvion',
+    'hero_card_title'        => 'Available Courses',
+    'hero_card_subtitle'     => 'Accredited & up-to-date content',
+    'hero_card_live'         => 'Active',
+    'hero_badge_cert'        => 'Accredited Certificates',
+    'hero_badge_cert_sub'    => 'Internationally recognised',
+    'hero_badge_expert'      => 'Expert Instructors',
+    'hero_badge_expert_sub'  => 'Medical field specialists',
+    'hero_scroll'            => 'Explore',
 
     // ---------------------------------------------------------------
     // Features Section
