@@ -52,12 +52,12 @@
 
             {{-- Badge --}}
             @if(count($slides) > 0)
-            <div id="hero-badge" class="hero-enter inline-flex items-center gap-2 mb-7 px-4 py-2 rounded-full bg-primary/10 border border-primary/25 backdrop-blur-md" style="animation-delay:0.05s">
+            <div id="hero-badge" class="hero-enter inline-flex items-center gap-2 mb-7 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md" style="animation-delay:0.05s">
                 <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </span>
-                <span id="slide-badge" class="text-xs font-bold uppercase tracking-[0.18em] text-primary-light">
+                <span id="slide-badge" class="text-xs font-bold uppercase tracking-[0.18em] text-white">
                     {{ $slides[0]['badge'] ?? '' }}
                 </span>
             </div>
@@ -67,7 +67,7 @@
                 <span id="slide-title-1" class="block text-4xl sm:text-5xl xl:text-6xl slide-text-fade">
                     {{ $slides[0]['title_1'] ?? '' }}
                 </span>
-                <span id="slide-title-2" class="block text-4xl sm:text-5xl xl:text-6xl text-transparent bg-clip-text bg-gradient-to-r rtl:bg-gradient-to-l from-primary-light to-primary-dark slide-text-fade mt-1" style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));">
+                <span id="slide-title-2" class="block text-4xl sm:text-5xl xl:text-6xl text-transparent bg-clip-text bg-gradient-to-r rtl:bg-gradient-to-l from-secondary-light to-white slide-text-fade mt-1" style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8));">
                     {{ $slides[0]['title_2'] ?? '' }}
                 </span>
             </h1>
