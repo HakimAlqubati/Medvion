@@ -48,11 +48,11 @@
                 <nav class="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main Navigation">
                     @foreach ($navLinks as $link)
                         <a href="{{ $link['url'] }}" 
-                           class="nav-link group relative px-2 py-1 transition-all duration-300 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded-lg active:scale-95 active:text-primary-dark {{ $link['active'] ? 'text-primary font-bold' : 'text-gray-600' }}"
+                           class="nav-link group/link relative px-2 py-1 transition-all duration-300 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded-lg active:scale-95 active:text-primary-dark {{ $link['active'] ? 'text-primary font-bold' : 'text-gray-600' }}"
                            @if($link['active']) aria-current="page" @endif
                            @if($link['target']) data-target="{{ $link['target'] }}" @endif>
                             {{ $link['name'] }}
-                            <span class="nav-underline absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ $link['active'] ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full' }}"></span>
+                            <span class="nav-underline absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ $link['active'] ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover/link:w-full' }}"></span>
                         </a>
                     @endforeach
                 </nav>
