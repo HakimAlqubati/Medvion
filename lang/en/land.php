@@ -16,6 +16,7 @@ return [
     'nav_home'               => 'Home',
     'nav_about'              => 'About Us',
     'nav_courses'            => 'Courses',
+    'nav_faq'                => 'FAQ',
     'nav_contact'            => 'Contact',
     'nav_login'              => 'Log In',
     'nav_register'           => 'Create Account',

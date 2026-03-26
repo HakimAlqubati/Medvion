@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" class="scroll-smooth">
 
 <head>
     <meta charset="utf-8">
@@ -14,7 +14,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        body { font-family: 'Tajawal', sans-serif; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
     </style>
 
     @stack('styles')
@@ -23,7 +25,7 @@
 <body class="bg-gray-50 text-gray-800 antialiased">
 
     {{-- ========== NAVBAR ========== --}}
-    <header class="bg-white shadow-sm sticky top-0 z-50">
+    <header class="bg-white shadow-sm sticky top-0 z-50" style="">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
 
@@ -34,31 +36,44 @@
 
                 {{-- Desktop Nav --}}
                 <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
-                    <a href="{{ url('/') }}"     class="hover:text-primary transition">{{ __('land.nav_home') }}</a>
-                    <a href="{{ url('/about') }}" class="hover:text-primary transition">{{ __('land.nav_about') }}</a>
-                    <a href="#courses"            class="hover:text-primary transition">{{ __('land.nav_courses') }}</a>
+                    <a href="{{ url('/') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark">
+                        {{ __('land.nav_home') }}
+                        <span class="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
+                    </a>
+                    <a href="{{ url('/about') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark">
+                        {{ __('land.nav_about') }}
+                        <span class="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
+                    </a>
+                    <a href="{{ url('/#courses') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark">
+                        {{ __('land.nav_courses') }}
+                        <span class="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
+                    </a>
+                    <a href="{{ url('/#faq') }}" class="group relative px-2 py-1 transition-all duration-300 hover:text-primary active:scale-95 active:text-primary-dark">
+                        {{ __('land.nav_faq') }}
+                        <span class="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
+                    </a>
                 </nav>
 
                 {{-- Auth Links --}}
                 <div class="flex items-center gap-3">
                     @if (Route::has('login'))
-                        @auth
-                            <a href="{{ url('/dashboard') }}"
-                               class="text-sm font-semibold text-primary hover:text-primary-dark transition">
-                                {{ __('land.nav_dashboard') }}
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}"
-                               class="text-sm font-medium text-gray-600 hover:text-primary transition">
-                                {{ __('land.nav_login') }}
-                            </a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                   class="inline-flex items-center px-4 py-2 bg-primary text-white text-xs font-bold rounded-md hover:bg-primary-light transition shadow-sm">
-                                    {{ __('land.nav_register') }}
-                                </a>
-                            @endif
-                        @endauth
+                    @auth
+                    <a href="{{ url('/dashboard') }}"
+                        class="text-sm font-semibold text-primary hover:text-primary-dark transition">
+                        {{ __('land.nav_dashboard') }}
+                    </a>
+                    @else
+                    <a href="{{ route('login') }}"
+                        class="text-sm font-medium text-gray-600 hover:text-primary transition">
+                        {{ __('land.nav_login') }}
+                    </a>
+                    @if (Route::has('register'))
+                    <a href="{{ route('register') }}"
+                        class="inline-flex items-center px-4 py-2 bg-primary text-white text-xs font-bold rounded-md hover:bg-primary-light transition shadow-sm">
+                        {{ __('land.nav_register') }}
+                    </a>
+                    @endif
+                    @endauth
                     @endif
                 </div>
 
@@ -84,9 +99,9 @@
                 </div>
 
                 <nav class="flex gap-6 text-sm text-gray-300">
-                    <a href="{{ url('/') }}"      class="hover:text-white transition">{{ __('land.nav_home') }}</a>
-                    <a href="{{ url('/about') }}"  class="hover:text-white transition">{{ __('land.nav_about') }}</a>
-                    <a href="#courses"             class="hover:text-white transition">{{ __('land.nav_courses') }}</a>
+                    <a href="{{ url('/') }}" class="hover:text-white transition">{{ __('land.nav_home') }}</a>
+                    <a href="{{ url('/about') }}" class="hover:text-white transition">{{ __('land.nav_about') }}</a>
+                    <a href="#courses" class="hover:text-white transition">{{ __('land.nav_courses') }}</a>
                 </nav>
 
             </div>
@@ -98,4 +113,5 @@
 
     @stack('scripts')
 </body>
+
 </html>

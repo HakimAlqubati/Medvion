@@ -16,6 +16,7 @@ return [
     'nav_home'               => 'الرئيسية',
     'nav_about'              => 'من نحن',
     'nav_courses'            => 'الدورات',
+    'nav_faq'                => 'الأسئلة الشائعة',
     'nav_contact'            => 'تواصل معنا',
     'nav_login'              => 'تسجيل الدخول',
     'nav_register'           => 'إنشاء حساب',

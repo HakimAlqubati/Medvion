@@ -1,5 +1,5 @@
 {{-- FAQ Section --}}
-<section class="py-20 bg-gray-50">
+<section class="py-20 bg-gray-50" id="faq">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Header --}}
