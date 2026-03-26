@@ -4,7 +4,7 @@
     </x-slot:title>
 
     {{-- Hero Section --}}
-    <section class="bg-gray-50 py-16 md:py-24 border-b border-gray-200">
+    <section class="bg-gray-50 pt-40 pb-16 md:pt-48 md:pb-24 border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-3xl md:text-5xl font-extrabold text-primary tracking-tight mb-4">
                 {{ __('land.contact_hero_title') }}
