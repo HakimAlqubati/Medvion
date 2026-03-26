@@ -4,7 +4,30 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $slides = [
+        [
+            'image'    => '/images/hero-slide-1.png',
+            'badge'    => __('land.hero_badge'),
+            'title_1'  => __('land.slide1_title1'),
+            'title_2'  => __('land.slide1_title2'),
+            'subtitle' => __('land.slide1_subtitle'),
+        ],
+        [
+            'image'    => '/images/hero-slide-2.png',
+            'badge'    => __('land.hero_badge'),
+            'title_1'  => __('land.slide2_title1'),
+            'title_2'  => __('land.slide2_title2'),
+            'subtitle' => __('land.slide2_subtitle'),
+        ],
+        [
+            'image'    => '/images/hero-slide-3.png',
+            'badge'    => __('land.hero_badge'),
+            'title_1'  => __('land.slide3_title1'),
+            'title_2'  => __('land.slide3_title2'),
+            'subtitle' => __('land.slide3_subtitle'),
+        ],
+    ];
+    return view('welcome', compact('slides'));
 })->name('home');
 
 Route::get('/about', function () {
