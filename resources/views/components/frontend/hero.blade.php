@@ -39,8 +39,8 @@
          FLOATING ORBS - Medical Trust Colors (Teal/Blue)
     ══════════════════════════════════════════ --}}
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div class="orb orb-a absolute w-[500px] h-[500px] -top-20 -start-32 rounded-full blur-3xl"></div>
-        <div class="orb orb-b absolute w-[400px] h-[400px] bottom-0 end-0 rounded-full blur-3xl"></div>
+        <div class="orb absolute w-[500px] h-[500px] -top-20 -start-32 rounded-full blur-3xl bg-primary/20" style="animation-duration: 14s;"></div>
+        <div class="orb absolute w-[400px] h-[400px] bottom-0 end-0 rounded-full blur-3xl bg-secondary/20" style="animation-duration: 18s;"></div>
     </div>
 
     {{-- ══════════════════════════════════════════
@@ -52,9 +52,12 @@
 
             {{-- Badge --}}
             @if(count($slides) > 0)
-            <div id="hero-badge" class="hero-enter inline-flex items-center gap-2 mb-7 px-4 py-2 rounded-full hero-badge-glass" style="animation-delay:0.05s">
-                <span class="pulse-dot"></span>
-                <span id="slide-badge" class="text-xs font-bold uppercase tracking-[0.18em] text-sky-300">
+            <div id="hero-badge" class="hero-enter inline-flex items-center gap-2 mb-7 px-4 py-2 rounded-full bg-primary/10 border border-primary/25 backdrop-blur-md" style="animation-delay:0.05s">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                <span id="slide-badge" class="text-xs font-bold uppercase tracking-[0.18em] text-primary-light">
                     {{ $slides[0]['badge'] ?? '' }}
                 </span>
             </div>
@@ -64,7 +67,7 @@
                 <span id="slide-title-1" class="block text-4xl sm:text-5xl xl:text-6xl slide-text-fade">
                     {{ $slides[0]['title_1'] ?? '' }}
                 </span>
-                <span id="slide-title-2" class="block text-4xl sm:text-5xl xl:text-6xl hero-grad-text slide-text-fade mt-1" style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));">
+                <span id="slide-title-2" class="block text-4xl sm:text-5xl xl:text-6xl text-transparent bg-clip-text bg-gradient-to-r rtl:bg-gradient-to-l from-primary-light to-primary-dark slide-text-fade mt-1" style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));">
                     {{ $slides[0]['title_2'] ?? '' }}
                 </span>
             </h1>
@@ -77,11 +80,11 @@
 
             {{-- CTAs --}}
             <div class="hero-enter flex flex-wrap gap-4 mb-16 {{ app()->getLocale() === 'ar' ? 'justify-end sm:justify-start' : 'justify-start' }}" style="animation-delay:0.35s">
-                <a href="#courses" class="cta-primary group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm text-white">
+                <a href="#courses" class="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-br from-primary to-primary-dark shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5 transition-all duration-300">
                     <x-heroicon-o-arrow-right class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180" />
                     {{ __('land.hero_cta_primary') }}
                 </a>
-                <a href="{{ url('/about') }}" class="cta-secondary inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white/90">
+                <a href="{{ url('/about') }}" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white/90 bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 hover:border-white/25 hover:-translate-y-0.5 transition-all duration-300">
                     {{ __('land.hero_cta_secondary') }}
                 </a>
             </div>
@@ -98,14 +101,14 @@
                         data-slide="{{ $i }}"
                         aria-label="Slide {{ $i + 1 }}"
                     >
-                        <span class="hero-dot {{ $i === 0 ? 'is-active' : '' }}"></span>
+                        <span class="hero-dot flex-shrink-0 h-1.5 rounded-full transition-all duration-300 {{ $i === 0 ? 'w-6 bg-primary shadow-[0_0_8px] shadow-primary/50' : 'w-1.5 bg-white/25' }}"></span>
                     </button>
                     @endforeach
                 </div>
 
                 {{-- Progress bar --}}
                 <div class="flex-1 max-w-[160px] h-0.5 bg-white/10 rounded-full overflow-hidden">
-                    <div id="hero-progress" class="h-full bg-gradient-to-r from-sky-400 to-blue-600 rounded-full {{ app()->getLocale() === 'ar' ? 'h-r-progress' : '' }}" style="width:0%"></div>
+                    <div id="hero-progress" class="h-full bg-gradient-to-r from-primary-light to-primary-dark rounded-full {{ app()->getLocale() === 'ar' ? 'h-r-progress' : '' }}" style="width:0%"></div>
                 </div>
 
                 {{-- Counter --}}
@@ -137,8 +140,6 @@
 
 /* ── Orbs (Trust/Medical Colors: Sky Blue & Deep Azure) ── */
 .orb { animation: orb-pulse 16s ease-in-out infinite alternate; }
-.orb-a { background: radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%); animation-duration: 14s; }
-.orb-b { background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%); animation-duration: 18s; }
 @keyframes orb-pulse {
     from { transform: scale(1) translate(0,0); opacity: 0.6; }
     to   { transform: scale(1.15) translate(20px,-15px); opacity: 1; }
@@ -161,69 +162,7 @@
     100% { transform: scale(1.00) translate(0%, 0%); }
 }
 
-/* ── Hero gradient text (Medical Blue/Teal) ── */
-.hero-grad-text {
-    background: linear-gradient(90deg, #38bdf8 0%, #3b82f6 55%, #60a5fa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-html[dir="rtl"] .hero-grad-text {
-    background: linear-gradient(270deg, #38bdf8 0%, #3b82f6 55%, #60a5fa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* ── Badge glass ── */
-.hero-badge-glass {
-    background: rgba(14,165,233,0.08);
-    border: 1px solid rgba(14,165,233,0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-}
-.pulse-dot {
-    display: inline-block;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #38bdf8;
-    flex-shrink: 0;
-    animation: dot-pulse 2s ease-in-out infinite;
-}
-@keyframes dot-pulse {
-    0%,100% { box-shadow: 0 0 0 0 rgba(56,189,248,0.5); }
-    50%      { box-shadow: 0 0 0 6px rgba(56,189,248,0); }
-}
-
-/* ── CTA buttons (Medical Trust Blue) ── */
-.cta-primary {
-    background: linear-gradient(135deg, #0284c7, #2563eb);
-    box-shadow: 0 4px 20px rgba(2,132,199,0.35);
-    transition: box-shadow 0.3s, transform 0.25s;
-}
-.cta-primary:hover { box-shadow: 0 6px 28px rgba(2,132,199,0.55); transform: translateY(-2px); }
-.cta-secondary {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: background 0.3s, transform 0.25s, border-color 0.3s;
-}
-.cta-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
-
-/* ── Dot indicators ── */
-.hero-dot {
-    display: block;
-    width: 6px; height: 6px;
-    border-radius: 9999px;
-    background: rgba(255,255,255,0.25);
-    transition: all 0.4s cubic-bezier(.22,1,.36,1);
-}
-.hero-dot.is-active {
-    width: 24px;
-    background: #38bdf8;
-    box-shadow: 0 0 8px rgba(56,189,248,0.5);
-}
+/* ── Custom Utility Adjustments ── */
 
 /* RTL Progress Bar adjustment */
 html[dir="rtl"] .h-r-progress { float: right; }
@@ -298,8 +237,14 @@ document.addEventListener('DOMContentLoaded', function () {
         current = index;
         slideEls[current].style.opacity = '1';
         
-        dotEls.forEach(function(d){ d.classList.remove('is-active'); });
-        if(dotEls[current]) dotEls[current].classList.add('is-active');
+        dotEls.forEach(function(d){ 
+            d.classList.remove('w-6', 'bg-primary', 'shadow-[0_0_8px]', 'shadow-primary/50');
+            d.classList.add('w-1.5', 'bg-white/25');
+        });
+        if(dotEls[current]) {
+            dotEls[current].classList.remove('w-1.5', 'bg-white/25');
+            dotEls[current].classList.add('w-6', 'bg-primary', 'shadow-[0_0_8px]', 'shadow-primary/50');
+        }
         
         if(counterEl) counterEl.textContent = String(current + 1).padStart(2, '0');
         
