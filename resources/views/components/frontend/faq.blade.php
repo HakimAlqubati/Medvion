@@ -1,7 +1,27 @@
 @props(['altBg' => false])
 
-{{-- FAQ Section - Modern UI Redesign --}}
-<section class="py-24 {{ $altBg ? 'bg-primary' : 'bg-white' }} relative overflow-hidden" id="faq">
+{{-- FAQ Section --}}
+<section id="faq" class="py-20 {{ $altBg ? 'bg-primary' : 'bg-white' }} relative overflow-hidden">
+
+    {{-- Decorative Background Image (Only when altBg is true) --}}
+    @if($altBg)
+        <style>
+            @keyframes breatheFadeFaq {
+                0%, 100% { opacity: 0.03; transform: scale(1.05) translateY(0); }
+                50% { opacity: 0.12; transform: scale(1) translateY(10px); }
+            }
+            .animate-breathe-faq {
+                animation: breatheFadeFaq 18s ease-in-out infinite;
+            }
+        </style>
+        <div class="absolute inset-0 z-0 pointer-events-none mix-blend-overlay">
+            <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=2000&q=80" 
+                 alt="الأسئلة الشائعة خلفية" 
+                 class="w-full h-full object-cover animate-breathe-faq">
+        </div>
+        {{-- Gradient top and bottom for smooth text transition, keeping it rich --}}
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-primary via-transparent to-primary opacity-60 pointer-events-none"></div>
+    @endif
     
     {{-- Decorative Background Blob (اختياري للمسة عصرية) --}}
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] {{ $altBg ? 'bg-white/5' : 'bg-primary/5' }} blur-[80px] rounded-full pointer-events-none"></div>
@@ -71,7 +91,7 @@
                         class="overflow-hidden"
                         x-cloak>
                         
-                        <div class="px-6 pb-6 pt-1 text-base leading-relaxed sm:px-6 {{ $altBg ? 'text-white/70' : 'text-gray-500' }}">
+                        <div class="px-6 pb-6 pt-1 text-base leading-relaxed sm:px-6 {{ $altBg ? 'text-white/90' : 'text-gray-500' }}">
                             {{-- إضافة خط جانبي بلون المنصة الثانوي لربط الإجابة بصرياً --}}
                             <p class="ps-4 border-s-2 {{ $altBg ? 'border-white/30' : 'border-secondary/50' }}">
                                 {{ $item['a'] }}
