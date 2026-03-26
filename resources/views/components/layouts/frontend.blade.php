@@ -26,7 +26,7 @@
     @php
         $navLinks = [
             ['name' => __('land.nav_home'), 'url' => url('/'), 'active' => request()->is('/'), 'target' => null],
-            ['name' => __('land.nav_about'), 'url' => url('/about'), 'active' => request()->is('about'), 'target' => null],
+            ['name' => __('land.nav_about'), 'url' => url('/#about'), 'active' => false, 'target' => 'about'],
             ['name' => __('land.nav_courses'), 'url' => url('/#courses'), 'active' => false, 'target' => 'courses'],
             ['name' => __('land.nav_faq'), 'url' => url('/#faq'), 'active' => false, 'target' => 'faq'],
             ['name' => __('land.nav_contact'), 'url' => route('contact'), 'active' => request()->routeIs('contact'), 'target' => null],
@@ -152,7 +152,7 @@
 
                 <nav class="flex flex-wrap gap-4 md:gap-6 text-sm text-gray-300 justify-center">
                     <a href="{{ url('/') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_home') }}</a>
-                    <a href="{{ url('/about') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_about') }}</a>
+                    <a href="{{ url('/#about') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_about') }}</a>
                     <a href="{{ url('/#courses') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_courses') }}</a>
                     <a href="{{ route('privacy') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_privacy') }}</a>
                     <a href="{{ route('terms') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_terms') }}</a>
