@@ -264,102 +264,92 @@ $slides = [
      ============================================================ --}}
 <script>
 (function () {
-    const TOTAL        = {{ count($slides) }};
-    const INTERVAL_MS  = 6000;   // 6s per slide
-    const PROGRESS_TICK = 50;    // ms per progress tick
+    var TOTAL        = {{ count($slides) }};
+    var INTERVAL_MS  = 6000;
+    var TICK         = 50;
+    var current      = 0;
+    var progTimer    = null;
+    var progVal      = 0;
+    var paused       = false;
 
-    let current   = 0;
-    let timer     = null;
-    let progTimer = null;
-    let progVal   = 0;
+    var slideEls  = document.querySelectorAll('.hero-slide');
+    var dotEls    = document.querySelectorAll('.hero-dot');
+    var dotBtns   = document.querySelectorAll('.hero-dot-btn');
+    var progressEl = document.getElementById('hero-progress');
+    var counterEl  = document.getElementById('hero-counter');
+    var title1El   = document.getElementById('slide-title-1');
+    var title2El   = document.getElementById('slide-title-2');
+    var subtitleEl = document.getElementById('slide-subtitle');
+    var badgeSpan  = document.getElementById('slide-badge');
 
-    const slides    = document.querySelectorAll('.hero-slide');
-    const dots      = document.querySelectorAll('.hero-dot');
-    const dotBtns   = document.querySelectorAll('.hero-dot-btn');
-    const progressEl = document.getElementById('hero-progress');
-    const counterEl  = document.getElementById('hero-counter');
-
-    // Text elements
-    const title1El   = document.getElementById('slide-title-1');
-    const title2El   = document.getElementById('slide-title-2');
-    const subtitleEl = document.getElementById('slide-subtitle');
-    const badgeEl    = document.getElementById('slide-badge');
-
-    const texts = [
+    var texts = [
         @foreach ($slides as $i => $slide)
-        {
-            badge:    {{ json_encode($slide['badge']) }},
-            title1:   {{ json_encode($slide['title_1']) }},
-            title2:   {{ json_encode($slide['title_2']) }},
-            subtitle: {{ json_encode($slide['subtitle']) }},
-        },
+        { badge: {!! json_encode($slide['badge']) !!}, title1: {!! json_encode($slide['title_1']) !!}, title2: {!! json_encode($slide['title_2']) !!}, subtitle: {!! json_encode($slide['subtitle']) !!} },
         @endforeach
     ];
 
+    // Init: force inline opacity so Tailwind classes don't interfere
+    slideEls.forEach(function (el, i) {
+        el.style.transition = 'opacity 1.4s ease-in-out';
+        el.style.opacity    = (i === 0) ? '1' : '0';
+        el.classList.remove('opacity-100', 'opacity-0');
+    });
+
     function goTo(index) {
-        // Fade out old text
-        [title1El, title2El, subtitleEl].forEach(el => el.classList.add('fading'));
-
-        // Crossfade images
-        slides[current].style.opacity = '0';
+        if (index === current) return;
+        [title1El, title2El, subtitleEl].forEach(function(el){ el.classList.add('fading'); });
+        slideEls[current].style.opacity = '0';
         current = index;
-        slides[current].style.opacity = '1';
-
-        // Update dots
-        dots.forEach(d => d.classList.remove('is-active'));
-        dots[current].classList.add('is-active');
-
-        // Update counter
+        slideEls[current].style.opacity = '1';
+        dotEls.forEach(function(d){ d.classList.remove('is-active'); });
+        dotEls[current].classList.add('is-active');
         counterEl.textContent = String(current + 1).padStart(2, '0');
-
-        // Update text after short fade
         setTimeout(function () {
-            badgeEl.textContent    = texts[current].badge;
-            title1El.textContent  = texts[current].title1;
-            title2El.textContent  = texts[current].title2;
+            if (badgeSpan) badgeSpan.textContent = texts[current].badge;
+            title1El.textContent   = texts[current].title1;
+            title2El.textContent   = texts[current].title2;
             subtitleEl.textContent = texts[current].subtitle;
-            [title1El, title2El, subtitleEl].forEach(el => el.classList.remove('fading'));
-        }, 300);
+            [title1El, title2El, subtitleEl].forEach(function(el){ el.classList.remove('fading'); });
+        }, 350);
+    }
 
-        // Reset progress
+    function resetProgress() {
         clearInterval(progTimer);
         progVal = 0;
         progressEl.style.width = '0%';
-        startProgress();
     }
 
-    function next() { goTo((current + 1) % TOTAL); }
-
     function startProgress() {
-        const step = (PROGRESS_TICK / INTERVAL_MS) * 100;
+        if (paused) return;
+        resetProgress();
+        var step = (TICK / INTERVAL_MS) * 100;
         progTimer = setInterval(function () {
+            if (paused) return;
             progVal = Math.min(progVal + step, 100);
             progressEl.style.width = progVal + '%';
             if (progVal >= 100) {
                 clearInterval(progTimer);
-                next();
+                goTo((current + 1) % TOTAL);
+                setTimeout(startProgress, 50);
             }
-        }, PROGRESS_TICK);
+        }, TICK);
     }
 
-    // Dot button clicks
     dotBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
-            const idx = parseInt(btn.dataset.slide);
-            if (idx !== current) {
-                clearInterval(progTimer);
-                progVal = 0;
-                goTo(idx);
-            }
+            var idx = parseInt(btn.getAttribute('data-slide'));
+            goTo(idx);
+            resetProgress();
+            setTimeout(startProgress, 50);
         });
     });
 
-    // Pause on hover
-    const root = document.getElementById('hero-root');
-    root.addEventListener('mouseenter', function () { clearInterval(progTimer); });
-    root.addEventListener('mouseleave', function () { startProgress(); });
+    var root = document.getElementById('hero-root');
+    if (root) {
+        root.addEventListener('mouseenter', function () { paused = true; clearInterval(progTimer); });
+        root.addEventListener('mouseleave', function () { paused = false; startProgress(); });
+    }
 
-    // Init
     startProgress();
 })();
 </script>
