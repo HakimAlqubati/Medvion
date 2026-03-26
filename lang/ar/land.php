@@ -12,7 +12,7 @@ return [
     'title'                  => 'منصة Medvion | للتدريب والتأهيل الصحي الرقمي',
     'meta_description'       => 'ارتقِ بمسارك في القطاع الصحي عبر دورات تدريبية معتمدة وشهادات موثقة.',
 
-    // Navbar
+    // Navigation
     'nav_home'               => 'الرئيسية',
     'nav_about'              => 'من نحن',
     'nav_courses'            => 'الدورات',
@@ -20,6 +20,7 @@ return [
     'nav_contact'            => 'تواصل معنا',
     'nav_login'              => 'تسجيل الدخول',
     'nav_register'           => 'إنشاء حساب',
+    'nav_login_register'     => 'تسجيل / دخول',
     'nav_dashboard'          => 'لوحة التحكم',
 
     // Footer

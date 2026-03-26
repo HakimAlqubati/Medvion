@@ -25,12 +25,13 @@
 <body class="bg-gray-50 text-gray-800 antialiased">
 
     {{-- ========== NAVBAR ========== --}}
-    <header class="bg-white shadow-sm sticky top-0 z-50" style="">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+    <!-- Wrapper to reserve 64px space on inner pages -->
+    <div class="{{ request()->is('/') ? 'absolute w-full z-50 pointer-events-none' : 'h-16 w-full' }}">
+        <header id="main-header" class="fixed left-0 right-0 z-50 transition-all duration-500 top-4 pointer-events-auto">
+            <div id="navbar-container" class="mx-auto bg-white transition-all duration-500 flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8 max-w-5xl rounded-full shadow-lg border border-black/5">
 
                 {{-- Brand --}}
-                <a href="{{ url('/') }}" class="text-2xl font-extrabold text-primary tracking-tight">
+                <a href="{{ url('/') }}" class="text-2xl font-extrabold text-primary tracking-tight flex-shrink-0">
                     Medvion<span class="text-secondary">+</span>
                 </a>
 
@@ -59,7 +60,7 @@
                 </nav>
 
                 {{-- Auth Links --}}
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 flex-shrink-0">
                     @if (Route::has('login'))
                     @auth
                     <a href="{{ url('/dashboard') }}"
@@ -68,22 +69,16 @@
                     </a>
                     @else
                     <a href="{{ route('login') }}"
-                        class="text-sm font-medium text-gray-600 hover:text-primary transition">
-                        {{ __('land.nav_login') }}
+                        class="inline-flex items-center justify-center px-6 py-2 border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-bold rounded-full shadow-sm hover:shadow transition-all duration-300">
+                        {{ __('land.nav_login_register') }}
                     </a>
-                    @if (Route::has('register'))
-                    <a href="{{ route('register') }}"
-                        class="inline-flex items-center px-4 py-2 bg-primary text-white text-xs font-bold rounded-md hover:bg-primary-light transition shadow-sm">
-                        {{ __('land.nav_register') }}
-                    </a>
-                    @endif
                     @endauth
                     @endif
                 </div>
 
             </div>
-        </div>
-    </header>
+        </header>
+    </div>
 
     {{-- ========== MAIN CONTENT ========== --}}
     <main>
@@ -133,6 +128,37 @@
     </a>
 
     @stack('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const nav = document.getElementById('navbar-container');
+            
+            const handleScroll = () => {
+                if (window.scrollY > 20) {
+                    // Scrolled down (normal full width)
+                    header.classList.remove('top-4');
+                    header.classList.add('top-0');
+                    
+                    nav.classList.remove('max-w-5xl', 'rounded-full', 'shadow-lg', 'border-black/5');
+                    if (!nav.classList.contains('max-w-full')) {
+                        nav.classList.add('max-w-full', 'rounded-none', 'shadow-sm', 'border-b', 'border-gray-100');
+                    }
+                } else {
+                    // At top (floating pill)
+                    header.classList.add('top-4');
+                    header.classList.remove('top-0');
+                    
+                    if (!nav.classList.contains('max-w-5xl')) {
+                        nav.classList.add('max-w-5xl', 'rounded-full', 'shadow-lg', 'border-black/5');
+                    }
+                    nav.classList.remove('max-w-full', 'rounded-none', 'shadow-sm', 'border-b', 'border-gray-100');
+                }
+            };
+
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Initialize on load
+        });
+    </script>
 </body>
 
 </html>

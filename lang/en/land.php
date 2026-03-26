@@ -20,6 +20,7 @@ return [
     'nav_contact'            => 'Contact',
     'nav_login'              => 'Log In',
     'nav_register'           => 'Create Account',
+    'nav_login_register'     => 'Login / Register',
     'nav_dashboard'          => 'Dashboard',
 
     // Footer
