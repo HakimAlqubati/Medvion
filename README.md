@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://via.placeholder.com/400x100.png?text=Medvion+Platform+Logo" width="400" alt="Medvion Logo">
+  <img src="public/favicon.png" width="150" alt="Medvion Logo" style="border-radius: 10px;">
 </p>
 
 <h1 align="center">منصة Medvion للتدريب والتأهيل والتثقيف الصحي الرقمي</h1>
