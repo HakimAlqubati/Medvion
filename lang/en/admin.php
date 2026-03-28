@@ -76,10 +76,10 @@ return [
         'plural_label' => 'Hero Slides',
         'fields' => [
             'badge' => 'Badge',
+            'image' => 'Image',
             'title_1' => 'Main Title',
             'title_2' => 'Secondary Title',
             'subtitle' => 'Subtitle',
-            'image' => 'Image',
             'button_text' => 'Button Text',
             'button_url' => 'Button URL',
             'is_active' => 'Is Active',
@@ -115,4 +115,5 @@ return [
             'is_active' => 'Is Active',
         ],
     ],
+    'sort_order' => 'Sort Order',
 ];
