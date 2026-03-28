@@ -9,8 +9,14 @@ return [
     */
 
     // Meta
-    'title'                  => 'منصة Medvion | للتدريب والتأهيل الصحي الرقمي',
-    'meta_description'       => 'ارتقِ بمسارك في القطاع الصحي عبر دورات تدريبية معتمدة وشهادات موثقة.',
+    'title'                  => 'منصة Medvion | التدريب والتأهيل الصحي الرقمي',
+    'meta_description'       => 'ارتقِ بمسارك المهني في الرعاية الصحية مع دورات معتمدة وشهادات موثقة.',
+
+    // Pagination
+    'pagination_showing'     => 'عرض',
+    'pagination_to'          => 'إلى',
+    'pagination_of'          => 'من أصل',
+    'pagination_results'     => 'نتائج',
 
     // About Section
     'about_section_title'       => 'نبذة عن المنصة',

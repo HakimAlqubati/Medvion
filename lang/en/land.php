@@ -12,6 +12,12 @@ return [
     'title'                  => 'Medvion Platform | Digital Health Training & Rehabilitation',
     'meta_description'       => 'Advance your healthcare career with accredited courses and verified certificates.',
 
+    // Pagination
+    'pagination_showing'     => 'Showing',
+    'pagination_to'          => 'to',
+    'pagination_of'          => 'of',
+    'pagination_results'     => 'results',
+
     // Navbar
     'nav_home'               => 'Home',
     'nav_about'              => 'About Us',
