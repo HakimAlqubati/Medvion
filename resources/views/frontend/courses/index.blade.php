@@ -22,12 +22,60 @@
                 {{-- Dummy Courses Loop for Theme --}}
                 @php
                     $dummyCourses = [
-                        ['title' => __('land.course_1_title'), 'cat' => __('land.course_1_category'), 'level' => 'advanced', 'color' => 'primary'],
-                        ['title' => __('land.course_2_title'), 'cat' => __('land.course_2_category'), 'level' => 'inter', 'color' => 'secondary'],
-                        ['title' => __('land.course_3_title'), 'cat' => __('land.course_3_category'), 'level' => 'beginner', 'color' => 'primary'],
-                        ['title' => 'مكافحة العدوى في المنشآت الصحية', 'cat' => 'الصحة العامة', 'level' => 'inter', 'color' => 'secondary'],
-                        ['title' => 'إدارة الجودة الشاملة في الرعاية الصحية', 'cat' => 'الإدارة الصحية', 'level' => 'advanced', 'color' => 'primary'],
-                        ['title' => 'أساسيات الإسعافات الأولية المتقدمة', 'cat' => 'الطوارئ والإنقاذ', 'level' => 'beginner', 'color' => 'secondary'],
+                        [
+                            'title' => __('land.course_1_title'),
+                            'cat' => __('land.course_1_category'),
+                            'level' => 'advanced',
+                            'color' => 'primary',
+                            'slug' => 'emergency-medicine-essentials',
+                            'image' => 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80',
+                            'price' => 150
+                        ],
+                        [
+                            'title' => __('land.course_2_title'),
+                            'cat' => __('land.course_2_category'),
+                            'level' => 'inter',
+                            'color' => 'secondary',
+                            'slug' => 'medical-radiology-techniques',
+                            'image' => 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80',
+                            'price' => 0
+                        ],
+                        [
+                            'title' => __('land.course_3_title'),
+                            'cat' => __('land.course_3_category'),
+                            'level' => 'beginner',
+                            'color' => 'primary',
+                            'slug' => 'surgical-assistant-training',
+                            'image' => 'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80',
+                            'price' => 299
+                        ],
+                        [
+                            'title' => 'مكافحة العدوى في المنشآت الصحية',
+                            'cat' => 'الصحة العامة',
+                            'level' => 'inter',
+                            'color' => 'secondary',
+                            'slug' => 'infection-control-basics',
+                            'image' => 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80',
+                            'price' => 80
+                        ],
+                        [
+                            'title' => 'إدارة الجودة الشاملة في الرعاية الصحية',
+                            'cat' => 'الإدارة الصحية',
+                            'level' => 'advanced',
+                            'color' => 'primary',
+                            'slug' => 'healthcare-quality-management',
+                            'image' => 'https://images.unsplash.com/photo-1454165833467-1359a33a7f74?auto=format&fit=crop&q=80',
+                            'price' => 450
+                        ],
+                        [
+                            'title' => 'أساسيات الإسعافات الأولية المتقدمة',
+                            'cat' => 'الطوارئ والإنقاذ',
+                            'level' => 'beginner',
+                            'color' => 'secondary',
+                            'slug' => 'advanced-first-aid-basics',
+                            'image' => 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80',
+                            'price' => 0
+                        ],
                     ];
                 @endphp
 
@@ -39,6 +87,9 @@
                         :hours="rand(8, 30)"
                         :students="rand(50, 500)"
                         :color="$course['color']"
+                        :slug="$course['slug']"
+                        :image="$course['image']"
+                        :price="$course['price']"
                     />
                 @endforeach
             </div>

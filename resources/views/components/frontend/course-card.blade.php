@@ -7,6 +7,9 @@
       - $hours    : int
       - $students : int
       - $color    : 'primary' | 'secondary'  (optional, default primary)
+      - $slug     : string
+      - $image    : string (url)
+      - $price    : int|float
 --}}
 @props([
     'title'    => '',
@@ -15,6 +18,9 @@
     'hours'    => 8,
     'students' => 120,
     'color'    => 'primary',
+    'slug'     => '',
+    'image'    => null,
+    'price'    => 0,
 ])
 
 @php
@@ -36,12 +42,27 @@
 
 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
 
-    {{-- Card Header / Thumbnail placeholder --}}
-    <div class="h-36 {{ $iconBg }} flex items-center justify-center">
-        <svg class="w-16 h-16 {{ $iconColor }} opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
+    {{-- Card Header / Thumbnail --}}
+    <div class="relative h-44 overflow-hidden {{ $iconBg }} flex items-center justify-center">
+        @if($image)
+            <img src="{{ $image }}" alt="{{ $title }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+        @else
+            <svg class="w-16 h-16 {{ $iconColor }} opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+        @endif
+
+        {{-- Price Badge Overlay --}}
+        <div class="absolute top-4 {{ app()->getLocale() === 'ar' ? 'left-4' : 'right-4' }}">
+            <span class="bg-white/95 backdrop-blur-sm text-primary font-bold px-3 py-1 rounded-lg shadow-sm text-sm">
+                @if($price > 0)
+                    {{ $price }} {{ __('land.currency_sar') }}
+                @else
+                    {{ __('land.course_free') }}
+                @endif
+            </span>
+        </div>
     </div>
 
     {{-- Card Body --}}
@@ -55,7 +76,7 @@
             </span>
         </div>
 
-        <h3 class="text-base font-bold text-gray-800 mb-4 flex-1 leading-snug">{{ $title }}</h3>
+        <h3 class="text-base font-bold text-gray-800 mb-4 flex-1 leading-snug line-clamp-2">{{ $title }}</h3>
 
         <div class="flex items-center justify-between text-xs text-gray-400 border-t border-gray-100 pt-3 mt-auto">
             <span class="flex items-center gap-1">
@@ -72,8 +93,8 @@
             </span>
         </div>
 
-        <a href="{{ route('courses.show', ['slug' => \Illuminate\Support\Str::slug($title ?? 'course')]) }}"
-           class="mt-4 w-full text-center py-2.5 bg-primary text-white text-xs font-bold rounded-lg hover:bg-primary-light transition">
+        <a href="{{ route('courses.show', $slug ?: \Illuminate\Support\Str::slug($title ?? 'course')) }}"
+           class="mt-4 w-full text-center py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary-light hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
             {{ __('land.course_enroll') }}
         </a>
     </div>

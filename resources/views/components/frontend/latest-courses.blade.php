@@ -24,6 +24,9 @@
                 :hours="12"
                 :students="340"
                 color="primary"
+                slug="emergency-medicine-essentials"
+                image="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80"
+                :price="150"
             />
 
             <x-frontend.course-card
@@ -33,6 +36,9 @@
                 :hours="8"
                 :students="210"
                 color="secondary"
+                slug="medical-radiology-techniques"
+                image="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80"
+                :price="0"
             />
 
             <x-frontend.course-card
@@ -42,6 +48,9 @@
                 :hours="20"
                 :students="95"
                 color="primary"
+                slug="surgical-assistant-training"
+                image="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80"
+                :price="299"
             />
 
         </div>
