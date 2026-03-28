@@ -162,6 +162,39 @@ return [
     'whatsapp_message'       => 'Hello Medvion Platform team, I would like to inquire about: ',
 
     // ---------------------------------------------------------------
+    // Hero Section 2 – Orbital Medical Ecosystem
+    // ---------------------------------------------------------------
+    'hero2_aria_label'      => 'Hero section – Medvion medical education ecosystem',
+    'hero2_badge'           => 'Integrated Medical Education Ecosystem',
+    'hero2_title_line1'     => 'Medvion — The Medical Platform',
+    'hero2_title_line2'     => 'Built Around You',
+    'hero2_subtitle'        => 'A complete medical education ecosystem encompassing courses, lectures, certificates, assessments, and clinical cases — designed to advance every healthcare professional at every stage of their career.',
+
+    // Stats
+    'hero2_stats_aria'      => 'Platform Features',
+    'hero2_stat1_val'       => 'Accredited',
+    'hero2_stat1_label'     => 'Scientific Content',
+    'hero2_stat2_val'       => 'Interactive',
+    'hero2_stat2_label'     => 'Digital Environment',
+    'hero2_stat3_val'       => 'Verified',
+    'hero2_stat3_label'     => 'Certificates',
+
+    // CTAs
+    'hero2_cta_primary'     => 'Start Your Learning Journey',
+    'hero2_cta_secondary'   => 'Discover the Platform',
+
+    // Orbital node labels
+    'hero2_node_courses'    => 'Courses',
+    'hero2_node_certs'      => 'Certificates',
+    'hero2_node_lectures'   => 'Lectures',
+    'hero2_node_exams'      => 'Exams',
+    'hero2_node_cases'      => 'Clinical Cases',
+    'hero2_node_community'  => 'Community',
+
+    // Center core
+    'hero2_core_tagline'    => 'Medical Education',
+
+    // ---------------------------------------------------------------
     // Legal Pages
     // ---------------------------------------------------------------
     'nav_privacy'          => 'Privacy Policy',

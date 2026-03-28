@@ -168,6 +168,39 @@ return [
     'whatsapp_message'       => 'مرحباً فريق منصة Medvion، أود الاستفسار عن: ',
 
     // ---------------------------------------------------------------
+    // Hero Section 2 – Orbital Medical Ecosystem
+    // ---------------------------------------------------------------
+    'hero2_aria_label'      => 'قسم الترحيب الرئيسي – منظومة Medvion الطبية التعليمية',
+    'hero2_badge'           => 'منظومة تعليم طبي متكاملة',
+    'hero2_title_line1'     => 'Medvion — المنصة الطبية',
+    'hero2_title_line2'     => 'التي تدور حولك',
+    'hero2_subtitle'        => 'منظومة تعليم طبي متكاملة تضم الدورات والمحاضرات والشهادات والاختبارات والحالات السريرية، صُمِّمت لتطوير الممارس الصحي في كل مرحلة من مسيرته المهنية.',
+
+    // Stats
+    'hero2_stats_aria'      => 'مميزات المنصة',
+    'hero2_stat1_val'       => 'مُعتمد',
+    'hero2_stat1_label'     => 'محتوى علمي',
+    'hero2_stat2_val'       => 'تفاعلية',
+    'hero2_stat2_label'     => 'بيئة رقمية',
+    'hero2_stat3_val'       => 'موثّقة',
+    'hero2_stat3_label'     => 'شهادات إتمام',
+
+    // CTAs
+    'hero2_cta_primary'     => 'ابدأ رحلتك التعليمية',
+    'hero2_cta_secondary'   => 'تعرّف على المنصة',
+
+    // Orbital node labels
+    'hero2_node_courses'    => 'الدورات',
+    'hero2_node_certs'      => 'الشهادات',
+    'hero2_node_lectures'   => 'المحاضرات',
+    'hero2_node_exams'      => 'الاختبارات',
+    'hero2_node_cases'      => 'الحالات السريرية',
+    'hero2_node_community'  => 'المجتمع المهني',
+
+    // Center core
+    'hero2_core_tagline'    => 'Medical Education',
+
+    // ---------------------------------------------------------------
     // Legal Pages
     // ---------------------------------------------------------------
     'nav_privacy'          => 'سياسة الخصوصية',

@@ -319,7 +319,7 @@
         document.body.style.overflow = 'hidden';
 
         // --- Page Loader: minimum display time ---
-        const MIN_LOADER_MS = 1000; // الحد الأدنى لوقت عرض اللودر (بالملي ثانية)
+        const MIN_LOADER_MS = 300; // الحد الأدنى لوقت عرض اللودر (بالملي ثانية)
         const loaderStart   = Date.now();
 
         const pageLoaded = new Promise(resolve => window.addEventListener('load', resolve));
