@@ -38,22 +38,42 @@
 
 <body class="bg-gray-50 text-gray-800 antialiased relative">
 
-    {{-- Page Loader (Ultra-lightweight Medical Theme) --}}
-    <div id="medvion-loader" class="fixed inset-0 z-[99999] bg-white flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out pointer-events-none">
-        <div class="relative w-16 h-16 mb-4">
+    {{-- Page Loader (Medical Theme – Inline Styles for guaranteed rendering) --}}
+    <div id="medvion-loader" style="
+        position: fixed; inset: 0; z-index: 99999;
+        background: #ffffff;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        transition: opacity 0.7s ease-in-out;
+        pointer-events: none;
+    ">
+        <div style="position: relative; width: 64px; height: 64px; margin-bottom: 16px;">
             {{-- Static Ring --}}
-            <div class="absolute inset-0 border-4 border-primary/10 rounded-full"></div>
-            {{-- Spinning Dual-color Pulse --}}
-            <div class="absolute inset-0 border-4 border-primary border-r-transparent border-t-secondary border-l-transparent rounded-full animate-spin" style="animation-duration: 1.5s;"></div>
+            <div style="position: absolute; inset: 0; border: 4px solid rgba(10,74,123,0.12); border-radius: 50%;"></div>
+            {{-- Spinning Ring --}}
+            <div id="loader-spinner" style="
+                position: absolute; inset: 0;
+                border: 4px solid transparent;
+                border-top-color: #0D9488;
+                border-right-color: #0A4A7B;
+                border-radius: 50%;
+                animation: medvion-spin 1.1s linear infinite;
+            "></div>
             {{-- Center Medical Cross --}}
-            <div class="absolute inset-0 flex items-center justify-center text-primary animate-pulse">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #0A4A7B; animation: medvion-pulse 1.5s ease-in-out infinite;">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/>
                 </svg>
             </div>
         </div>
-        {{-- Brand Name Pulse --}}
-        <div class="text-primary font-bold tracking-[0.2em] text-sm md:text-base animate-pulse">MEDVION</div>
+        {{-- Brand Name --}}
+        <div style="color: #0A4A7B; font-weight: 700; letter-spacing: 0.2em; font-size: 14px; animation: medvion-pulse 1.5s ease-in-out infinite;">
+            MEDVION
+        </div>
+
+        <style>
+            @keyframes medvion-spin  { to { transform: rotate(360deg); } }
+            @keyframes medvion-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+        </style>
     </div>
     @php
         $navLinks = [
@@ -216,15 +236,26 @@
     <script>
         // --- Prevent body scroll before load ---
         document.body.style.overflow = 'hidden';
-        
-        // --- Page Loader Removal ---
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('medvion-loader');
-            if (loader) {
-                loader.style.opacity = '0';
-                document.body.style.overflow = ''; // Restore scroll
-                setTimeout(() => loader.remove(), 700);
-            }
+
+        // --- Page Loader: minimum display time ---
+        const MIN_LOADER_MS = 1000; // الحد الأدنى لوقت عرض اللودر (بالملي ثانية)
+        const loaderStart   = Date.now();
+
+        const pageLoaded = new Promise(resolve => window.addEventListener('load', resolve));
+        const minTime    = new Promise(resolve => setTimeout(resolve, MIN_LOADER_MS));
+
+        Promise.all([pageLoaded, minTime]).then(() => {
+            const loader  = document.getElementById('medvion-loader');
+            const elapsed = Date.now() - loaderStart;
+            // إذا انتهى الوقت الأدنى بالفعل، اختفاء فوري؛ وإلا انتظر الباقي
+            const delay = Math.max(0, MIN_LOADER_MS - elapsed);
+            setTimeout(() => {
+                if (loader) {
+                    loader.style.opacity = '0';
+                    document.body.style.overflow = '';
+                    setTimeout(() => loader.remove(), 700);
+                }
+            }, delay);
         });
 
         document.addEventListener('DOMContentLoaded', () => {
