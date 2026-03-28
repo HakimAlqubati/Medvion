@@ -29,7 +29,7 @@ class CourseService
      * @param int $perPage
      * @return LengthAwarePaginator
      */
-    public function getAllCourses(int $perPage = 9): LengthAwarePaginator
+    public function getAllCourses(int $perPage = 6): LengthAwarePaginator
     {
         return Course::with('category')
             ->where('is_active', true)

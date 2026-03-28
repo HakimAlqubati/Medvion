@@ -33,7 +33,7 @@
 
             {{-- Pagination --}}
             @if($courses->hasPages())
-                <div class="mt-12 flex justify-center reveal delay-200">
+                <div class="mt-12 flex justify-center">
                     {{ $courses->links() }}
                 </div>
             @endif
