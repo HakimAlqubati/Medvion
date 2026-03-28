@@ -157,6 +157,7 @@ class AboutSeeder extends Seeder
             ],
         ];
 
+        About::truncate();
         foreach ($aboutSections as $section) {
             About::create($section);
         }

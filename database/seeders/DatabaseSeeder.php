@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             MedvionSeeder::class,
-            // FaqSeeder::class,
-            // AboutSeeder::class,
+            FaqSeeder::class,
+            AboutSeeder::class,
         ]);
     }
 }

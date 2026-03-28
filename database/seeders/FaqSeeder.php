@@ -70,6 +70,7 @@ class FaqSeeder extends Seeder
             ],
         ];
 
+        Faq::truncate();
         foreach ($faqs as $faqData) {
             Faq::create($faqData);
         }
