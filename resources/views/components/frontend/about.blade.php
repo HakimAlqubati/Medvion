@@ -1,4 +1,8 @@
-@props(['altBg' => false])
+@props(['altBg' => false, 'summary' => null])
+
+@php
+    $summary = $summary ?? app(\App\Services\Frontend\AboutService::class)->getHomeSummary();
+@endphp
 
 <section id="about" class="py-20 md:py-32 {{ $altBg ? 'bg-gray-50' : 'bg-white' }} relative overflow-hidden">
     {{-- Decorative Background --}}
@@ -18,11 +22,11 @@
                 </div>
                 
                 <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
-                    {{ __('land.about_section_title') }}
+                    {{ optional($summary)->title ?? __('land.about_section_title') }}
                 </h2>
                 
                 <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8">
-                    {{ __('land.about_section_subtitle') }}
+                    {{ optional($summary)->content ?? __('land.about_section_subtitle') }}
                 </p>
                 
                 <div>

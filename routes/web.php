@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\CourseController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,9 +32,7 @@ Route::get('/', function () {
     return view('welcome', compact('slides'));
 })->name('home');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/contact', function () {
     return view('contact');
