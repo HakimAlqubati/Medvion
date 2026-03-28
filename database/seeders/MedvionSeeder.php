@@ -277,6 +277,75 @@ class MedvionSeeder extends Seeder
             ],
         ]);
 
+        // ==========================================
+        // 7. إنشاء السلايدر الرئيسي (Hero Slides)
+        // ==========================================
+        $this->command->info('Creating Dynamic Hero Slides...');
+        \App\Models\HeroSlide::truncate();
+
+        \App\Models\HeroSlide::create([
+            'image' => '/images/hero-slide-1.png',
+            'badge' => [
+                'ar' => __('land.hero_badge', [], 'ar'),
+                'en' => __('land.hero_badge', [], 'en'),
+            ],
+            'title_1' => [
+                'ar' => __('land.slide1_title1', [], 'ar'),
+                'en' => __('land.slide1_title1', [], 'en'),
+            ],
+            'title_2' => [
+                'ar' => __('land.slide1_title2', [], 'ar'),
+                'en' => __('land.slide1_title2', [], 'en'),
+            ],
+            'subtitle' => [
+                'ar' => __('land.slide1_subtitle', [], 'ar'),
+                'en' => __('land.slide1_subtitle', [], 'en'),
+            ],
+            'sort_order' => 1,
+        ]);
+
+        \App\Models\HeroSlide::create([
+            'image' => '/images/hero-slide-2.png',
+            'badge' => [
+                'ar' => __('land.hero_badge', [], 'ar'),
+                'en' => __('land.hero_badge', [], 'en'),
+            ],
+            'title_1' => [
+                'ar' => __('land.slide2_title1', [], 'ar'),
+                'en' => __('land.slide2_title1', [], 'en'),
+            ],
+            'title_2' => [
+                'ar' => __('land.slide2_title2', [], 'ar'),
+                'en' => __('land.slide2_title2', [], 'en'),
+            ],
+            'subtitle' => [
+                'ar' => __('land.slide2_subtitle', [], 'ar'),
+                'en' => __('land.slide2_subtitle', [], 'en'),
+            ],
+            'sort_order' => 2,
+        ]);
+
+        \App\Models\HeroSlide::create([
+            'image' => '/images/hero-slide-3.png',
+            'badge' => [
+                'ar' => __('land.hero_badge', [], 'ar'),
+                'en' => __('land.hero_badge', [], 'en'),
+            ],
+            'title_1' => [
+                'ar' => __('land.slide3_title1', [], 'ar'),
+                'en' => __('land.slide3_title1', [], 'en'),
+            ],
+            'title_2' => [
+                'ar' => __('land.slide3_title2', [], 'ar'),
+                'en' => __('land.slide3_title2', [], 'en'),
+            ],
+            'subtitle' => [
+                'ar' => __('land.slide3_subtitle', [], 'ar'),
+                'en' => __('land.slide3_subtitle', [], 'en'),
+            ],
+            'sort_order' => 3,
+        ]);
+
         \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
         Category::truncate();
         Course::truncate();

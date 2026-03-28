@@ -21,8 +21,9 @@
         >
             {{-- Image optimization: Eager load first slide, lazy load the rest --}}
             <img
-                src="{{ $slide['image'] }}"
-                alt="{{ $slide['title_1'] }}"
+                src="{{ $slide->image_url }}"
+                onerror="this.onerror=null;this.src='{{ asset('/images/hero-slide-1.png') }}';"
+                alt="{{ $slide->title_1 }}"
                 loading="{{ $i === 0 ? 'eager' : 'lazy' }}"
                 decoding="async"
                 class="absolute inset-0 w-full h-full object-cover hero-slide-img"
@@ -58,23 +59,23 @@
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </span>
                 <span id="slide-badge" class="text-xs font-bold uppercase tracking-[0.18em] text-white">
-                    {{ $slides[0]['badge'] ?? '' }}
+                    {{ $slides[0]->badge ?? '' }}
                 </span>
             </div>
 
             {{-- Headline --}}
             <h1 class="hero-enter font-black text-white leading-[1.06] tracking-tight mb-6" style="animation-delay:0.15s; text-shadow: 0 4px 24px rgba(0,0,0,0.6);">
                 <span id="slide-title-1" class="block text-4xl sm:text-5xl xl:text-6xl slide-text-fade">
-                    {{ $slides[0]['title_1'] ?? '' }}
+                    {{ $slides[0]->title_1 ?? '' }}
                 </span>
                 <span id="slide-title-2" class="block text-4xl sm:text-5xl xl:text-6xl text-transparent bg-clip-text bg-gradient-to-r rtl:bg-gradient-to-l from-secondary-light to-white slide-text-fade mt-1" style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8));">
-                    {{ $slides[0]['title_2'] ?? '' }}
+                    {{ $slides[0]->title_2 ?? '' }}
                 </span>
             </h1>
 
             {{-- Subtitle --}}
             <p id="slide-subtitle" class="hero-enter text-base sm:text-lg text-white/90 leading-relaxed mb-10 max-w-xl slide-text-fade font-medium" style="animation-delay:0.25s; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
-                {{ $slides[0]['subtitle'] ?? '' }}
+                {{ $slides[0]->subtitle ?? '' }}
             </p>
             @endif
 
@@ -216,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var texts = [
         @foreach ($slides as $i => $slide)
-        { badge: {!! json_encode($slide['badge'] ?? '') !!}, title1: {!! json_encode($slide['title_1'] ?? '') !!}, title2: {!! json_encode($slide['title_2'] ?? '') !!}, subtitle: {!! json_encode($slide['subtitle'] ?? '') !!} },
+        { badge: {!! json_encode($slide->badge ?? '') !!}, title1: {!! json_encode($slide->title_1 ?? '') !!}, title2: {!! json_encode($slide->title_2 ?? '') !!}, subtitle: {!! json_encode($slide->subtitle ?? '') !!} },
         @endforeach
     ];
 

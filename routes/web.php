@@ -7,29 +7,8 @@ use App\Http\Controllers\Frontend\CourseController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $slides = [
-        [
-            'image'    => '/images/hero-slide-1.png',
-            'badge'    => __('land.hero_badge'),
-            'title_1'  => __('land.slide1_title1'),
-            'title_2'  => __('land.slide1_title2'),
-            'subtitle' => __('land.slide1_subtitle'),
-        ],
-        [
-            'image'    => '/images/hero-slide-2.png',
-            'badge'    => __('land.hero_badge'),
-            'title_1'  => __('land.slide2_title1'),
-            'title_2'  => __('land.slide2_title2'),
-            'subtitle' => __('land.slide2_subtitle'),
-        ],
-        [
-            'image'    => '/images/hero-slide-3.png',
-            'badge'    => __('land.hero_badge'),
-            'title_1'  => __('land.slide3_title1'),
-            'title_2'  => __('land.slide3_title2'),
-            'subtitle' => __('land.slide3_subtitle'),
-        ],
-    ];
+    // Dynamic slides loaded from DB instead of hardcoded arrays
+    $slides = \App\Services\Frontend\HeroSlideService::getSlides();
     return view('welcome', compact('slides'));
 })->name('home');
 
