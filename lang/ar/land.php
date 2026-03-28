@@ -32,6 +32,10 @@ return [
     // Footer
     'footer_copy'            => '© :year منصة Medvion للتدريب والتأهيل الصحي. جميع الحقوق محفوظة.',
     'footer_tagline'         => 'نحو منظومة صحية رقمية متميزة.',
+    'footer_email_desc'      => 'راسلنا للتعاون والمقترحات',
+    'footer_whatsapp_desc'   => 'الدعم الفني وخدمة العملاء',
+    'footer_quick_links'     => 'روابط سريعة',
+    'footer_social_media'    => 'تواصل معنا',
 
     // ---------------------------------------------------------------
     // Hero Section
