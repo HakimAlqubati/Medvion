@@ -6,15 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Translatable\HasTranslations; // استدعاء حزمة الترجمة
 
 class Course extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasTranslations; // تفعيل الترجمة
 
-    // السماح بإدخال جميع الحقول ما عدا الـ ID
     protected $guarded = ['id'];
 
+    // تحديد الحقول التي تدعم الترجمة
+    public $translatable = ['title', 'brief'];
+
     // تحويل البيانات تلقائياً بين قاعدة البيانات والـ Blade
+    // ملاحظة: لا نضع title و brief هنا لأن حزمة Spatie تتولى أمرها
     protected $casts = [
         'objectives' => 'array',
         'target_audience' => 'array',
@@ -26,6 +30,12 @@ class Course extends Model
     /**
      * العلاقات (Relationships)
      */
+
+    // الفئة التي تنتمي إليها الدورة
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 
     // المستخدم الذي قام بإنشاء الدورة
     public function creator()
@@ -39,21 +49,11 @@ class Course extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-
-    /**
-     * الفئة التي تنتمي إليها الدورة
-     */
-    public function category()
-    {
-        return $this->belongsTo(Category::class, 'category_id');
-    }
-
     /**
      * أتمتة حقول التتبع (Booted Method)
      */
     protected static function booted()
     {
-        // عند إنشاء دورة جديدة
         static::creating(function ($course) {
             if (Auth::check()) {
                 $course->created_by = Auth::id();
@@ -61,7 +61,6 @@ class Course extends Model
             }
         });
 
-        // عند تعديل الدورة
         static::updating(function ($course) {
             if (Auth::check()) {
                 $course->updated_by = Auth::id();

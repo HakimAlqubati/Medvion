@@ -19,80 +19,24 @@
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 reveal delay-100">
-                {{-- Dummy Courses Loop for Theme --}}
-                @php
-                    $dummyCourses = [
-                        [
-                            'title' => __('land.course_1_title'),
-                            'cat' => __('land.course_1_category'),
-                            'level' => 'advanced',
-                            'color' => 'primary',
-                            'slug' => 'emergency-medicine-essentials',
-                            'image' => 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80',
-                            'price' => 150
-                        ],
-                        [
-                            'title' => __('land.course_2_title'),
-                            'cat' => __('land.course_2_category'),
-                            'level' => 'inter',
-                            'color' => 'secondary',
-                            'slug' => 'medical-radiology-techniques',
-                            'image' => 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80',
-                            'price' => 0
-                        ],
-                        [
-                            'title' => __('land.course_3_title'),
-                            'cat' => __('land.course_3_category'),
-                            'level' => 'beginner',
-                            'color' => 'primary',
-                            'slug' => 'surgical-assistant-training',
-                            'image' => 'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80',
-                            'price' => 299
-                        ],
-                        [
-                            'title' => 'مكافحة العدوى في المنشآت الصحية',
-                            'cat' => 'الصحة العامة',
-                            'level' => 'inter',
-                            'color' => 'secondary',
-                            'slug' => 'infection-control-basics',
-                            'image' => 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80',
-                            'price' => 80
-                        ],
-                        [
-                            'title' => 'إدارة الجودة الشاملة في الرعاية الصحية',
-                            'cat' => 'الإدارة الصحية',
-                            'level' => 'advanced',
-                            'color' => 'primary',
-                            'slug' => 'healthcare-quality-management',
-                            'image' => 'https://images.unsplash.com/photo-1454165833467-1359a33a7f74?auto=format&fit=crop&q=80',
-                            'price' => 450
-                        ],
-                        [
-                            'title' => 'أساسيات الإسعافات الأولية المتقدمة',
-                            'cat' => 'الطوارئ والإنقاذ',
-                            'level' => 'beginner',
-                            'color' => 'secondary',
-                            'slug' => 'advanced-first-aid-basics',
-                            'image' => 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80',
-                            'price' => 0
-                        ],
-                    ];
-                @endphp
-
-                @foreach($dummyCourses as $course)
+                @forelse($courses as $course)
                     <x-frontend.course-card
-                        :title="$course['title']"
-                        :category="$course['cat']"
-                        :level="$course['level']"
-                        :hours="rand(8, 30)"
-                        :students="rand(50, 500)"
-                        :color="$course['color']"
-                        :slug="$course['slug']"
-                        :image="$course['image']"
-                        :price="$course['price']"
+                        :course="$course"
+                        :color="$loop->even ? 'secondary' : 'primary'"
                     />
-                @endforeach
+                @empty
+                    <div class="col-span-1 sm:col-span-2 lg:col-span-3 text-center text-gray-500 py-12">
+                        لا توجد دورات متاحة حالياً.
+                    </div>
+                @endforelse
             </div>
+
+            {{-- Pagination --}}
+            @if($courses->hasPages())
+                <div class="mt-12 flex justify-center reveal delay-200">
+                    {{ $courses->links() }}
+                </div>
+            @endif
         </div>
     </section>
 

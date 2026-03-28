@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Translatable\HasTranslations; // استدعاء حزمة الترجمة
 
 class Category extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasTranslations; // تفعيل الترجمة
 
     protected $guarded = ['id'];
+
+    // تحديد الحقول التي تدعم الترجمة (JSON في الداتا بيز)
+    public $translatable = ['name'];
 
     protected $casts = [
         'is_active' => 'boolean',
@@ -20,7 +24,7 @@ class Category extends Model
     /**
      * العلاقات الهرمية (Hierarchical Relationships)
      */
-     
+
     // الفئة الأب (الرئيسية)
     public function parent()
     {
@@ -42,7 +46,7 @@ class Category extends Model
     }
 
     /**
-     * أتمتة التتبع
+     * أتمتة حقول التتبع
      */
     protected static function booted()
     {

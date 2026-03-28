@@ -10,20 +10,22 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            
+
             // الحقل الهرمي (Nullable ليسمح بوجود فئات رئيسية بدون أب)
             $table->foreignId('parent_id')->nullable()->constrained('categories')->cascadeOnDelete();
-            
+
             // البيانات الأساسية
-            $table->string('name');
-            $table->string('slug')->unique();
+            // تم التعديل: تحويل الاسم إلى json ليدعم تعدد اللغات
+            $table->json('name');
+
+            $table->string('slug')->unique(); // الرابط يفضل أن يبقى string إنجليزي ليكون SEO Friendly
             $table->string('icon')->nullable(); // مفيد جداً لعرض الأيقونات الطبية في واجهة المستخدم
             $table->boolean('is_active')->default(true);
-            
+
             // حقول التتبع
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
-            
+
             $table->timestamps();
             $table->softDeletes();
         });

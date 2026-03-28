@@ -1,4 +1,8 @@
-@props(['altBg' => false])
+@props(['altBg' => false, 'courses' => null])
+
+@php
+    $courses = $courses ?? app(\App\Services\Frontend\CourseService::class)->getLatestCourses(3);
+@endphp
 
 {{-- Latest Courses Section --}}
 <section id="courses" class="py-20 {{ $altBg ? 'bg-gray-50' : 'bg-white' }}">
@@ -16,43 +20,16 @@
 
         {{-- Course Cards Grid --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 reveal delay-100">
-
-            <x-frontend.course-card
-                :title="__('land.course_1_title')"
-                :category="__('land.course_1_category')"
-                level="beginner"
-                :hours="12"
-                :students="340"
-                color="primary"
-                slug="emergency-medicine-essentials"
-                image="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80"
-                :price="150"
-            />
-
-            <x-frontend.course-card
-                :title="__('land.course_2_title')"
-                :category="__('land.course_2_category')"
-                level="inter"
-                :hours="8"
-                :students="210"
-                color="secondary"
-                slug="medical-radiology-techniques"
-                image="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80"
-                :price="0"
-            />
-
-            <x-frontend.course-card
-                :title="__('land.course_3_title')"
-                :category="__('land.course_3_category')"
-                level="advanced"
-                :hours="20"
-                :students="95"
-                color="primary"
-                slug="surgical-assistant-training"
-                image="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80"
-                :price="299"
-            />
-
+            @forelse($courses as $course)
+                <x-frontend.course-card 
+                    :course="$course" 
+                    :color="$loop->even ? 'secondary' : 'primary'" 
+                />
+            @empty
+                <div class="col-span-1 sm:col-span-2 lg:col-span-3 text-center text-gray-500 py-12">
+                    لا توجد دورات متاحة حالياً.
+                </div>
+            @endforelse
         </div>
 
         {{-- View All CTA --}}
