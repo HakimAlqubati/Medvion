@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\CourseController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +35,8 @@ Route::get('/', function () {
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::view('/privacy-policy', 'privacy')->name('privacy');
 Route::view('/terms-conditions', 'terms')->name('terms');
