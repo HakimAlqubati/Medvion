@@ -379,25 +379,14 @@
         // --- Prevent body scroll before load ---
         document.body.style.overflow = 'hidden';
 
-        // --- Page Loader: minimum display time ---
-        const MIN_LOADER_MS = 300; // الحد الأدنى لوقت عرض اللودر (بالملي ثانية)
-        const loaderStart   = Date.now();
-
-        const pageLoaded = new Promise(resolve => window.addEventListener('load', resolve));
-        const minTime    = new Promise(resolve => setTimeout(resolve, MIN_LOADER_MS));
-
-        Promise.all([pageLoaded, minTime]).then(() => {
-            const loader  = document.getElementById('medvion-loader');
-            const elapsed = Date.now() - loaderStart;
-            // إذا انتهى الوقت الأدنى بالفعل، اختفاء فوري؛ وإلا انتظر الباقي
-            const delay = Math.max(0, MIN_LOADER_MS - elapsed);
-            setTimeout(() => {
-                if (loader) {
-                    loader.style.opacity = '0';
-                    document.body.style.overflow = '';
-                    setTimeout(() => loader.remove(), 700);
-                }
-            }, delay);
+        // --- Page Loader: wait for standard DOM and assets load ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('medvion-loader');
+            if (loader) {
+                loader.style.opacity = '0';
+                document.body.style.overflow = '';
+                setTimeout(() => loader.remove(), 700);
+            }
         });
 
         document.addEventListener('DOMContentLoaded', () => {
