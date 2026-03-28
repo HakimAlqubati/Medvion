@@ -168,6 +168,9 @@ return [
     'contact_page_title'     => 'تواصل معنا | منصة Medvion',
     'contact_hero_title'     => 'نحن هنا لمساعدتك',
     'contact_hero_subtitle'  => 'لا تتردد في التواصل معنا لأي استفسار أو اقتراح، فريقنا متاح للرد عليك في أقرب وقت.',
+    'contact_hero_main'      => 'نطوي المسافات',
+    'contact_hero_highlight' => 'لأجلك',
+    'contact_hero_desc'      => 'فريق خبراء Medvion متصل بك على مدار الساعة في أي بُعد زمني ومكاني. نحن هنا لاستقبال استفساراتك واقتراحاتك.',
     'contact_form_title'     => 'أرسل لنا رسالة',
     'contact_name'           => 'الاسم الكامل',
     'contact_email'          => 'البريد الإلكتروني',
@@ -175,10 +178,15 @@ return [
     'contact_subject'        => 'الموضوع',
     'contact_message'        => 'الرسالة',
     'contact_submit'         => 'إرسال الرسالة',
+    'contact_processing'     => 'جاري المعالجة...',
     'contact_info_title'     => 'معلومات التواصل المباشر',
     'contact_whatsapp'       => 'واتساب',
+    'contact_whatsapp_desc'  => 'الدعم المباشر',
     'contact_support_email'  => 'البريد الإلكتروني للدعم',
     'whatsapp_message'       => 'مرحباً فريق منصة Medvion، أود الاستفسار عن: ',
+    'contact_success_heading' => 'اكتمل الإرسال.',
+    'contact_success_subheading'=> 'تم إرسال الرسالة بنجاح',
+    'contact_success_body'   => 'تم تسجيل بياناتك في مركز عمليات Medvion. سنتواصل معك بمجرد فك شفرة رسالتك!',
 
     // ---------------------------------------------------------------
     // Hero Section 2 – Orbital Medical Ecosystem

@@ -45,14 +45,14 @@
 
                     {{-- Giant Headline --}}
                     <h1 class="font-black leading-[1.1] tracking-tighter mb-8 drop-shadow-xl text-5xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem]">
-                        <span class="block text-white glow-text">نطوي المسافات</span>
+                        <span class="block text-white glow-text">{{ __('land.contact_hero_main') }}</span>
                         <span class="block text-white glow-text mt-2">
-                            لأجلك
+                            {{ __('land.contact_hero_highlight') }}
                         </span>
                     </h1>
 
                     <p class="text-lg md:text-2xl text-white drop-shadow-md max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed mb-12">
-                        فريق خبراء Medvion متصل بك على مدار الساعة في أي بُعد زمني ومكاني. نحن هنا لاستقبال استفساراتك واقتراحاتك.
+                        {{ __('land.contact_hero_desc') }}
                     </p>
 
                     {{-- Floating Glass Cards --}}
@@ -67,7 +67,7 @@
                             </div>
                             <div class="text-start">
                                 <p class="text-xs uppercase tracking-widest text-white/90 mb-1 font-semibold">{{ __('land.contact_whatsapp') }}</p>
-                                <p class="font-bold text-white text-lg drop-shadow-sm">الدعم المباشر</p>
+                                <p class="font-bold text-white text-lg drop-shadow-sm">{{ __('land.contact_whatsapp_desc') }}</p>
                             </div>
                             <div class="absolute inset-0 rounded-3xl border border-white/0 group-hover:border-white/10 transition-colors duration-500 pointer-events-none"></div>
                         </a>
@@ -175,10 +175,10 @@
                                 </div>
                             </div>
                             
-                            <h3 class="text-3xl font-black text-white mb-3 tracking-tight">Transmission Complete.</h3>
-                            <h4 class="text-xl font-bold text-secondary mb-3">تم إرسال الرسالة بنجاح</h4>
+                            <h3 class="text-3xl font-black text-white mb-3 tracking-tight">{{ __('land.contact_success_heading') }}</h3>
+                            <h4 class="text-xl font-bold text-secondary mb-3">{{ __('land.contact_success_subheading') }}</h4>
                             <p class="text-white/60 text-lg leading-relaxed max-w-sm">
-                                تم تسجيل بياناتك في مركز عمليات Medvion. سنتواصل معك بمجرد فك شفرة رسالتك!
+                                {{ __('land.contact_success_body') }}
                             </p>
                         </div>
 
@@ -270,7 +270,7 @@
                     
                     const originalBtnText = submitText.innerHTML;
                     submitBtn.disabled = true;
-                    submitText.innerHTML = 'جاري المعالجة...';
+                    submitText.innerHTML = "{!! __('land.contact_processing') !!}";
                     
                     fetch(form.action, {
                         method: 'POST',

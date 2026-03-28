@@ -162,6 +162,9 @@ return [
     'contact_page_title'     => 'Contact Us | Medvion Platform',
     'contact_hero_title'     => 'We Are Here to Help',
     'contact_hero_subtitle'  => 'Do not hesitate to reach out with any questions or suggestions. Our team is available to assist you as soon as possible.',
+    'contact_hero_main'      => 'Bridging the Distance',
+    'contact_hero_highlight' => 'For You',
+    'contact_hero_desc'      => 'The Medvion expert team is connected with you around the clock, across any time and space. We are here to receive your inquiries and suggestions.',
     'contact_form_title'     => 'Send Us a Message',
     'contact_name'           => 'Full Name',
     'contact_email'          => 'Email Address',
@@ -169,10 +172,15 @@ return [
     'contact_subject'        => 'Subject',
     'contact_message'        => 'Message',
     'contact_submit'         => 'Send Message',
+    'contact_processing'     => 'Processing...',
     'contact_info_title'     => 'Direct Contact Information',
     'contact_whatsapp'       => 'WhatsApp',
+    'contact_whatsapp_desc'  => 'Live Support',
     'contact_support_email'  => 'Support Email',
     'whatsapp_message'       => 'Hello Medvion Platform team, I would like to inquire about: ',
+    'contact_success_heading'=> 'Transmission Complete.',
+    'contact_success_subheading' => 'Message Sent Successfully',
+    'contact_success_body'   => 'Your data has been logged in the Medvion operations center. We will contact you as soon as your message is decoded!',
 
     // ---------------------------------------------------------------
     // Hero Section 2 – Orbital Medical Ecosystem
