@@ -117,14 +117,13 @@
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                     allowfullscreen>
                                 </iframe>
+                            @elseif($course->image)
+                                <img src="{{ Str::startsWith($course->image, ['http://', 'https://']) ? $course->image : asset('storage/' . $course->image) }}" 
+                                     alt="{{ $course->title }}"
+                                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80';" 
+                                     class="absolute inset-0 w-full h-full object-cover">
                             @else
-                                @if($course->image)
-                                    <img src="{{ $course->image }}" class="absolute inset-0 w-full h-full object-cover">
-                                @else
-                                    <div class="absolute inset-0 flex items-center justify-center text-gray-500">
-                                        لا يوجد فيديو أو صورة
-                                    </div>
-                                @endif
+                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" alt="{{ $course->title }}" class="absolute inset-0 w-full h-full object-cover grayscale-[20%] opacity-90">
                             @endif
                         </div>
 

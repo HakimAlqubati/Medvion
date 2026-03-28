@@ -31,12 +31,12 @@
     {{-- Card Header / Thumbnail --}}
     <div class="relative h-44 overflow-hidden {{ $iconBg }} flex items-center justify-center">
         @if($course->image)
-            <img src="{{ $course->image }}" alt="{{ $course->title }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            <img src="{{ Str::startsWith($course->image, ['http://', 'https://']) ? $course->image : asset('storage/' . $course->image) }}" 
+                 alt="{{ $course->title }}" 
+                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80';" 
+                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
         @else
-            <svg class="w-16 h-16 {{ $iconColor }} opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" alt="{{ $course->title }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 grayscale-[20%] opacity-90">
         @endif
 
         {{-- Price Badge Overlay --}}
