@@ -1,4 +1,8 @@
-@props(['altBg' => false])
+@props(['altBg' => false, 'faqs' => null])
+
+@php
+    $faqs = $faqs ?? app(\App\Services\Frontend\FaqService::class)->getActiveFaqs();
+@endphp
 
 {{-- FAQ Section --}}
 <section id="faq" class="py-20 {{ $altBg ? 'bg-primary' : 'bg-white' }} relative overflow-hidden">
@@ -94,13 +98,7 @@
         {{-- Accordion Container --}}
         <div x-data="{ activeAccordion: null }" id="faq-accordion" class="space-y-5">
 
-            @foreach([
-                ['q' => __('land.faq_1_q'), 'a' => __('land.faq_1_a')],
-                ['q' => __('land.faq_2_q'), 'a' => __('land.faq_2_a')],
-                ['q' => __('land.faq_3_q'), 'a' => __('land.faq_3_a')],
-                ['q' => __('land.faq_4_q'), 'a' => __('land.faq_4_a')],
-                ['q' => __('land.faq_5_q'), 'a' => __('land.faq_5_a')],
-            ] as $index => $item)
+            @foreach($faqs as $index => $item)
 
                 {{-- Accordion Item --}}
                 <div
@@ -117,7 +115,7 @@
                             class="font-bold text-base sm:text-lg transition-colors duration-200"
                             :class="activeAccordion === {{ $index }} ? '{{ $altBg ? 'text-white' : 'text-primary' }}' : '{{ $altBg ? 'text-white/80 group-hover:text-white' : 'text-gray-800 group-hover:text-primary' }}'"
                         >
-                            {{ $item['q'] }}
+                            {{ $item->question }}
                         </span>
 
                         {{-- Animated Chevron Icon --}}
@@ -153,7 +151,7 @@
                             x-cloak>
                             {{-- خط جانبي لربط الإجابة بصرياً --}}
                             <p class="ps-4 border-s-2 {{ $altBg ? 'border-white/30' : 'border-secondary/50' }}">
-                                {{ $item['a'] }}
+                                {{ $item->answer }}
                             </p>
                         </div>
                     </div>
