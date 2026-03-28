@@ -14,6 +14,28 @@
                 animation: breatheFadeFaq 18s ease-in-out infinite;
             }
         </style>
+    @endif
+    <style>
+        /* --- Accordion Answer Transition --- */
+        @keyframes faqAnswerIn {
+            0%   { opacity: 0; transform: translateY(-10px); max-height: 0; }
+            60%  { opacity: 1; }
+            100% { opacity: 1; transform: translateY(0);    max-height: 500px; }
+        }
+        @keyframes faqAnswerOut {
+            0%   { opacity: 1; transform: translateY(0);    max-height: 500px; }
+            100% { opacity: 0; transform: translateY(-6px); max-height: 0; }
+        }
+        .faq-answer-enter {
+            animation: faqAnswerIn 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+            overflow: hidden;
+        }
+        .faq-answer-leave {
+            animation: faqAnswerOut 0.28s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+            overflow: hidden;
+        }
+    </style>
+    @if($altBg)
         <div class="absolute inset-0 z-0 pointer-events-none mix-blend-overlay">
             <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=2000&q=80" 
                  alt="الأسئلة الشائعة خلفية" 
@@ -86,14 +108,22 @@
                     {{-- Answer Content --}}
                     <div
                         x-show="activeAccordion === {{ $index }}"
-                        x-transition:enter="transition ease-out duration-300"
-                        x-transition:enter-start="opacity-0 -translate-y-2"
-                        x-transition:enter-end="opacity-100 translate-y-0"
-                        class="overflow-hidden"
+                        x-transition:enter="faq-answer-enter"
+                        x-transition:leave="faq-answer-leave"
+                        style="overflow: hidden;"
                         x-cloak>
-                        
-                        <div class="px-6 pb-6 pt-1 text-base leading-relaxed sm:px-6 {{ $altBg ? 'text-white/90' : 'text-gray-500' }}">
-                            {{-- إضافة خط جانبي بلون المنصة الثانوي لربط الإجابة بصرياً --}}
+
+                        <div
+                            class="px-6 pb-6 pt-1 text-base leading-relaxed sm:px-6 {{ $altBg ? 'text-white/90' : 'text-gray-500' }}"
+                            x-show="activeAccordion === {{ $index }}"
+                            x-transition:enter="transition-all ease-[cubic-bezier(0.34,1.4,0.64,1)] duration-500 delay-75"
+                            x-transition:enter-start="opacity-0 translate-y-2"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:leave="transition-all ease-in duration-150"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0"
+                            x-cloak>
+                            {{-- خط جانبي لربط الإجابة بصرياً --}}
                             <p class="ps-4 border-s-2 {{ $altBg ? 'border-white/30' : 'border-secondary/50' }}">
                                 {{ $item['a'] }}
                             </p>
