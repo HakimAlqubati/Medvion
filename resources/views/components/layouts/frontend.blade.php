@@ -42,6 +42,24 @@
         .delay-100 { transition-delay: 150ms; }
         .delay-200 { transition-delay: 300ms; }
         .delay-300 { transition-delay: 450ms; }
+
+        /* --- Footer Nav Links Animation --- */
+        .footer-link {
+            opacity: 0;
+            transform: translateY(150px) scale(0.75);
+            filter: blur(8px);
+            transition:
+                opacity   0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                filter    0.55s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity, filter;
+            display: inline-block;
+        }
+        .footer-link.footer-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
     </style>
 
     @stack('styles')
@@ -213,12 +231,12 @@
                     <p class="text-gray-400 text-sm mt-1">{{ __('land.footer_tagline') }}</p>
                 </div>
 
-                <nav class="flex flex-wrap gap-4 md:gap-6 text-sm text-gray-300 justify-center">
-                    <a href="{{ url('/') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_home') }}</a>
-                    <a href="{{ url('/#about') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_about') }}</a>
-                    <a href="{{ url('/#courses') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_courses') }}</a>
-                    <a href="{{ route('privacy') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_privacy') }}</a>
-                    <a href="{{ route('terms') }}" class="hover:text-white transition whitespace-nowrap">{{ __('land.nav_terms') }}</a>
+                <nav class="flex flex-wrap gap-4 md:gap-6 text-sm text-gray-300 justify-center" id="footer-nav">
+                    <a href="{{ url('/') }}"       data-index="0" class="footer-link hover:text-white transition whitespace-nowrap">{{ __('land.nav_home') }}</a>
+                    <a href="{{ url('/#about') }}"  data-index="1" class="footer-link hover:text-white transition whitespace-nowrap">{{ __('land.nav_about') }}</a>
+                    <a href="{{ url('/#courses') }}" data-index="2" class="footer-link hover:text-white transition whitespace-nowrap">{{ __('land.nav_courses') }}</a>
+                    <a href="{{ route('privacy') }}" data-index="3" class="footer-link hover:text-white transition whitespace-nowrap">{{ __('land.nav_privacy') }}</a>
+                    <a href="{{ route('terms') }}"   data-index="4" class="footer-link hover:text-white transition whitespace-nowrap">{{ __('land.nav_terms') }}</a>
                 </nav>
 
             </div>
@@ -387,6 +405,45 @@
                     
                     spyTargets.forEach(el => observer.observe(el));
                 }
+            }
+
+            // --- Footer Nav Animation ---
+            const footerNav = document.getElementById('footer-nav');
+            if (footerNav) {
+                var footerTimers = [];
+                const footerObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        const links = footerNav.querySelectorAll('.footer-link');
+                        if (entry.isIntersecting) {
+                            footerTimers.forEach(clearTimeout);
+                            footerTimers = [];
+                            // reset instantly
+                            links.forEach(function (link) {
+                                link.style.transition = 'none';
+                                link.classList.remove('footer-visible');
+                            });
+                            void footerNav.offsetHeight;
+                            // stagger in
+                            links.forEach(function (link) {
+                                link.style.transition = '';
+                                const idx = parseInt(link.getAttribute('data-index')) || 0;
+                                const t = setTimeout(function () {
+                                    link.classList.add('footer-visible');
+                                }, idx * 110 + 80);
+                                footerTimers.push(t);
+                            });
+                        } else {
+                            // reset when footer leaves view
+                            footerTimers.forEach(clearTimeout);
+                            footerTimers = [];
+                            links.forEach(function (link) {
+                                link.style.transition = 'none';
+                                link.classList.remove('footer-visible');
+                            });
+                        }
+                    });
+                }, { threshold: 0.2 });
+                footerObserver.observe(footerNav);
             }
         });
     </script>
