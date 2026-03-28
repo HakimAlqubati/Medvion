@@ -18,26 +18,36 @@
             font-family: 'Tajawal', sans-serif;
         }
 
-        /* --- Scroll Reveal Animations --- */
+        /* --- Cinematic Scroll Reveal --- */
+        .reveal-wrap { perspective: 1200px; }
+
         .reveal {
             opacity: 0;
-            transform: translateY(120px) scale(0.88);
-            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: transform, opacity;
+            transform: translateY(130px) scale(0.82) rotateX(8deg);
+            filter: blur(10px);
+            transform-origin: center bottom;
+            transition:
+                opacity  1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                filter   0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity, filter;
         }
         .reveal.active {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0) scale(1) rotateX(0deg);
+            filter: blur(0px);
         }
-        .delay-100 { transition-delay: 120ms; }
-        .delay-200 { transition-delay: 240ms; }
-        .delay-300 { transition-delay: 360ms; }
+
+        /* Stagger delays — more spread for dramatic cascade */
+        .delay-100 { transition-delay: 150ms; }
+        .delay-200 { transition-delay: 300ms; }
+        .delay-300 { transition-delay: 450ms; }
     </style>
 
     @stack('styles')
 </head>
 
-<body class="bg-gray-50 text-gray-800 antialiased relative">
+<body class="bg-gray-50 text-gray-800 antialiased relative overflow-x-hidden">
 
     {{-- Page Loader (Medical Theme – Inline Styles for guaranteed rendering) --}}
     <div id="medvion-loader" style="

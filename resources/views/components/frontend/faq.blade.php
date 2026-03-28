@@ -18,21 +18,49 @@
     <style>
         /* --- Accordion Answer Transition --- */
         @keyframes faqAnswerIn {
-            0%   { opacity: 0; transform: translateY(-10px); max-height: 0; }
-            60%  { opacity: 1; }
-            100% { opacity: 1; transform: translateY(0);    max-height: 500px; }
+            0%   { opacity: 0; transform: translateY(-12px) scaleY(0.9); filter: blur(4px); max-height: 0; }
+            50%  { opacity: 0.8; filter: blur(0); }
+            100% { opacity: 1; transform: translateY(0) scaleY(1); filter: blur(0); max-height: 600px; }
         }
         @keyframes faqAnswerOut {
-            0%   { opacity: 1; transform: translateY(0);    max-height: 500px; }
-            100% { opacity: 0; transform: translateY(-6px); max-height: 0; }
+            0%   { opacity: 1; transform: translateY(0) scaleY(1); max-height: 600px; }
+            100% { opacity: 0; transform: translateY(-8px) scaleY(0.95); max-height: 0; }
         }
         .faq-answer-enter {
-            animation: faqAnswerIn 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+            animation: faqAnswerIn 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
             overflow: hidden;
+            transform-origin: top center;
         }
         .faq-answer-leave {
-            animation: faqAnswerOut 0.28s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+            animation: faqAnswerOut 0.3s cubic-bezier(0.4, 0, 0.6, 1) forwards;
             overflow: hidden;
+            transform-origin: top center;
+        }
+
+        /* --- FAQ Item Stagger Entrance (alternating directions) --- */
+        .faq-item {
+            opacity: 0;
+            filter: blur(10px);
+            transition:
+                opacity   0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                filter    0.65s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity, filter;
+        }
+        /* Even  → flies in from FAR RIGHT (off-screen) */
+        .faq-from-right {
+            transform: translateX(120vw) scale(0.82) rotate(3deg);
+            transform-origin: left center;
+        }
+        /* Odd → flies in from FAR LEFT (off-screen) */
+        .faq-from-left {
+            transform: translateX(-120vw) scale(0.82) rotate(-3deg);
+            transform-origin: right center;
+        }
+        .faq-item.faq-visible {
+            opacity: 1;
+            transform: translateX(0) scale(1) rotate(0deg);
+            filter: blur(0px);
         }
     </style>
     @if($altBg)
@@ -76,8 +104,8 @@
 
                 {{-- Accordion Item --}}
                 <div
-                    class="faq-item group rounded-2xl border transition-all duration-300 ease-in-out cursor-pointer {{ $altBg ? 'bg-white/5' : 'bg-white' }}"
-                    style="--faq-delay: {{ $index * 120 }}ms"
+                    class="faq-item {{ $index % 2 === 0 ? 'faq-from-right' : 'faq-from-left' }} group rounded-2xl border transition-all duration-300 ease-in-out cursor-pointer {{ $altBg ? 'bg-white/5' : 'bg-white' }}"
+                    style="--faq-delay: {{ $index * 160 }}ms"
                     :class="activeAccordion === {{ $index }} ? '{{ $altBg ? 'border-white/30 shadow-lg shadow-black/10 bg-white/10' : 'border-primary shadow-lg shadow-primary/5' }}' : '{{ $altBg ? 'border-white/10 shadow-sm hover:border-white/30 hover:bg-white/10' : 'border-gray-100 shadow-sm hover:border-primary/30 hover:shadow-md' }}'"
                 >
                     {{-- Question (Toggle Button) --}}
@@ -138,18 +166,6 @@
     </div>
 
     {{-- FAQ Stagger Animation --}}
-    <style>
-        .faq-item {
-            opacity: 0;
-            transform: translateY(70px) scale(0.92);
-            transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: transform, opacity;
-        }
-        .faq-item.faq-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-    </style>
     <script>
         (function () {
             var pendingTimers = [];
@@ -164,21 +180,22 @@
                         pendingTimers.forEach(clearTimeout);
                         pendingTimers = [];
 
-                        /* Strip class instantly (no transition flash) */
+                        /* Strip only faq-visible (keep direction class) — no transition flash */
                         items.forEach(function (item) {
                             item.style.transition = 'none';
                             item.classList.remove('faq-visible');
                         });
 
-                        /* Force reflow then re-apply transitions */
-                        entry.target.getBoundingClientRect();
+                        /* Force reflow so CSS direction transform re-applies */
+                        void entry.target.offsetHeight;
 
+                        /* Re-apply transitions then stagger in */
                         items.forEach(function (item) {
                             item.style.transition = '';
                             const delay = parseInt(item.style.getPropertyValue('--faq-delay')) || 0;
                             const t = setTimeout(function () {
                                 item.classList.add('faq-visible');
-                            }, delay + 80); /* small base offset */
+                            }, delay + 100);
                             pendingTimers.push(t);
                         });
                     }
