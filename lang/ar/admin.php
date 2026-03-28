@@ -117,4 +117,5 @@ return [
         ],
     ],
     'sort_order' => 'الترتيب',
+    'is_active' => 'نشط',
 ];
