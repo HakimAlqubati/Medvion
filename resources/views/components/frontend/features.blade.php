@@ -35,45 +35,44 @@
             </p>
         </div>
 
+        @php
+            $features = \App\Services\Frontend\FeatureService::getFeatures();
+        @endphp
+
         {{-- Cards Grid --}}
+        @if($features->isNotEmpty())
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-            {{-- Feature 1 --}}
-            <div class="group p-8 rounded-2xl border transition-all duration-300 flex flex-col items-start {{ $altBg ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-gray-100 shadow-sm hover:border-primary/20 hover:shadow-xl' }} reveal delay-100">
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition {{ $altBg ? 'bg-white/20 group-hover:bg-white/30' : 'bg-primary/10 group-hover:bg-primary/20' }}">
-                    <svg class="w-7 h-7 {{ $altBg ? 'text-white' : 'text-primary' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                    </svg>
+            @foreach($features as $feature)
+            @php
+                // Generate a custom staggered delay multiplier to maintain cinematic cascading effect
+                // E.g., item 1 -> delay-100, item 2 -> delay-200
+                $delayClass = 'delay-' . (($loop->iteration % 3 == 0 ? 3 : $loop->iteration % 3) * 100);
+                
+                // Original behavior: Item 2 had secondary color, others primary.
+                $isSecondary = ($loop->iteration % 2 === 0);
+                
+                $cardHoverBorder = $isSecondary ? 'hover:border-secondary/20' : 'hover:border-primary/20';
+                
+                if($altBg) {
+                    $iconColorValue = 'text-white';
+                } else {
+                    $iconColorValue = $isSecondary ? 'text-secondary' : 'text-primary';
+                }
+                
+                // Base colors override if AltBg is applied
+                $cardBaseClasses = $altBg ? 'bg-white/5 border-white/10 hover:bg-white/10' : "bg-white border-gray-100 shadow-sm {$cardHoverBorder} hover:shadow-xl";
+                
+                $iconContainerBg = $altBg ? 'bg-white/20 group-hover:bg-white/30' : ($isSecondary ? 'bg-secondary/10 group-hover:bg-secondary/20' : 'bg-primary/10 group-hover:bg-primary/20');
+            @endphp
+            <div class="group p-8 rounded-2xl border transition-all duration-300 flex flex-col items-start {{ $cardBaseClasses }} reveal {{ $delayClass }}">
+                <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition {{ $iconContainerBg }}">
+                    {!! str_replace('{colorClass}', $iconColorValue, $feature->icon) !!}
                 </div>
-                <h3 class="text-lg font-bold mb-3 {{ $altBg ? 'text-white' : 'text-primary' }}">{{ __('land.feature_1_title') }}</h3>
-                <p class="text-sm leading-relaxed {{ $altBg ? 'text-white/70' : 'text-gray-500' }}">{{ __('land.feature_1_desc') }}</p>
+                <h3 class="text-lg font-bold mb-3 {{ $altBg ? 'text-white' : 'text-primary' }}">{{ $feature->title }}</h3>
+                <p class="text-sm leading-relaxed {{ $altBg ? 'text-white/70' : 'text-gray-500' }}">{{ $feature->description }}</p>
             </div>
-
-            {{-- Feature 2 --}}
-            <div class="group p-8 rounded-2xl border transition-all duration-300 flex flex-col items-start {{ $altBg ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-gray-100 shadow-sm hover:border-secondary/20 hover:shadow-xl' }} reveal delay-200">
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition {{ $altBg ? 'bg-white/20 group-hover:bg-white/30' : 'bg-secondary/10 group-hover:bg-secondary/20' }}">
-                    <svg class="w-7 h-7 {{ $altBg ? 'text-white' : 'text-secondary' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-3 {{ $altBg ? 'text-white' : 'text-primary' }}">{{ __('land.feature_2_title') }}</h3>
-                <p class="text-sm leading-relaxed {{ $altBg ? 'text-white/70' : 'text-gray-500' }}">{{ __('land.feature_2_desc') }}</p>
-            </div>
-
-            {{-- Feature 3 --}}
-            <div class="group p-8 rounded-2xl border transition-all duration-300 flex flex-col items-start {{ $altBg ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-gray-100 shadow-sm hover:border-primary/20 hover:shadow-xl' }} reveal delay-300">
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition {{ $altBg ? 'bg-white/20 group-hover:bg-white/30' : 'bg-primary/10 group-hover:bg-primary/20' }}">
-                    <svg class="w-7 h-7 {{ $altBg ? 'text-white' : 'text-primary' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-3 {{ $altBg ? 'text-white' : 'text-primary' }}">{{ __('land.feature_3_title') }}</h3>
-                <p class="text-sm leading-relaxed {{ $altBg ? 'text-white/70' : 'text-gray-500' }}">{{ __('land.feature_3_desc') }}</p>
-            </div>
-
+            @endforeach
         </div>
+        @endif
     </div>
 </section>

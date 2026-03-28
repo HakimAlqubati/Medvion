@@ -20,13 +20,60 @@ class MedvionSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
-        auth()->login($admin);
+        // ==========================================
+        // 5. إنشاء قسم المميزات (Features)
+        // ==========================================
+        $this->command->info('Creating Dynamic Features...');
+        \App\Models\Feature::truncate();
+        
+        $features = [
+            [
+                'title' => [
+                    'ar' => 'برامج معتمدة عالمياً',
+                    'en' => 'Internationally Accredited Programs',
+                ],
+                'description' => [
+                    'ar' => 'شهادات معتمدة دولياً ومحلياً تضمن لك التميز في مسارك المهني.',
+                    'en' => 'Internationally and locally accredited certificates ensuring excellence in your career path.',
+                ],
+                'icon' => '<svg class="w-7 h-7 {colorClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>',
+                'sort_order' => 1,
+            ],
+            [
+                'title' => [
+                    'ar' => 'أفضل الخبراء',
+                    'en' => 'Top Elite Experts',
+                ],
+                'description' => [
+                    'ar' => 'نخبة من الأطباء والمتخصصين لنقل المعرفة بأحدث الوسائل التعليمية.',
+                    'en' => 'An elite group of doctors and specialists transferring knowledge using the latest educational methods.',
+                ],
+                'icon' => '<svg class="w-7 h-7 {colorClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>',
+                'sort_order' => 2,
+            ],
+            [
+                'title' => [
+                    'ar' => 'بيئة تفاعلية حديثة',
+                    'en' => 'Modern Interactive Environment',
+                ],
+                'description' => [
+                    'ar' => 'منصات تعليمية ذكية وورش عمل افتراضية تواكب مستقبل الرعاية الصحية.',
+                    'en' => 'Smart educational platforms and virtual workshops keeping pace with the future of healthcare.',
+                ],
+                'icon' => '<svg class="w-7 h-7 {colorClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>',
+                'sort_order' => 3,
+            ]
+        ];
 
+        foreach ($features as $feature) {
+            \App\Models\Feature::create($feature);
+        }
+
+        // Finished Feature seeding
         \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
         Category::truncate();
         Course::truncate();
         \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
-        // ==========================================
         // 2. إنشاء 20 فئة (10 رئيسية و 10 فرعية)
         // ==========================================
         $categoriesData = [
@@ -338,5 +385,6 @@ class MedvionSeeder extends Seeder
         }
 
         auth()->logout();
+        $this->command->info('Database seeding completed successfully!');
     }
 }
