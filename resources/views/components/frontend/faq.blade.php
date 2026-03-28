@@ -42,7 +42,7 @@
         </div>
 
         {{-- Accordion Container --}}
-        <div x-data="{ activeAccordion: null }" class="space-y-5 reveal delay-100">
+        <div x-data="{ activeAccordion: null }" id="faq-accordion" class="space-y-5">
 
             @foreach([
                 ['q' => __('land.faq_1_q'), 'a' => __('land.faq_1_a')],
@@ -54,7 +54,8 @@
 
                 {{-- Accordion Item --}}
                 <div
-                    class="group rounded-2xl border transition-all duration-300 ease-in-out cursor-pointer {{ $altBg ? 'bg-white/5' : 'bg-white' }}"
+                    class="faq-item group rounded-2xl border transition-all duration-300 ease-in-out cursor-pointer {{ $altBg ? 'bg-white/5' : 'bg-white' }}"
+                    style="--faq-delay: {{ $index * 120 }}ms"
                     :class="activeAccordion === {{ $index }} ? '{{ $altBg ? 'border-white/30 shadow-lg shadow-black/10 bg-white/10' : 'border-primary shadow-lg shadow-primary/5' }}' : '{{ $altBg ? 'border-white/10 shadow-sm hover:border-white/30 hover:bg-white/10' : 'border-gray-100 shadow-sm hover:border-primary/30 hover:shadow-md' }}'"
                 >
                     {{-- Question (Toggle Button) --}}
@@ -105,4 +106,59 @@
 
         </div>
     </div>
+
+    {{-- FAQ Stagger Animation --}}
+    <style>
+        .faq-item {
+            opacity: 0;
+            transform: translateY(70px) scale(0.92);
+            transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity;
+        }
+        .faq-item.faq-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    </style>
+    <script>
+        (function () {
+            var pendingTimers = [];
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        /* Reset & re-animate every time */
+                        const items = entry.target.querySelectorAll('.faq-item');
+
+                        /* Cancel any running timers first */
+                        pendingTimers.forEach(clearTimeout);
+                        pendingTimers = [];
+
+                        /* Strip class instantly (no transition flash) */
+                        items.forEach(function (item) {
+                            item.style.transition = 'none';
+                            item.classList.remove('faq-visible');
+                        });
+
+                        /* Force reflow then re-apply transitions */
+                        entry.target.getBoundingClientRect();
+
+                        items.forEach(function (item) {
+                            item.style.transition = '';
+                            const delay = parseInt(item.style.getPropertyValue('--faq-delay')) || 0;
+                            const t = setTimeout(function () {
+                                item.classList.add('faq-visible');
+                            }, delay + 80); /* small base offset */
+                            pendingTimers.push(t);
+                        });
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const container = document.getElementById('faq-accordion');
+                if (container) observer.observe(container);
+            });
+        })();
+    </script>
 </section>
