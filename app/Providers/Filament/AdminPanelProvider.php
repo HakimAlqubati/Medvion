@@ -28,6 +28,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Medvion')
+            ->brandLogo(asset('favicon.png'))
+            ->favicon(asset('favicon.png'))
             ->colors([
                 'primary' => Color::hex('#1A52CE'),
             ])
@@ -52,6 +55,7 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->spa()
             ->authMiddleware([
                 Authenticate::class,
             ]);

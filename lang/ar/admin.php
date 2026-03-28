@@ -1,0 +1,112 @@
+<?php
+
+return [
+    'id' => 'الرقم',
+    'categories' => [
+        'label' => 'التصنيف',
+        'plural_label' => 'التصنيفات',
+        'fields' => [
+            'name' => 'الاسم',
+            'role' => 'الدور',
+            'members' => 'الأعضاء',
+        ],
+        'roles' => [
+            'member' => 'عضو',
+            'administrator' => 'مسؤول',
+            'owner' => 'مالك',
+        ],
+    ],
+    'courses' => [
+        'label' => 'الدورة',
+        'plural_label' => 'الدورات',
+        'fields' => [
+            'title' => 'العنوان',
+            'brief' => 'نبذة مختصرة',
+            'objectives' => 'الأهداف',
+            'target_audience' => 'الجمهور المستهدف',
+            'content_modules' => 'محاور الدورة',
+            'is_active' => 'نشط',
+            'price' => 'السعر',
+            'created_at' => 'تاريخ الإضافة',
+        ],
+    ],
+    'messages' => [
+        'label' => 'الرسالة',
+        'plural_label' => 'الرسائل',
+        'fields' => [
+            'name' => 'الاسم',
+            'email' => 'البريد الإلكتروني',
+            'phone' => 'الهاتف',
+            'subject' => 'الموضوع',
+            'message' => 'الرسالة',
+            'is_read' => 'مقروءة',
+            'created_at' => 'تاريخ الإرسال',
+        ],
+    ],
+    'users' => [
+        'label' => 'المستخدم',
+        'plural_label' => 'المستخدمين',
+        'fields' => [
+            'name' => 'الاسم',
+            'email' => 'البريد الإلكتروني',
+            'password' => 'كلمة المرور',
+            'email_verified_at' => 'تاريخ التحقق من البريد',
+            'created_at' => 'تاريخ الإنشاء',
+        ],
+    ],
+    'faqs' => [
+        'label' => 'سؤال شائع',
+        'plural_label' => 'الأسئلة الشائعة',
+        'fields' => [
+            'question' => 'السؤال',
+            'answer' => 'الإجابة',
+            'is_active' => 'نشط',
+            'sort_order' => 'الترتيب',
+            'created_at' => 'تاريخ الإنشاء',
+        ],
+    ],
+    'hero_slides' => [
+        'label' => 'شريحة رئيسية',
+        'plural_label' => 'شرائح الواجهة',
+        'fields' => [
+            'badge' => 'شارة',
+            'title_1' => 'العنوان الرئيسي',
+            'title_2' => 'العنوان الفرعي',
+            'subtitle' => 'الوصف',
+            'image' => 'الصورة',
+            'button_text' => 'نص الزر',
+            'button_url' => 'رابط الزر',
+            'is_active' => 'نشط',
+        ],
+    ],
+    'abouts' => [
+        'label' => 'من نحن',
+        'plural_label' => 'أقسام من نحن',
+        'fields' => [
+            'title' => 'العنوان',
+            'content' => 'المحتوى',
+            'is_active' => 'نشط',
+            'sort_order' => 'الترتيب',
+        ],
+    ],
+    'features' => [
+        'label' => 'ميزة',
+        'plural_label' => 'المميزات',
+        'fields' => [
+            'title' => 'العنوان',
+            'description' => 'الوصف',
+            'icon' => 'الأيقونة',
+            'is_active' => 'نشط',
+        ],
+    ],
+    'pages' => [
+        'label' => 'صفحة',
+        'plural_label' => 'الصفحات',
+        'fields' => [
+            'title' => 'العنوان',
+            'slug' => 'الرابط المخصص',
+            'content' => 'المحتوى',
+            'is_active' => 'نشط',
+        ],
+    ],
+];

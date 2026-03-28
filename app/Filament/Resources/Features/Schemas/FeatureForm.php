@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Filament\Resources\Features\Schemas;
+
+use Filament\Schemas\Schema;
+
+class FeatureForm
+{
+    public static function configure(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                //
+            ]);
+    }
+}

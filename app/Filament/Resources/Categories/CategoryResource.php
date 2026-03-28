@@ -20,7 +20,17 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    public static function getModelLabel(): string
+    {
+        return __('admin.categories.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.categories.plural_label');
+    }
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
 
     protected static ?string $recordTitleAttribute = 'name';
 
