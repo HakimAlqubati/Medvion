@@ -79,4 +79,9 @@ class UserResource extends Resource
             ViewUser::class,
         ]);
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }
