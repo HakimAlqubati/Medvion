@@ -19,4 +19,9 @@ class CreateHeroSlide extends CreateRecord
             LocaleSwitcher::make(),
         ];
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
