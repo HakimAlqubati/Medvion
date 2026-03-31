@@ -11,6 +11,7 @@ use App\Filament\Resources\Features\FeatureResource;
 use App\Filament\Resources\HeroSlides\HeroSlideResource;
 use App\Filament\Resources\Pages\PageResource;
 use App\Filament\Resources\Users\UserResource;
+use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -31,6 +32,7 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
 
 class AdminPanelProvider extends PanelProvider
@@ -100,6 +102,7 @@ class AdminPanelProvider extends PanelProvider
                             // ->icon(Heroicon::OutlinedCog6Tooth)
                             ->items([
                                 ...UserResource::getNavigationItems(),
+                                ...RoleResource::getNavigationItems(),
                             ]),
                     ])
                 ;
@@ -122,7 +125,10 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(
                 SpatieTranslatablePlugin::make()
                     ->persist()
-                    ->defaultLocales(['ar', 'en',]),
+                    ->defaultLocales(['ar', 'en']),
+            )
+            ->plugin(
+                FilamentShieldPlugin::make(),
             )
         ;
     }
