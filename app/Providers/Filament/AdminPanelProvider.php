@@ -74,8 +74,8 @@ class AdminPanelProvider extends PanelProvider
                         NavigationGroup::make(__('admin.navigation.groups.content'))
                             // ->icon(Heroicon::OutlinedRectangleStack)
                             ->items([
-                                ...CourseResource::getNavigationItems(),
-                                ...CategoryResource::getNavigationItems(),
+                                ...(CourseResource::canViewAny() ? CourseResource::getNavigationItems() : []),
+                                ...(CategoryResource::canViewAny() ? CategoryResource::getNavigationItems() : []),
 
                             ]),
 
@@ -83,26 +83,26 @@ class AdminPanelProvider extends PanelProvider
                         NavigationGroup::make(__('admin.navigation.groups.site'))
                             // ->icon(Heroicon::OutlinedGlobeAlt)
                             ->items([
-                                ...HeroSlideResource::getNavigationItems(),
-                                ...AboutResource::getNavigationItems(),
-                                ...PageResource::getNavigationItems(),
-                                ...FeatureResource::getNavigationItems(),
-                                ...FaqResource::getNavigationItems(),
+                                ...(HeroSlideResource::canViewAny() ? HeroSlideResource::getNavigationItems() : []),
+                                ...(AboutResource::canViewAny() ? AboutResource::getNavigationItems() : []),
+                                ...(PageResource::canViewAny() ? PageResource::getNavigationItems() : []),
+                                ...(FeatureResource::canViewAny() ? FeatureResource::getNavigationItems() : []),
+                                ...(FaqResource::canViewAny() ? FaqResource::getNavigationItems() : []),
                             ]),
 
                         //     // ── التواصل ───────────────────────────────────────────────
                         NavigationGroup::make(__('admin.navigation.groups.communication'))
                             // ->icon(Heroicon::OutlinedChatBubbleLeftRight)
                             ->items([
-                                ...ContactMessageResource::getNavigationItems(),
+                                ...(ContactMessageResource::canViewAny() ? ContactMessageResource::getNavigationItems() : []),
                             ]),
 
                         // ── الإدارة ───────────────────────────────────────────────
                         NavigationGroup::make(__('admin.navigation.groups.management'))
                             // ->icon(Heroicon::OutlinedCog6Tooth)
                             ->items([
-                                ...UserResource::getNavigationItems(),
-                                ...RoleResource::getNavigationItems(),
+                                ...(UserResource::canViewAny() ? UserResource::getNavigationItems() : []),
+                                ...(RoleResource::canViewAny() ? RoleResource::getNavigationItems() : []),
                             ]),
                     ])
                 ;

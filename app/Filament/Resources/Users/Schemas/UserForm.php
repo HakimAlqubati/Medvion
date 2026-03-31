@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Users\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -39,6 +40,16 @@ class UserForm
                                 ->unique(ignoreRecord: true)
                                 ->prefixIcon('heroicon-o-envelope'),
                         ]),
+
+                        Select::make('roles')
+                            ->label(__('admin.users.fields.roles'))
+                            ->relationship('roles', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            ->getOptionLabelFromRecordUsing(fn ($record) => \App\Enums\RolesEnum::tryFrom($record->name)?->label() ?? $record->name)
+                            ->prefixIcon('heroicon-o-shield-check')
+                            ->columnSpanFull(),
 
                     ])->columnSpan(2),
 

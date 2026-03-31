@@ -82,6 +82,7 @@ return [
             'password_confirmation'  => 'Confirm Password',
             'email_verified_at'      => 'Email Verified At',
             'email_verified_at_hint' => 'Leave blank if not verified • Set a date to manually activate the account',
+            'roles'                  => 'Roles & Permissions',
             'created_at'             => 'Created At',
         ],
     ],
@@ -217,6 +218,16 @@ return [
             'site'          => 'Site Management',
             'communication' => 'Communication',
             'management'    => 'Management',
+        ],
+    ],
+
+    'errors' => [
+        '403' => [
+            'title'     => 'Access Denied | 403 - Medvion',
+            'heading'   => 'Sorry, Access Forbidden!',
+            'message'   => 'It looks like you are trying to access a page or perform an action you do not have permission for in Medvion. Please contact the platform administration if you believe this is an error.',
+            'back_home' => 'Back to Home',
+            'go_back'   => 'Go Back',
         ],
     ],
 ];
