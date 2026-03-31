@@ -63,12 +63,26 @@ return [
     'users' => [
         'label' => 'User',
         'plural_label' => 'Users',
+
+        'sections' => [
+            'personal'             => 'Personal Information',
+            'personal_description' => 'The user\'s full name and email address',
+            'security'             => 'Security & Password',
+            'security_description' => 'Password settings and verification status',
+        ],
+
         'fields' => [
-            'name' => 'Name',
-            'email' => 'Email',
-            'password' => 'Password',
-            'email_verified_at' => 'Email Verified At',
-            'created_at' => 'Created At',
+            'name'                   => 'Full Name',
+            'name_placeholder'       => 'Example: John Doe',
+            'email'                  => 'Email Address',
+            'email_placeholder'      => 'Example: user@example.com',
+            'password'               => 'Password',
+            'password_placeholder'   => 'Enter a new password or leave blank to keep current',
+            'password_hint'          => 'Minimum 8 characters • Leave blank to keep the current password',
+            'password_confirmation'  => 'Confirm Password',
+            'email_verified_at'      => 'Email Verified At',
+            'email_verified_at_hint' => 'Leave blank if not verified • Set a date to manually activate the account',
+            'created_at'             => 'Created At',
         ],
     ],
     'faqs' => [

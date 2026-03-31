@@ -61,14 +61,28 @@ return [
         ],
     ],
     'users' => [
-        'label' => 'المستخدم',
+        'label' => 'مستخدم',
         'plural_label' => 'المستخدمين',
+
+        'sections' => [
+            'personal'             => 'المعلومات الشخصية',
+            'personal_description' => 'الاسم وعنوان البريد الإلكتروني للمستخدم',
+            'security'             => 'الأمان وكلمة المرور',
+            'security_description' => 'إعدادات كلمة المرور وحالة التحقق',
+        ],
+
         'fields' => [
-            'name' => 'الاسم',
-            'email' => 'البريد الإلكتروني',
-            'password' => 'كلمة المرور',
-            'email_verified_at' => 'تاريخ التحقق من البريد',
-            'created_at' => 'تاريخ الإنشاء',
+            'name'                      => 'الاسم الكامل',
+            'name_placeholder'          => 'مثال: أحمد محمد',
+            'email'                     => 'البريد الإلكتروني',
+            'email_placeholder'         => 'مثال: user@example.com',
+            'password'                  => 'كلمة المرور',
+            'password_placeholder'      => 'ادخل كلمة مرور جديدة أو اتركها فارغة للإبقاء',
+            'password_hint'             => 'بحد أدنى 8 أحرف • اتركها فارغة لعدم تغيير كلمة المرور الحالية',
+            'password_confirmation'     => 'تأكيد كلمة المرور',
+            'email_verified_at'         => 'تاريخ التحقق من البريد',
+            'email_verified_at_hint'    => 'اتركها فارغة إذا لم يتم التحقق • اضبط تاريخًا لتفعيل الحساب يدويًا',
+            'created_at'                => 'تاريخ الإنشاء',
         ],
     ],
     'faqs' => [
