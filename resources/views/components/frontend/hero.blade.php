@@ -53,13 +53,13 @@
 
             {{-- Badge --}}
             @if(count($slides) > 0)
-            <div id="hero-badge" class="hero-enter inline-flex items-center gap-2 mb-7 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md" style="animation-delay:0.05s">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+            <div id="hero-badge" class="hero-enter inline-flex items-center gap-3 mb-8 px-7 py-3 rounded-full bg-white/10 border border-white/25 backdrop-blur-md shadow-[0_4px_20px_rgba(255,255,255,0.1)] transition-all duration-300 hover:bg-white/20" style="animation-delay:0.05s" dir="ltr">
+                <span class="relative flex h-3 w-3 mt-0.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-80"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-white shadow-[0_0_12px_rgba(255,255,255,1)]"></span>
                 </span>
-                <span id="slide-badge" class="text-xs font-bold uppercase tracking-[0.18em] text-white">
-                    {{ $slides[0]->badge ?? '' }}
+                <span class="text-xl md:text-2xl font-black tracking-[0.2em] text-white drop-shadow-md pb-0.5">
+                    +Medvion
                 </span>
             </div>
 

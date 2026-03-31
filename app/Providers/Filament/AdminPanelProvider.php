@@ -2,14 +2,27 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\Abouts\AboutResource;
+use App\Filament\Resources\Categories\CategoryResource;
+use App\Filament\Resources\ContactMessages\ContactMessageResource;
+use App\Filament\Resources\Courses\CourseResource;
+use App\Filament\Resources\Faqs\FaqResource;
+use App\Filament\Resources\Features\FeatureResource;
+use App\Filament\Resources\HeroSlides\HeroSlideResource;
+use App\Filament\Resources\Pages\PageResource;
+use App\Filament\Resources\Users\UserResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationBuilder;
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -44,6 +57,52 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 FilamentInfoWidget::class,
             ])
+            ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
+                return $builder
+                    ->items([
+                        NavigationItem::make(__('admin.navigation.dashboard'))
+                            ->icon(Heroicon::OutlinedHome)
+                            ->isActiveWhen(fn(): bool => request()->routeIs('filament.admin.pages.dashboard'))
+                            ->url(fn(): string => Dashboard::getUrl()),
+                    ])
+                    ->groups([
+
+                        //     // ── المحتوى الرئيسي ──────────────────────────────────────
+                        NavigationGroup::make(__('admin.navigation.groups.content'))
+                            // ->icon(Heroicon::OutlinedRectangleStack)
+                            ->items([
+                                ...CourseResource::getNavigationItems(),
+                                ...CategoryResource::getNavigationItems(),
+
+                            ]),
+
+                        //     // ── إدارة الموقع ──────────────────────────────────────────
+                        NavigationGroup::make(__('admin.navigation.groups.site'))
+                            // ->icon(Heroicon::OutlinedGlobeAlt)
+                            ->items([
+                                ...HeroSlideResource::getNavigationItems(),
+                                ...AboutResource::getNavigationItems(),
+                                ...PageResource::getNavigationItems(),
+                                ...FeatureResource::getNavigationItems(),
+                                ...FaqResource::getNavigationItems(),
+                            ]),
+
+                        //     // ── التواصل ───────────────────────────────────────────────
+                        NavigationGroup::make(__('admin.navigation.groups.communication'))
+                            // ->icon(Heroicon::OutlinedChatBubbleLeftRight)
+                            ->items([
+                                ...ContactMessageResource::getNavigationItems(),
+                            ]),
+
+                        // ── الإدارة ───────────────────────────────────────────────
+                        NavigationGroup::make(__('admin.navigation.groups.management'))
+                            // ->icon(Heroicon::OutlinedCog6Tooth)
+                            ->items([
+                                ...UserResource::getNavigationItems(),
+                            ]),
+                    ])
+                ;
+            })
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

@@ -76,7 +76,6 @@ return [
         'plural_label' => 'شرائح الواجهة',
         'fields' => [
             'badge' => 'شارة',
-            'image' => 'الصورة',    
             'title_1' => 'العنوان الرئيسي',
             'title_2' => 'العنوان الفرعي',
             'subtitle' => 'الوصف',
@@ -118,4 +117,14 @@ return [
     ],
     'sort_order' => 'الترتيب',
     'is_active' => 'نشط',
+
+    'navigation' => [
+        'dashboard' => 'الرئيسية',
+        'groups' => [
+            'content'       => 'المحتوى التعليمي',
+            'site'          => 'إدارة الموقع',
+            'communication' => 'التواصل',
+            'management'    => 'الإدارة',
+        ],
+    ],
 ];

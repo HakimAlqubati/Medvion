@@ -117,4 +117,14 @@ return [
     ],
     'sort_order' => 'Sort Order',
     'is_active' => 'Is Active',
+
+    'navigation' => [
+        'dashboard' => 'Dashboard',
+        'groups' => [
+            'content'       => 'Learning Content',
+            'site'          => 'Site Management',
+            'communication' => 'Communication',
+            'management'    => 'Management',
+        ],
+    ],
 ];
