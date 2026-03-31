@@ -13,9 +13,11 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 
 class FeatureResource extends Resource
 {
+    use Translatable;
     protected static ?string $model = Feature::class;
 
     public static function getModelLabel(): string

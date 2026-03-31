@@ -37,15 +37,26 @@ return [
         ],
     ],
     'messages' => [
-        'label' => 'الرسالة',
+        'label' => 'رسالة',
         'plural_label' => 'الرسائل',
+
+        'sections' => [
+            'sender'             => 'بيانات المرسل',
+            'sender_description' => 'معلومات الشخص الذي أرسل الرسالة',
+            'message'            => 'محتوى الرسالة',
+            'message_description' => 'نص الرسالة الواردة',
+            'settings'           => 'الإعدادات',
+            'settings_description' => 'حالة القراءة',
+        ],
+
         'fields' => [
-            'name' => 'الاسم',
-            'email' => 'البريد الإلكتروني',
-            'phone' => 'الهاتف',
-            'subject' => 'الموضوع',
-            'message' => 'الرسالة',
-            'is_read' => 'مقروءة',
+            'name'       => 'اسم المرسل',
+            'email'      => 'البريد الإلكتروني',
+            'phone'      => 'رقم الهاتف',
+            'subject'    => 'الموضوع',
+            'message'    => 'الرسالة',
+            'is_read'    => 'تمت القراءة',
+            'is_read_hint' => 'علّم على هذه الرسالة كمقروءة لأرشفتها',
             'created_at' => 'تاريخ الإرسال',
         ],
     ],
@@ -63,12 +74,24 @@ return [
     'faqs' => [
         'label' => 'سؤال شائع',
         'plural_label' => 'الأسئلة الشائعة',
+
+        'sections' => [
+            'content'             => 'السؤال والإجابة',
+            'content_description' => 'السؤال وإجابته التي ستظهر للزوار',
+            'settings'            => 'الإعدادات',
+            'settings_description' => 'الترتيب والحالة',
+        ],
+
         'fields' => [
-            'question' => 'السؤال',
-            'answer' => 'الإجابة',
-            'is_active' => 'نشط',
-            'sort_order' => 'الترتيب',
-            'created_at' => 'تاريخ الإنشاء',
+            'question'             => 'السؤال',
+            'question_placeholder' => 'اكتب السؤال كما يطرحه الزوار...',
+            'answer'               => 'الإجابة',
+            'answer_placeholder'   => 'اكتب إجابة واضحة ومفيدة...',
+            'sort_order'           => 'ترتيب العرض',
+            'sort_order_hint'      => 'الرقم الأصغر يعني ظهور هذا السؤال أولاً',
+            'is_active'            => 'نشط',
+            'is_active_hint'       => 'عند التفعيل سيظهر هذا السؤال في صفحة الأسئلة الشائعة',
+            'created_at'           => 'تاريخ الإنشاء',
         ],
     ],
     'hero_slides' => [
@@ -126,21 +149,48 @@ return [
     'features' => [
         'label' => 'ميزة',
         'plural_label' => 'المميزات',
+
+        'sections' => [
+            'content'             => 'المحتوى',
+            'content_description' => 'تفاصيل الميزة التي ستظهر للزوار',
+            'settings'            => 'الإعدادات',
+            'settings_description' => 'الترتيب والحالة',
+        ],
+
         'fields' => [
-            'title' => 'العنوان',
-            'description' => 'الوصف',
-            'icon' => 'الأيقونة',
-            'is_active' => 'نشط',
+            'title'                => 'العنوان',
+            'title_placeholder'    => 'مثال: تعلم في أي وقت ومكان',
+            'description'          => 'الوصف',
+            'description_placeholder' => 'وصف مختصر يوضح هذه الميزة للزوار',
+            'icon'                 => 'الأيقونة',
+            'icon_placeholder'     => 'مثال: heroicon-o-academic-cap',
+            'icon_hint'            => 'اسم أيقونة Heroicons أو FontAwesome',
+            'sort_order'           => 'ترتيب العرض',
+            'sort_order_hint'      => 'الرقم الأصغر يعني ظهور هذه الميزة أولاً',
+            'is_active'            => 'نشطة',
+            'is_active_hint'       => 'عند التفعيل ستظهر هذه الميزة في الصفحة الرئيسية',
         ],
     ],
     'pages' => [
         'label' => 'صفحة',
         'plural_label' => 'الصفحات',
+
+        'sections' => [
+            'content'             => 'محتوى الصفحة',
+            'content_description' => 'العنوان والرابط والمحتوى الكامل للصفحة',
+            'settings'            => 'الإعدادات',
+            'settings_description' => 'حالة نشر الصفحة',
+        ],
+
         'fields' => [
-            'title' => 'العنوان',
-            'slug' => 'الرابط المخصص',
-            'content' => 'المحتوى',
-            'is_active' => 'نشط',
+            'title'            => 'عنوان الصفحة',
+            'title_placeholder' => 'مثال: سياسة الخصوصية',
+            'slug'             => 'الرابط المخصص',
+            'slug_placeholder' => 'مثال: privacy-policy',
+            'slug_hint'        => 'يُستخدم في رابط الصفحة - باللغة الإنجليزية فقط',
+            'content'          => 'المحتوى',
+            'is_active'        => 'منشورة',
+            'is_active_hint'   => 'عند التفعيل ستكون الصفحة متاحة للزوار',
         ],
     ],
     'sort_order' => 'الترتيب',

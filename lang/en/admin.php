@@ -39,14 +39,25 @@ return [
     'messages' => [
         'label' => 'Message',
         'plural_label' => 'Messages',
+
+        'sections' => [
+            'sender'              => 'Sender Information',
+            'sender_description'  => 'Details of the person who sent the message',
+            'message'             => 'Message Content',
+            'message_description' => 'The body of the incoming message',
+            'settings'            => 'Settings',
+            'settings_description' => 'Read status',
+        ],
+
         'fields' => [
-            'name' => 'Name',
-            'email' => 'Email',
-            'phone' => 'Phone',
-            'subject' => 'Subject',
-            'message' => 'Message',
-            'is_read' => 'Is Read',
-            'created_at' => 'Sent At',
+            'name'         => 'Sender Name',
+            'email'        => 'Email Address',
+            'phone'        => 'Phone Number',
+            'subject'      => 'Subject',
+            'message'      => 'Message',
+            'is_read'      => 'Read',
+            'is_read_hint' => 'Mark this message as read to archive it',
+            'created_at'   => 'Sent At',
         ],
     ],
     'users' => [
@@ -63,12 +74,24 @@ return [
     'faqs' => [
         'label' => 'FAQ',
         'plural_label' => 'FAQs',
+
+        'sections' => [
+            'content'             => 'Question & Answer',
+            'content_description' => 'The question and its answer that will appear to visitors',
+            'settings'            => 'Settings',
+            'settings_description' => 'Display order and status',
+        ],
+
         'fields' => [
-            'question' => 'Question',
-            'answer' => 'Answer',
-            'is_active' => 'Is Active',
-            'sort_order' => 'Sort Order',
-            'created_at' => 'Created At',
+            'question'             => 'Question',
+            'question_placeholder' => 'Write the question as visitors would ask it...',
+            'answer'               => 'Answer',
+            'answer_placeholder'   => 'Write a clear and helpful answer...',
+            'sort_order'           => 'Display Order',
+            'sort_order_hint'      => 'The lower the number, the earlier this FAQ appears',
+            'is_active'            => 'Active',
+            'is_active_hint'       => 'When enabled, this FAQ will appear on the FAQs page',
+            'created_at'           => 'Created At',
         ],
     ],
     'hero_slides' => [
@@ -126,21 +149,48 @@ return [
     'features' => [
         'label' => 'Feature',
         'plural_label' => 'Features',
+
+        'sections' => [
+            'content'             => 'Content',
+            'content_description' => 'Feature details visible to visitors',
+            'settings'            => 'Settings',
+            'settings_description' => 'Display order and status',
+        ],
+
         'fields' => [
-            'title' => 'Title',
-            'description' => 'Description',
-            'icon' => 'Icon',
-            'is_active' => 'Is Active',
+            'title'                   => 'Title',
+            'title_placeholder'       => 'Example: Learn Anywhere, Anytime',
+            'description'             => 'Description',
+            'description_placeholder' => 'A brief description explaining this feature to visitors',
+            'icon'                    => 'Icon',
+            'icon_placeholder'        => 'Example: heroicon-o-academic-cap',
+            'icon_hint'               => 'Heroicons or FontAwesome icon name',
+            'sort_order'              => 'Display Order',
+            'sort_order_hint'         => 'The lower the number, the earlier this feature appears',
+            'is_active'               => 'Active',
+            'is_active_hint'          => 'When enabled, this feature will appear on the homepage',
         ],
     ],
     'pages' => [
         'label' => 'Page',
         'plural_label' => 'Pages',
+
+        'sections' => [
+            'content'             => 'Page Content',
+            'content_description' => 'Title, slug, and full content of the page',
+            'settings'            => 'Settings',
+            'settings_description' => 'Page publication status',
+        ],
+
         'fields' => [
-            'title' => 'Title',
-            'slug' => 'Slug',
-            'content' => 'Content',
-            'is_active' => 'Is Active',
+            'title'            => 'Page Title',
+            'title_placeholder' => 'Example: Privacy Policy',
+            'slug'             => 'Slug',
+            'slug_placeholder' => 'Example: privacy-policy',
+            'slug_hint'        => 'Used in the page URL — English only',
+            'content'          => 'Content',
+            'is_active'        => 'Published',
+            'is_active_hint'   => 'When enabled, the page will be accessible to visitors',
         ],
     ],
     'sort_order' => 'Sort Order',
