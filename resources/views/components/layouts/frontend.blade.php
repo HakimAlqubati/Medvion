@@ -168,12 +168,12 @@
                     </button>
                     @if (Route::has('login'))
                     @auth
-                    <a href="{{ url('/dashboard') }}"
+                    <a href="{{ url('/admin') }}"
                         class="hidden md:inline-flex text-sm font-semibold text-primary hover:text-primary-dark focus:outline-none focus:ring-2 focus:ring-primary rounded-lg px-2 transition">
                         {{ __('land.nav_dashboard') }}
                     </a>
                     @else
-                    <a href="{{ route('login') }}"
+                    <a href="{{ url('admin/login') }}"
                         class="hidden md:inline-flex items-center justify-center px-6 py-2 border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-bold rounded-full shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300">
                         {{ __('land.nav_login_register') }}
                     </a>
@@ -212,9 +212,9 @@
                     @if (Route::has('login'))
                     <div class="mt-4 flex justify-center w-full">
                         @auth
-                        <a href="{{ url('/dashboard') }}" class="mobile-link inline-flex items-center justify-center w-full px-8 py-3 bg-primary text-white font-bold rounded-full shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300">{{ __('land.nav_dashboard') }}</a>
+                        <a href="{{ url('/admin') }}" class="mobile-link inline-flex items-center justify-center w-full px-8 py-3 bg-primary text-white font-bold rounded-full shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300">{{ __('land.nav_dashboard') }}</a>
                         @else
-                        <a href="{{ route('login') }}" class="mobile-link inline-flex items-center justify-center w-full px-8 py-3 bg-primary text-white font-bold rounded-full shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300">{{ __('land.nav_login_register') }}</a>
+                        <a href="{{ url('admin/login') }}" class="mobile-link inline-flex items-center justify-center w-full px-8 py-3 bg-primary text-white font-bold rounded-full shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300">{{ __('land.nav_login_register') }}</a>
                         @endauth
                     </div>
                     @endif

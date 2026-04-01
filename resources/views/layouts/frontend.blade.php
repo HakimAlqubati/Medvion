@@ -62,17 +62,17 @@
                     <div class="hidden md:flex items-center gap-2">
                         @if (Route::has('login'))
                             @auth
-                                <a href="{{ url('/dashboard') }}"
+                                <a href="{{ url('/admin') }}"
                                    class="px-4 py-2 text-sm font-bold text-white/80 hover:text-white transition">
                                     {{ __('land.nav_dashboard') }}
                                 </a>
                             @else
-                                <a href="{{ route('login') }}"
+                                <a href="{{ url('admin/login') }}"
                                    class="px-4 py-2 text-sm font-semibold text-white/70 hover:text-white transition">
                                     {{ __('land.nav_login') }}
                                 </a>
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}"
+                                    <a href="{{ url('admin/login') }}"
                                        class="nav-cta inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all duration-300">
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                                         {{ __('land.nav_register') }}
@@ -115,17 +115,17 @@
                 <div class="p-3 flex flex-col gap-2">
                     @if (Route::has('login'))
                         @auth
-                            <a href="{{ url('/dashboard') }}"
+                            <a href="{{ url('/admin') }}"
                                class="flex items-center justify-center py-3 rounded-xl text-sm font-bold text-white bg-white/10 hover:bg-white/15 transition">
                                 {{ __('land.nav_dashboard') }}
                             </a>
                         @else
-                            <a href="{{ route('login') }}"
+                            <a href="{{ url('admin/login') }}"
                                class="flex items-center justify-center py-3 rounded-xl text-sm font-semibold text-white/75 hover:text-white bg-white/5 hover:bg-white/10 transition">
                                 {{ __('land.nav_login') }}
                             </a>
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
+                                <a href="{{ url('admin/login') }}"
                                    class="nav-cta flex items-center justify-center py-3 rounded-xl text-sm font-bold text-white transition">
                                     {{ __('land.nav_register') }}
                                 </a>
