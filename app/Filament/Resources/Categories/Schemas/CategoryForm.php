@@ -29,7 +29,14 @@ class CategoryForm
 
                         $set('slug', Str::slug($state));
                     }),
-                TextInput::make('slug')
+                TextInput::make('slug'),
+
+                Select::make('parent_id')
+                    ->label(__('admin.categories.fields.parent_id'))
+                    ->relationship('parent', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->nullable(),
 
             ]);
     }

@@ -26,6 +26,11 @@ class CategoriesTable
                 TextColumn::make('name')
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->label(__('admin.categories.fields.name')),
+                TextColumn::make('parent.name')
+                    ->label(__('admin.categories.fields.parent_id'))
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 TrashedFilter::make(),

@@ -7,6 +7,7 @@ return [
         'plural_label' => 'التصنيفات',
         'fields' => [
             'name' => 'الاسم',
+            'parent_id' => 'التصنيف الأب',
             'role' => 'الدور',
             'members' => 'الأعضاء',
         ],

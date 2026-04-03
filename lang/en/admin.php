@@ -7,6 +7,7 @@ return [
         'plural_label' => 'Categories',
         'fields' => [
             'name' => 'Name',
+            'parent_id' => 'Parent Category',
             'role' => 'Role',
             'members' => 'Members',
         ],
