@@ -242,4 +242,20 @@ return [
     'about_section_subtitle'    => 'We are a specialized platform dedicated to qualifying and developing the skills of healthcare professionals according to the latest academic and digital standards.',
     'about_section_button'      => 'Read More About Us',
     'about_section_badge'       => 'Certified Standards',
+    // ---------------------------------------------------------------
+    // Course Registration Form
+    // ---------------------------------------------------------------
+    'reg_form_title'       => 'Enrol Now in this Course',
+    'reg_form_subtitle'    => 'Fill in the details below to request enrolment, and our team will contact you.',
+    'reg_full_name'        => 'Full Name',
+    'reg_email'            => 'Email Address',
+    'reg_phone'            => 'Phone / WhatsApp',
+    'reg_profession'       => 'Profession / Specialty',
+    'reg_profession_ph'    => 'e.g., General Practitioner, Nurse, Student',
+    'reg_workplace'        => 'Workplace / University',
+    'reg_notes'            => 'Additional Notes (Optional)',
+    'reg_btn_submit'       => 'Confirm Enrolment',
+    'reg_success_msg'      => 'Your registration request has been successfully received! We will contact you soon.',
+    'reg_error_msg'        => 'An error occurred while submitting your request. Please try again.',
+
 ];

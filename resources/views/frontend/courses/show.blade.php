@@ -101,6 +101,10 @@
                             @endforeach
                         </div>
                     </div>
+
+                    <div id="registration-form" class="reveal mt-12 pt-12 border-t border-gray-100">
+                        <x-frontend.course-registration-form :course="$course" />
+                    </div>
                 </div>
 
                 {{-- Sidebar Sticky Registration --}}
@@ -136,7 +140,7 @@
                             </div>
                             </div>
 
-                            <a href="#" class="flex items-center justify-center w-full py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 mb-4 text-lg">
+                            <a href="#registration-form" class="flex items-center justify-center w-full py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 mb-4 text-lg">
                                 {{ __('land.enroll_now') }}
                             </a>
                             <p class="text-sm text-center text-gray-500 mb-6">{{ __('land.enroll_instant_access') }}</p>
