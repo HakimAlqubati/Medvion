@@ -14,5 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (\Illuminate\Http\Exceptions\ThrottleRequestsException $e) {
+            return response()->json([
+                'message' => 'لقد تجاوزت الحد الأقصى لمحاولات تسجيل الدخول. يرجى الانتظار لمدة دقيقة قبل المحاولة مرة أخرى.',
+            ], 429);
+        });
     })->create();
