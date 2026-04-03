@@ -2,6 +2,13 @@
 
 namespace App\Filament\Resources\HeroSlides\Schemas;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver; // استخدمنا مشغل GD الافتراضي
+use Intervention\Image\Format; // ← استدعاء هام جداً للإصدار الرابع
+
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -68,9 +75,41 @@ class HeroSlideForm
                             ->image()
                             ->imageEditor()
                             ->imageEditorAspectRatios(['16:9', '21:9'])
-                            ->directory('hero-slides')
-                            ->maxSize(5120)
+                            // ->maxSize(5120) // 5 ميجابايت كحد أقصى للرفع
+                            ->saveUploadedFileUsing(function (TemporaryUploadedFile $file): string {
+                                // 1. توليد مسار واسم الصورة
+                                $filename = 'hero-slides/' . Str::uuid() . '.webp';
+
+                                // 2. تهيئة المعالج بالطريقة الرسمية لـ V4
+                                $manager = ImageManager::usingDriver(Driver::class);
+
+                                // 3. قراءة الصورة باستخدام decode() بدلاً من read()
+                                $image = $manager->decode($file->getRealPath());
+
+                                // 4. تصغير الصورة مع الحفاظ على التناسب
+                                $image->scaleDown(width: 1600);
+
+                                // 5. تحويل الصورة إلى WebP بجودة 80 باستخدام نظام V4 الجديد
+                                $encodedImage = $image->encodeUsingFormat(Format::WEBP, quality: 80);
+
+                                // 6. حفظ الصورة كنص ثنائي (Binary String) في الاستضافة
+                                Storage::disk('public')->put($filename, (string) $encodedImage);
+
+                                // 7. إرجاع مسار الصورة ليحفظه Filament في قاعدة البيانات
+                                return $filename;
+                            })
                             ->columnSpanFull(),
+
+                        // // الصورة
+                        // FileUpload::make('image')
+                        //     ->label(__('admin.hero_slides.fields.image'))
+                        //     ->helperText(__('admin.hero_slides.fields.image_hint'))
+                        //     ->image()
+                        //     ->imageEditor()
+                        //     ->imageEditorAspectRatios(['16:9', '21:9'])
+                        //     ->directory('hero-slides')
+                        //     ->maxSize(5120)
+                        //     ->columnSpanFull(),
 
                         // الترتيب
                         TextInput::make('sort_order')

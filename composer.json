@@ -10,6 +10,7 @@
         "bezhansalleh/filament-shield": "^4.2",
         "blade-ui-kit/blade-heroicons": "^2.7",
         "filament/filament": "^5.4",
+        "intervention/image-laravel": "^4.0",
         "lara-zeus/spatie-translatable": "^2.0",
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0",

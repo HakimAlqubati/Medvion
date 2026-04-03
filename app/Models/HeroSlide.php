@@ -24,11 +24,16 @@ class HeroSlide extends Model
      */
     public function getImageUrlAttribute()
     {
-        if (!empty($this->image) && file_exists(public_path(ltrim($this->image, '/')))) {
-            return asset($this->image);
+        if (!empty($this->image)) {
+            if (filter_var($this->image, FILTER_VALIDATE_URL)) {
+                return $this->image;
+            }
+            if (\Illuminate\Support\Facades\Storage::disk('public')->exists($this->image)) {
+                return \Illuminate\Support\Facades\Storage::disk('public')->url($this->image);
+            }
         }
         
         // Fallback to exactly the first available banner image
-        return asset('/images/hero-slide-1.png');
+        return asset('images/hero-slide-1.png');
     }
 }

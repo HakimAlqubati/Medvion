@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\CourseRegistrations\Schemas;
 
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class CourseRegistrationForm
@@ -10,9 +12,9 @@ class CourseRegistrationForm
     {
         return $schema
             ->components([
-                \Filament\Forms\Components\Section::make()
+                Section::make()
                     ->schema([
-                        \Filament\Forms\Components\Grid::make(2)->schema([
+                        Grid::make(2)->schema([
                             \Filament\Forms\Components\Select::make('course_id')
                                 ->label(__('admin.course_registrations.fields.course'))
                                 ->relationship('course', 'title')
@@ -31,9 +33,9 @@ class CourseRegistrationForm
                         ]),
                     ]),
 
-                \Filament\Forms\Components\Section::make()
+                Section::make()
                     ->schema([
-                        \Filament\Forms\Components\Grid::make(2)->schema([
+                        Grid::make(2)->schema([
                             \Filament\Forms\Components\TextInput::make('full_name')
                                 ->label(__('admin.course_registrations.fields.full_name'))
                                 ->required()
@@ -58,7 +60,7 @@ class CourseRegistrationForm
                         ]),
                     ]),
                 
-                \Filament\Forms\Components\Section::make()
+                Section::make()
                     ->schema([
                         \Filament\Forms\Components\Textarea::make('notes')
                             ->label(__('admin.course_registrations.fields.notes'))

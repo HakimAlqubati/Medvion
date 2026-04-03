@@ -14,6 +14,8 @@ class HeroSlidesTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->striped()
+            ->defaultSort('id', 'desc')
             ->columns([
                 TextColumn::make('title_1')
                     ->label(__('admin.hero_slides.fields.title_1'))
@@ -35,7 +37,7 @@ class HeroSlidesTable
                     ->sortable(),
                 ImageColumn::make('image')
                     ->label(__('admin.hero_slides.fields.image'))
-                    // ->disk('public')
+                    ->disk('public')
                     ->sortable(),
                 TextColumn::make('sort_order')
                     ->label(__('admin.sort_order'))
