@@ -253,4 +253,21 @@ return [
             'confirmed' => 'Confirmed',
         ],
     ],
+
+    'login' => [
+        'tagline'       => 'The Integrated Medical Training Platform for Healthcare Professionals',
+        'stat_courses'  => '200+',
+        'stat_courses_label' => 'Courses',
+        'stat_trainees' => '5K+',
+        'stat_trainees_label' => 'Trainees',
+        'stat_satisfaction' => '98%',
+        'stat_satisfaction_label' => 'Satisfaction Rate',
+        'welcome'       => 'Welcome Back 👋',
+        'subtitle'      => 'Sign in to access your Medvion admin panel',
+        'submit'        => 'Sign In',
+        'security'      => 'Secure encrypted connection — SSL/TLS 256-bit',
+        'back_to_site'  => '← Back to Website',
+        'copyright'     => '© :year Medvion. All rights reserved.',
+    ],
 ];
+

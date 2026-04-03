@@ -253,4 +253,21 @@ return [
             'confirmed' => 'مؤكد',
         ],
     ],
+
+    'login' => [
+        'tagline'       => 'منصة التكوين الطبي المتكاملة للكوادر الصحية الاحترافية',
+        'stat_courses'  => '+200',
+        'stat_courses_label' => 'دورة تدريبية',
+        'stat_trainees' => '+5K',
+        'stat_trainees_label' => 'متدرب',
+        'stat_satisfaction' => '98%',
+        'stat_satisfaction_label' => 'رضا المستخدمين',
+        'welcome'       => 'مرحباً بعودتك 👋',
+        'subtitle'      => 'سجّل دخولك للوصول إلى لوحة تحكم Medvion',
+        'submit'        => 'تسجيل الدخول',
+        'security'      => 'اتصال آمن ومشفر — SSL/TLS 256-bit',
+        'back_to_site'  => '← العودة إلى الموقع الرئيسي',
+        'copyright'     => '© :year Medvion. جميع الحقوق محفوظة.',
+    ],
 ];
+
