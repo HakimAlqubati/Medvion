@@ -216,6 +216,7 @@ return [
         'dashboard' => 'Dashboard',
         'groups' => [
             'content'       => 'Learning Content',
+            'registrations' => 'Registrations',
             'site'          => 'Site Management',
             'communication' => 'Communication',
             'management'    => 'Management',
@@ -229,6 +230,27 @@ return [
             'message'   => 'It looks like you are trying to access a page or perform an action you do not have permission for in Medvion. Please contact the platform administration if you believe this is an error.',
             'back_home' => 'Back to Home',
             'go_back'   => 'Go Back',
+        ],
+    ],
+    'course_registrations' => [
+        'label' => 'Course Registration',
+        'plural_label' => 'Course Registrations',
+        'fields' => [
+            'course' => 'Course',
+            'full_name' => 'Full Name',
+            'email' => 'Email',
+            'phone' => 'Phone',
+            'profession' => 'Profession',
+            'workplace' => 'Workplace',
+            'notes' => 'User Notes',
+            'status' => 'Status',
+            'admin_notes' => 'Admin Notes',
+            'created_at' => 'Created At',
+        ],
+        'status' => [
+            'pending' => 'Pending',
+            'contacted' => 'Contacted',
+            'confirmed' => 'Confirmed',
         ],
     ],
 ];

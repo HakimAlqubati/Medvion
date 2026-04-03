@@ -6,6 +6,7 @@ use App\Filament\Resources\Abouts\AboutResource;
 use App\Filament\Resources\Categories\CategoryResource;
 use App\Filament\Resources\ContactMessages\ContactMessageResource;
 use App\Filament\Resources\Courses\CourseResource;
+use App\Filament\Resources\CourseRegistrations\CourseRegistrationResource;
 use App\Filament\Resources\Faqs\FaqResource;
 use App\Filament\Resources\Features\FeatureResource;
 use App\Filament\Resources\HeroSlides\HeroSlideResource;
@@ -79,6 +80,12 @@ class AdminPanelProvider extends PanelProvider
                                 ...(CourseResource::canViewAny() ? CourseResource::getNavigationItems() : []),
                                 ...(CategoryResource::canViewAny() ? CategoryResource::getNavigationItems() : []),
 
+                            ]),
+
+                        //     // ── تسجيلات الدورات ──────────────────────────────────────
+                        NavigationGroup::make(__('admin.navigation.groups.registrations'))
+                            ->items([
+                                ...(CourseRegistrationResource::canViewAny() ? CourseRegistrationResource::getNavigationItems() : []),
                             ]),
 
                         //     // ── إدارة الموقع ──────────────────────────────────────────
