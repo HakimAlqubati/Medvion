@@ -41,6 +41,9 @@ class About extends Model
     protected static function booted()
     {
         static::creating(function ($about) {
+            if (!$about->section_key) {
+                $about->section_key = 'value';
+            }
             if (Auth::check()) {
                 $about->created_by = Auth::id();
                 $about->updated_by = Auth::id();

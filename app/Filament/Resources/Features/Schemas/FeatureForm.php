@@ -55,7 +55,10 @@ class FeatureForm
                             ->label(__('admin.features.fields.sort_order'))
                             ->helperText(__('admin.features.fields.sort_order_hint'))
                             ->numeric()
-                            ->default(0)
+                            ->default(function () {
+                                $last = \App\Models\Feature::orderBy('sort_order', 'desc')->first();
+                                return $last ? $last->sort_order + 1 : 0;
+                            })
                             ->minValue(0)
                             ->columnSpanFull(),
 

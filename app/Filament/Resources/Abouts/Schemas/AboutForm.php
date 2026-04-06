@@ -35,10 +35,16 @@ class AboutForm
                             ->label(__('admin.abouts.fields.content'))
                             ->placeholder(__('admin.abouts.fields.content_placeholder'))
                             ->toolbarButtons([
-                                'bold', 'italic', 'underline',
-                                'bulletList', 'orderedList',
-                                'h2', 'h3',
-                                'link', 'redo', 'undo',
+                                'bold',
+                                'italic',
+                                'underline',
+                                'bulletList',
+                                'orderedList',
+                                'h2',
+                                'h3',
+                                'link',
+                                'redo',
+                                'undo',
                             ])
                             ->columnSpanFull(),
 
@@ -55,7 +61,10 @@ class AboutForm
                             ->label(__('admin.abouts.fields.sort_order'))
                             ->helperText(__('admin.abouts.fields.sort_order_hint'))
                             ->numeric()
-                            ->default(0)
+                            ->default(function () {
+                                $last = \App\Models\About::orderBy('sort_order', 'desc')->first();
+                                return $last ? $last->sort_order + 1 : 0;
+                            })
                             ->minValue(0)
                             ->columnSpanFull(),
 
