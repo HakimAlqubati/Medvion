@@ -17,6 +17,11 @@ class AboutController extends Controller
     public function index(AboutService $aboutService)
     {
         $pageData = $aboutService->getPageContent();
+        
+        $pageData['goals'] = $aboutService->getGoals();
+        $pageData['audiences'] = $aboutService->getTargetAudiences();
+        $pageData['teamMembers'] = $aboutService->getTeamMembers();
+        $pageData['impacts'] = $aboutService->getImpacts();
 
         return view('about', $pageData);
     }

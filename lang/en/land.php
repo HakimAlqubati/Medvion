@@ -145,6 +145,15 @@ return [
     'about_value_4_title'    => 'Integrity',
     'about_value_4_desc'     => 'Transparency and professionalism in everything we offer — programmes, content, and certificates.',
 
+    'about_goals_title'      => 'Our Goals',
+    'about_goals_subtitle'   => 'Discover the strategic goals we strive to achieve through the Medvion platform.',
+    'about_audience_title'   => 'Target Audience',
+    'about_audience_subtitle'=> 'Our platform and training programs are tailored to meet the needs of various healthcare professionals.',
+    'about_team_title'       => 'Platform Management',
+    'about_team_subtitle'    => 'An elite group of pioneers and experts who founded and manage the Medvion health training platform.',
+    'about_impact_title'     => 'Expected Impact',
+    'about_impact_subtitle'  => 'We aim to create a tangible positive change in the journey of healthcare and medical education.',
+
     // ---------------------------------------------------------------
     // FAQ Section
     // ---------------------------------------------------------------

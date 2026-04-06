@@ -3,6 +3,10 @@
 namespace App\Services\Frontend;
 
 use App\Models\About;
+use App\Models\Goal;
+use App\Models\TargetAudience;
+use App\Models\TeamMember;
+use App\Models\Impact;
 use Illuminate\Database\Eloquent\Collection;
 
 class AboutService
@@ -49,5 +53,41 @@ class AboutService
         }
 
         return $pageData;
+    }
+
+    /**
+     * Get active goals
+     * @return Collection
+     */
+    public function getGoals(): Collection
+    {
+        return Goal::where('is_active', true)->orderBy('sort_order', 'asc')->get();
+    }
+
+    /**
+     * Get active target audiences
+     * @return Collection
+     */
+    public function getTargetAudiences(): Collection
+    {
+        return TargetAudience::where('is_active', true)->orderBy('sort_order', 'asc')->get();
+    }
+
+    /**
+     * Get active team members
+     * @return Collection
+     */
+    public function getTeamMembers(): Collection
+    {
+        return TeamMember::where('is_active', true)->orderBy('sort_order', 'asc')->get();
+    }
+
+    /**
+     * Get active impacts
+     * @return Collection
+     */
+    public function getImpacts(): Collection
+    {
+        return Impact::where('is_active', true)->orderBy('sort_order', 'asc')->get();
     }
 }
