@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     // Dynamic slides loaded from DB instead of hardcoded arrays
     $slides = \App\Services\Frontend\HeroSlideService::getSlides();
-    return view('welcome', compact('slides'));
+    $impacts = app(\App\Services\Frontend\AboutService::class)->getImpacts();
+    return view('welcome', compact('slides', 'impacts'));
 })->name('home');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
