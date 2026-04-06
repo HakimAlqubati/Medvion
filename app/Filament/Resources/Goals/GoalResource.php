@@ -15,14 +15,32 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 
 class GoalResource extends Resource
 {
+    use Translatable;
+
     protected static ?string $model = Goal::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheckBadge;
 
     protected static ?string $recordTitleAttribute = 'title';
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.goals.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.goals.plural_label');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Schema $schema): Schema
     {

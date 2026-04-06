@@ -209,6 +209,41 @@ return [
             'is_active_hint'   => 'When enabled, the page will be accessible to visitors',
         ],
     ],
+
+    'goals' => [
+        'label' => 'Goal',
+        'plural_label' => 'Goals',
+        'fields' => [
+            'title' => 'Title',
+            'content' => 'Content',
+        ]
+    ],
+    'target_audiences' => [
+        'label' => 'Target Audience',
+        'plural_label' => 'Target Audiences',
+        'fields' => [
+            'title' => 'Title',
+        ]
+    ],
+    'team_members' => [
+        'label' => 'Team Member',
+        'plural_label' => 'Team Members',
+        'fields' => [
+            'name' => 'Name',
+            'role' => 'Role',
+            'bio' => 'Biography',
+            'image' => 'Image',
+        ]
+    ],
+    'impacts' => [
+        'label' => 'Expected Impact',
+        'plural_label' => 'Expected Impacts',
+        'fields' => [
+            'title' => 'Title',
+            'content' => 'Content',
+        ]
+    ],
+
     'sort_order' => 'Sort Order',
     'is_active' => 'Is Active',
 

@@ -209,6 +209,41 @@ return [
             'is_active_hint'   => 'عند التفعيل ستكون الصفحة متاحة للزوار',
         ],
     ],
+
+    'goals' => [
+        'label' => 'هدف',
+        'plural_label' => 'أهداف المنصة',
+        'fields' => [
+            'title' => 'عنوان الهدف',
+            'content' => 'التفاصيل',
+        ]
+    ],
+    'target_audiences' => [
+        'label' => 'فئة مستهدفة',
+        'plural_label' => 'الفئة المستهدفة',
+        'fields' => [
+            'title' => 'المسمى',
+        ]
+    ],
+    'team_members' => [
+        'label' => 'عضو إداري',
+        'plural_label' => 'إدارة المنصة',
+        'fields' => [
+            'name' => 'الاسم',
+            'role' => 'المنصب / الدور',
+            'bio' => 'نبذة تعريفية',
+            'image' => 'الصورة',
+        ]
+    ],
+    'impacts' => [
+        'label' => 'أثر متوقع',
+        'plural_label' => 'الأثر المتوقع',
+        'fields' => [
+            'title' => 'العنوان',
+            'content' => 'الوصف',
+        ]
+    ],
+
     'sort_order' => 'الترتيب',
     'is_active' => 'نشط',
 

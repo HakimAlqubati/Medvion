@@ -10,6 +10,10 @@ use App\Filament\Resources\CourseRegistrations\CourseRegistrationResource;
 use App\Filament\Resources\Faqs\FaqResource;
 use App\Filament\Resources\Features\FeatureResource;
 use App\Filament\Resources\HeroSlides\HeroSlideResource;
+use App\Filament\Resources\Goals\GoalResource;
+use App\Filament\Resources\TargetAudiences\TargetAudienceResource;
+use App\Filament\Resources\TeamMembers\TeamMemberResource;
+use App\Filament\Resources\Impacts\ImpactResource;
 use App\Filament\Resources\Pages\PageResource;
 use App\Filament\Resources\Users\UserResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
@@ -95,6 +99,10 @@ class AdminPanelProvider extends PanelProvider
                             ->items([
                                 ...(HeroSlideResource::canViewAny() ? HeroSlideResource::getNavigationItems() : []),
                                 ...(AboutResource::canViewAny() ? AboutResource::getNavigationItems() : []),
+                                ...(GoalResource::canViewAny() ? GoalResource::getNavigationItems() : []),
+                                ...(TargetAudienceResource::canViewAny() ? TargetAudienceResource::getNavigationItems() : []),
+                                ...(TeamMemberResource::canViewAny() ? TeamMemberResource::getNavigationItems() : []),
+                                ...(ImpactResource::canViewAny() ? ImpactResource::getNavigationItems() : []),
                                 ...(PageResource::canViewAny() ? PageResource::getNavigationItems() : []),
                                 ...(FeatureResource::canViewAny() ? FeatureResource::getNavigationItems() : []),
                                 ...(FaqResource::canViewAny() ? FaqResource::getNavigationItems() : []),
