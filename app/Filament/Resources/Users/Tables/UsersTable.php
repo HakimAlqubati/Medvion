@@ -14,6 +14,8 @@ class UsersTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort("id", "desc")
+            ->striped()
             ->columns([
                 TextColumn::make("name")
                     ->label(__('admin.users.fields.name'))
@@ -21,7 +23,7 @@ class UsersTable
                     ->sortable(),
                 TextColumn::make("email")
                     ->label(__('admin.users.fields.email'))
-                    ->searchable()
+                    ->searchable()->copyable()
                     ->sortable(),
                 TextColumn::make("email_verified_at")
                     ->label(__('admin.users.fields.email_verified_at'))
