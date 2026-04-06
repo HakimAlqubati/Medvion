@@ -22,6 +22,7 @@ class TeamMembersTable
             ->columns([
                 ImageColumn::make('image')
                     ->label(__('admin.team_members.fields.image'))
+                    ->disk('public')
                     ->circular(),
                 TextColumn::make('name')
                     ->label(__('admin.team_members.fields.name'))

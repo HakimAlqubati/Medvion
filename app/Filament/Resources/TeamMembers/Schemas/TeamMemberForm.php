@@ -43,6 +43,7 @@ class TeamMemberForm
                         FileUpload::make('image')
                             ->label(__('admin.team_members.fields.image'))
                             ->image()
+                            ->disk('public')
                             ->directory('team-members')
                             ->columnSpanFull(),
 
