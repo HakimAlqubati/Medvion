@@ -27,6 +27,10 @@ class DatabaseSeeder extends Seeder
             // FaqSeeder::class,
             // AboutSeeder::class,
             ShieldSeeder::class,
+            GoalSeeder::class,
+            TargetAudienceSeeder::class,
+            TeamMemberSeeder::class,
+            ImpactSeeder::class,
         ]);
     }
 }
