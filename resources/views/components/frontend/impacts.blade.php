@@ -8,14 +8,14 @@
     </div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
+        <div class="text-center mb-16 reveal">
             <h2 class="text-3xl font-extrabold text-white">{{ __('land.about_impact_title') }}</h2>
             <p class="mt-4 text-primary-light text-lg max-w-2xl mx-auto opacity-90">{{ __('land.about_impact_subtitle') }}</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             @foreach($impacts as $index => $impact)
-                <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/20 transition duration-300">
+                <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/20 transition duration-300 reveal delay-{{ ($loop->iteration % 4 == 0 ? 4 : $loop->iteration % 4) * 100 }}">
                     <div class="w-14 h-14 mx-auto bg-gradient-to-br from-secondary to-secondary-light rounded-xl flex items-center justify-center shadow-lg mb-6 -mt-12">
                         <!-- Dynamic or static icon -->
                         <span class="text-white font-extrabold text-xl">{{ $index + 1 }}</span>

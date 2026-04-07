@@ -5,7 +5,7 @@
         <div class="absolute inset-0 opacity-10"
              style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
         </div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
             <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">{{ $page_hero->title ?? __('land.about_hero_title') }}</h1>
             <p class="text-white/75 text-lg max-w-2xl mx-auto">{{ $page_hero->content ?? __('land.about_hero_subtitle') }}</p>
         </div>
@@ -14,7 +14,7 @@
     {{-- Platform Definition --}}
     <section class="py-16 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-start gap-8">
+            <div class="flex flex-col md:flex-row items-start gap-8 reveal">
                 <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center shrink-0">
                     <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -35,7 +35,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                 {{-- Vision --}}
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm reveal">
                     <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center mb-5">
                         <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             @if(optional($vision)->icon)
@@ -51,7 +51,7 @@
                 </div>
 
                 {{-- Mission --}}
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm reveal delay-200">
                     <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
                         <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -69,12 +69,12 @@
     {{-- Values --}}
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
+            <div class="text-center mb-12 reveal">
                 <h2 class="text-3xl font-extrabold text-primary">{{ __('land.about_values_title') }}</h2>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @forelse($values ?? collect() as $value)
-                    <div class="p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-center">
+                    <div class="p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition text-center reveal delay-{{ ($loop->iteration % 4 == 0 ? 4 : $loop->iteration % 4) * 100 }}">
                         <div class="w-12 h-12 mx-auto rounded-xl mb-4 flex items-center justify-center
                                     {{ $value->color === 'secondary' ? 'bg-secondary/10' : 'bg-primary/10' }}">
                             <svg class="w-6 h-6 {{ $value->color === 'secondary' ? 'text-secondary' : 'text-primary' }}"

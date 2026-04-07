@@ -3,13 +3,13 @@
 @if($members && $members->count() > 0)
 <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12 reveal">
             <h2 class="text-3xl font-extrabold text-primary">{{ __('land.about_team_title') }}</h2>
             <p class="mt-4 text-gray-600 max-w-2xl mx-auto">{{ __('land.about_team_subtitle') }}</p>
         </div>
         <div class="flex justify-center">
             @foreach($members as $member)
-                <div class="bg-white rounded-2xl shadow-sm border border-primary/20 overflow-hidden w-full max-w-sm text-center">
+                <div class="bg-white rounded-2xl shadow-sm border border-primary/20 overflow-hidden w-full max-w-sm text-center reveal delay-{{ ($loop->iteration % 3 == 0 ? 3 : $loop->iteration % 3) * 100 }}">
                     <div class="h-32 bg-primary"></div>
                      <div class="relative px-6 pb-6">
                         <div class="w-24 h-24 mx-auto rounded-full bg-gray-100 border-4 border-white shadow -mt-12 overflow-hidden flex items-center justify-center">
