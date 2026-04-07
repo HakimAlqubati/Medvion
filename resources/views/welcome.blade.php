@@ -12,13 +12,13 @@
     @php $activeHero = 1; @endphp
 
     @if ($activeHero === 1)
-        <x-frontend.hero :slides="$slides" />
+    <x-frontend.hero :slides="$slides" />
     @else
-        <x-frontend.hero2 />
+    <x-frontend.hero2 />
     @endif
 
     <x-frontend.about :alt-bg="false" />
-    <!-- <x-frontend.impacts :impacts="$impacts" /> -->
+    {{-- <x-frontend.impacts :impacts="$impacts" /> --}}
 
     <x-frontend.features :alt-bg="true" />
     <x-frontend.latest-courses :alt-bg="false" />
