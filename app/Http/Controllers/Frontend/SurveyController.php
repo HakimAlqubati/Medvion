@@ -24,8 +24,10 @@ class SurveyController extends Controller
             : Survey::where('is_active', true)->with('questions')->firstOrFail();
 
         $groupedQuestions = $this->surveyService->getGroupedQuestions($survey);
+        $allQuestions = $survey->questions->sortBy('order')->values();
+        $questionMapping = $this->surveyService->getQuestionStepMapping($survey);
 
-        return view('frontend.survey', compact('survey', 'groupedQuestions'));
+        return view('frontend.survey', compact('survey', 'groupedQuestions', 'allQuestions', 'questionMapping'));
     }
 
     /**

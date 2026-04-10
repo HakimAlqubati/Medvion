@@ -136,4 +136,22 @@ class SurveyService
 
         return $groups;
     }
+
+    /**
+     * Return a simple mapping of question_id => step_index.
+     * Crucial for the frontend to 'jump' to the correct step on validation error.
+     */
+    public function getQuestionStepMapping(Survey $survey): array
+    {
+        $grouped = $this->getGroupedQuestions($survey);
+        $mapping = [];
+
+        foreach ($grouped as $stepIndex => $group) {
+            foreach ($group['questions'] as $question) {
+                $mapping[$question->id] = $stepIndex;
+            }
+        }
+
+        return $mapping;
+    }
 }
