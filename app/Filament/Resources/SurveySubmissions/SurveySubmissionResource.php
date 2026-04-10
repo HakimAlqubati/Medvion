@@ -53,7 +53,7 @@ class SurveySubmissionResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where('status', 'pending')->count();
+        return static::getModel()::count();
     }
 
     public static function getNavigationBadgeColor(): ?string

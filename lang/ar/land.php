@@ -265,4 +265,22 @@ return [
     'reg_success_msg'      => 'تم استلام طلب التسجيل بنجاح! سنتواصل معك قريباً.',
     'reg_error_msg'        => 'حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى.',
 
+    // ---------------------------------------------------------------
+    // Expert Board Survey
+    // ---------------------------------------------------------------
+    'expert_survey_title'      => 'تقييم خبراء Medvion',
+    'expert_survey_hero_badge' => 'برنامج اختيار الخبراء',
+    'expert_survey_hero_title' => 'كن جزءاً من نخبة الخبراء في Medvion',
+    'expert_survey_hero_desc'  => 'هذا التقييم مصمم لاختيار الكفاءات الصحية الأكثر تميزاً للانضمام إلى مجلس خبراء التدريب الصحي الرقمي.',
+    'expert_survey_start_btn'  => 'ابدأ التقييم الآن',
+    'expert_survey_next_btn'   => 'التالي',
+    'expert_survey_prev_btn'   => 'السابق',
+    'expert_survey_submit_btn' => 'إرسال التقييم',
+    'expert_survey_step'       => 'خطوة',
+    'expert_survey_of'         => 'من',
+    'expert_survey_loading'    => 'جاري التحميل...',
+    'expert_survey_success_title' => 'شكراً لك!',
+    'expert_survey_success_body'  => 'تم استلام تقييمك بنجاح. سيقوم فريقنا بمراجعة خبراتك والتواصل معك قريباً.',
+    'expert_survey_back_home'    => 'العودة للرئيسية',
+    'expert_survey_required'     => 'هذا الحقل مطلوب لإتمام التقييم.',
 ];
