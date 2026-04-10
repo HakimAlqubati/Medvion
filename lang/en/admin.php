@@ -254,6 +254,7 @@ return [
             'registrations' => 'Registrations',
             'site'          => 'Site Management',
             'communication' => 'Communication',
+            'surveys'       => 'Surveys Management',
             'management'    => 'Management',
         ],
     ],

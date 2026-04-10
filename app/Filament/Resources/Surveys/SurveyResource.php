@@ -54,4 +54,9 @@ class SurveyResource extends Resource
             'edit' => EditSurvey::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }

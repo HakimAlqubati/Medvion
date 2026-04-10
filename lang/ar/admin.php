@@ -254,6 +254,7 @@ return [
             'registrations' => 'التسجيلات والطلبات',
             'site'          => 'إدارة الموقع',
             'communication' => 'التواصل',
+            'surveys'       => 'إدارة الاستبيانات',
             'management'    => 'الإدارة',
         ],
     ],

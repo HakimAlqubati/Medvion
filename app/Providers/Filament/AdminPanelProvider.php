@@ -93,7 +93,6 @@ class AdminPanelProvider extends PanelProvider
                         NavigationGroup::make(__('admin.navigation.groups.registrations'))
                             ->items([
                                 ...(CourseRegistrationResource::canViewAny() ? CourseRegistrationResource::getNavigationItems() : []),
-                                ...(SurveySubmissionResource::canViewAny() ? SurveySubmissionResource::getNavigationItems() : []),
                             ]),
 
                         //     // ── إدارة الموقع ──────────────────────────────────────────
@@ -109,7 +108,6 @@ class AdminPanelProvider extends PanelProvider
                                 ...(PageResource::canViewAny() ? PageResource::getNavigationItems() : []),
                                 ...(FeatureResource::canViewAny() ? FeatureResource::getNavigationItems() : []),
                                 ...(FaqResource::canViewAny() ? FaqResource::getNavigationItems() : []),
-                                ...(SurveyResource::canViewAny() ? SurveyResource::getNavigationItems() : []),
                             ]),
 
                         //     // ── التواصل ───────────────────────────────────────────────
@@ -117,6 +115,12 @@ class AdminPanelProvider extends PanelProvider
                             // ->icon(Heroicon::OutlinedChatBubbleLeftRight)
                             ->items([
                                 ...(ContactMessageResource::canViewAny() ? ContactMessageResource::getNavigationItems() : []),
+                            ]),
+                        
+                        NavigationGroup::make(__('admin.navigation.groups.surveys'))
+                            ->items([
+                                ...(SurveyResource::canViewAny() ? SurveyResource::getNavigationItems() : []),
+                                ...(SurveySubmissionResource::canViewAny() ? SurveySubmissionResource::getNavigationItems() : []),
                             ]),
 
                         // ── الإدارة ───────────────────────────────────────────────
