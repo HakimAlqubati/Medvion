@@ -229,6 +229,9 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+        input[type="text"],input[type="email"],input[type="tel"], textarea{
+            width: 100%;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-secondary selection:text-white">
