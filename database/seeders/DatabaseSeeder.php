@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             TargetAudienceSeeder::class,
             TeamMemberSeeder::class,
             ImpactSeeder::class,
+            SurveySeeder::class,
         ]);
     }
 }
