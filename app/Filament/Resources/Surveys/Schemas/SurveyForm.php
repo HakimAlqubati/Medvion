@@ -33,7 +33,7 @@ class SurveyForm
                         Toggle::make('is_active')
                             ->label(__('admin.surveys.fields.is_active'))
                             ->default(true),
-                    ])->columnSpan(2),
+                    ])->columnSpanFull(),
 
                 Section::make(__('admin.surveys.sections.questions'))
                     ->description(__('admin.surveys.sections.questions_description'))
