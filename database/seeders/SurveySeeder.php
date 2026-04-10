@@ -17,8 +17,8 @@ class SurveySeeder extends Seeder
 
         $questions = [
             // SECTION 1: البيانات الأساسية
-            ['text' => 'الاسم الكامل', 'type' => 'short_text', 'required' => true],
-            ['text' => 'البريد الإلكتروني', 'type' => 'email', 'required' => true],
+            ['text' => 'الاسم الكامل', 'type' => 'short_text', 'required' => true, 'key' => 'full_name'],
+            ['text' => 'البريد الإلكتروني', 'type' => 'email', 'required' => true, 'key' => 'email'],
             ['text' => 'رقم الهاتف', 'type' => 'phone', 'required' => true],
             ['text' => 'الدولة / المدينة', 'type' => 'short_text', 'required' => true],
             ['text' => 'الجنس (اختياري – لأغراض إحصائية)', 'type' => 'radio', 'required' => false, 'options' => ['ذكر', 'أنثى', 'أفضل عدم الإجابة']],
@@ -28,18 +28,18 @@ class SurveySeeder extends Seeder
             ['text' => 'التخصص الرئيسي', 'type' => 'radio', 'required' => true, 'options' => ['الطب البشري', 'طب الأسنان', 'الصيدلة', 'التمريض', 'المختبرات الطبية', 'الأشعة والتصوير الطبي', 'العلاج الطبيعي', 'التغذية العلاجية', 'الصحة العامة', 'إدارة صحية', 'أخرى']],
             ['text' => 'التخصص الدقيق', 'type' => 'short_text', 'required' => true],
             ['text' => 'جهة العمل الحالية', 'type' => 'short_text', 'required' => true],
-            ['text' => 'سنوات الخبرة', 'type' => 'radio', 'required' => true, 'options' => ['أقل من سنة', '1–3 سنوات', '3–5 سنوات', '5–10 سنوات', 'أكثر من 10 سنوات']],
+            ['text' => 'سنوات الخبرة', 'type' => 'radio', 'required' => true, 'options' => ['أقل من سنة', '1–3 سنوات', '3–5 سنوات', '5–10 سنوات', 'أكثر من 10 سنوات'], 'key' => 'exp_years'],
             ['text' => 'هل لديك ترخيص مهني ساري؟', 'type' => 'radio', 'required' => true, 'options' => ['نعم', 'لا']],
 
             // SECTION 3: الخبرة العملية
             ['text' => 'صف خبرتك العملية في مجالك', 'type' => 'long_text', 'required' => true],
             ['text' => 'ما نوع بيئة عملك الحالية؟', 'type' => 'radio', 'required' => true, 'options' => ['مستشفى حكومي', 'مستشفى خاص', 'مركز صحي', 'مختبر', 'عيادة', 'جامعة / أكاديمية', 'أخرى']],
             ['text' => 'ما أكثر الحالات / المهام التي تتعامل معها؟', 'type' => 'long_text', 'required' => true],
-            ['text' => 'مستوى خبرتك', 'type' => 'radio', 'required' => true, 'options' => ['مبتدئ', 'متوسط', 'متقدم', 'خبير']],
+            ['text' => 'مستوى خبرتك', 'type' => 'radio', 'required' => true, 'options' => ['مبتدئ', 'متوسط', 'متقدم', 'خبير'], 'key' => 'experience_level'],
 
             // SECTION 4: القدرة على التعليم
-            ['text' => 'هل سبق لك تقديم تدريب أو تدريس؟', 'type' => 'radio', 'required' => true, 'options' => ['نعم', 'لا']],
-            ['text' => 'كيف تشرح مفهومًا معقدًا لشخص مبتدئ؟', 'type' => 'long_text', 'required' => true],
+            ['text' => 'هل سبق لك تقديم تدريب أو تدريس؟', 'type' => 'radio', 'required' => true, 'options' => ['نعم', 'لا'], 'key' => 'has_training_exp'],
+            ['text' => 'كيف تشرح مفهومًا معقدًا لشخص مبتدئ؟', 'type' => 'long_text', 'required' => true, 'key' => 'skill_explanation'],
             ['text' => 'ما أسلوبك المفضل في التدريب؟', 'type' => 'radio', 'required' => true, 'options' => ['نظري', 'تطبيقي', 'تفاعلي', 'مزيج بينهم']],
             ['text' => 'كيف تتعامل مع متدرب ضعيف الفهم؟', 'type' => 'long_text', 'required' => true],
 
@@ -52,7 +52,7 @@ class SurveySeeder extends Seeder
             ['text' => 'المجالات التي يمكنك التدريب فيها', 'type' => 'checkboxes', 'required' => true, 'options' => ['المهارات السريرية', 'تفسير التحاليل', 'الأشعة', 'التمريض العملي', 'الطوارئ', 'مكافحة العدوى', 'الجودة وسلامة المرضى', 'المهارات الإدارية الصحية', 'البحث العلمي', 'اللغة الإنجليزية الطبية', 'مهارات التواصل', 'أخرى']],
             ['text' => 'الفئة التي تستهدفها بالتدريب', 'type' => 'checkboxes', 'required' => true, 'options' => ['طلاب', 'مبتدئين', 'متوسطين', 'محترفين']],
             ['text' => 'اذكر 3 برامج تدريبية يمكنك تقديمها', 'type' => 'long_text', 'required' => true],
-            ['text' => 'هل لديك محتوى تدريبي جاهز؟', 'type' => 'radio', 'required' => true, 'options' => ['نعم', 'لا']],
+            ['text' => 'هل لديك محتوى تدريبي جاهز؟', 'type' => 'radio', 'required' => true, 'options' => ['نعم', 'لا'], 'key' => 'has_content'],
 
             // SECTION 7: الجاهزية المهنية
             ['text' => 'كم ساعة يمكنك تخصيصها شهريًا للتدريب؟', 'type' => 'radio', 'required' => true, 'options' => ['أقل من 5 ساعات', '5–10', '10–20', 'أكثر من 20']],
@@ -73,6 +73,7 @@ class SurveySeeder extends Seeder
                 'is_required' => $q['required'],
                 'options' => isset($q['options']) ? $q['options'] : null,
                 'order' => $order,
+                'key' => isset($q['key']) ? $q['key'] : null,
             ]);
         }
     }

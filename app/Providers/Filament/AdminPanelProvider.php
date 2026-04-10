@@ -15,6 +15,8 @@ use App\Filament\Resources\TargetAudiences\TargetAudienceResource;
 use App\Filament\Resources\TeamMembers\TeamMemberResource;
 use App\Filament\Resources\Impacts\ImpactResource;
 use App\Filament\Resources\Pages\PageResource;
+use App\Filament\Resources\Surveys\SurveyResource;
+use App\Filament\Resources\SurveySubmissions\SurveySubmissionResource;
 use App\Filament\Resources\Users\UserResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use App\Filament\Pages\Auth\Login;
@@ -91,6 +93,7 @@ class AdminPanelProvider extends PanelProvider
                         NavigationGroup::make(__('admin.navigation.groups.registrations'))
                             ->items([
                                 ...(CourseRegistrationResource::canViewAny() ? CourseRegistrationResource::getNavigationItems() : []),
+                                ...(SurveySubmissionResource::canViewAny() ? SurveySubmissionResource::getNavigationItems() : []),
                             ]),
 
                         //     // ── إدارة الموقع ──────────────────────────────────────────
@@ -106,6 +109,7 @@ class AdminPanelProvider extends PanelProvider
                                 ...(PageResource::canViewAny() ? PageResource::getNavigationItems() : []),
                                 ...(FeatureResource::canViewAny() ? FeatureResource::getNavigationItems() : []),
                                 ...(FaqResource::canViewAny() ? FaqResource::getNavigationItems() : []),
+                                ...(SurveyResource::canViewAny() ? SurveyResource::getNavigationItems() : []),
                             ]),
 
                         //     // ── التواصل ───────────────────────────────────────────────

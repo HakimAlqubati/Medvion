@@ -304,5 +304,65 @@ return [
         'back_to_site'  => '← العودة إلى الموقع الرئيسي',
         'copyright'     => '© :year Medvion. جميع الحقوق محفوظة.',
     ],
+    'surveys' => [
+        'label' => 'استبيان',
+        'plural_label' => 'الاستبيانات',
+        'sections' => [
+            'content' => 'محتوى الاستبيان',
+            'content_description' => 'العنوان والوصف العام للاستبيان',
+            'questions' => 'الأسئلة',
+            'questions_description' => 'إدارة أسئلة الاستبيان وأنواعها',
+        ],
+        'fields' => [
+            'title' => 'العنوان',
+            'description' => 'الوصف',
+            'is_active' => 'نشط',
+            'created_by' => 'أنشئ بواسطة',
+        ],
+    ],
+    'survey_questions' => [
+        'label' => 'سؤال استبيان',
+        'plural_label' => 'أسئلة الاستبيانات',
+        'fields' => [
+            'question_text' => 'نص السؤال',
+            'type' => 'نوع السؤال',
+            'options' => 'الخيارات',
+            'is_required' => 'مطلوب',
+            'order' => 'الترتيب',
+        ],
+        'types' => [
+            'short_text' => 'نص قصير',
+            'long_text' => 'نص طويل',
+            'email' => 'بريد إلكتروني',
+            'phone' => 'رقم هاتف',
+            'radio' => 'خيار واحد (Radio)',
+            'checkboxes' => 'خيارات متعددة (Checkboxes)',
+            'select' => 'قائمة منسدلة',
+            'file' => 'رفع ملف',
+        ],
+    ],
+    'survey_submissions' => [
+        'label' => 'مشاركة في استبيان',
+        'plural_label' => 'المشاركات / التقديمات',
+        'sections' => [
+            'info' => 'معلومات المتقدم',
+            'answers' => 'الإجابات',
+            'evaluation' => 'التقييم',
+        ],
+        'fields' => [
+            'survey' => 'الاستبيان',
+            'applicant_email' => 'البريد الإلكتروني',
+            'user' => 'المستخدم',
+            'status' => 'الحالة',
+            'score' => 'التقييم الرقمي',
+            'created_at' => 'تاريخ التقديم',
+        ],
+        'status' => [
+            'pending' => 'قيد المراجعة',
+            'elite' => 'نخبة (Elite)',
+            'priority' => 'أولوية (Priority)',
+            'rejected' => 'مرفوض / غير جاهز',
+        ],
+    ],
 ];
 

@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('survey_questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('survey_id')->constrained('surveys')->cascadeOnDelete();
+            $table->string('key')->nullable(); // Unique key for logic identification (e.g., exp_years, has_content)
             $table->text('question_text');
             $table->string('type'); // text, textarea, select, multiselect, radio, file, email, phone
             $table->json('options')->nullable(); // For select, multiselect, radio options

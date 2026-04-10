@@ -304,5 +304,65 @@ return [
         'back_to_site'  => '← Back to Website',
         'copyright'     => '© :year Medvion. All rights reserved.',
     ],
+    'surveys' => [
+        'label' => 'Survey',
+        'plural_label' => 'Surveys',
+        'sections' => [
+            'content' => 'Survey Content',
+            'content_description' => 'Title and general description of the survey',
+            'questions' => 'Questions',
+            'questions_description' => 'Manage survey questions and their types',
+        ],
+        'fields' => [
+            'title' => 'Title',
+            'description' => 'Description',
+            'is_active' => 'Is Active',
+            'created_by' => 'Created By',
+        ],
+    ],
+    'survey_questions' => [
+        'label' => 'Survey Question',
+        'plural_label' => 'Survey Questions',
+        'fields' => [
+            'question_text' => 'Question Text',
+            'type' => 'Question Type',
+            'options' => 'Options',
+            'is_required' => 'Is Required',
+            'order' => 'Order',
+        ],
+        'types' => [
+            'short_text' => 'Short Text',
+            'long_text' => 'Long Text',
+            'email' => 'Email',
+            'phone' => 'Phone Number',
+            'radio' => 'Single Choice (Radio)',
+            'checkboxes' => 'Multiple Choice (Checkboxes)',
+            'select' => 'Dropdown Menu',
+            'file' => 'File Upload',
+        ],
+    ],
+    'survey_submissions' => [
+        'label' => 'Survey Submission',
+        'plural_label' => 'Submissions / Applications',
+        'sections' => [
+            'info' => 'Applicant Information',
+            'answers' => 'Answers',
+            'evaluation' => 'Evaluation',
+        ],
+        'fields' => [
+            'survey' => 'Survey',
+            'applicant_email' => 'Email Address',
+            'user' => 'User',
+            'status' => 'Status',
+            'score' => 'Numerical Score',
+            'created_at' => 'Submission Date',
+        ],
+        'status' => [
+            'pending' => 'Pending Review',
+            'elite' => 'Elite Candidate',
+            'priority' => 'Priority Candidate',
+            'rejected' => 'Rejected / Not Ready',
+        ],
+    ],
 ];
 
