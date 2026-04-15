@@ -106,6 +106,7 @@ return [
     'course_level_advanced'  => 'متقدم',
     'currency_sar'           => 'ر.س',
     'course_free'            => 'مجاناً',
+    'course_language'        => 'اللغة العربية',
     'course_brief'           => 'نبذة عن الدورة',
     'course_objectives'      => 'الأهداف',
     'course_target_audience' => 'الفئة المستهدفة',

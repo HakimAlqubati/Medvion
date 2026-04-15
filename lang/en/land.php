@@ -100,6 +100,7 @@ return [
     'course_level_advanced'  => 'Advanced',
     'currency_sar'           => 'SAR',
     'course_free'            => 'Free',
+    'course_language'        => 'Arabic',
     'course_brief'           => 'About Course',
     'course_objectives'      => 'Objectives',
     'course_target_audience' => 'Target Audience',
