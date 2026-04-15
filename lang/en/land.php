@@ -91,6 +91,7 @@ return [
     'courses_heading'        => 'Latest Training Courses',
     'courses_subheading'     => 'Explore a diverse range of specialised courses in healthcare and medical rehabilitation.',
     'courses_view_all'       => 'View All Courses',
+    'courses_no_results'     => 'No courses are currently available.',
     'course_enroll'          => 'Enrol Now',
     'course_hours'           => 'hrs',
     'course_students'        => 'students',
@@ -293,4 +294,18 @@ return [
     'expert_survey_accuracy_alert' => 'Correction required in',
     'expert_survey_requirement_alert' => 'Field completion required to synchronize.',
     'expert_survey_quit_confirm' => 'Are you sure you want to quit the assessment? Unsaved progress will be lost.',
+
+    // ---------------------------------------------------------------
+    // Courses — Guest Auth Wall
+    // ---------------------------------------------------------------
+    'courses_auth_badge'        => 'Members-Only Content',
+    'courses_auth_heading'      => 'Discover Our Specialised Training Courses',
+    'courses_auth_desc'         => 'Medvion hosts an outstanding collection of accredited medical and health training courses. Create your free account now for instant access to all courses and certificates.',
+    'courses_auth_feature_1'    => 'Internationally Accredited Courses',
+    'courses_auth_feature_2'    => 'Verified Certificates',
+    'courses_auth_feature_3'    => 'Flexible Access Anytime',
+    'courses_auth_cta_register' => 'Create Free Account',
+    'courses_auth_cta_login'    => 'Sign In',
+    'courses_auth_already'      => 'Already have an account?',
+    'courses_auth_redirect'     => 'You will be redirected automatically after registration to view courses.',
 ];

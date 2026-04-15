@@ -97,6 +97,7 @@ return [
     'courses_heading'        => 'أحدث الدورات التدريبية',
     'courses_subheading'     => 'استكشف مجموعة متنوعة من الدورات المتخصصة في مجالات الرعاية الصحية والتأهيل الطبي.',
     'courses_view_all'       => 'عرض جميع الدورات',
+    'courses_no_results'     => 'لا توجد دورات متاحة حالياً.',
     'course_enroll'          => 'سجّل الآن',
     'course_hours'           => 'ساعة',
     'course_students'        => 'متدرب',
@@ -295,4 +296,18 @@ return [
     'expert_survey_accuracy_alert' => 'مطلوب التصحيح في',
     'expert_survey_requirement_alert' => 'إكمال الحقل مطلوب للمزامنة.',
     'expert_survey_quit_confirm' => 'هل أنت متأكد من مغادرة التقييم؟ سيتم فقدان تقدمك غير المحفوظ.',
+
+    // ---------------------------------------------------------------
+    // Courses — Guest Auth Wall
+    // ---------------------------------------------------------------
+    'courses_auth_badge'        => 'محتوى حصري للأعضاء',
+    'courses_auth_heading'      => 'اكتشف دوراتنا التدريبية المتخصصة',
+    'courses_auth_desc'         => 'منصة Medvion تضم مجموعة متميزة من الدورات الطبية والصحية المعتمدة. سجّل حسابك المجاني الآن للوصول الفوري إلى جميع الدورات والشهادات.',
+    'courses_auth_feature_1'    => 'دورات معتمدة دولياً',
+    'courses_auth_feature_2'    => 'شهادات موثّقة',
+    'courses_auth_feature_3'    => 'وصول مرن في أي وقت',
+    'courses_auth_cta_register' => 'أنشئ حسابك مجاناً',
+    'courses_auth_cta_login'    => 'تسجيل الدخول',
+    'courses_auth_already'      => 'لديك حساب بالفعل؟',
+    'courses_auth_redirect'     => 'ستُنقل تلقائياً بعد التسجيل لمشاهدة الدورات.',
 ];

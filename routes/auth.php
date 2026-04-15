@@ -17,6 +17,11 @@ Route::middleware('guest')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
+    // AJAX step validation — called from multi-step form JS
+    Route::post('register/validate-step/{step}', [RegisteredUserController::class, 'validateStep'])
+        ->where('step', '[1-3]')
+        ->name('register.validate-step');
+
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
