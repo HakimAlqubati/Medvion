@@ -16,7 +16,12 @@ class CourseRegistrationRequest extends FormRequest
         return [
             'course_id'  => ['required', 'exists:courses,id'],
             'full_name'  => ['required', 'string', 'max:255'],
-            'email'      => ['required', 'email', 'max:255'],
+            'email'      => [
+                'required', 
+                'email', 
+                'max:255', 
+                new \App\Rules\UniqueUserCourseRegistration($this->course_id)
+            ],
             'phone'      => ['required', 'string', 'max:50'],
             'profession' => ['nullable', 'string', 'max:255'],
             'workplace'  => ['nullable', 'string', 'max:255'],

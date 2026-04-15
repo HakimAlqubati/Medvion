@@ -15,10 +15,13 @@ class UsersChart extends ChartWidget
     {
         return __('lang.users_chart.heading');
     }
-
+    public static function canView(): bool
+    {
+        return is_admin();
+    }
     protected function getData(): array
     {
-        $months = collect(range(1, 12))->map(fn ($month) => \Carbon\Carbon::create(null, $month, 1)->translatedFormat('F'))->toArray();
+        $months = collect(range(1, 12))->map(fn($month) => \Carbon\Carbon::create(null, $month, 1)->translatedFormat('F'))->toArray();
 
         return [
             'datasets' => [
@@ -46,6 +49,6 @@ class UsersChart extends ChartWidget
     protected function getType(): string
     {
         // تغيير نوع التشارت إلى خطي، متوفر أنواع أخرى مثل 'bar', 'pie', 'doughnut'
-        return 'line'; 
+        return 'line';
     }
 }

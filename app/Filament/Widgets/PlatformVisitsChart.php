@@ -13,7 +13,10 @@ class PlatformVisitsChart extends ChartWidget
     {
         return __('lang.platform_visits_chart.heading');
     }
-
+    public static function canView(): bool
+    {
+        return is_admin();
+    }
     protected function getData(): array
     {
         // جلب أسماء آخر 6 أشهر بشكل ديناميكي ومترجم

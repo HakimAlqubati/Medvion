@@ -12,7 +12,10 @@ class CourseCategoriesChart extends ChartWidget
     {
         return __('lang.course_categories_chart.heading');
     }
-
+    public static function canView(): bool
+    {
+        return is_admin();
+    }
     protected function getData(): array
     {
         return [

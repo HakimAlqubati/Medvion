@@ -54,9 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile',  [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/login', function () {
-    dd('sdf');
-    return ('/admin/login');
-})->name('login');
+// Frontend users authenticate via the admin panel
+Route::get('/login', fn () => redirect('/admin/login'))->name('login');
 
 require __DIR__ . '/auth.php';
