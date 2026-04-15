@@ -22,8 +22,8 @@ Route::middleware('guest')->group(function () {
         ->where('step', '[1-3]')
         ->name('register.validate-step');
 
-    // Route::get('login', [AuthenticatedSessionController::class, 'create'])
-    //     ->name('login');
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+        ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 

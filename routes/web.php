@@ -56,5 +56,6 @@ Route::middleware('auth')->group(function () {
 });
 // Frontend users authenticate via the admin panel
 Route::get('/login', fn () => redirect('/admin/login'))->name('login');
+Route::get('/admin/login', fn () => redirect('/admin/login'))->name('login');
 
 require __DIR__ . '/auth.php';

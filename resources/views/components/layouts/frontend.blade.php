@@ -120,6 +120,7 @@
             ['name' => __('land.nav_courses'), 'url' => url('/#courses'), 'active' => false, 'target' => 'courses'],
             ['name' => __('land.nav_faq'), 'url' => url('/#faq'), 'active' => false, 'target' => 'faq'],
             ['name' => __('land.nav_contact'), 'url' => route('contact'), 'active' => request()->routeIs('contact'), 'target' => null],
+            ['name' => __('land.nav_expert_board'), 'url' => route('expert-board'), 'active' => request()->routeIs('expert-board'), 'target' => null],
         ];
     @endphp
 

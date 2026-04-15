@@ -87,7 +87,7 @@
                                 {{ __('land.courses_auth_cta_register') }}
                             </a>
                             <span class="text-white/50 text-sm hidden sm:block">{{ __('land.courses_auth_already') }}</span>
-                            <a href="{{ route('login') }}"
+                            <a href="{{ url('login') }}"
                                class="inline-flex items-center gap-2 px-6 py-4 border border-white/25 text-white/85 font-semibold rounded-2xl hover:bg-white/10 hover:border-white/40 transition-all duration-300 text-sm">
                                 {{ __('land.courses_auth_cta_login') }}
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

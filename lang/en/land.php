@@ -241,6 +241,7 @@ return [
     // ---------------------------------------------------------------
     'nav_privacy'          => 'Privacy Policy',
     'nav_terms'            => 'Terms & Conditions',
+    'nav_expert_board'     => 'Expert Board',
     'privacy_title'        => 'Privacy Policy',
     'privacy_content'      => '<div class="space-y-6 text-relaxed leading-8"><p>At Medvion, we are committed to protecting our users\' privacy. This policy explains how we collect, use, and protect your personal data.</p><h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">1. Data Collection</h3><p>We collect data that you directly provide to us upon registration, such as name, email, and phone number.</p><h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">2. Data Usage</h3><p>Your data is used to improve user experience, provide technical support, and issue training certificates.</p><h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">3. Data Protection</h3><p>We follow the best security standards to ensure no unauthorized third party can access your personal data.</p></div>',
     'terms_title'          => 'Terms & Conditions',
