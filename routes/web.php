@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 Route::get('/about',   [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact',[ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/privacy-policy', function () {
     $page = \App\Services\Frontend\PageService::getPage('privacy');
@@ -33,14 +33,14 @@ Route::get('/terms-conditions', function () {
 })->name('terms');
 
 Route::get('/expert-board', [SurveyController::class, 'show'])->name('expert-board');
-Route::post('/expert-board',[SurveyController::class, 'store'])->name('expert-board.store');
+Route::post('/expert-board', [SurveyController::class, 'store'])->name('expert-board.store');
 
 // ─── Courses — Authentication required ────────────────────────────────────────
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/courses',         [CourseController::class, 'index'])->name('courses.index');
     Route::get('/courses/{slug}',  [CourseController::class, 'show'])->name('courses.show');
-    Route::post('/courses/register',[CourseRegistrationController::class, 'store'])->name('courses.register');
+    Route::post('/courses/register', [CourseRegistrationController::class, 'store'])->name('courses.register');
 });
 
 // ─── Dashboard & Profile ─────────────────────────────────────────────────────
@@ -54,5 +54,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile',  [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('/login', function () {
+    dd('sdf');
+    return ('/admin/login');
+})->name('login');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

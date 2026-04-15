@@ -22,8 +22,8 @@ Route::middleware('guest')->group(function () {
         ->where('step', '[1-3]')
         ->name('register.validate-step');
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
+    // Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    //     ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
@@ -61,4 +61,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+});
+
+
+Route::get('/login', function () {
+    return redirect('/admin/login');
 });
