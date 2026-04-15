@@ -620,7 +620,7 @@
             {{-- Already registered --}}
             <p class="text-center text-sm text-gray-400 mt-8">
                 {{ __('register.already_registered') }}
-                <a href="{{ route('login') }}" class="font-bold text-primary hover:text-primary-dark transition">
+                <a href="{{ url('admin/login') }}" class="font-bold text-primary hover:text-primary-dark transition">
                     {{ __('register.login_link') }}
                 </a>
             </p>
