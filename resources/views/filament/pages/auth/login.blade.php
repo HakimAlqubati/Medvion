@@ -9,9 +9,9 @@
         --mv-primary-dk:   #0F389E;
         --mv-secondary:    #0D9488;
         --mv-secondary-lt: #14B8A6;
-        --mv-bg:           #030a18;
-        --mv-surface:      #060e1f;
-        --mv-border:       rgba(255,255,255,0.07);
+        --mv-bg:           #0F389E; 
+        --mv-surface:      #113184; 
+        --mv-border:       rgba(255,255,255,0.12);
     }
 
     /* ── Reset Filament simple layout to full-viewport ── */
@@ -31,6 +31,7 @@
         display: flex;
         min-height: 100vh;
         font-family: 'Tajawal', sans-serif;
+        background: var(--mv-bg);
         direction: {{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }};
     }
 
@@ -41,7 +42,7 @@
         flex: 1;
         position: relative;
         overflow: hidden;
-        background: linear-gradient(145deg, #020810 0%, #071228 55%, #0b1c3a 100%);
+        background: linear-gradient(145deg, #0F389E 0%, #1A52CE 55%, #3068E8 100%);
         display: none;
         flex-direction: column;
         align-items: center;
@@ -52,7 +53,7 @@
     /* Animated dot grid */
     .mv-grid {
         position: absolute; inset: 0; pointer-events: none;
-        background-image: radial-gradient(rgba(26,82,206,0.14) 1px, transparent 1px);
+        background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
         background-size: 32px 32px;
         animation: gridDrift 28s linear infinite;
     }
@@ -65,13 +66,13 @@
     .mv-orb { position: absolute; border-radius: 50%; filter: blur(75px); pointer-events: none; }
     .mv-orb-a {
         width: 480px; height: 480px;
-        background: radial-gradient(circle, rgba(26,82,206,0.2), transparent 70%);
+        background: radial-gradient(circle, rgba(20,184,166,0.18), transparent 70%);
         top: -12%; {{ app()->getLocale() === 'ar' ? 'right' : 'left' }}: -8%;
         animation: orbFloat 12s ease-in-out infinite;
     }
     .mv-orb-b {
         width: 320px; height: 320px;
-        background: radial-gradient(circle, rgba(13,148,136,0.22), transparent 70%);
+        background: radial-gradient(circle, rgba(48,104,232,0.25), transparent 70%);
         bottom: -8%; {{ app()->getLocale() === 'ar' ? 'left' : 'right' }}: -6%;
         animation: orbFloat 16s ease-in-out infinite reverse;
     }
@@ -117,7 +118,7 @@
     .mv-brand-name span { color: #14B8A6; }
 
     .mv-tagline {
-        font-size: 0.9rem; color: rgba(255,255,255,0.42);
+        font-size: 0.9rem; color: rgba(255,255,255,0.8);
         line-height: 1.8; margin: 0 auto 2.8rem;
     }
 
@@ -146,8 +147,8 @@
     .mv-feat-icon-2 { background: rgba(13,148,136,0.18); }
     .mv-feat-icon-3 { background: rgba(99,102,241,0.18); }
     .mv-feat-body { flex: 1; }
-    .mv-feat-title { font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.88); }
-    .mv-feat-desc  { font-size: 0.75rem; color: rgba(255,255,255,0.38); margin-top: 1px; }
+    .mv-feat-title { font-size: 1rem; font-weight: 800; color: #fff; }
+    .mv-feat-desc  { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-top: 1px; }
 
     /* ECG line animation */
     .mv-ecg { margin-top: 2.8rem; opacity: 0.28; }
@@ -207,16 +208,16 @@
     .mv-mob-name span { color: var(--mv-secondary-lt); }
 
     /* Heading */
-    .mv-heading { font-size: 1.75rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
-    .mv-sub     { font-size: 0.88rem; color: rgba(255,255,255,0.38); margin-bottom: 2.5rem; line-height: 1.6; }
+    .mv-heading { font-size: 2.1rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+    .mv-sub     { font-size: 1rem; color: rgba(255,255,255,0.85); margin-bottom: 2.5rem; line-height: 1.6; }
 
     /* ── Filament field overrides ── */
     .fi-fo-field-wrp label,
     .fi-label {
-        color: rgba(255,255,255,0.75) !important;
+        color: #fff !important;
         font-family: 'Tajawal', sans-serif !important;
-        font-weight: 600 !important;
-        font-size: 0.85rem !important;
+        font-weight: 800 !important;
+        font-size: 1rem !important;
     }
     .fi-input-wrp { border-radius: 12px !important; }
     .fi-input {
@@ -226,15 +227,15 @@
         font-family: 'Tajawal', sans-serif !important;
         border-radius: 12px !important;
         transition: border-color 0.2s, box-shadow 0.2s, background 0.2s !important;
-        font-size: 0.93rem !important;
+        font-size: 1rem !important;
     }
     .fi-input:focus {
-        background: rgba(26,82,206,0.06) !important;
-        border-color: rgba(26,82,206,0.5) !important;
-        box-shadow: 0 0 0 3px rgba(26,82,206,0.12) !important;
+        background: rgba(26,82,206,0.1) !important;
+        border-color: rgba(255,255,255,0.6) !important;
+        box-shadow: 0 0 0 3px rgba(26,82,206,0.25) !important;
         outline: none !important;
     }
-    .fi-input::placeholder { color: rgba(255,255,255,0.18) !important; }
+    .fi-input::placeholder { color: rgba(255,255,255,0.5) !important; }
     .fi-input-wrp-btn { color: rgba(255,255,255,0.4) !important; }
     .fi-checkbox-input {
         border-radius: 6px !important;
@@ -242,6 +243,7 @@
         background: rgba(255,255,255,0.04) !important;
     }
     .fi-checkbox-input:checked { background-color: var(--mv-primary) !important; border-color: var(--mv-primary) !important; }
+    .fi-checkbox-label, .fi-checkbox-label span { color: #fff !important; font-weight: 800 !important; font-size: 0.95rem !important; }
 
     /* Submit button */
     .fi-btn-color-primary,
@@ -270,10 +272,10 @@
     .mv-badge {
         display: flex; align-items: center; gap: 10px;
         padding: 12px 16px;
-        background: rgba(13,148,136,0.07);
-        border: 1px solid rgba(13,148,136,0.16);
+        background: rgba(13,148,136,0.15);
+        border: 1px solid rgba(13,148,136,0.25);
         border-radius: 12px; margin-top: 1.5rem;
-        color: rgba(20,184,166,0.85); font-size: 0.78rem;
+        color: #fff; font-size: 0.78rem;
     }
     .mv-pulse {
         width: 8px; height: 8px; border-radius: 50%;
@@ -288,10 +290,10 @@
     /* Footer */
     .mv-footer {
         margin-top: 1.8rem; text-align: center;
-        font-size: 0.77rem; color: rgba(255,255,255,0.22);
+        font-size: 0.77rem; color: rgba(255,255,255,0.5);
         display: flex; flex-direction: column; gap: 6px;
     }
-    .mv-footer a { color: var(--mv-secondary-lt); text-decoration: none; transition: opacity 0.2s; }
+    .mv-footer a { color: #fff; text-decoration: underline; transition: opacity 0.2s; }
     .mv-footer a:hover { opacity: 0.7; }
 </style>
 
