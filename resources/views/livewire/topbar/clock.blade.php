@@ -1,21 +1,7 @@
 <div wire:poll.60000ms="refresh" class="flex justify-center items-center">
     <span title="Timezone: {{ config('app.timezone') }}"
-        style="
-            display:inline-block;
-            padding: 3px 14px;
-            border: 2px solid #0d7c66;
-            border-top-right-radius: 10px;
-            border-bottom-left-radius: 10px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            color: #d58102;
-            /* background: #fff; */
-            /* تأثير الضوء */
-              box-shadow: 0 0 4px rgba(113, 124, 13, 0.6),
-                        0 0 8px rgba(120, 124, 13, 0.4);
-            transition: box-shadow 0.3s ease-in-out;
-        ">
+        class="inline-block px-3.5 py-[3px] border-2 border-secondary-dark rounded-tr-[10px] rounded-bl-[10px] font-semibold text-[0.8rem] tracking-wider text-primary transition-all duration-300 ease-in-out hover:shadow-md"
+        style="box-shadow: 0 0 4px rgba(15, 118, 110, 0.6), 0 0 8px rgba(26, 82, 206, 0.4);">
         {{ $time }}
     </span>
 </div>
