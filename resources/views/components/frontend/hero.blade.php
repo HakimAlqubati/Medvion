@@ -109,7 +109,11 @@
 
                 {{-- Progress bar --}}
                 <div class="flex-1 max-w-[160px] h-0.5 bg-white/10 rounded-full overflow-hidden">
-                    <div id="hero-progress" class="h-full bg-gradient-to-r from-primary-light to-primary-dark rounded-full {{ app()->getLocale() === 'ar' ? 'h-r-progress' : '' }}" style="width:0%"></div>
+                    {{-- غيرنا width إلى 100% وسنستخدم scaleX للتحجيم --}}
+                    <div id="hero-progress" 
+                         class="h-full bg-gradient-to-r from-primary-light to-primary-dark rounded-full origin-left rtl:origin-right will-change-transform" 
+                         style="width: 100%; transform: scaleX(0);">
+                    </div>
                 </div>
 
                 {{-- Counter --}}
@@ -132,56 +136,61 @@
 
 @push('styles')
 <style>
-/* ── Slide overlays (Medical Theme: Navy/Blue base) ── */
+/* ── Slide overlays ── */
 .hero-overlay {
     background:
         linear-gradient(to {{ app()->getLocale() === 'ar' ? 'left' : 'right' }}, rgba(2,12,27,0.85) 0%, rgba(5,20,40,0.5) 55%, transparent 100%),
         linear-gradient(0deg,   rgba(2,12,27,0.7) 0%, rgba(5,20,40,0.2) 40%, transparent 100%);
 }
 
-/* ── Orbs (Trust/Medical Colors: Sky Blue & Deep Azure) ── */
-.orb { animation: orb-pulse 16s ease-in-out infinite alternate; }
-@keyframes orb-pulse {
-    from { transform: scale(1) translate(0,0); opacity: 0.6; }
-    to   { transform: scale(1.15) translate(20px,-15px); opacity: 1; }
+/* ── Ken Burns (تسريع كارت الشاشة للصور) ── */
+.hero-slide-img {
+    will-change: transform; /* إخبار المتصفح بأن العنصر سيتحرك */
+    backface-visibility: hidden; /* إزالة التقطيع */
+    transform: translateZ(0); /* فرض المعالجة على الـ GPU */
 }
 
-/* ── Ken Burns per slide ── */
+/* ── Orbs (حل مشكلة التقطيع بسبب الـ Blur) ── */
+.orb { 
+    animation: orb-pulse 16s ease-in-out infinite alternate; 
+    will-change: transform; 
+    transform: translate3d(0, 0, 0); /* يمنع إعادة رسم الـ blur مع الـ scroll */
+}
+@keyframes orb-pulse {
+    from { transform: scale(1) translate3d(0,0,0); opacity: 0.6; }
+    to   { transform: scale(1.15) translate3d(20px,-15px,0); opacity: 1; }
+}
+
 @keyframes kenburns-0 {
-    0%   { transform: scale(1.00) translate(0%,   0%); }
-    50%  { transform: scale(1.06) translate(-1%,  0.5%); }
-    100% { transform: scale(1.03) translate(1%, -0.5%); }
+    0%   { transform: scale(1.00) translate3d(0%, 0%, 0); }
+    50%  { transform: scale(1.06) translate3d(-1%, 0.5%, 0); }
+    100% { transform: scale(1.03) translate3d(1%, -0.5%, 0); }
 }
 @keyframes kenburns-1 {
-    0%   { transform: scale(1.04) translate(0.5%, 0%); }
-    50%  { transform: scale(1.00) translate(-0.5%, -1%); }
-    100% { transform: scale(1.06) translate(0%, 0.5%); }
+    0%   { transform: scale(1.04) translate3d(0.5%, 0%, 0); }
+    50%  { transform: scale(1.00) translate3d(-0.5%, -1%, 0); }
+    100% { transform: scale(1.06) translate3d(0%, 0.5%, 0); }
 }
 @keyframes kenburns-2 {
-    0%   { transform: scale(1.02) translate(-0.5%, 0.5%); }
-    50%  { transform: scale(1.06) translate(0.5%, -0.5%); }
-    100% { transform: scale(1.00) translate(0%, 0%); }
+    0%   { transform: scale(1.02) translate3d(-0.5%, 0.5%, 0); }
+    50%  { transform: scale(1.06) translate3d(0.5%, -0.5%, 0); }
+    100% { transform: scale(1.00) translate3d(0%, 0%, 0); }
 }
 
 /* ── Custom Utility Adjustments ── */
-
-/* RTL Progress Bar adjustment */
 html[dir="rtl"] .h-r-progress { float: right; }
 
-/* ── Text crossfade ── */
 .slide-text-fade { transition: opacity 0.5s ease, transform 0.5s ease; }
 .slide-text-fade.fading { opacity: 0; transform: translateY(8px); }
 
-/* ── Entry animations ── */
 .hero-enter { animation: hero-rise 0.75s cubic-bezier(.22,1,.36,1) both; }
 @keyframes hero-rise {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Scroll mouse ── */
 .scroll-mouse { width: 20px; height: 32px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 11px; display: flex; justify-content: center; padding-top: 5px; }
-.scroll-wheel  { width: 3px; height: 5px; background: rgba(255,255,255,0.6); border-radius: 3px; animation: scroll-anim 2s ease-in-out infinite; }
+.scroll-wheel  { width: 3px; height: 5px; background: rgba(255,255,255,0.6); border-radius: 3px; animation: scroll-anim 2s ease-in-out infinite; will-change: transform, opacity; }
 @keyframes scroll-anim {
     0%   { opacity:1; transform: translateY(0); }
     70%  { opacity:0; transform: translateY(8px); }
@@ -262,7 +271,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function resetProgress() {
         clearInterval(progTimer);
         progVal = 0;
-        if(progressEl) progressEl.style.width = '0%';
+        // تعديل: استخدام scaleX بدلاً من width
+        if(progressEl) progressEl.style.transform = 'scaleX(0)'; 
     }
 
     function startProgress() {
@@ -272,7 +282,10 @@ document.addEventListener('DOMContentLoaded', function () {
         progTimer = setInterval(function () {
             if (paused) return;
             progVal = Math.min(progVal + step, 100);
-            if(progressEl) progressEl.style.width = progVal + '%';
+            
+            // تعديل جوهري: التلاعب بـ transform بدلاً من width لمنع الـ Layout Thrashing
+            if(progressEl) progressEl.style.transform = 'scaleX(' + (progVal / 100) + ')';
+            
             if (progVal >= 100) {
                 clearInterval(progTimer);
                 goTo((current + 1) % TOTAL);
