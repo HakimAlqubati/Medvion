@@ -17,7 +17,7 @@
     <x-frontend.hero2 />
     @endif
 
-    <!-- <x-frontend.about :alt-bg="false" /> -->
+    <x-frontend.about :alt-bg="false" />
     {{-- <x-frontend.impacts :impacts="$impacts" /> --}}
 
     <x-frontend.features :alt-bg="true" />
