@@ -12,7 +12,7 @@
     @php $activeHero = 1; @endphp
 
     @if ($activeHero === 1)
-    <x-frontend.hero :slides="$slides" />
+    <!-- <x-frontend.hero :slides="$slides" /> -->
     @else
     <x-frontend.hero2 />
     @endif
