@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var root = document.getElementById('hero-root');
     if (root) {
-        root.addEventListener('mouseenter', function () { paused = true; clearInterval(progTimer); });
+        // root.addEventListener('mouseenter', function () { paused = true; clearInterval(progTimer); });
         root.addEventListener('mouseleave', function () { paused = false; startProgress(); });
     }
 
