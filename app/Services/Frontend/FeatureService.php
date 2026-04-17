@@ -14,9 +14,18 @@ class FeatureService
      */
     public static function getFeatures()
     {
-        return Feature::where('is_active', true)
-            ->orderBy('sort_order', 'asc')
-            ->get();
+        $rows = Cache::remember('frontend.features.active', now()->addHours(6), function () {
+            return Feature::where('is_active', true)
+                ->orderBy('sort_order', 'asc')
+                ->limit(3)
+                ->get()
+                ->map->getAttributes() // raw DB values, بدون تطبيق الـ casts للهروب من الـ serialization
+                ->values()
+                ->all();
+        });
+
+        // إعادة بناء الـ Eloquent Collection من الـ array المُخزَّن
+        return Feature::hydrate($rows);
     }
 
     /**

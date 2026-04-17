@@ -20,7 +20,7 @@
     <x-frontend.about :alt-bg="false" />
     {{-- <x-frontend.impacts :impacts="$impacts" /> --}}
 
-    <x-frontend.features :alt-bg="true" />
+    <x-frontend.features :alt-bg="true" :features="$features" />
     <x-frontend.latest-courses :alt-bg="false" />
-    <!-- <x-frontend.faq :alt-bg="true" /> -->
+    <x-frontend.faq :alt-bg="true" />
 </x-layouts.frontend>

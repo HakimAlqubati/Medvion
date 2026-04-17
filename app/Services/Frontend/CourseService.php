@@ -16,11 +16,36 @@ class CourseService
      */
     public function getLatestCourses(int $limit = 3): Collection
     {
-        return Course::with('category')
-            ->where('is_active', true)
-            ->latest()
-            ->take($limit)
-            ->get();
+        $rows = \Illuminate\Support\Facades\Cache::remember('frontend.courses.latest.' . $limit, now()->addHours(6), function () use ($limit) {
+            return Course::with('category')
+                ->where('is_active', true)
+                ->latest()
+                ->take($limit)
+                ->get()
+                ->map(function ($course) {
+                    // نأخذ الخصائص الأساسية كـ raw database strings
+                    return [
+                        'attributes' => $course->getAttributes(),
+                        'category_attributes' => $course->category ? $course->category->getAttributes() : null,
+                    ];
+                })
+                ->toArray();
+        });
+
+        // إعادة بناء موديلات الكورسات الرئيسية باستخدام الـ raw attributes
+        $courses = Course::hydrate(array_column($rows, 'attributes'));
+
+        // إعادة ربط الـ Relations (category) بدون N+1 queries
+        foreach ($courses as $index => $course) {
+            $catAttrs = $rows[$index]['category_attributes'];
+            if ($catAttrs) {
+                // نبني الموديل الخاص بالتصنيف ونربطه بالكورس
+                $category = \App\Models\Category::hydrate([$catAttrs])->first();
+                $course->setRelation('category', $category);
+            }
+        }
+
+        return $courses;
     }
 
     /**

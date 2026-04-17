@@ -32,7 +32,7 @@ $isGuest = ! auth()->check();
                 إذا كان المستخدم ضيفاً، نطبق تأثير التمويه (blur-md)، وتقليل الشفافية (opacity-40)، 
                 ونمنع التفاعل معها (pointer-events-none)
             --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500 {{ $isGuest ? 'blur-md opacity-40 select-none pointer-events-none scale-[0.98]' : 'reveal delay-100' }}">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 {{ $isGuest ? 'opacity-20 select-none pointer-events-none scale-[0.98]' : 'reveal delay-100' }}">
                 @forelse($courses as $course)
                 <x-frontend.course-card
                     :course="$course"
@@ -60,7 +60,7 @@ $isGuest = ! auth()->check();
 
                     <div class="relative z-10 flex flex-col items-center">
                         {{-- شارة الحظر --}}
-                        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/90 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
+                        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/90 text-xs font-bold uppercase tracking-widest mb-6">
                             <svg class="w-4 h-4 text-yellow-300 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
                             </svg>
@@ -78,7 +78,7 @@ $isGuest = ! auth()->check();
                         {{-- مميزات التسجيل --}}
                         <div class="flex flex-wrap justify-center gap-3 mb-8">
                             @foreach (['courses_auth_feature_1', 'courses_auth_feature_2', 'courses_auth_feature_3'] as $feature)
-                            <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-white text-sm font-medium backdrop-blur-sm">
+                            <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-white text-sm font-medium">
                                 <svg class="w-4 h-4 text-green-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
                                 </svg>
@@ -102,7 +102,7 @@ $isGuest = ! auth()->check();
 
                             <a href="{{ url('admin/login') }}"
                                 target="_blank"
-                                class="flex items-center justify-center gap-2 px-6 py-3.5 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 w-full sm:w-auto text-sm backdrop-blur-sm">
+                                class="flex items-center justify-center gap-2 px-6 py-3.5 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 w-full sm:w-auto text-sm">
                                 {{ __('land.courses_auth_cta_login') }}
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

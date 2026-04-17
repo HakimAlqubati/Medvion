@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $slides  = \App\Services\Frontend\HeroSlideService::getSlides();
     $impacts = app(\App\Services\Frontend\AboutService::class)->getImpacts();
-    return view('welcome', compact('slides', 'impacts'));
+    $features = \App\Services\Frontend\FeatureService::getFeatures();
+
+    return view('welcome', compact('slides', 'impacts', 'features'));
 })->name('home');
 
 Route::get('/about',   [AboutController::class, 'index'])->name('about');
@@ -55,6 +57,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 // Frontend users authenticate via the admin panel
-Route::get('/login', fn () => redirect('/admin/login'))->name('login'); 
+Route::get('/login', fn() => redirect('/admin/login'))->name('login');
 
 require __DIR__ . '/auth.php';

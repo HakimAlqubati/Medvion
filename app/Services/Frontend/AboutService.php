@@ -18,9 +18,15 @@ class AboutService
      */
     public function getHomeSummary(): ?About
     {
-        return About::where('is_active', true)
-            ->where('section_key', 'home_summary')
-            ->first();
+        $attributes = \Illuminate\Support\Facades\Cache::remember('frontend.about.home_summary', now()->addHours(6), function () {
+            $model = About::where('is_active', true)
+                ->where('section_key', 'home_summary')
+                ->first();
+
+            return $model ? $model->getAttributes() : null;
+        });
+
+        return $attributes ? About::hydrate([$attributes])->first() : null;
     }
 
     /**

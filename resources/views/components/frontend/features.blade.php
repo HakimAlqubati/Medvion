@@ -1,5 +1,7 @@
 @props(['altBg' => false])
-
+@props([
+    'features' => [] // Expected to be passed from the controller or parent view
+])
 {{-- Features Section --}}
 <section class="py-20 {{ $altBg ? 'bg-primary' : 'bg-white' }} relative overflow-hidden">
     
@@ -34,10 +36,7 @@
                 {{ __('land.features_subheading') }}
             </p>
         </div>
-
-        @php
-            $features = \App\Services\Frontend\FeatureService::getFeatures();
-        @endphp
+ 
 
         {{-- Cards Grid --}}
         @if($features->isNotEmpty())
