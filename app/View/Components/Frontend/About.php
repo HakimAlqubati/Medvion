@@ -3,40 +3,36 @@
 namespace App\View\Components\Frontend;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Cache;
 use App\Services\Frontend\AboutService;
 
 class About extends Component
 {
-    /**
-     * @var \App\Models\About|null
-     */
     public $summary;
-
-    /**
-     * @var bool
-     */
     public $altBg;
 
-    /**
-     * Create a new component instance.
-     *
-     * @param AboutService $aboutService
-     * @param bool $altBg
-     * @return void
-     */
-    public function __construct(AboutService $aboutService, $altBg = false)
+    public function __construct(AboutService $aboutService, $altBg = false, $summary = null)
     {
-        $this->summary = $aboutService->getHomeSummary();
+        // Data injected or fetched from service cleanly
+        $this->summary = $summary ?? $aboutService->getHomeSummary();
         $this->altBg = $altBg;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|\Closure|string
-     */
     public function render()
     {
-        return view('components.frontend.about');
+        // Html Fragment Caching Architecture
+        $locale = app()->getLocale();
+        $altBgState = $this->altBg ? 'alt_bg' : 'normal_bg';
+        $version = 'v1.0'; 
+        
+        $cacheKey = "components.about.{$locale}.{$altBgState}.{$version}";
+
+        return Cache::remember($cacheKey, now()->addHours(6), function () {
+            // No need to pass variables down explicitly if we use simple array, but it's cleaner
+            return view('components.frontend.about', [
+                'summary' => $this->summary,
+                'altBg'   => $this->altBg,
+            ])->render();
+        });
     }
 }
