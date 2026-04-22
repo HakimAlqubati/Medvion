@@ -143,7 +143,6 @@ $colors = [
     </div>
 </section>
 
-@push('styles')
 <style>
     /* 
        Hardware Accelerated Infinite Marquee 
@@ -184,7 +183,7 @@ $colors = [
         transform: scale(1.06);
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         z-index: 10;
-        border-color: #e5e7eb; /* Keep a clean border or use var(--primary) */
+        border-color: #e5e7eb;
     }
 
     /* Standard LTR */
@@ -210,4 +209,3 @@ $colors = [
         }
     }
 </style>
-@endpush
