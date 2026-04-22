@@ -15,66 +15,66 @@ class PartnerForm
     {
         return $schema
             ->components([
-                Section::make('Category Information')
+                Section::make(__('admin.partners.sections.category_info'))
                     ->schema([
                         Grid::make(2)->schema([
                             TextInput::make('name_ar')
-                                ->label('Name (Arabic)')
+                                ->label(__('admin.partners.fields.name_ar'))
                                 ->required()
                                 ->maxLength(255),
                                 
                             TextInput::make('name_en')
-                                ->label('Name (English)')
+                                ->label(__('admin.partners.fields.name_en'))
                                 ->required()
                                 ->maxLength(255),
                                 
                             TextInput::make('stat_value')
-                                ->label('Statistic Value')
+                                ->label(__('admin.partners.fields.stat_value'))
                                 ->placeholder('e.g., +40')
                                 ->maxLength(255),
                                 
                             TextInput::make('icon')
-                                ->label('Icon Identifier')
+                                ->label(__('admin.partners.fields.icon'))
                                 ->placeholder('e.g., gov, cert, hosp')
                                 ->maxLength(255),
                         ]),
                         
                         Toggle::make('is_active')
-                            ->label('Active')
+                            ->label(__('admin.partners.fields.is_active'))
                             ->default(true)
                             ->inline(false),
                     ]),
 
-                Section::make('Partners (Children)')
+                Section::make(__('admin.partners.sections.children'))
                     ->schema([
                         Repeater::make('partners')
                             ->relationship('partners')
                             ->schema([
                                 Grid::make(2)->schema([
                                     TextInput::make('name_ar')
-                                        ->label('Partner Name (Arabic)')
+                                        ->label(__('admin.partners.fields.name_ar'))
                                         ->required()
                                         ->maxLength(255),
                                         
                                     TextInput::make('name_en')
-                                        ->label('Partner Name (English)')
+                                        ->label(__('admin.partners.fields.name_en'))
                                         ->required()
                                         ->maxLength(255),
                                         
                                     TextInput::make('icon')
-                                        ->label('Icon Identifier')
+                                        ->label(__('admin.partners.fields.icon'))
                                         ->placeholder('e.g., gov, cert')
                                         ->maxLength(255),
                                         
                                     Toggle::make('is_active')
-                                        ->label('Active')
+                                        ->label(__('admin.partners.fields.is_active'))
                                         ->default(true)
                                         ->inline(false),
                                 ]),
                             ])
                             ->collapsible()
                             ->itemLabel(fn (array $state): ?string => $state['name_ar'] ?? null)
-                            ->addActionLabel('Add Partner')
+                            ->addActionLabel(__('admin.partners.sections.children'))
                             ->columns(1),
                     ])
             ]);

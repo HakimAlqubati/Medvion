@@ -366,5 +366,21 @@ return [
             'rejected' => 'Rejected / Not Ready',
         ],
     ],
+    'partners' => [
+        'label' => 'Partner Category',
+        'plural_label' => 'Partners',
+        'sections' => [
+            'category_info' => 'Category Information',
+            'children' => 'Partners (Children)',
+        ],
+        'fields' => [
+            'name_ar' => 'Name (Arabic)',
+            'name_en' => 'Name (English)',
+            'stat_value' => 'Statistic Value',
+            'icon' => 'Icon Identifier',
+            'is_active' => 'Active',
+            'partners_count' => 'Partners Count',
+        ],
+    ],
 ];
 

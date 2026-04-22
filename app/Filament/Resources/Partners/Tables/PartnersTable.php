@@ -21,26 +21,26 @@ class PartnersTable
         return $table
             ->columns([
                 TextColumn::make('name_ar')
-                    ->label('Category (AR)')
+                    ->label(__('admin.partners.fields.name_ar'))
                     ->searchable()
                     ->sortable(),
                     
                 TextColumn::make('name_en')
-                    ->label('Category (EN)')
+                    ->label(__('admin.partners.fields.name_en'))
                     ->searchable()
                     ->sortable(),
                     
                 TextColumn::make('partners_count')
                     ->counts('partners')
-                    ->label('Partners Count')
+                    ->label(__('admin.partners.fields.partners_count'))
                     ->badge(),
                     
                 TextColumn::make('stat_value')
-                    ->label('Statistic Value')
+                    ->label(__('admin.partners.fields.stat_value'))
                     ->searchable(),
                     
                 IconColumn::make('is_active')
-                    ->label('Active')
+                    ->label(__('admin.partners.fields.is_active'))
                     ->boolean(),
             ])
             ->filters([

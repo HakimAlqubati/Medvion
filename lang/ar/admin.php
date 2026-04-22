@@ -360,11 +360,26 @@ return [
             'created_at' => 'تاريخ التقديم',
         ],
         'status' => [
-            'pending' => 'قيد المراجعة',
-            'elite' => 'نخبة (Elite)',
-            'priority' => 'أولوية (Priority)',
+            'pending' => 'في انتظار المراجعة',
+            'elite' => 'مرشح نخبوي',
+            'priority' => 'مرشح ذو أولوية',
             'rejected' => 'مرفوض / غير جاهز',
         ],
     ],
+    'partners' => [
+        'label' => 'فئة الشركاء',
+        'plural_label' => 'الشركاء',
+        'sections' => [
+            'category_info' => 'معلومات الفئة',
+            'children' => 'الشركاء (الأبناء)',
+        ],
+        'fields' => [
+            'name_ar' => 'الاسم (عربي)',
+            'name_en' => 'الاسم (إنجليزي)',
+            'stat_value' => 'القيمة الإحصائية',
+            'icon' => 'رمز الأيقونة',
+            'is_active' => 'مفعل',
+            'partners_count' => 'عدد الشركاء',
+        ],
+    ],
 ];
-

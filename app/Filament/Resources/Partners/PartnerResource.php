@@ -20,9 +20,19 @@ class PartnerResource extends Resource
 {
     protected static ?string $model = PartnerCategory::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
 
     protected static ?string $recordTitleAttribute = 'name_ar';
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.partners.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.partners.plural_label');
+    }
 
     public static function form(Schema $schema): Schema
     {
