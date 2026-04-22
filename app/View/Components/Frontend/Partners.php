@@ -14,7 +14,10 @@ class Partners extends Component
 
     public function __construct()
     {
-        $data = Cache::remember('frontend.partners.data.v1', now()->addHours(24), function () {
+        $locale   = app()->getLocale();
+        $dataKey  = "frontend.partners.data.{$locale}.v1";
+
+        $data = Cache::remember($dataKey, now()->addHours(24), function () {
             return [
                 'stats'    => PartnerCategory::whereNotNull('stat_value')->where('is_active', true)->get(),
                 'partners' => Partner::with('category')->where('is_active', true)->get(),
