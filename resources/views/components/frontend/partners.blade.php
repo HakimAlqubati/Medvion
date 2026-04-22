@@ -1,19 +1,4 @@
-@props(['altBg' => false])
-
 @php
-$partners = [
-    ['name' => 'وزارة الصحة', 'name_en' => 'Ministry of Health',       'type' => __('land.partners_type_gov'),    'icon' => 'gov'],
-    ['name' => 'هيئة التخصصات', 'name_en' => 'Saudi Commission',       'type' => __('land.partners_type_accred'), 'icon' => 'cert'],
-    ['name' => 'مستشفى الملك فهد', 'name_en' => 'King Fahad Hospital', 'type' => __('land.partners_type_hosp'),   'icon' => 'hosp'],
-    ['name' => 'جامعة الملك سعود', 'name_en' => 'King Saud University', 'type' => __('land.partners_type_edu'),   'icon' => 'edu'],
-    ['name' => 'المجلس الصحي', 'name_en' => 'Health Council',          'type' => __('land.partners_type_gov'),    'icon' => 'gov'],
-    ['name' => 'كلية الطب', 'name_en' => 'College of Medicine',        'type' => __('land.partners_type_edu'),    'icon' => 'edu'],
-    ['name' => 'مركز الابتكار', 'name_en' => 'Innovation Center',      'type' => __('land.partners_type_tech'),   'icon' => 'tech'],
-    ['name' => 'رابطة الممارسين', 'name_en' => 'Practitioners Union',  'type' => __('land.partners_type_assoc'),  'icon' => 'assoc'],
-];
-$locale = app()->getLocale();
-$isAr   = $locale === 'ar';
-
 $icons = [
     'gov'   => '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/>',
     'cert'  => '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/>',
@@ -73,17 +58,12 @@ $colors = [
 
         {{-- ── Stats Strip ── --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 reveal delay-100">
-            @foreach([
-                ['val' => '+40',  'label' => __('land.partners_stat_partners')],
-                ['val' => '+12',  'label' => __('land.partners_stat_accred')],
-                ['val' => '+8',   'label' => __('land.partners_stat_hospitals')],
-                ['val' => '+5',   'label' => __('land.partners_stat_universities')],
-            ] as $stat)
+            @foreach($partnerStats as $stat)
             <div class="group relative text-center p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/3 group-hover:to-secondary/3 transition-all duration-500"></div>
                 <div class="relative z-10">
-                    <div class="text-3xl sm:text-4xl font-black text-primary mb-1 tabular-nums">{{ $stat['val'] }}</div>
-                    <div class="text-xs sm:text-sm text-gray-500 font-semibold">{{ $stat['label'] }}</div>
+                    <div class="text-3xl sm:text-4xl font-black text-primary mb-1 tabular-nums">{{ $stat->stat_value }}</div>
+                    <div class="text-xs sm:text-sm text-gray-500 font-semibold">{{ $stat->name }}</div>
                 </div>
             </div>
             @endforeach
@@ -102,17 +82,20 @@ $colors = [
                 <div class="flex w-max group">
                     <div class="flex shrink-0 animate-marquee-1">
                         @foreach($partners as $p)
-                        @php $c = $colors[$p['icon']]; @endphp
+                        @php 
+                            $iconKey = $p->icon ?? $p->category->icon ?? 'gov';
+                            $c = $colors[$iconKey]; 
+                        @endphp
                         <div class="pe-6">
                             <div class="partner-card relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 w-[250px] shrink-0 cursor-default select-none">
                                 <div class="w-12 h-12 rounded-xl {{ $c['bg'] }} border {{ $c['border'] }} flex items-center justify-center shrink-0">
                                     <svg class="w-6 h-6 {{ $c['icon'] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        {!! $icons[$p['icon']] !!}
+                                        {!! $icons[$iconKey] !!}
                                     </svg>
                                 </div>
                                 <div class="min-w-0">
-                                    <p class="font-bold text-gray-800 text-[15px] truncate">{{ $isAr ? $p['name'] : $p['name_en'] }}</p>
-                                    <p class="text-[12px] text-gray-400 mt-0.5 font-medium">{{ $p['type'] }}</p>
+                                    <p class="font-bold text-gray-800 text-[15px] truncate">{{ $p->name }}</p>
+                                    <p class="text-[12px] text-gray-400 mt-0.5 font-medium">{{ $p->category->name }}</p>
                                 </div>
                             </div>
                         </div>
@@ -120,17 +103,20 @@ $colors = [
                     </div>
                     <div class="flex shrink-0 animate-marquee-1" aria-hidden="true">
                         @foreach($partners as $p)
-                        @php $c = $colors[$p['icon']]; @endphp
+                        @php 
+                            $iconKey = $p->icon ?? $p->category->icon ?? 'gov';
+                            $c = $colors[$iconKey]; 
+                        @endphp
                         <div class="pe-6">
                             <div class="partner-card relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 w-[250px] shrink-0 cursor-default select-none">
                                 <div class="w-12 h-12 rounded-xl {{ $c['bg'] }} border {{ $c['border'] }} flex items-center justify-center shrink-0">
                                     <svg class="w-6 h-6 {{ $c['icon'] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        {!! $icons[$p['icon']] !!}
+                                        {!! $icons[$iconKey] !!}
                                     </svg>
                                 </div>
                                 <div class="min-w-0">
-                                    <p class="font-bold text-gray-800 text-[15px] truncate">{{ $isAr ? $p['name'] : $p['name_en'] }}</p>
-                                    <p class="text-[12px] text-gray-400 mt-0.5 font-medium">{{ $p['type'] }}</p>
+                                    <p class="font-bold text-gray-800 text-[15px] truncate">{{ $p->name }}</p>
+                                    <p class="text-[12px] text-gray-400 mt-0.5 font-medium">{{ $p->category->name }}</p>
                                 </div>
                             </div>
                         </div>
