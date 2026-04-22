@@ -100,7 +100,7 @@ $colors = [
                 
                 {{-- Track 1 --}}
                 <div class="flex w-max group">
-                    <div class="flex shrink-0 animate-marquee-1 group-hover:paused">
+                    <div class="flex shrink-0 animate-marquee-1">
                         @foreach($partners as $p)
                         @php $c = $colors[$p['icon']]; @endphp
                         <div class="pe-6">
@@ -118,7 +118,7 @@ $colors = [
                         </div>
                         @endforeach
                     </div>
-                    <div class="flex shrink-0 animate-marquee-1 group-hover:paused" aria-hidden="true">
+                    <div class="flex shrink-0 animate-marquee-1" aria-hidden="true">
                         @foreach($partners as $p)
                         @php $c = $colors[$p['icon']]; @endphp
                         <div class="pe-6">
@@ -171,7 +171,8 @@ $colors = [
         animation: marquee-scroll 35s linear infinite;
     }
 
-    .group-hover\:paused:hover {
+    /* Pause both tracks together when the parent group is hovered */
+    .group:hover .animate-marquee-1 {
         animation-play-state: paused;
     }
 
