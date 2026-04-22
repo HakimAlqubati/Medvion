@@ -15,6 +15,7 @@ use App\Filament\Resources\TargetAudiences\TargetAudienceResource;
 use App\Filament\Resources\TeamMembers\TeamMemberResource;
 use App\Filament\Resources\Impacts\ImpactResource;
 use App\Filament\Resources\Pages\PageResource;
+use App\Filament\Resources\Partners\PartnerResource;
 use App\Filament\Resources\Surveys\SurveyResource;
 use App\Filament\Resources\SurveySubmissions\SurveySubmissionResource;
 use App\Filament\Resources\Users\UserResource;
@@ -108,6 +109,7 @@ class AdminPanelProvider extends PanelProvider
                                 ...(PageResource::canViewAny() ? PageResource::getNavigationItems() : []),
                                 ...(FeatureResource::canViewAny() ? FeatureResource::getNavigationItems() : []),
                                 ...(FaqResource::canViewAny() ? FaqResource::getNavigationItems() : []),
+                                ...(PartnerResource::canViewAny() ? PartnerResource::getNavigationItems() : []),
                             ]),
 
                         //     // ── التواصل ───────────────────────────────────────────────
