@@ -32,9 +32,7 @@ $colors = [
     'assoc' => ['bg' => 'bg-amber-50',   'icon' => 'text-amber-600',  'border' => 'border-amber-100'],
 ];
 
-// Split into two rows for dual marquee
-$row1 = array_slice($partners, 0, 4);
-$row2 = array_slice($partners, 4, 4);
+
 @endphp
 
 <section class="py-24 bg-white relative overflow-hidden" id="partners" aria-label="{{ __('land.partners_section_label') }}">
@@ -140,46 +138,6 @@ $row2 = array_slice($partners, 4, 4);
                     </div>
                 </div>
 
-                {{-- Track 2 (Reverse) --}}
-                <div class="flex w-max group" dir="{{ $isAr ? 'ltr' : 'rtl' }}">
-                    {{-- By switching the direction of the container, we automatically reverse the flow without needing complex CSS --}}
-                    <div class="flex shrink-0 animate-marquee-1 group-hover:paused" dir="{{ $isAr ? 'rtl' : 'ltr' }}">
-                        @foreach(array_reverse($partners) as $p)
-                        @php $c = $colors[$p['icon']]; @endphp
-                        <div class="ps-6"> {{-- ps-6 because container is reversed --}}
-                            <div class="flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 w-[250px] shrink-0 cursor-default select-none">
-                                <div class="w-12 h-12 rounded-xl {{ $c['bg'] }} border {{ $c['border'] }} flex items-center justify-center shrink-0">
-                                    <svg class="w-6 h-6 {{ $c['icon'] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        {!! $icons[$p['icon']] !!}
-                                    </svg>
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="font-bold text-gray-800 text-[15px] truncate">{{ $isAr ? $p['name'] : $p['name_en'] }}</p>
-                                    <p class="text-[12px] text-gray-400 mt-0.5 font-medium">{{ $p['type'] }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                    <div class="flex shrink-0 animate-marquee-1 group-hover:paused" aria-hidden="true" dir="{{ $isAr ? 'rtl' : 'ltr' }}">
-                        @foreach(array_reverse($partners) as $p)
-                        @php $c = $colors[$p['icon']]; @endphp
-                        <div class="ps-6">
-                            <div class="flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 w-[250px] shrink-0 cursor-default select-none">
-                                <div class="w-12 h-12 rounded-xl {{ $c['bg'] }} border {{ $c['border'] }} flex items-center justify-center shrink-0">
-                                    <svg class="w-6 h-6 {{ $c['icon'] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        {!! $icons[$p['icon']] !!}
-                                    </svg>
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="font-bold text-gray-800 text-[15px] truncate">{{ $isAr ? $p['name'] : $p['name_en'] }}</p>
-                                    <p class="text-[12px] text-gray-400 mt-0.5 font-medium">{{ $p['type'] }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
 
             </div>
         </div>
