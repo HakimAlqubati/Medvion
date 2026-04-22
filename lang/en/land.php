@@ -328,4 +328,25 @@ return [
     'courses_auth_cta_login'    => 'Sign In',
     'courses_auth_already'      => 'Already have an account?',
     'courses_auth_redirect'     => 'You will be redirected automatically after registration to view courses.',
+
+    // ---------------------------------------------------------------
+    // Partners Section
+    // ---------------------------------------------------------------
+    'partners_badge'           => 'Trusted Partners',
+    'partners_title_1'         => 'Partners of ',
+    'partners_title_highlight' => 'Success',
+    'partners_subtitle'        => 'We are proud to partner with leading health organizations, universities, and accreditation bodies to deliver the highest quality training.',
+    'partners_section_label'   => 'Partners of Success',
+    'partners_type_gov'        => 'Government Body',
+    'partners_type_accred'     => 'Accreditation',
+    'partners_type_hosp'       => 'Hospital',
+    'partners_type_edu'        => 'University',
+    'partners_type_tech'       => 'Technology',
+    'partners_type_assoc'      => 'Association',
+    'partners_stat_partners'   => 'Strategic Partners',
+    'partners_stat_accred'     => 'Accreditation Bodies',
+    'partners_stat_hospitals'  => 'Hospitals',
+    'partners_stat_universities'=> 'Universities',
+    'partners_cta_text'        => 'Interested in joining as a partner?',
+    'partners_cta_btn'         => 'Partner With Us',
 ];

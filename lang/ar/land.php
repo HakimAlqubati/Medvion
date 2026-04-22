@@ -329,4 +329,25 @@ return [
     'courses_auth_cta_login'    => 'تسجيل الدخول',
     'courses_auth_already'      => 'لديك حساب بالفعل؟',
     'courses_auth_redirect'     => 'ستُنقل تلقائياً بعد التسجيل لمشاهدة الدورات.',
+
+    // ---------------------------------------------------------------
+    // Partners Section
+    // ---------------------------------------------------------------
+    'partners_badge'           => 'شركاؤنا الموثوقون',
+    'partners_title_1'         => 'شركاء ',
+    'partners_title_highlight' => 'النجاح',
+    'partners_subtitle'        => 'نفخر بشراكتنا مع كبرى المؤسسات الصحية والجامعات وهيئات الاعتماد لضمان أعلى معايير الجودة في التدريب.',
+    'partners_section_label'   => 'شركاء النجاح',
+    'partners_type_gov'        => 'جهة حكومية',
+    'partners_type_accred'     => 'هيئة اعتماد',
+    'partners_type_hosp'       => 'مستشفى',
+    'partners_type_edu'        => 'جامعة',
+    'partners_type_tech'       => 'تقنية',
+    'partners_type_assoc'      => 'رابطة',
+    'partners_stat_partners'   => 'شريك استراتيجي',
+    'partners_stat_accred'     => 'هيئة اعتماد',
+    'partners_stat_hospitals'  => 'مستشفى',
+    'partners_stat_universities'=> 'جامعة',
+    'partners_cta_text'        => 'مهتم بالانضمام كشريك؟',
+    'partners_cta_btn'         => 'كن شريكاً معنا',
 ];
