@@ -35,6 +35,12 @@ return [
     'nav_login_register'     => 'تسجيل / دخول',
     'nav_dashboard'          => 'لوحة التحكم',
 
+    // Language Switcher
+    'lang_switch_label'      => 'تغيير اللغة',
+    'lang_panel_label'       => 'اختيار اللغة',
+    'lang_select_language'   => 'اللغة',
+    'lang_current'           => 'الحالية',
+
     // Footer
     'footer_copy'            => '© :year منصة Medvion للتدريب والتأهيل الصحي. جميع الحقوق محفوظة.',
     'footer_tagline'         => 'نحو منظومة صحية رقمية متميزة.',

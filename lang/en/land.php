@@ -29,6 +29,12 @@ return [
     'nav_login_register'     => 'Login / Register',
     'nav_dashboard'          => 'Dashboard',
 
+    // Language Switcher
+    'lang_switch_label'      => 'Switch language',
+    'lang_panel_label'       => 'Language selection',
+    'lang_select_language'   => 'Language',
+    'lang_current'           => 'Current',
+
     // Footer
     'footer_copy'            => '© :year Medvion Health Training & Rehabilitation Platform. All rights reserved.',
     'footer_tagline'         => 'Towards a distinguished digital healthcare ecosystem.',

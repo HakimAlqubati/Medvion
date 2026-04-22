@@ -8,7 +8,20 @@ use App\Http\Controllers\Frontend\CourseRegistrationController;
 use App\Http\Controllers\Frontend\SurveyController;
 use Illuminate\Support\Facades\Route;
 
+// ─── Locale Switch ────────────────────────────────────────────────────────────
+
+Route::post('/locale/{locale}', function (string $locale) {
+    $supported = ['ar', 'en'];
+    if (in_array($locale, $supported, true)) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back()->withHeaders([
+        'Vary' => 'Accept-Language',
+    ]);
+})->name('locale.switch')->whereIn('locale', ['ar', 'en']);
+
 // ─── Public routes ────────────────────────────────────────────────────────────
+
 
 Route::get('/', function () {
     $slides  = \App\Services\Frontend\HeroSlideService::getSlides();
