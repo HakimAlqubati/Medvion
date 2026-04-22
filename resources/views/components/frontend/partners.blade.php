@@ -104,7 +104,7 @@ $colors = [
                         @foreach($partners as $p)
                         @php $c = $colors[$p['icon']]; @endphp
                         <div class="pe-6">
-                            <div class="flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 w-[250px] shrink-0 cursor-default select-none">
+                            <div class="partner-card relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 w-[250px] shrink-0 cursor-default select-none">
                                 <div class="w-12 h-12 rounded-xl {{ $c['bg'] }} border {{ $c['border'] }} flex items-center justify-center shrink-0">
                                     <svg class="w-6 h-6 {{ $c['icon'] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                         {!! $icons[$p['icon']] !!}
@@ -122,7 +122,7 @@ $colors = [
                         @foreach($partners as $p)
                         @php $c = $colors[$p['icon']]; @endphp
                         <div class="pe-6">
-                            <div class="flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 w-[250px] shrink-0 cursor-default select-none">
+                            <div class="partner-card relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 w-[250px] shrink-0 cursor-default select-none">
                                 <div class="w-12 h-12 rounded-xl {{ $c['bg'] }} border {{ $c['border'] }} flex items-center justify-center shrink-0">
                                     <svg class="w-6 h-6 {{ $c['icon'] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                         {!! $icons[$p['icon']] !!}
@@ -174,6 +174,31 @@ $colors = [
     /* Pause both tracks together when the parent group is hovered */
     .group:hover .animate-marquee-1 {
         animation-play-state: paused;
+    }
+
+    /* 
+       Focus Effect (Spotlight):
+       When the user hovers over the track (.group), dim all cards.
+       Then, restore the opacity and scale up ONLY the card being hovered.
+    */
+    .partner-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform, filter, opacity;
+    }
+
+    .group:hover .partner-card {
+        filter: grayscale(100%);
+        opacity: 0.35;
+        transform: scale(0.96);
+    }
+
+    .group .partner-card:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.06);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        border-color: #e5e7eb; /* Keep a clean border or use var(--primary) */
     }
 
     /* Standard LTR */
