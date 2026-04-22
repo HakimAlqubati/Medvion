@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Partners\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Repeater;
 use Filament\Schemas\Components\Grid;
@@ -33,10 +34,18 @@ class PartnerForm
                                 ->placeholder('e.g., +40')
                                 ->maxLength(255),
                                 
-                            TextInput::make('icon')
+                            Select::make('icon')
                                 ->label(__('admin.partners.fields.icon'))
-                                ->placeholder('e.g., gov, cert, hosp')
-                                ->maxLength(255),
+                                ->options([
+                                    'gov' => 'جهة حكومية (Government)',
+                                    'cert' => 'هيئة اعتماد (Accreditation)',
+                                    'hosp' => 'مستشفى (Hospital)',
+                                    'edu' => 'جامعة أو تعليم (Education)',
+                                    'tech' => 'تقنية (Technology)',
+                                    'assoc' => 'رابطة أو جمعية (Association)',
+                                ])
+                                ->searchable()
+                                ->nullable(),
                         ]),
                         
                         Toggle::make('is_active')
@@ -61,10 +70,18 @@ class PartnerForm
                                         ->required()
                                         ->maxLength(255),
                                         
-                                    TextInput::make('icon')
+                                    Select::make('icon')
                                         ->label(__('admin.partners.fields.icon'))
-                                        ->placeholder('e.g., gov, cert')
-                                        ->maxLength(255),
+                                        ->options([
+                                            'gov' => 'جهة حكومية (Government)',
+                                            'cert' => 'هيئة اعتماد (Accreditation)',
+                                            'hosp' => 'مستشفى (Hospital)',
+                                            'edu' => 'جامعة أو تعليم (Education)',
+                                            'tech' => 'تقنية (Technology)',
+                                            'assoc' => 'رابطة أو جمعية (Association)',
+                                        ])
+                                        ->searchable()
+                                        ->nullable(),
                                         
                                     Toggle::make('is_active')
                                         ->label(__('admin.partners.fields.is_active'))
