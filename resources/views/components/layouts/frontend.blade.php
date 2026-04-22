@@ -19,7 +19,9 @@
         }
 
         /* --- Cinematic Scroll Reveal --- */
-        .reveal-wrap { perspective: 1200px; }
+        .reveal-wrap {
+            perspective: 1200px;
+        }
 
         .reveal {
             opacity: 0;
@@ -27,11 +29,12 @@
             filter: blur(10px);
             transform-origin: center bottom;
             transition:
-                opacity  1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
-                filter   0.9s cubic-bezier(0.16, 1, 0.3, 1);
+                filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity, filter;
         }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0) scale(1) rotateX(0deg);
@@ -39,9 +42,17 @@
         }
 
         /* Stagger delays — more spread for dramatic cascade */
-        .delay-100 { transition-delay: 150ms; }
-        .delay-200 { transition-delay: 300ms; }
-        .delay-300 { transition-delay: 450ms; }
+        .delay-100 {
+            transition-delay: 150ms;
+        }
+
+        .delay-200 {
+            transition-delay: 300ms;
+        }
+
+        .delay-300 {
+            transition-delay: 450ms;
+        }
 
         /* --- Footer Nav Links Animation --- */
         .footer-link {
@@ -49,11 +60,12 @@
             transform: translateY(150px) scale(0.75);
             filter: blur(8px);
             transition:
-                opacity   0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                filter    0.55s cubic-bezier(0.16, 1, 0.3, 1);
+                filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity, filter;
         }
+
         .footer-link.footer-visible {
             opacity: 1;
             transform: translateY(0) scale(1);
@@ -62,10 +74,23 @@
 
         /* --- WhatsApp Auto Ping --- */
         @keyframes waPing {
-            0%           { transform: scale(1);   opacity: 0.4; }
-            8%           { transform: scale(2);   opacity: 0;   }
-            9%, 100%     { transform: scale(1);   opacity: 0;   }
+            0% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+
+            8% {
+                transform: scale(2);
+                opacity: 0;
+            }
+
+            9%,
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
         }
+
         .wa-auto-ping {
             animation: waPing 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
@@ -79,14 +104,14 @@
     {{-- Page Loader (Medical Theme – Inline Styles for guaranteed rendering) --}}
     <x-frontend.loader />
     @php
-        $navLinks = [
-            ['name' => __('land.nav_home'), 'url' => url('/'), 'active' => request()->is('/'), 'target' => null],
-            ['name' => __('land.nav_about'), 'url' => url('/#about'), 'active' => false, 'target' => 'about'],
-            ['name' => __('land.nav_courses'), 'url' => url('/#courses'), 'active' => false, 'target' => 'courses'],
-            ['name' => __('land.nav_faq'), 'url' => url('/#faq'), 'active' => false, 'target' => 'faq'],
-            ['name' => __('land.nav_contact'), 'url' => route('contact'), 'active' => request()->routeIs('contact'), 'target' => null],
-            ['name' => __('land.nav_expert_board'), 'url' => route('expert-board'), 'active' => request()->routeIs('expert-board'), 'target' => null],
-        ];
+    $navLinks = [
+    ['name' => __('land.nav_home'), 'url' => url('/'), 'active' => request()->is('/'), 'target' => null],
+    ['name' => __('land.nav_about'), 'url' => url('/#about'), 'active' => false, 'target' => 'about'],
+    ['name' => __('land.nav_courses'), 'url' => url('/#courses'), 'active' => false, 'target' => 'courses'],
+    ['name' => __('land.nav_faq'), 'url' => url('/#faq'), 'active' => false, 'target' => 'faq'],
+    ['name' => __('land.nav_contact'), 'url' => route('contact'), 'active' => request()->routeIs('contact'), 'target' => null],
+    ['name' => __('land.nav_expert_board'), 'url' => route('expert-board'), 'active' => request()->routeIs('expert-board'), 'target' => null],
+    ];
     @endphp
 
     {{-- ========== NAVBAR ========== --}}
@@ -103,26 +128,26 @@
                 {{-- Desktop Nav --}}
                 <nav class="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main Navigation">
                     @foreach ($navLinks as $link)
-                        <a href="{{ $link['url'] }}" 
-                           class="nav-link group/link relative px-2 py-1 transition-all duration-300 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded-lg active:scale-95 active:text-primary-dark {{ $link['active'] ? 'text-primary font-bold' : 'text-gray-600' }}"
-                           @if($link['active']) aria-current="page" @endif
-                           @if($link['target']) data-target="{{ $link['target'] }}" @endif>
-                            {{ $link['name'] }}
-                            <span class="nav-underline absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ $link['active'] ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover/link:w-full' }}"></span>
-                        </a>
+                    <a href="{{ $link['url'] }}"
+                        class="nav-link group/link relative px-2 py-1 transition-all duration-300 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded-lg active:scale-95 active:text-primary-dark {{ $link['active'] ? 'text-primary font-bold' : 'text-gray-600' }}"
+                        @if($link['active']) aria-current="page" @endif
+                        @if($link['target']) data-target="{{ $link['target'] }}" @endif>
+                        {{ $link['name'] }}
+                        <span class="nav-underline absolute bottom-0 left-1/2 h-[2px] bg-primary transition-all duration-300 rounded-full {{ $link['active'] ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover/link:w-full' }}"></span>
+                    </a>
                     @endforeach
                 </nav>
 
                 {{-- Auth Links & Mobile Menu --}}
                 <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
-                    
+
                     {{-- Mobile Menu Button --}}
-                    <button id="mobile-menu-btn" 
-                            data-open="false"
-                            aria-expanded="false" 
-                            aria-controls="mobile-menu"
-                            aria-label="Toggle navigation menu"
-                            class="md:hidden flex items-center justify-center p-2 text-primary hover:bg-gray-100 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary group/btn">
+                    <button id="mobile-menu-btn"
+                        data-open="false"
+                        aria-expanded="false"
+                        aria-controls="mobile-menu"
+                        aria-label="Toggle navigation menu"
+                        class="md:hidden flex items-center justify-center p-2 text-primary hover:bg-gray-100 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary group/btn">
                         {{-- Burger Icon (Shows when closed) --}}
                         <svg class="h-6 w-6 transition-transform duration-300 group-data-[open=true]/btn:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -139,7 +164,7 @@
                         {{ __('land.nav_dashboard') }}
                     </a>
                     @else
-                    <a href="{{ url('admin/login') }}"
+                    <a href="{{ route('login') }}"
                         class="hidden md:inline-flex items-center justify-center px-6 py-2 border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-bold rounded-full shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300">
                         {{ __('land.nav_login_register') }}
                     </a>
@@ -151,14 +176,14 @@
         </header>
 
         {{-- Mobile Menu Drawer --}}
-        <div id="mobile-menu" 
-             role="dialog" 
-             aria-modal="true" 
-             aria-hidden="true"
-             aria-label="Mobile Navigation"
-             data-open="false" 
-             class="fixed inset-0 z-40 pointer-events-none group/menu md:hidden">
-             
+        <div id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-hidden="true"
+            aria-label="Mobile Navigation"
+            data-open="false"
+            class="fixed inset-0 z-40 pointer-events-none group/menu md:hidden">
+
             <!-- Overlay Background -->
             <div id="mobile-overlay" aria-hidden="true" class="absolute inset-0 bg-white/95 backdrop-blur-md opacity-0 transition-opacity duration-300 group-data-[open=true]/menu:opacity-100 group-data-[open=true]/menu:pointer-events-auto cursor-pointer"></div>
 
@@ -166,12 +191,12 @@
             <div class="relative z-10 flex flex-col pt-24 px-6 pb-8 h-full overflow-y-auto opacity-0 translate-y-4 transition-all duration-300 group-data-[open=true]/menu:opacity-100 group-data-[open=true]/menu:translate-y-0 group-data-[open=true]/menu:pointer-events-auto">
                 <nav class="flex flex-col gap-5 text-xl font-bold mt-6 text-center max-w-sm mx-auto w-full">
                     @foreach ($navLinks as $link)
-                        <a href="{{ $link['url'] }}" 
-                           class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg px-4 {{ $link['active'] ? 'text-primary' : '' }}"
-                           @if($link['active']) aria-current="page" @endif
-                           @if($link['target']) data-target="{{ $link['target'] }}" @endif>
-                           {{ $link['name'] }}
-                        </a>
+                    <a href="{{ $link['url'] }}"
+                        class="mobile-link text-gray-800 hover:text-primary transition-colors border-b border-gray-100 pb-4 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg px-4 {{ $link['active'] ? 'text-primary' : '' }}"
+                        @if($link['active']) aria-current="page" @endif
+                        @if($link['target']) data-target="{{ $link['target'] }}" @endif>
+                        {{ $link['name'] }}
+                    </a>
                     @endforeach
 
                     {{-- Auth Links on Mobile --}}
@@ -198,15 +223,15 @@
     <x-frontend.footer />
 
     {{-- Floating WhatsApp Button --}}
-    <a href="https://wa.me/966500000000?text={{ urlencode(__('land.whatsapp_message')) }}" 
-       target="_blank" rel="noopener noreferrer"
-       class="fixed bottom-8 end-8 z-50 flex items-center justify-center w-14 h-14 bg-primary text-white rounded-full shadow-lg hover:shadow-2xl hover:bg-primary-dark hover:-translate-y-1 transition-all duration-300 group"
-       aria-label="{{ __('land.contact_whatsapp') }}">
+    <a href="https://wa.me/966500000000?text={{ urlencode(__('land.whatsapp_message')) }}"
+        target="_blank" rel="noopener noreferrer"
+        class="fixed bottom-8 end-8 z-50 flex items-center justify-center w-14 h-14 bg-primary text-white rounded-full shadow-lg hover:shadow-2xl hover:bg-primary-dark hover:-translate-y-1 transition-all duration-300 group"
+        aria-label="{{ __('land.contact_whatsapp') }}">
         {{-- Auto-ping ring --}}
         <span class="wa-auto-ping absolute inline-flex w-full h-full rounded-full bg-primary"></span>
         {{-- Custom WhatsApp Icon matching theme --}}
         <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
         </svg>
     </a>
 
@@ -219,7 +244,7 @@
         style="opacity: 0; transform: translateY(20px) scale(0.8); pointer-events: none;">
         {{-- Bouncing arrow --}}
         <svg class="w-5 h-5 text-white relative z-10 transition-transform duration-300 group-hover:-translate-y-1"
-             fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
         </svg>
         {{-- Glow ring on hover --}}
@@ -234,13 +259,13 @@
         }
     </style>
     <script>
-        (function () {
+        (function() {
             const btn = document.getElementById('scroll-top-btn');
             if (!btn) return;
             let ticking = false;
-            window.addEventListener('scroll', function () {
+            window.addEventListener('scroll', function() {
                 if (!ticking) {
-                    requestAnimationFrame(function () {
+                    requestAnimationFrame(function() {
                         if (window.scrollY > 300) {
                             btn.classList.add('stt-visible');
                         } else {
@@ -250,7 +275,9 @@
                     });
                     ticking = true;
                 }
-            }, { passive: true });
+            }, {
+                passive: true
+            });
         })();
     </script>
 
@@ -275,15 +302,17 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const overlay = document.getElementById('mobile-overlay');
             const mobileLinks = document.querySelectorAll('.mobile-link');
-            
+
             // --- Scroll Handling via Data Attribute ---
             const handleScroll = () => {
                 const isScrolled = window.scrollY > 20;
-                if(header.getAttribute('data-scrolled') !== String(isScrolled)) {
+                if (header.getAttribute('data-scrolled') !== String(isScrolled)) {
                     header.setAttribute('data-scrolled', isScrolled);
                 }
             };
-            window.addEventListener('scroll', handleScroll, { passive: true });
+            window.addEventListener('scroll', handleScroll, {
+                passive: true
+            });
             handleScroll();
 
             // --- Mobile Menu A11y & Toggle ---
@@ -293,10 +322,10 @@
                 mobileBtn.setAttribute('data-open', 'true');
                 mobileBtn.setAttribute('aria-expanded', 'true');
                 document.body.style.overflow = 'hidden'; // Scroll lock
-                
+
                 // Focus trap enhancement - focus first link slightly delayed
                 const firstLink = mobileMenu.querySelector('a');
-                if(firstLink) setTimeout(() => firstLink.focus(), 300);
+                if (firstLink) setTimeout(() => firstLink.focus(), 300);
             };
 
             const closeMenu = () => {
@@ -349,7 +378,9 @@
                             entry.target.classList.remove('active');
                         }
                     });
-                }, { rootMargin: '0px 0px -50px 0px' });
+                }, {
+                    rootMargin: '0px 0px -50px 0px'
+                });
 
                 revealElements.forEach(el => revealObserver.observe(el));
             }
@@ -358,7 +389,7 @@
             const isHomePage = document.getElementById('hero-root') !== null;
             if (isHomePage) {
                 const spyTargets = document.querySelectorAll('section[id]');
-                if(spyTargets.length > 0) {
+                if (spyTargets.length > 0) {
                     const observer = new IntersectionObserver((entries) => {
                         let activeId = null;
                         entries.forEach(entry => {
@@ -371,20 +402,22 @@
                             document.querySelectorAll('a[data-target]').forEach(link => {
                                 const target = link.getAttribute('data-target');
                                 const underline = link.querySelector('.nav-underline');
-                                
+
                                 if (target === activeId) {
                                     link.classList.add('text-primary', 'font-bold');
                                     link.classList.remove('text-gray-600');
-                                    if(underline) underline.classList.replace('w-0', 'w-full');
+                                    if (underline) underline.classList.replace('w-0', 'w-full');
                                 } else {
                                     link.classList.remove('text-primary', 'font-bold');
                                     link.classList.add('text-gray-600');
-                                    if(underline) underline.classList.replace('w-full', 'w-0');
+                                    if (underline) underline.classList.replace('w-full', 'w-0');
                                 }
                             });
                         }
-                    }, { rootMargin: '-20% 0px -60% 0px' });
-                    
+                    }, {
+                        rootMargin: '-20% 0px -60% 0px'
+                    });
+
                     spyTargets.forEach(el => observer.observe(el));
                 }
             }
@@ -393,23 +426,23 @@
             const footerSection = document.querySelector('footer');
             if (footerSection) {
                 var footerTimers = [];
-                const footerObserver = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
+                const footerObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
                         const links = footerSection.querySelectorAll('.footer-link');
                         if (entry.isIntersecting) {
                             footerTimers.forEach(clearTimeout);
                             footerTimers = [];
                             // reset instantly
-                            links.forEach(function (link) {
+                            links.forEach(function(link) {
                                 link.style.transition = 'none';
                                 link.classList.remove('footer-visible');
                             });
                             void footerSection.offsetHeight;
                             // stagger in
-                            links.forEach(function (link) {
+                            links.forEach(function(link) {
                                 link.style.transition = '';
                                 const idx = parseInt(link.getAttribute('data-index')) || 0;
-                                const t = setTimeout(function () {
+                                const t = setTimeout(function() {
                                     link.classList.add('footer-visible');
                                 }, idx * 110 + 80);
                                 footerTimers.push(t);
@@ -418,13 +451,15 @@
                             // reset when footer leaves view
                             footerTimers.forEach(clearTimeout);
                             footerTimers = [];
-                            links.forEach(function (link) {
+                            links.forEach(function(link) {
                                 link.style.transition = 'none';
                                 link.classList.remove('footer-visible');
                             });
                         }
                     });
-                }, { threshold: 0.2 });
+                }, {
+                    threshold: 0.2
+                });
                 footerObserver.observe(footerSection);
             }
         });

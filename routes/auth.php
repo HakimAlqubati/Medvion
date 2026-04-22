@@ -64,6 +64,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/login', function () {
-    return redirect('/admin/login');
-});
+// Route::get('/login', function () {
+//     return redirect('/admin/login');
+// });

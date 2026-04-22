@@ -9,6 +9,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Tables\Columns\ToggleColumn;
 
 class SurveyTable
 {
@@ -21,9 +22,8 @@ class SurveyTable
                     ->searchable()
                     ->sortable(),
 
-                IconColumn::make('is_active')
+                ToggleColumn::make('is_active')
                     ->label(__('admin.surveys.fields.is_active'))
-                    ->boolean()
                     ->sortable(),
 
                 TextColumn::make('questions_count')

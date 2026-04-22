@@ -66,16 +66,38 @@
                     if(this.currentQIndex >= this.allQuestions.length) return;
                     
                     const q = this.currentQuestion;
-                    if(q && q.is_required && !this.formData['answers[' + q.id + ']'] && !this.files[q.id]) {
+                    const val = this.formData['answers[' + q.id + ']'];
+
+                    if(q && q.is_required && !val && !this.files[q.id]) {
                         this.errors['answers.' + q.id] = '{{ __('land.expert_survey_requirement_alert') }}';
                         return;
                     }
+
+                    // Validate email format
+                    if(q && q.type === 'email' && val) {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if(!emailRegex.test(val)) {
+                            this.errors['answers.' + q.id] = '{{ __('land.expert_survey_invalid_email') }}';
+                            return;
+                        }
+                    }
+
+                    // Validate phone format
+                    if(q && q.type === 'phone' && val) {
+                        const phoneRegex = /^[\+]?[\d\s\-\(\)]{7,20}$/;
+                        if(!phoneRegex.test(val)) {
+                            this.errors['answers.' + q.id] = '{{ __('land.expert_survey_invalid_phone') }}';
+                            return;
+                        }
+                    }
+
                     this.errors = {};
 
                     if(this.currentQIndex < this.allQuestions.length) {
                         this.currentQIndex++;
                     }
                 },
+
 
                 prev() {
                     if(this.currentQIndex > 0) {
@@ -335,8 +357,30 @@
                             </div>
 
                             <div class="relative pt-4">
-                                <template x-if="['short_text', 'email', 'phone'].includes(q.type)">
-                                    <input :type="q.type === 'email' ? 'email' : (q.type === 'phone' ? 'tel' : 'text')"
+                                <template x-if="q.type === 'email'">
+                                    <input type="email"
+                                           :name="'answers[' + q.id + ']'"
+                                           :id="'f-' + q.id"
+                                           class="zenith-input"
+                                           placeholder="..."
+                                           x-model="formData['answers[' + q.id + ']']"
+                                           @keydown.enter.stop="next()"
+                                           autofocus>
+                                </template>
+
+                                <template x-if="q.type === 'phone'">
+                                    <input type="tel"
+                                           :name="'answers[' + q.id + ']'"
+                                           :id="'f-' + q.id"
+                                           class="zenith-input"
+                                           placeholder="..."
+                                           x-model="formData['answers[' + q.id + ']']"
+                                           @keydown.enter.stop="next()"
+                                           autofocus>
+                                </template>
+
+                                <template x-if="q.type === 'short_text'">
+                                    <input type="text"
                                            :name="'answers[' + q.id + ']'"
                                            :id="'f-' + q.id"
                                            class="zenith-input"

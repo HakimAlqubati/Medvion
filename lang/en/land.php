@@ -305,6 +305,8 @@ return [
     'expert_survey_confirm_exit' => 'Confirm & Exit',
     'expert_survey_accuracy_alert' => 'Correction required in',
     'expert_survey_requirement_alert' => 'Field completion required to synchronize.',
+    'expert_survey_invalid_email' => 'Please enter a valid email address.',
+    'expert_survey_invalid_phone' => 'Please enter a valid phone number.',
     'expert_survey_quit_confirm' => 'Are you sure you want to quit the assessment? Unsaved progress will be lost.',
 
     // ---------------------------------------------------------------

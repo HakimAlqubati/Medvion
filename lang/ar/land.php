@@ -306,6 +306,8 @@ return [
     'expert_survey_confirm_exit' => 'تأكيد وخروج',
     'expert_survey_accuracy_alert' => 'مطلوب التصحيح في',
     'expert_survey_requirement_alert' => 'إكمال الحقل مطلوب للمزامنة.',
+    'expert_survey_invalid_email' => 'يرجى إدخال بريد إلكتروني صحيح.',
+    'expert_survey_invalid_phone' => 'يرجى إدخال رقم هاتف صحيح.',
     'expert_survey_quit_confirm' => 'هل أنت متأكد من مغادرة التقييم؟ سيتم فقدان تقدمك غير المحفوظ.',
 
     // ---------------------------------------------------------------

@@ -57,6 +57,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 // Frontend users authenticate via the admin panel
-Route::get('/login', fn() => redirect('/admin/login'))->name('login');
+// Route::get('/login', fn() => redirect('/admin/login'))->name('login');
 
 require __DIR__ . '/auth.php';

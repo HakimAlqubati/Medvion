@@ -29,6 +29,12 @@ class Survey extends Model
                 $model->created_by = Auth::id();
             }
         });
+
+        static::saving(function ($model) {
+            if ($model->is_active) {
+                static::where('id', '!=', $model->id)->update(['is_active' => false]);
+            }
+        });
     }
 
     public function questions()
