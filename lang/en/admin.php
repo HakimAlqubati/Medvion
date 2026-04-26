@@ -407,5 +407,30 @@ return [
             'created_by' => 'Created By',
         ],
     ],
+    'testimonials' => [
+        'label' => 'Testimonial',
+        'plural_label' => 'Testimonials',
+        'sections' => [
+            'content' => 'Review Content',
+            'content_description' => 'Client details and their review text',
+            'settings' => 'Settings',
+            'settings_description' => 'Avatar image, publish status, and star rating',
+        ],
+        'fields' => [
+            'client_name' => 'Client Name',
+            'client_name_placeholder' => 'Example: Dr. John Doe',
+            'role' => 'Role / Title',
+            'role_placeholder' => 'Example: General Practitioner or Trainee',
+            'content' => 'Review',
+            'content_placeholder' => 'Write what the client said about the platform...',
+            'rating' => 'Rating (Stars)',
+            'rating_hint' => 'From 1 to 5 stars',
+            'avatar_image' => 'Avatar Image',
+            'avatar_image_hint' => 'A small square image is recommended, it will be automatically compressed',
+            'status' => 'Visibility Status',
+        ],
+        'status_active' => 'Active',
+        'status_hidden' => 'Hidden',
+    ],
 ];
 
