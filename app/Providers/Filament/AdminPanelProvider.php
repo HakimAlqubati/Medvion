@@ -121,8 +121,14 @@ class AdminPanelProvider extends PanelProvider
                         
                         NavigationGroup::make(__('admin.navigation.groups.surveys'))
                             ->items([
-                                ...(SurveyResource::canViewAny() ? SurveyResource::getNavigationItems() : []),
-                                ...(SurveySubmissionResource::canViewAny() ? SurveySubmissionResource::getNavigationItems() : []),
+                                ...(\App\Filament\Resources\Surveys\SurveyResource::canViewAny() ? \App\Filament\Resources\Surveys\SurveyResource::getNavigationItems() : []),
+                                ...(\App\Filament\Resources\SurveySubmissions\SurveySubmissionResource::canViewAny() ? \App\Filament\Resources\SurveySubmissions\SurveySubmissionResource::getNavigationItems() : []),
+                            ]),
+
+                        //     // ── المدونة ───────────────────────────────────────────────
+                        NavigationGroup::make(__('admin.navigation.groups.blog'))
+                            ->items([
+                                ...(\App\Filament\Resources\Blogs\BlogResource::canViewAny() ? \App\Filament\Resources\Blogs\BlogResource::getNavigationItems() : []),
                             ]),
 
                         // ── الإدارة ───────────────────────────────────────────────
