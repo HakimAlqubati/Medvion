@@ -349,4 +349,20 @@ return [
     'partners_stat_universities'=> 'Universities',
     'partners_cta_text'        => 'Interested in joining as a partner?',
     'partners_cta_btn'         => 'Partner With Us',
+
+    // ---------------------------------------------------------------
+    // Blog Section
+    // ---------------------------------------------------------------
+    'blog_section_badge'       => 'Medical Blog',
+    'blog_section_title'       => 'Medvion Blog',
+    'blog_section_subtitle'    => 'Stay updated with the latest articles, medical research, and healthcare developments.',
+    'browse_blogs'             => 'Browse All Articles',
+    'read_more'                => 'Read More',
+    'views'                    => 'Views',
+    'no_blogs'                 => 'No articles are currently available.',
+    'back_to_blogs'            => 'Back to Blog',
+    'share_article'            => 'Share this article:',
+    'status_draft'             => 'Draft',
+    'status_published'         => 'Published',
+    'status_archived'          => 'Archived',
 ];

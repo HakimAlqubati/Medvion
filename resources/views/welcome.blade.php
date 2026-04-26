@@ -5,4 +5,5 @@
     <x-frontend.latest-courses :alt-bg="false" />
     <x-frontend.faq :alt-bg="true" />
     <x-frontend.partners />
+    <x-frontend.blog :alt-bg="true" />
 </x-layouts.frontend>

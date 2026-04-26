@@ -50,6 +50,10 @@ Route::get('/terms-conditions', function () {
 Route::get('/expert-board', [SurveyController::class, 'show'])->name('expert-board');
 Route::post('/expert-board', [SurveyController::class, 'store'])->name('expert-board.store');
 
+// ─── Blog ────────────────────────────────────────────────────────────
+Route::get('/blogs', [\App\Http\Controllers\Frontend\BlogController::class, 'index'])->name('blogs.index');
+Route::get('/blogs/{slug}', [\App\Http\Controllers\Frontend\BlogController::class, 'show'])->name('blogs.show');
+
 // ─── Courses — Authentication required ────────────────────────────────────────
 
 Route::middleware(['auth'])->group(function () {

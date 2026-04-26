@@ -350,4 +350,20 @@ return [
     'partners_stat_universities'=> 'جامعة',
     'partners_cta_text'        => 'مهتم بالانضمام كشريك؟',
     'partners_cta_btn'         => 'كن شريكاً معنا',
+
+    // ---------------------------------------------------------------
+    // Blog Section
+    // ---------------------------------------------------------------
+    'blog_section_badge'       => 'المدونة الطبية',
+    'blog_section_title'       => 'مدونة Medvion',
+    'blog_section_subtitle'    => 'ابقَ على اطلاع بأحدث المقالات والأبحاث الطبية وتطورات الرعاية الصحية.',
+    'browse_blogs'             => 'تصفح جميع المقالات',
+    'read_more'                => 'قراءة المزيد',
+    'views'                    => 'قراءة',
+    'no_blogs'                 => 'لا توجد مقالات متاحة حالياً.',
+    'back_to_blogs'            => 'العودة للمدونة',
+    'share_article'            => 'شارك هذا المقال:',
+    'status_draft'             => 'مسودة',
+    'status_published'         => 'منشور',
+    'status_archived'          => 'مؤرشف',
 ];
