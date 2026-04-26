@@ -351,6 +351,13 @@ return [
     'partners_cta_btn'         => 'Partner With Us',
 
     // ---------------------------------------------------------------
+    // Testimonials Section
+    // ---------------------------------------------------------------
+    'testimonials_badge'       => 'Testimonials',
+    'testimonials_title'       => 'What Our Clients Say',
+    'testimonials_subtitle'    => 'Discover the impact of Medvion through the experiences of healthcare professionals.',
+
+    // ---------------------------------------------------------------
     // Blog Section
     // ---------------------------------------------------------------
     'blog_section_badge'       => 'Medical Blog',
