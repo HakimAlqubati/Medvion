@@ -16,7 +16,7 @@ class BlogService
         $locale = app()->getLocale();
         $cacheKey = "blogs.latest.{$locale}.{$limit}";
 
-        return Cache::remember($cacheKey, now()->addHours(2), function () use ($limit) {
+        $blogs = Cache::remember($cacheKey, now()->addHours(2), function () use ($limit) {
             return Blog::where('status', BlogStatus::PUBLISHED)
                 ->whereNotNull('published_at')
                 ->where('published_at', '<=', now())
@@ -24,6 +24,8 @@ class BlogService
                 ->take($limit)
                 ->get();
         });
+
+        return $blogs->map(fn($blog) => $this->prepareBlogImage($blog));
     }
 
     /**
@@ -31,11 +33,15 @@ class BlogService
      */
     public function getPaginatedBlogs($perPage = 9)
     {
-        return Blog::where('status', BlogStatus::PUBLISHED)
+        $blogs = Blog::where('status', BlogStatus::PUBLISHED)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
             ->orderBy('published_at', 'desc')
             ->paginate($perPage);
+
+        $blogs->getCollection()->transform(fn($blog) => $this->prepareBlogImage($blog));
+
+        return $blogs;
     }
 
     /**
@@ -50,6 +56,19 @@ class BlogService
         // Increment read count
         $blog->increment('read_count');
 
+        return $this->prepareBlogImage($blog);
+    }
+
+    /**
+     * Prepare blog image path with fallback.
+     */
+    protected function prepareBlogImage($blog)
+    {
+        if ($blog->main_image && file_exists(public_path('storage/' . $blog->main_image))) {
+            $blog->main_image = 'storage/' . $blog->main_image;
+        } else {
+            $blog->main_image = 'assets/images/blog-placeholder.webp';
+        }
         return $blog;
     }
 }

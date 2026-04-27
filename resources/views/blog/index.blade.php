@@ -20,7 +20,7 @@
                         
                         {{-- Image --}}
                         <a href="{{ route('blogs.show', $blog->slug) }}" class="block relative h-56 overflow-hidden bg-gray-50 shrink-0">
-                            <img src="{{ $blog->main_image ? asset('storage/' . $blog->main_image) : asset('assets/images/placeholder.webp') }}" 
+                            <img src="{{ asset($blog->main_image) }}" 
                                  alt="{{ $blog->title }}" 
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                  loading="lazy">

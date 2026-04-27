@@ -27,6 +27,17 @@ class TestimonialService
 
         // 2. تحويل المصفوفة فور خروجها من الكاش إلى Collection of stdClass Objects
         // هذا السطر يخدع ملف Blade ليجعله يعتقد أنه يتعامل مع كائنات عادية
-        return collect($testimonialsArray)->map(fn($item) => (object) $item);
+        return collect($testimonialsArray)->map(function ($item) {
+            $item = (object) $item;
+
+            // التحقق من وجود الصورة في المجلد، وإذا لم تكن موجودة نستخدم الصورة الافتراضية
+            if ($item->avatar_image && file_exists(public_path('storage/' . $item->avatar_image))) {
+                $item->avatar_image = 'storage/' . $item->avatar_image;
+            } else {
+                $item->avatar_image = 'assets/images/avatar.webp';
+            }
+
+            return $item;
+        });
     }
 }

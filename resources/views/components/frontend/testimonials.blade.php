@@ -56,7 +56,7 @@
                         <div class="flex items-center gap-4 mt-auto pt-6 border-t border-gray-50">
                             <div class="relative">
                                 @if($testimonial->avatar_image)
-                                <img src="{{ asset('storage/' . $testimonial->avatar_image) }}" alt="{{ $testimonial->client_name['ar'] }}" class="w-14 h-14 rounded-full object-cover shadow-sm ring-2 ring-primary/10">
+                                <img src="{{ asset($testimonial->avatar_image) }}" alt="{{ $testimonial->client_name['ar'] }}" class="w-14 h-14 rounded-full object-cover shadow-sm ring-2 ring-primary/10">
                                 @else
                                 <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xl ring-2 ring-primary/20">
                                     {{ mb_substr($testimonial->client_name, 0, 1) }}

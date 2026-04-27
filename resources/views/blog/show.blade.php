@@ -49,13 +49,11 @@
     <section class="pb-24 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 reveal delay-100">
             {{-- Main Image --}}
-            @if($blog->main_image)
             <div class="relative rounded-3xl overflow-hidden mb-12 shadow-lg border border-gray-100 aspect-video bg-gray-50">
-                <img src="{{ asset('storage/' . $blog->main_image) }}" 
+                <img src="{{ asset($blog->main_image) }}" 
                      alt="{{ $blog->title }}" 
                      class="w-full h-full object-cover">
             </div>
-            @endif
 
             {{-- Short Description (Lead) --}}
             <div class="prose prose-lg prose-primary max-w-none mb-12">
