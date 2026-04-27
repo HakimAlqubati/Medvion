@@ -16,10 +16,17 @@ class TestimonialService
         $locale = app()->getLocale();
         $cacheKey = "testimonials.active.{$locale}";
 
-        return Cache::remember($cacheKey, now()->addHours(2), function () {
+        // 1. جلب وتخزين البيانات في الكاش كمصفوفة (Array) آمنة وخفيفة
+        $testimonialsArray = Cache::remember($cacheKey, now()->addHours(2), function () {
             return Testimonial::where('status', TestimonialStatus::ACTIVE)
                 ->latest()
-                ->get();
+                // حددنا فقط الحقول المستخدمة في ملف Blade لتقليل حجم الكاش لأقصى درجة
+                ->get(['id', 'rating', 'content', 'avatar_image', 'client_name', 'role'])
+                ->toArray(); 
         });
+
+        // 2. تحويل المصفوفة فور خروجها من الكاش إلى Collection of stdClass Objects
+        // هذا السطر يخدع ملف Blade ليجعله يعتقد أنه يتعامل مع كائنات عادية
+        return collect($testimonialsArray)->map(fn($item) => (object) $item);
     }
 }

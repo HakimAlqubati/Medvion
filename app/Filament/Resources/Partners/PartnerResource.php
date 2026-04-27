@@ -34,6 +34,11 @@ class PartnerResource extends Resource
         return __('admin.partners.plural_label');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Schema $schema): Schema
     {
         return PartnerForm::configure($schema);
