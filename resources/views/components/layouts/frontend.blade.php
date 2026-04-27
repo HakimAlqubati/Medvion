@@ -18,27 +18,24 @@
             font-family: 'Tajawal', sans-serif;
         }
 
-        /* --- Cinematic Scroll Reveal --- */
+        /* --- Lightweight Scroll Reveal --- */
         .reveal-wrap {
             perspective: 1200px;
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(130px) scale(0.82) rotateX(8deg);
-            filter: blur(10px);
+            transform: translateY(24px);
             transform-origin: center bottom;
             transition:
-                opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, opacity, filter;
+                opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
         }
 
         .reveal.active {
             opacity: 1;
-            transform: translateY(0) scale(1) rotateX(0deg);
-            filter: blur(0px);
+            transform: translateY(0);
         }
 
         /* Stagger delays — more spread for dramatic cascade */
@@ -93,6 +90,23 @@
 
         .wa-auto-ping {
             animation: waPing 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal,
+            .reveal.active,
+            .footer-link,
+            .footer-link.footer-visible {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+                will-change: auto !important;
+            }
+
+            .wa-auto-ping {
+                animation: none !important;
+            }
         }
     </style>
 
@@ -265,16 +279,33 @@
     <script>
         (function() {
             const btn = document.getElementById('scroll-top-btn');
-            if (!btn) return;
+            const header = document.getElementById('main-header');
+            if (!btn && !header) return;
             let ticking = false;
+
+            const handleViewportScroll = () => {
+                const scrollY = window.scrollY;
+
+                if (btn) {
+                    if (scrollY > 300) {
+                        btn.classList.add('stt-visible');
+                    } else {
+                        btn.classList.remove('stt-visible');
+                    }
+                }
+
+                if (header) {
+                    const isScrolled = scrollY > 20;
+                    if (header.getAttribute('data-scrolled') !== String(isScrolled)) {
+                        header.setAttribute('data-scrolled', isScrolled);
+                    }
+                }
+            };
+
             window.addEventListener('scroll', function() {
                 if (!ticking) {
                     requestAnimationFrame(function() {
-                        if (window.scrollY > 300) {
-                            btn.classList.add('stt-visible');
-                        } else {
-                            btn.classList.remove('stt-visible');
-                        }
+                        handleViewportScroll();
                         ticking = false;
                     });
                     ticking = true;
@@ -282,42 +313,30 @@
             }, {
                 passive: true
             });
+
+            handleViewportScroll();
         })();
     </script>
 
     @stack('scripts')
     <script>
-        // --- Prevent body scroll before load ---
-        document.body.style.overflow = 'hidden';
-
-        // --- Page Loader: wait for standard DOM and assets load ---
-        window.addEventListener('load', () => {
+        // --- Page Loader: hide as early as possible to avoid blocking interaction ---
+        const hideLoader = () => {
             const loader = document.getElementById('medvion-loader');
             if (loader) {
                 loader.style.opacity = '0';
-                document.body.style.overflow = '';
                 setTimeout(() => loader.remove(), 700);
             }
-        });
+        };
+
+        document.addEventListener('DOMContentLoaded', hideLoader, { once: true });
+        window.addEventListener('load', hideLoader, { once: true });
 
         document.addEventListener('DOMContentLoaded', () => {
-            const header = document.getElementById('main-header');
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const overlay = document.getElementById('mobile-overlay');
             const mobileLinks = document.querySelectorAll('.mobile-link');
-
-            // --- Scroll Handling via Data Attribute ---
-            const handleScroll = () => {
-                const isScrolled = window.scrollY > 20;
-                if (header.getAttribute('data-scrolled') !== String(isScrolled)) {
-                    header.setAttribute('data-scrolled', isScrolled);
-                }
-            };
-            window.addEventListener('scroll', handleScroll, {
-                passive: true
-            });
-            handleScroll();
 
             // --- Mobile Menu A11y & Toggle ---
             const openMenu = () => {
@@ -370,16 +389,14 @@
                 }
             });
 
-            // --- Scroll Reveal Animations (re-triggers every time) ---
+            // --- Scroll Reveal Animations (run once per element) ---
             const revealElements = document.querySelectorAll('.reveal');
             if (revealElements.length > 0) {
                 const revealObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('active');
-                        } else {
-                            // إزالة الكلاس عند الخروج من نطاق الرؤية لإعادة الانيميشن
-                            entry.target.classList.remove('active');
+                            revealObserver.unobserve(entry.target);
                         }
                     });
                 }, {
@@ -429,36 +446,17 @@
             // --- Footer Nav Animation ---
             const footerSection = document.querySelector('footer');
             if (footerSection) {
-                var footerTimers = [];
                 const footerObserver = new IntersectionObserver(function(entries) {
                     entries.forEach(function(entry) {
                         const links = footerSection.querySelectorAll('.footer-link');
                         if (entry.isIntersecting) {
-                            footerTimers.forEach(clearTimeout);
-                            footerTimers = [];
-                            // reset instantly
                             links.forEach(function(link) {
-                                link.style.transition = 'none';
-                                link.classList.remove('footer-visible');
-                            });
-                            void footerSection.offsetHeight;
-                            // stagger in
-                            links.forEach(function(link) {
-                                link.style.transition = '';
                                 const idx = parseInt(link.getAttribute('data-index')) || 0;
-                                const t = setTimeout(function() {
+                                setTimeout(function() {
                                     link.classList.add('footer-visible');
                                 }, idx * 110 + 80);
-                                footerTimers.push(t);
                             });
-                        } else {
-                            // reset when footer leaves view
-                            footerTimers.forEach(clearTimeout);
-                            footerTimers = [];
-                            links.forEach(function(link) {
-                                link.style.transition = 'none';
-                                link.classList.remove('footer-visible');
-                            });
+                            footerObserver.unobserve(footerSection);
                         }
                     });
                 }, {
