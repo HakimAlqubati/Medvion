@@ -16,26 +16,17 @@ $colors = [
     'tech'  => ['bg' => 'bg-cyan-50',    'icon' => 'text-cyan-600',   'border' => 'border-cyan-100'],
     'assoc' => ['bg' => 'bg-amber-50',   'icon' => 'text-amber-600',  'border' => 'border-amber-100'],
 ];
-
-
 @endphp
 
 <section class="py-24 bg-white relative overflow-hidden" id="partners" aria-label="{{ __('land.partners_section_label') }}">
-
-    {{-- Subtle grid background --}}
     <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div class="absolute inset-0"
-             style="background-image: radial-gradient(circle, rgba(0,102,153,0.04) 1px, transparent 1px); background-size: 32px 32px;"></div>
-        {{-- Ambient blobs --}}
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle, rgba(0,102,153,0.04) 1px, transparent 1px); background-size: 32px 32px;"></div>
         <div class="absolute -top-32 -start-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
         <div class="absolute -bottom-32 -end-32 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        {{-- ── Section Header ── --}}
         <div class="text-center mb-16 reveal">
-            {{-- Badge --}}
             <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-primary/8 border border-primary/15 text-primary mb-6 shadow-sm">
                 <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
@@ -56,7 +47,6 @@ $colors = [
             </p>
         </div>
 
-        {{-- ── Stats Strip ── --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 reveal delay-100">
             @foreach($partnerStats as $stat)
             <div class="group relative text-center p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 overflow-hidden">
@@ -69,143 +59,83 @@ $colors = [
             @endforeach
         </div>
 
-        {{-- ── Seamless Infinite Marquee ── --}}
         <div class="relative mb-16 reveal delay-200">
-
-            {{-- Edge fade masks --}}
             <div class="absolute inset-y-0 start-0 w-24 sm:w-32 z-10 pointer-events-none bg-gradient-to-r rtl:bg-gradient-to-l from-white to-transparent"></div>
             <div class="absolute inset-y-0 end-0 w-24 sm:w-32 z-10 pointer-events-none bg-gradient-to-l rtl:bg-gradient-to-r from-white to-transparent"></div>
 
-            <div class="flex flex-col gap-6 overflow-hidden">
-                
-                {{-- Track 1 --}}
-                <div class="flex w-max group">
-                    <div class="flex shrink-0 animate-marquee-1">
-                        @foreach($partners as $p)
-                        @php 
-                            $iconKey = $p->icon ?? $p->category->icon ?? 'gov';
-                            $c = $colors[$iconKey]; 
-                        @endphp
-                        <div class="pe-6">
-                            <div class="partner-card relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 w-[250px] shrink-0 cursor-default select-none">
-                                <div class="w-12 h-12 rounded-xl {{ $c['bg'] }} border {{ $c['border'] }} flex items-center justify-center shrink-0">
-                                    <svg class="w-6 h-6 {{ $c['icon'] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        {!! $icons[$iconKey] !!}
-                                    </svg>
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="font-bold text-gray-800 text-[15px] truncate">{{ $p->name }}</p>
-                                    <p class="text-[12px] text-gray-400 mt-0.5 font-medium">{{ $p->category->name }}</p>
-                                </div>
-                            </div>
+            <div class="partner-rail overflow-x-auto overflow-y-hidden pb-3">
+                <div class="partner-track group flex w-max gap-6 pe-6">
+                    @foreach($partners as $partner)
+                    @php
+                        $iconKey = $partner->icon ?? $partner->category->icon ?? 'gov';
+                        $c = $colors[$iconKey];
+                    @endphp
+                    <div class="partner-card relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 w-[250px] shrink-0 cursor-default select-none">
+                        <div class="w-12 h-12 rounded-xl {{ $c['bg'] }} border {{ $c['border'] }} flex items-center justify-center shrink-0">
+                            <svg class="w-6 h-6 {{ $c['icon'] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                {!! $icons[$iconKey] !!}
+                            </svg>
                         </div>
-                        @endforeach
-                    </div>
-                    <div class="flex shrink-0 animate-marquee-1" aria-hidden="true">
-                        @foreach($partners as $p)
-                        @php 
-                            $iconKey = $p->icon ?? $p->category->icon ?? 'gov';
-                            $c = $colors[$iconKey]; 
-                        @endphp
-                        <div class="pe-6">
-                            <div class="partner-card relative flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-gray-100 w-[250px] shrink-0 cursor-default select-none">
-                                <div class="w-12 h-12 rounded-xl {{ $c['bg'] }} border {{ $c['border'] }} flex items-center justify-center shrink-0">
-                                    <svg class="w-6 h-6 {{ $c['icon'] }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        {!! $icons[$iconKey] !!}
-                                    </svg>
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="font-bold text-gray-800 text-[15px] truncate">{{ $p->name }}</p>
-                                    <p class="text-[12px] text-gray-400 mt-0.5 font-medium">{{ $p->category->name }}</p>
-                                </div>
-                            </div>
+                        <div class="min-w-0">
+                            <p class="font-bold text-gray-800 text-[15px] truncate">{{ $partner->name }}</p>
+                            <p class="text-[12px] text-gray-400 mt-0.5 font-medium">{{ $partner->category->name }}</p>
                         </div>
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
-
-
             </div>
         </div>
 
-        {{-- ── CTA ── --}}
         <div class="mt-8 text-center reveal">
             <p class="text-gray-500 text-sm mb-4 font-medium">{{ __('land.partners_cta_text') }}</p>
-            <a href="{{ route('contact') }}"
-               class="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl bg-primary text-white font-bold text-sm shadow-md shadow-primary/20 hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300">
+            <a href="{{ route('contact') }}" class="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl bg-primary text-white font-bold text-sm shadow-md shadow-primary/20 hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300">
                 {{ __('land.partners_cta_btn') }}
                 <svg class="w-4 h-4 rtl:rotate-180 transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
             </a>
         </div>
-
     </div>
 </section>
 
 <style>
-    /* 
-       Hardware Accelerated Infinite Marquee 
-       - will-change: transform tells the browser to offload animation to the GPU.
-       - translateZ(0) forces hardware acceleration (compositing layer).
-       This ensures 0 CPU usage and perfectly smooth 60fps scrolling.
-    */
-    .animate-marquee-1 {
-        will-change: transform;
-        transform: translateZ(0);
-        animation: marquee-scroll 35s linear infinite;
+    .partner-rail {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
 
-    /* Pause both tracks together when the parent group is hovered */
-    .group:hover .animate-marquee-1 {
-        animation-play-state: paused;
+    .partner-rail::-webkit-scrollbar {
+        display: none;
     }
 
-    /* 
-       Focus Effect (Spotlight):
-       When the user hovers over the track (.group), dim all cards.
-       Then, restore the opacity and scale up ONLY the card being hovered.
-    */
+    .partner-track {
+        scroll-snap-type: x proximity;
+    }
+
     .partner-card {
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        will-change: transform, filter, opacity;
+        scroll-snap-align: start;
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease,
+            border-color 0.3s ease,
+            opacity 0.3s ease;
     }
 
     .group:hover .partner-card {
-        filter: grayscale(100%);
-        opacity: 0.35;
-        transform: scale(0.96);
+        opacity: 0.72;
     }
 
     .group .partner-card:hover {
-        filter: grayscale(0%);
         opacity: 1;
-        transform: scale(1.06);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
         z-index: 10;
         border-color: #e5e7eb;
     }
 
-    /* Standard LTR */
-    @keyframes marquee-scroll {
-        from { transform: translateX(0); }
-        to   { transform: translateX(-100%); }
-    }
-
-    /* RTL Override */
-    html[dir="rtl"] .animate-marquee-1 {
-        animation-name: marquee-scroll-rtl;
-    }
-
-    @keyframes marquee-scroll-rtl {
-        from { transform: translateX(0); }
-        to   { transform: translateX(100%); }
-    }
-
-    /* Accessibility */
     @media (prefers-reduced-motion: reduce) {
-        .animate-marquee-1 {
-            animation: none;
+        .partner-card {
+            transition: none;
         }
     }
 </style>

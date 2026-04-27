@@ -61,6 +61,7 @@
             onerror="this.onerror=null;this.src='{{ asset('/images/hero-slide-1.png') }}';"
             alt="{{ $headlineTop }}"
             loading="eager"
+            fetchpriority="high"
             decoding="async"
             class="absolute inset-0 w-full h-full object-cover object-center md:object-center hero-bg-img"
         >
@@ -71,12 +72,12 @@
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div
             class="orb absolute size-[260px] sm:size-[340px] lg:size-[520px] -top-12 sm:-top-16 lg:-top-24 {{ $isRtl ? '-right-16 sm:-right-24 lg:-right-32' : '-left-16 sm:-left-24 lg:-left-32' }} rounded-full blur-3xl bg-primary/20"
-            style="animation-duration: 16s;"
+            style="animation-duration: 24s;"
         ></div>
 
         <div
             class="orb absolute size-[220px] sm:size-[300px] lg:size-[420px] bottom-0 {{ $isRtl ? '-left-8 sm:-left-10' : '-right-8 sm:-right-10' }} rounded-full blur-3xl bg-secondary/20"
-            style="animation-duration: 20s;"
+            style="animation-duration: 28s;"
         ></div>
     </div>
 
@@ -195,7 +196,7 @@
     will-change: transform;
     backface-visibility: hidden;
     transform: translateZ(0);
-    animation: hero-kenburns 18s ease-in-out infinite alternate;
+    animation: hero-kenburns 28s ease-in-out infinite alternate;
 }
 
 .hero-grid-mask {
@@ -209,7 +210,7 @@
 }
 
 .orb {
-    animation: orb-pulse 16s ease-in-out infinite alternate;
+    animation: orb-pulse 24s ease-in-out infinite alternate;
     will-change: transform;
     transform: translate3d(0, 0, 0);
 }
@@ -261,7 +262,7 @@
 
 @media (max-width: 639px) {
     .hero-bg-img {
-        animation-duration: 14s;
+        animation-duration: 22s;
     }
 
     .hero-grid-mask {
@@ -283,6 +284,23 @@
                 rgba(5,20,40,0.38) 65%,
                 rgba(5,20,40,0.16) 100%
             );
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-bg-img,
+    .orb,
+    .scroll-wheel,
+    .hero-enter,
+    .animate-ping {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .hero-bg-img,
+    .orb,
+    .hero-enter {
+        transform: none !important;
     }
 }
 </style>

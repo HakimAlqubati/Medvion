@@ -54,19 +54,16 @@
         /* --- Footer Nav Links Animation --- */
         .footer-link {
             opacity: 0;
-            transform: translateY(150px) scale(0.75);
-            filter: blur(8px);
+            transform: translateY(18px);
             transition:
-                opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, opacity, filter;
+                opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
         }
 
         .footer-link.footer-visible {
             opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
+            transform: translateY(0);
         }
 
         /* --- WhatsApp Auto Ping --- */
@@ -89,7 +86,7 @@
         }
 
         .wa-auto-ping {
-            animation: waPing 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+            animation: waPing 2.8s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -99,7 +96,6 @@
             .footer-link.footer-visible {
                 opacity: 1 !important;
                 transform: none !important;
-                filter: none !important;
                 transition: none !important;
                 will-change: auto !important;
             }
@@ -325,7 +321,7 @@
             const loader = document.getElementById('medvion-loader');
             if (loader) {
                 loader.style.opacity = '0';
-                setTimeout(() => loader.remove(), 700);
+                setTimeout(() => loader.remove(), 250);
             }
         };
 
@@ -340,6 +336,7 @@
 
             // --- Mobile Menu A11y & Toggle ---
             const openMenu = () => {
+                if (!mobileMenu || !mobileBtn) return;
                 mobileMenu.setAttribute('data-open', 'true');
                 mobileMenu.setAttribute('aria-hidden', 'false');
                 mobileBtn.setAttribute('data-open', 'true');
@@ -352,6 +349,7 @@
             };
 
             const closeMenu = () => {
+                if (!mobileMenu || !mobileBtn) return;
                 mobileMenu.setAttribute('data-open', 'false');
                 mobileMenu.setAttribute('aria-hidden', 'true');
                 mobileBtn.setAttribute('data-open', 'false');
