@@ -372,4 +372,7 @@ return [
     'status_draft'             => 'Draft',
     'status_published'         => 'Published',
     'status_archived'          => 'Archived',
+    'academic_badge' => 'Professors & Experts',
+    'courses' => 'Courses',
+    'students' => 'Students',
 ];

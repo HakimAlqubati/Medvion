@@ -373,4 +373,7 @@ return [
     'status_draft'             => 'مسودة',
     'status_published'         => 'منشور',
     'status_archived'          => 'مؤرشف',
+    'academic_badge' => 'أساتذة وخبراء',
+    'courses' => 'دورات',
+    'students' => 'طالب',
 ];
