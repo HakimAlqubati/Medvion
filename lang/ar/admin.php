@@ -432,4 +432,21 @@ return [
         'status_active' => 'ظاهر',
         'status_hidden' => 'مخفي',
     ],
+    'academic_headers' => [
+        'label' => 'عقل أكاديمي',
+        'plural_label' => 'العقول الأكاديمية',
+        'sections' => [
+            'content' => 'بيانات القسم',
+            'experts' => 'الخبراء',
+        ],
+        'fields' => [
+            'title' => 'العنوان',
+            'description' => 'الوصف',
+            'is_active' => 'مفعل',
+            'name' => 'اسم الخبير',
+            'image' => 'الصورة الشخصية',
+            'courses_count' => 'عدد الدورات',
+            'students_count' => 'عدد الطلاب',
+        ],
+    ],
 ];

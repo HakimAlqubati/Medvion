@@ -111,6 +111,7 @@ class AdminPanelProvider extends PanelProvider
                                 ...(FaqResource::canViewAny() ? FaqResource::getNavigationItems() : []),
                                 ...(\App\Filament\Resources\Partners\PartnerResource::canViewAny() ? \App\Filament\Resources\Partners\PartnerResource::getNavigationItems() : []),
                                 ...(\App\Filament\Resources\Testimonials\TestimonialResource::canViewAny() ? \App\Filament\Resources\Testimonials\TestimonialResource::getNavigationItems() : []),
+                                ...(\App\Filament\Resources\AcademicHeaders\AcademicHeaderResource::canViewAny() ? \App\Filament\Resources\AcademicHeaders\AcademicHeaderResource::getNavigationItems() : []),
                             ]),
 
                         //     // ── التواصل ───────────────────────────────────────────────

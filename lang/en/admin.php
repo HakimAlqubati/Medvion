@@ -432,5 +432,22 @@ return [
         'status_active' => 'Active',
         'status_hidden' => 'Hidden',
     ],
+    'academic_headers' => [
+        'label' => 'Academic Mind',
+        'plural_label' => 'Academic Minds',
+        'sections' => [
+            'content' => 'Section Data',
+            'experts' => 'Experts',
+        ],
+        'fields' => [
+            'title' => 'Title',
+            'description' => 'Description',
+            'is_active' => 'Is Active',
+            'name' => 'Expert Name',
+            'image' => 'Avatar',
+            'courses_count' => 'Courses Count',
+            'students_count' => 'Students Count',
+        ],
+    ],
 ];
 
