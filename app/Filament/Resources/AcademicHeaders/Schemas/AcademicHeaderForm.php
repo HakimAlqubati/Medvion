@@ -59,8 +59,13 @@ class AcademicHeaderForm
                                     ->required(),
                             ])
                             ->columns(2)
-                            // ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
-                            ->itemLabel('sdf')
+                            ->itemLabel(function (array $state): ?string {
+                                $name = $state['name'] ?? null;
+                                if (is_array($name)) {
+                                    return $name[app()->getLocale()] ?? collect($name)->first();
+                                }
+                                return $name;
+                            })
                             ->collapsible()
                             ->defaultItems(1),
                     ]),
