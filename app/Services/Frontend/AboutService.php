@@ -94,6 +94,15 @@ class AboutService
      */
     public function getImpacts(): Collection
     {
-        return Impact::where('is_active', true)->orderBy('sort_order', 'asc')->get();
+        $rows = \Illuminate\Support\Facades\Cache::remember('frontend.about.impacts', now()->addHours(6), function () {
+            return Impact::where('is_active', true)
+                ->orderBy('sort_order', 'asc')
+                ->get()
+                ->map->getAttributes()
+                ->values()
+                ->all();
+        });
+
+        return Impact::hydrate($rows);
     }
 }

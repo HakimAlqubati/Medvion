@@ -273,11 +273,24 @@
         }
     </style>
     <script>
+        // Throttle function to limit scroll event firing rate
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+
         (function() {
             const btn = document.getElementById('scroll-top-btn');
             const header = document.getElementById('main-header');
             if (!btn && !header) return;
-            let ticking = false;
 
             const handleViewportScroll = () => {
                 const scrollY = window.scrollY;
@@ -298,17 +311,10 @@
                 }
             };
 
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    requestAnimationFrame(function() {
-                        handleViewportScroll();
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            }, {
-                passive: true
-            });
+            // Apply throttle of 100ms for smooth but less CPU-intensive scrolling
+            window.addEventListener('scroll', throttle(function() {
+                requestAnimationFrame(handleViewportScroll);
+            }, 100), { passive: true });
 
             handleViewportScroll();
         })();
@@ -409,6 +415,9 @@
             if (isHomePage) {
                 const spyTargets = document.querySelectorAll('section[id]');
                 if (spyTargets.length > 0) {
+                    // CACHE DOM LOOKUP: fetch links once instead of inside observer loop
+                    const navLinks = document.querySelectorAll('a[data-target]');
+                    
                     const observer = new IntersectionObserver((entries) => {
                         let activeId = null;
                         entries.forEach(entry => {
@@ -418,7 +427,7 @@
                         });
 
                         if (activeId) {
-                            document.querySelectorAll('a[data-target]').forEach(link => {
+                            navLinks.forEach(link => {
                                 const target = link.getAttribute('data-target');
                                 const underline = link.querySelector('.nav-underline');
 

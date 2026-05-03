@@ -204,26 +204,22 @@
         linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
     background-size: 40px 40px;
-    mask-image: radial-gradient(circle at center, rgba(0,0,0,0.55), transparent 82%);
-    -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.55), transparent 82%);
-    opacity: 0.18;
+    opacity: 0.1;
 }
 
 .orb {
     animation: orb-pulse 24s ease-in-out infinite alternate;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
+    will-change: opacity;
 }
 
 @keyframes orb-pulse {
-    from { transform: scale(1) translate3d(0,0,0); opacity: 0.55; }
-    to   { transform: scale(1.15) translate3d(20px,-15px,0); opacity: 0.95; }
+    from { opacity: 0.4; }
+    to   { opacity: 0.8; }
 }
 
 @keyframes hero-kenburns {
-    0%   { transform: scale(1.02) translate3d(0%, 0%, 0); }
-    50%  { transform: scale(1.06) translate3d(-0.8%, 0.6%, 0); }
-    100% { transform: scale(1.04) translate3d(0.8%, -0.5%, 0); }
+    0%   { transform: scale(1.0) translateZ(0); }
+    100% { transform: scale(1.05) translateZ(0); }
 }
 
 .hero-enter {
