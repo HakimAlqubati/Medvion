@@ -1,5 +1,5 @@
 <x-layouts.frontend :title="__('land.title')">
-    <x-frontend.hero :slides="$slides" />
+    <!-- <x-frontend.hero :slides="$slides" /> -->
     <x-frontend.about :alt-bg="false" />
     <x-frontend.features :alt-bg="true" :features="$features" />
     <x-frontend.latest-courses :alt-bg="false" />
