@@ -273,24 +273,11 @@
         }
     </style>
     <script>
-        // Throttle function to limit scroll event firing rate
-        function throttle(func, limit) {
-            let inThrottle;
-            return function() {
-                const args = arguments;
-                const context = this;
-                if (!inThrottle) {
-                    func.apply(context, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
-                }
-            }
-        }
-
         (function() {
             const btn = document.getElementById('scroll-top-btn');
             const header = document.getElementById('main-header');
             if (!btn && !header) return;
+            let ticking = false;
 
             const handleViewportScroll = () => {
                 const scrollY = window.scrollY;
@@ -311,10 +298,17 @@
                 }
             };
 
-            // Apply throttle of 100ms for smooth but less CPU-intensive scrolling
-            window.addEventListener('scroll', throttle(function() {
-                requestAnimationFrame(handleViewportScroll);
-            }, 100), { passive: true });
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(function() {
+                        handleViewportScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, {
+                passive: true
+            });
 
             handleViewportScroll();
         })();
