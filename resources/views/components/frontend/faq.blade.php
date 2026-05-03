@@ -22,7 +22,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-16 reveal">
             <span class="inline-block py-1.5 px-4 rounded-full {{ $altBg ? 'bg-white/10 text-white' : 'bg-secondary/10 text-secondary' }} font-bold text-sm mb-4 tracking-wide">
-                Ø§Ù„Ø¯Ø¹Ù… ÙˆØ§Ù„Ù…Ø³Ø§Ø¹Ø¯Ø©
+                {{ __('land.faq_heading') }}
             </span>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold {{ $altBg ? 'text-white' : 'text-gray-900' }}">
                 {{ __('land.faq_heading') }}
