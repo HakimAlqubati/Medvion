@@ -465,6 +465,8 @@ return [
             'site_logo' => 'شعار الموقع',
             'contact_email' => 'البريد الإلكتروني للتواصل',
             'contact_phone' => 'رقم الهاتف للتواصل',
+            'contact_phone_2' => 'رقم الهاتف الإضافي',
+            'whatsapp_number' => 'رقم الواتساب',
             'contact_address' => 'عنوان التواصل',
             'facebook_url' => 'رابط فيسبوك',
             'twitter_url' => 'رابط تويتر',

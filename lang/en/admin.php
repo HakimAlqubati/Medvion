@@ -465,6 +465,7 @@ return [
             'site_logo' => 'Site Logo',
             'contact_email' => 'Contact Email',
             'contact_phone' => 'Contact Phone',
+            'whatsapp_number' => 'WhatsApp Number',
             'contact_address' => 'Contact Address',
             'facebook_url' => 'Facebook URL',
             'twitter_url' => 'Twitter URL',

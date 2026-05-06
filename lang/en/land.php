@@ -40,6 +40,7 @@ return [
     'footer_tagline'         => 'Towards a distinguished digital healthcare ecosystem.',
     'footer_email_desc'      => 'Write to us for collaborations & suggestions',
     'footer_whatsapp_desc'   => 'Technical Support & Customer Service',
+    'footer_phone_desc'      => 'Direct Contact Number',
     'footer_quick_links'     => 'Quick Links',
     'footer_social_media'    => 'Connect With Us',
 

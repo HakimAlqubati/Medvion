@@ -45,6 +45,10 @@ class SettingForm
                                     ->email(),
                                 TextInput::make('contact_phone')
                                     ->label(__('admin.settings.fields.contact_phone')),
+                                TextInput::make('contact_phone_2')
+                                    ->label(__('admin.settings.fields.contact_phone_2')),
+                                TextInput::make('whatsapp_number')
+                                    ->label(__('admin.settings.fields.whatsapp_number')),
                                 Textarea::make('contact_address')
                                     ->label(__('admin.settings.fields.contact_address'))
                                     ->columnSpanFull(),
