@@ -100,7 +100,7 @@ class AdminPanelProvider extends PanelProvider
                         NavigationGroup::make(__('admin.navigation.groups.site'))
                             // ->icon(Heroicon::OutlinedGlobeAlt)
                             ->items([
-                                ...(HeroSlideResource::canViewAny() ? HeroSlideResource::getNavigationItems() : []),
+                                // ...(HeroSlideResource::canViewAny() ? HeroSlideResource::getNavigationItems() : []),
                                 ...(AboutResource::canViewAny() ? AboutResource::getNavigationItems() : []),
                                 ...(GoalResource::canViewAny() ? GoalResource::getNavigationItems() : []),
                                 ...(TargetAudienceResource::canViewAny() ? TargetAudienceResource::getNavigationItems() : []),

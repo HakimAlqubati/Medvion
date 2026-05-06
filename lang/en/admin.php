@@ -160,6 +160,7 @@ return [
             'sort_order_hint'     => 'The lower the number, the earlier this section appears',
             'is_active'           => 'Active',
             'is_active_hint'      => 'When enabled, this section will appear on the About Us page',
+            'image'               => 'Section Main Image',
         ],
     ],
     'features' => [

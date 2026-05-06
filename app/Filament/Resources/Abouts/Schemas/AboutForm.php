@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Abouts\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -46,6 +47,15 @@ class AboutForm
                                 'redo',
                                 'undo',
                             ])
+                            ->columnSpanFull(),
+
+                        // الصورة الرئيسية
+                        FileUpload::make('image')
+                            ->label(__('admin.abouts.fields.image') ?? 'Image')
+                            ->image()
+                            ->imageEditor()
+                            ->directory('abouts')
+                            ->disk('public')
                             ->columnSpanFull(),
 
                     ])->columnSpan(2),
