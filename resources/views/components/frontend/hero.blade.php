@@ -12,9 +12,6 @@
 
     $firstSlide = collect($slides)->first();
 
-    $heroImage = $firstSlide->image_url
-        ?? asset('/images/hero-slide-1.png');
-
     $badge = $firstSlide->badge
         ?? 'Medvion';
 
@@ -48,12 +45,12 @@
     {{-- Ambient layers --}}
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div
-            class="orb absolute size-[260px] sm:size-[340px] lg:size-[520px] -top-12 sm:-top-16 lg:-top-24 {{ $isRtl ? '-right-16 sm:-right-24 lg:-right-32' : '-left-16 sm:-left-24 lg:-left-32' }} rounded-full blur-3xl bg-primary/20"
+            class="orb absolute size-[260px] sm:size-[340px] lg:size-[520px] -top-12 sm:-top-16 lg:-top-24 {{ $isRtl ? '-right-16 sm:-right-24 lg:-right-32' : '-left-16 sm:-left-24 lg:-left-32' }} rounded-full bg-primary/20"
             style="animation-duration: 24s;"
         ></div>
 
         <div
-            class="orb absolute size-[220px] sm:size-[300px] lg:size-[420px] bottom-0 {{ $isRtl ? '-left-8 sm:-left-10' : '-right-8 sm:-right-10' }} rounded-full blur-3xl bg-secondary/20"
+            class="orb absolute size-[220px] sm:size-[300px] lg:size-[420px] bottom-0 {{ $isRtl ? '-left-8 sm:-left-10' : '-right-8 sm:-right-10' }} rounded-full bg-secondary/20"
             style="animation-duration: 28s;"
         ></div>
     </div>
@@ -66,7 +63,7 @@
 
             {{-- Badge --}}
             <div
-                class="hero-enter inline-flex max-w-full items-center gap-3 mb-6 sm:mb-8 px-4 sm:px-6 lg:px-7 py-2.5 sm:py-3 rounded-full bg-white/10 border border-white/25 backdrop-blur-md shadow-[0_4px_20px_rgba(255,255,255,0.1)] transition-all duration-300 hover:bg-white/15"
+                class="hero-enter inline-flex max-w-full items-center gap-3 mb-6 sm:mb-8 px-4 sm:px-6 lg:px-7 py-2.5 sm:py-3 rounded-full bg-white/10 border border-white/25 shadow-[0_4px_20px_rgba(255,255,255,0.1)] transition-all duration-300 hover:bg-white/15"
                 style="animation-delay:0.05s"
                 dir="ltr"
             >
@@ -96,7 +93,7 @@
 
                 <a
                     href="{{ url('/about') }}"
-                    class="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl font-semibold text-sm text-white/90 bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 hover:border-white/25 hover:-translate-y-0.5 transition-all duration-300"
+                    class="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl font-semibold text-sm text-white/90 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/25 hover:-translate-y-0.5 transition-all duration-300"
                 >
                     {{ __('land.hero_cta_secondary') }}
                 </a>
@@ -108,7 +105,7 @@
                 style="animation-delay:0.45s"
             >
                 @foreach ($trustItems as $item)
-                    <div class="inline-flex max-w-full items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/85 text-xs sm:text-sm font-medium shadow-[0_6px_18px_rgba(2,12,27,0.18)]">
+                    <div class="inline-flex max-w-full items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/85 text-xs sm:text-sm font-medium shadow-[0_6px_18px_rgba(2,12,27,0.18)]">
                         <span class="inline-flex h-2 w-2 rounded-full bg-secondary-light shadow-[0_0_10px_rgba(255,255,255,0.55)] shrink-0"></span>
                         <span class="truncate">{{ $item }}</span>
                     </div>
