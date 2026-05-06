@@ -258,6 +258,7 @@ return [
             'surveys'       => 'Surveys Management',
             'blog'          => 'Blog Management',
             'management'    => 'Management',
+            'settings'      => 'System Settings',
         ],
     ],
 
@@ -448,6 +449,27 @@ return [
             'image' => 'Avatar',
             'courses_count' => 'Courses Count',
             'students_count' => 'Students Count',
+        ],
+    ],
+    'settings' => [
+        'label' => 'System Settings',
+        'plural_label' => 'System Settings',
+        'tabs' => [
+            'general' => 'General Settings',
+            'contact' => 'Contact Settings',
+            'social'  => 'Social Settings',
+        ],
+        'fields' => [
+            'site_name' => 'Site Name',
+            'site_description' => 'Site Description',
+            'site_logo' => 'Site Logo',
+            'contact_email' => 'Contact Email',
+            'contact_phone' => 'Contact Phone',
+            'contact_address' => 'Contact Address',
+            'facebook_url' => 'Facebook URL',
+            'twitter_url' => 'Twitter URL',
+            'instagram_url' => 'Instagram URL',
+            'linkedin_url' => 'LinkedIn URL',
         ],
     ],
 ];

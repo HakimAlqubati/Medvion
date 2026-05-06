@@ -258,6 +258,7 @@ return [
             'surveys'       => 'إدارة الاستبيانات',
             'blog'          => 'إدارة المدونة',
             'management'    => 'الإدارة',
+            'settings'      => 'إعدادات النظام',
         ],
     ],
 
@@ -448,6 +449,27 @@ return [
             'image' => 'الصورة الشخصية',
             'courses_count' => 'عدد الدورات',
             'students_count' => 'عدد الطلاب',
+        ],
+    ],
+    'settings' => [
+        'label' => 'إعدادات النظام',
+        'plural_label' => 'إعدادات النظام',
+        'tabs' => [
+            'general' => 'الإعدادات العامة',
+            'contact' => 'إعدادات التواصل',
+            'social'  => 'التواصل الاجتماعي',
+        ],
+        'fields' => [
+            'site_name' => 'اسم الموقع',
+            'site_description' => 'وصف الموقع',
+            'site_logo' => 'شعار الموقع',
+            'contact_email' => 'البريد الإلكتروني للتواصل',
+            'contact_phone' => 'رقم الهاتف للتواصل',
+            'contact_address' => 'عنوان التواصل',
+            'facebook_url' => 'رابط فيسبوك',
+            'twitter_url' => 'رابط تويتر',
+            'instagram_url' => 'رابط إنستغرام',
+            'linkedin_url' => 'رابط لينكد إن',
         ],
     ],
 ];

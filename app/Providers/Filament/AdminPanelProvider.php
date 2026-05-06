@@ -21,6 +21,7 @@ use App\Filament\Resources\SurveySubmissions\SurveySubmissionResource;
 use App\Filament\Resources\Users\UserResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use App\Filament\Pages\Auth\Login;
+use App\Filament\Resources\Settings\SettingResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -139,6 +140,11 @@ class AdminPanelProvider extends PanelProvider
                             ->items([
                                 ...(UserResource::canViewAny() ? UserResource::getNavigationItems() : []),
                                 ...(RoleResource::canViewAny() ? RoleResource::getNavigationItems() : []),
+                            ]),
+                        NavigationGroup::make(__('admin.navigation.groups.settings'))
+                            // ->icon(Heroicon::OutlinedCog6Tooth)
+                            ->items([
+                                ...(SettingResource::canViewAny() ? SettingResource::getNavigationItems() : []),
                             ]),
                     ])
                 ;
