@@ -18,29 +18,6 @@
     $badge = $firstSlide->badge
         ?? 'Medvion';
 
-    $headlineTop = $firstSlide->title_1
-        ?? __('land.hero_static_title_1', [], $locale);
-
-    $headlineBottom = $firstSlide->title_2
-        ?? __('land.hero_static_title_2', [], $locale);
-
-    $subtitle = $firstSlide->subtitle
-        ?? __('land.hero_static_subtitle', [], $locale);
-
-    if ($headlineTop === 'land.hero_static_title_1') {
-        $headlineTop = $isRtl ? 'التدريب الصحي الرقمي' : 'Digital Healthcare Training';
-    }
-
-    if ($headlineBottom === 'land.hero_static_title_2') {
-        $headlineBottom = $isRtl ? 'بمعايير مهنية موثوقة' : 'Built on Trusted Professional Standards';
-    }
-
-    if ($subtitle === 'land.hero_static_subtitle') {
-        $subtitle = $isRtl
-            ? 'منصة متخصصة تقدم برامج تدريبية حديثة، وتجربة تعليمية احترافية مرنة مصممة للكوادر الصحية من أي مكان.'
-            : 'A specialized platform delivering modern training programs and a flexible, professional learning experience for healthcare professionals from anywhere.';
-    }
-
     $trustItems = [
         $isRtl ? 'خبراء متخصصون' : 'Expert-Led Programs',
         $isRtl ? 'شهادات رقمية' : 'Digital Certificates',
@@ -54,17 +31,17 @@
     class="relative overflow-hidden bg-[#020b18] min-h-[100svh] md:min-h-screen flex items-end md:items-center"
     dir="{{ $isRtl ? 'rtl' : 'ltr' }}"
 >
-    {{-- Background image --}}
+    {{-- Background video --}}
     <div class="absolute inset-0 z-0">
-        <img
-            src="{{ $heroImage }}"
-            onerror="this.onerror=null;this.src='{{ asset('/images/hero-slide-1.png') }}';"
-            alt="{{ $headlineTop }}"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            class="absolute inset-0 w-full h-full object-cover object-center md:object-center hero-bg-img"
+        <video 
+            autoplay 
+            loop 
+            muted 
+            playsinline 
+            class="absolute inset-0 w-full h-full object-cover object-center md:object-center hero-bg-video"
         >
+            <source src="{{ asset('video/hero.mp4') }}" type="video/mp4">
+        </video>
         <div class="absolute inset-0 hero-overlay"></div>
     </div>
 
@@ -103,30 +80,6 @@
                 </span>
             </div>
 
-            {{-- Headline --}}
-            <h1
-                class="hero-enter font-black text-white leading-[1.02] tracking-tight mb-5 sm:mb-6"
-                style="animation-delay:0.15s; text-shadow: 0 4px 24px rgba(0,0,0,0.6);"
-            >
-                <span class="block text-[clamp(2rem,8vw,4.25rem)]">
-                    {{ $headlineTop }}
-                </span>
-
-                <span
-                    class="block text-[clamp(2rem,8vw,4.25rem)] text-transparent bg-clip-text bg-gradient-to-r rtl:bg-gradient-to-l from-secondary-light to-white mt-1.5 sm:mt-2"
-                    style="filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8));"
-                >
-                    {{ $headlineBottom }}
-                </span>
-            </h1>
-
-            {{-- Subtitle --}}
-            <p
-                class="hero-enter text-sm sm:text-base lg:text-lg text-white/90 leading-7 sm:leading-8 mb-8 sm:mb-10 max-w-xl font-medium"
-                style="animation-delay:0.25s; text-shadow: 0 2px 10px rgba(0,0,0,0.8);"
-            >
-                {{ $subtitle }}
-            </p>
 
             {{-- CTAs --}}
             <div
@@ -192,11 +145,10 @@
         );
 }
 
-.hero-bg-img {
-    will-change: transform;
+.hero-bg-video {
+    will-change: opacity;
     backface-visibility: hidden;
     transform: translateZ(0);
-    animation: hero-kenburns 28s ease-in-out infinite alternate;
 }
 
 .hero-grid-mask {
@@ -217,10 +169,6 @@
     to   { opacity: 0.8; }
 }
 
-@keyframes hero-kenburns {
-    0%   { transform: scale(1.0) translateZ(0); }
-    100% { transform: scale(1.05) translateZ(0); }
-}
 
 .hero-enter {
     animation: hero-rise 0.75s cubic-bezier(.22,1,.36,1) both;
@@ -257,10 +205,6 @@
 }
 
 @media (max-width: 639px) {
-    .hero-bg-img {
-        animation-duration: 22s;
-    }
-
     .hero-grid-mask {
         opacity: 0.10;
         background-size: 28px 28px;
@@ -284,7 +228,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-bg-img,
+    .hero-bg-video,
     .orb,
     .scroll-wheel,
     .hero-enter,
@@ -293,7 +237,7 @@
         transition: none !important;
     }
 
-    .hero-bg-img,
+    .hero-bg-video,
     .orb,
     .hero-enter {
         transform: none !important;
