@@ -29,17 +29,18 @@
     dir="{{ $isRtl ? 'rtl' : 'ltr' }}"
 >
     {{-- Background video --}}
-    <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 z-0 overflow-hidden bg-[#020b18]">
         <video 
             autoplay 
             loop 
             muted 
             playsinline 
-            class="absolute inset-0 w-full h-full object-cover object-center md:object-center hero-bg-video"
+            preload="auto"
+            class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none hero-bg-video"
         >
             <source src="{{ asset('video/hero.mp4') }}" type="video/mp4">
         </video>
-        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="absolute inset-0 hero-overlay pointer-events-none"></div>
     </div>
 
     {{-- Ambient layers --}}
@@ -143,9 +144,26 @@
 }
 
 .hero-bg-video {
-    will-change: opacity;
+    will-change: transform, opacity;
     backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
     transform: translateZ(0);
+    object-position: center;
+}
+
+/* Tablet / iPad adjustments */
+@media (max-width: 1024px) {
+    .hero-bg-video {
+        object-position: center center;
+    }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .hero-bg-video {
+        /* Focuses slightly above the center for better subject visibility on portrait devices */
+        object-position: center 40%;
+    }
 }
 
 .hero-grid-mask {
