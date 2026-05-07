@@ -184,43 +184,41 @@
 
     <style>
         [x-cloak] { display: none !important; }
-        body { font-family: 'Tajawal', sans-serif; overflow: hidden; background-color: #01040D; }
+        body { font-family: 'Tajawal', sans-serif; overflow: hidden; background-color: #F8FAFC; }
         
         .cyber-grid {
              background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
              background-size: 80px 80px;
         }
 
         .zenith-btn {
-            @apply relative inline-flex items-center gap-6 px-14 py-6 text-white font-black rounded-[2rem] transition-all duration-500 overflow-hidden ring-1 ring-white/10;
-            background-color: #0D9488;
-            box-shadow: 0 0 40px rgba(13,148,136,0.4);
-            animation: neon-pulse 3s infinite;
+            @apply relative inline-flex items-center gap-6 px-14 py-6 text-white font-black rounded-[2rem] transition-all duration-500 overflow-hidden ring-1 ring-primary/10;
+            background-color: #1A52CE;
+            box-shadow: 0 10px 30px rgba(26,82,206,0.2);
         }
-
-        @keyframes neon-pulse {
-            0%, 100% { box-shadow: 0 0 40px rgba(13,148,136,0.3); }
-            50% { box-shadow: 0 0 80px rgba(13,148,136,0.7); transform: scale(1.02); }
+        .zenith-btn:hover {
+            box-shadow: 0 15px 40px rgba(26,82,206,0.3);
+            transform: translateY(-2px);
         }
 
         .zenith-btn::before {
             content: '';
-            @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full;
+            @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full;
             transition: transform 0.8s ease-in-out;
         }
         .zenith-btn:hover::before { @apply translate-x-full; }
 
         .zenith-input {
-            @apply w-full bg-transparent border-b-4 border-white/10 py-4 text-3xl sm:text-5xl font-black text-white focus:outline-none focus:border-secondary transition-all placeholder-white/5;
+            @apply w-full bg-transparent border-b-4 border-gray-200 py-4 text-3xl sm:text-5xl font-black text-gray-900 focus:outline-none focus:border-primary transition-all placeholder-gray-300;
         }
 
         .zenith-choice {
-            @apply flex items-center gap-6 p-8 bg-white/[0.03] border-2 border-white/5 rounded-[2rem] cursor-pointer hover:bg-secondary/10 hover:border-secondary transition-all duration-300;
+            @apply flex items-center gap-6 p-8 bg-white border-2 border-gray-100 rounded-[2rem] cursor-pointer hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 shadow-sm;
         }
         .zenith-choice.selected {
-            @apply bg-secondary/20 border-secondary scale-[1.03] shadow-[0_25px_50px_-15px_rgba(13,148,136,0.4)];
+            @apply bg-primary/5 border-primary scale-[1.03] shadow-[0_20px_40px_-15px_rgba(26,82,206,0.2)];
         }
 
         @keyframes gateIn {
@@ -256,7 +254,7 @@
         }
     </style>
 </head>
-<body class="antialiased selection:bg-secondary selection:text-white">
+<body class="antialiased selection:bg-primary selection:text-white text-gray-900">
 
     <div x-data="zenithSurveyHandler()" 
          class="fixed inset-0 flex flex-col z-[9999]"
@@ -265,31 +263,31 @@
          @keydown.window.backspace="if($event.target.tagName !== 'INPUT' && $event.target.tagName !== 'TEXTAREA') prev()">
         
         <div class="absolute inset-0 z-0 pointer-events-none">
-            <div class="absolute top-0 right-0 w-[50vw] h-[50vh] bg-primary/10 blur-[150px] rounded-full animate-pulse-slow"></div>
-            <div class="absolute bottom-0 left-0 w-[40vw] h-[40vh] bg-secondary/10 blur-[120px] rounded-full animate-pulse-slow delay-1000"></div>
-            <div class="absolute inset-0 opacity-[0.03] cyber-grid"></div>
+            <div class="absolute top-0 right-0 w-[50vw] h-[50vh] bg-primary/5 blur-[150px] rounded-full animate-pulse-slow"></div>
+            <div class="absolute bottom-0 left-0 w-[40vw] h-[40vh] bg-primary/5 blur-[120px] rounded-full animate-pulse-slow delay-1000"></div>
+            <div class="absolute inset-0 opacity-[1] cyber-grid"></div>
         </div>
 
-        <header class="relative z-50 flex items-center justify-between px-6 py-4 border-b border-white/5 bg-black/40 backdrop-blur-3xl h-20 shadow-2xl">
+        <header class="relative z-50 flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-white/80 backdrop-blur-3xl h-20 shadow-sm">
             <div class="flex items-center gap-6">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary to-primary-light flex items-center justify-center text-white shadow-lg">
+                    <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18" />
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-xs font-black uppercase tracking-[0.4em] text-white/30 leading-none mb-1">{{ __('land.expert_survey_elite_assessment') }}</h1>
-                        <p class="text-sm font-bold text-secondary" x-text="currentGroupName"></p>
+                        <h1 class="text-xs font-black uppercase tracking-[0.4em] text-gray-400 leading-none mb-1">{{ __('land.expert_survey_elite_assessment') }}</h1>
+                        <p class="text-sm font-bold text-primary" x-text="currentGroupName"></p>
                     </div>
                 </div>
             </div>
 
             <div class="hidden md:flex items-center gap-2">
                 <template x-for="(g, index) in groups" :key="index">
-                    <div class="h-1.5 rounded-full bg-white/5 overflow-hidden w-16 transition-all duration-300"
-                         :class="index === currentGroupIndex ? 'ring-2 ring-secondary/20' : ''">
-                        <div class="h-full bg-secondary shadow-[0_0_10px_#0D9488] transition-all duration-1000 ease-out"
+                    <div class="h-1.5 rounded-full bg-gray-200 overflow-hidden w-16 transition-all duration-300"
+                         :class="index === currentGroupIndex ? 'ring-2 ring-primary/30' : ''">
+                        <div class="h-full bg-primary shadow-[0_0_10px_rgba(26,82,206,0.5)] transition-all duration-1000 ease-out"
                              :style="{ width: index < currentGroupIndex ? '100%' : (index === currentGroupIndex ? progressInGroup + '%' : '0%') }"></div>
                     </div>
                 </template>
@@ -297,11 +295,11 @@
 
             <div class="flex items-center gap-6">
                 <div class="text-right">
-                    <span class="text-xl font-black text-white block leading-none" x-text="completionRate + '%'"></span>
-                    <span class="text-[10px] text-white/30 uppercase tracking-[0.2em] font-black">{{ __('land.expert_survey_sync_ratio') }}</span>
+                    <span class="text-xl font-black text-gray-900 block leading-none" x-text="completionRate + '%'"></span>
+                    <span class="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-black">{{ __('land.expert_survey_sync_ratio') }}</span>
                 </div>
                 <button type="button" @click="if(confirm('{{ __('land.expert_survey_quit_confirm') }}')) window.location.href='/'" 
-                        class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                        class="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 hover:border-red-100 transition-all">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
             </div>
@@ -321,13 +319,13 @@
                     
                     <template x-if="currentQIndex === -1">
                         <div class="text-center space-y-12 animate-gate-in">
-                            <div class="inline-block px-6 py-2 rounded-full border border-secondary/30 bg-secondary/5 text-secondary text-xs font-black uppercase tracking-[0.5em] mb-4">
+                            <div class="inline-block px-6 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-black uppercase tracking-[0.5em] mb-4">
                                 Protocol Verification
                             </div>
-                            <h1 class="text-6xl sm:text-8xl font-black tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-b from-white to-white/30">
+                            <h1 class="text-6xl sm:text-8xl font-black tracking-tighter leading-none text-gray-900">
                                 {{ __('land.expert_survey_hero_title') }}
                             </h1>
-                            <p class="text-2xl sm:text-3xl text-white/40 leading-relaxed max-w-3xl mx-auto font-medium">
+                            <p class="text-2xl sm:text-3xl text-gray-500 leading-relaxed max-w-3xl mx-auto font-medium">
                                 {{ __('land.expert_survey_hero_desc') }}
                             </p>
                             <button type="button" @click="startSurvey" class="zenith-btn group mt-8">
@@ -349,11 +347,11 @@
                             
                             <div class="space-y-8 text-center sm:text-start">
                                 <div class="flex items-center gap-8">
-                                    <div class="h-1 flex-1 bg-gradient-to-r from-secondary/50 to-transparent"></div>
-                                    <span class="text-base font-black text-secondary tracking-[1em] uppercase" x-text="'{{ __('land.expert_survey_phase') }} ' + (currentGroupIndex + 1)"></span>
-                                    <div class="h-1 flex-1 bg-gradient-to-l from-secondary/50 to-transparent"></div>
+                                    <div class="h-1 flex-1 bg-gradient-to-r from-primary/30 to-transparent"></div>
+                                    <span class="text-base font-black text-primary tracking-[1em] uppercase" x-text="'{{ __('land.expert_survey_phase') }} ' + (currentGroupIndex + 1)"></span>
+                                    <div class="h-1 flex-1 bg-gradient-to-l from-primary/30 to-transparent"></div>
                                 </div>
-                                <h2 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight" x-text="q.question_text"></h2>
+                                <h2 class="text-4xl sm:text-6xl font-black text-gray-900 tracking-tight leading-tight" x-text="q.question_text"></h2>
                             </div>
 
                             <div class="relative pt-4">
@@ -409,11 +407,11 @@
                                                        @change="handleChoice(q, opt)"
                                                        class="hidden">
                                                 <div class="w-10 h-10 rounded-2xl border flex items-center justify-center transition-all shadow-inner"
-                                                     :class="isSelected(q.id, opt) ? 'bg-secondary border-secondary scale-110 shadow-[0_0_20px_#0D9488]' : 'bg-white/5 border-white/10 group-hover/opt:border-secondary/50'">
+                                                     :class="isSelected(q.id, opt) ? 'bg-primary border-primary scale-110 shadow-[0_0_20px_rgba(26,82,206,0.3)]' : 'bg-gray-50 border-gray-200 group-hover/opt:border-primary/50'">
                                                     <svg x-show="isSelected(q.id, opt)" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                                                    <span x-show="!isSelected(q.id, opt)" class="text-xs font-black text-white/20" x-text="String.fromCharCode(65 + oIdx)"></span>
+                                                    <span x-show="!isSelected(q.id, opt)" class="text-xs font-black text-gray-400" x-text="String.fromCharCode(65 + oIdx)"></span>
                                                 </div>
-                                                <span class="text-2xl font-bold tracking-tight transition-all" :class="isSelected(q.id, opt) ? 'text-white' : 'text-white/40 group-hover/opt:text-white/70'" x-text="opt"></span>
+                                                <span class="text-2xl font-bold tracking-tight transition-all" :class="isSelected(q.id, opt) ? 'text-gray-900' : 'text-gray-500 group-hover/opt:text-gray-900'" x-text="opt"></span>
                                             </label>
                                         </template>
                                     </div>
@@ -426,11 +424,11 @@
                                                class="hidden-file-input"
                                                @change="handleFile($event, q.id)">
                                         <button type="button" @click="$el.previousElementSibling.click()"
-                                                class="zenith-btn bg-white/5 border border-white/10 w-full h-48 flex flex-col items-center justify-center gap-4 hover:bg-white/10 hover:border-secondary transition-all rounded-[3rem]">
-                                            <div class="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-2 group-hover/file:scale-110 transition-transform">
+                                                class="w-full h-48 flex flex-col items-center justify-center gap-4 bg-gray-50 border-2 border-dashed border-gray-300 hover:bg-gray-100 hover:border-primary transition-all rounded-[3rem] cursor-pointer">
+                                            <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2 group-hover/file:scale-110 transition-transform">
                                                 <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
                                             </div>
-                                            <span class="text-xl font-bold text-white/60 truncate max-w-full px-12" x-text="fileName(q.id) || '...'"></span>
+                                            <span class="text-xl font-bold text-gray-500 truncate max-w-full px-12" x-text="fileName(q.id) || '...'"></span>
                                         </button>
                                     </div>
                                 </template>
@@ -447,13 +445,13 @@
                     <template x-if="currentQIndex === allQuestions.length">
                         <div class="text-center space-y-16 animate-gate-in">
                             <div class="space-y-6">
-                                <h2 class="text-7xl font-black tracking-tighter leading-none">{{ __('land.expert_survey_complete_title') }}</h2>
-                                <p class="text-3xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed">
+                                <h2 class="text-7xl font-black tracking-tighter leading-none text-gray-900">{{ __('land.expert_survey_complete_title') }}</h2>
+                                <p class="text-3xl text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed">
                                     {{ __('land.expert_survey_complete_desc') }}
                                 </p>
                             </div>
                             <div class="flex flex-col sm:flex-row items-center justify-center gap-8">
-                                <button type="button" @click="currentQIndex = 0" class="px-14 py-6 rounded-3xl bg-white/5 font-black text-xl hover:bg-white/10 transition-all border border-white/5">{{ __('land.expert_survey_redo_btn') }}</button>
+                                <button type="button" @click="currentQIndex = 0" class="px-14 py-6 rounded-3xl bg-gray-100 font-black text-xl hover:bg-gray-200 transition-all border border-gray-200 text-gray-700">{{ __('land.expert_survey_redo_btn') }}</button>
                                 <button type="button" @click="submitForm" :disabled="loading" class="zenith-btn min-w-[320px]">
                                     <span x-show="!loading" class="text-xl">{{ __('land.expert_survey_submit_to_board') }}</span>
                                     <span x-show="loading" class="flex items-center gap-4"><svg class="animate-spin h-8 w-8 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>{{ __('land.expert_survey_analyzing') }}</span>
@@ -465,13 +463,13 @@
                     <template x-if="currentQIndex === 999">
                          <div class="text-center space-y-14 animate-gate-in">
                             <div class="relative w-48 h-48 mx-auto">
-                                <div class="absolute inset-0 bg-secondary/30 blur-[80px] rounded-full animate-pulse"></div>
-                                <div class="relative w-full h-full bg-secondary rounded-full flex items-center justify-center text-white shadow-[0_0_100px_rgba(13,148,136,0.7)] transform rotate-[360deg] transition-all">
+                                <div class="absolute inset-0 bg-primary/20 blur-[80px] rounded-full animate-pulse"></div>
+                                <div class="relative w-full h-full bg-primary rounded-full flex items-center justify-center text-white shadow-[0_20px_40px_rgba(26,82,206,0.4)] transform rotate-[360deg] transition-all">
                                     <svg class="w-24 h-24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                                 </div>
                             </div>
-                            <h2 class="text-7xl font-black tracking-tighter text-white drop-shadow-2xl">{{ __('land.expert_survey_success_title') }}</h2>
-                            <p class="text-3xl text-gray-200 leading-relaxed max-w-2xl mx-auto font-bold">{{ __('land.expert_survey_success_body') }}</p>
+                            <h2 class="text-7xl font-black tracking-tighter text-gray-900 drop-shadow-sm">{{ __('land.expert_survey_success_title') }}</h2>
+                            <p class="text-3xl text-gray-500 leading-relaxed max-w-2xl mx-auto font-bold">{{ __('land.expert_survey_success_body') }}</p>
                             <a href="{{ route('home') }}" class="inline-block zenith-btn">
                                 {{ __('land.expert_survey_confirm_exit') }}
                             </a>
@@ -481,10 +479,10 @@
             </form>
         </main>
 
-        <footer class="h-28 bg-black/40 backdrop-blur-3xl border-t border-white/5 px-12 flex items-center justify-between z-50">
+        <footer class="h-28 bg-white/80 backdrop-blur-3xl border-t border-gray-200 px-12 flex items-center justify-between z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
             <div class="min-w-[150px]">
                 <button type="button" @click="prev" x-show="currentQIndex >= 0 && currentQIndex < allQuestions.length" 
-                        class="flex items-center gap-4 text-white/30 hover:text-white transition-all font-black text-xl group">
+                        class="flex items-center gap-4 text-gray-400 hover:text-primary transition-all font-black text-xl group">
                     <svg class="w-8 h-8 rtl:rotate-180 group-hover:-translate-x-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
                     {{ __('land.expert_survey_prev_btn') }}
                 </button>
@@ -494,13 +492,13 @@
                 <template x-for="(q, i) in allQuestions" :key="q.id">
                     <button type="button" @click="jumpTo(i)"
                             class="w-2 h-2 rounded-full transition-all duration-500"
-                            :class="i === currentQIndex ? 'bg-secondary w-6 shadow-[0_0_10px_#0D9488]' : (i < currentQIndex ? 'bg-secondary/40' : 'bg-white/10')"></button>
+                            :class="i === currentQIndex ? 'bg-primary w-6 shadow-[0_4px_10px_rgba(26,82,206,0.3)]' : (i < currentQIndex ? 'bg-primary/40' : 'bg-gray-200')"></button>
                 </template>
             </div>
 
             <div class="min-w-[150px] flex justify-end">
                 <button type="button" @click="next" x-show="currentQIndex >= 0 && currentQIndex < allQuestions.length" 
-                        class="flex items-center gap-4 text-secondary hover:text-white transition-all font-black text-2xl group">
+                        class="flex items-center gap-4 text-primary transition-all font-black text-2xl group hover:opacity-80">
                     {{ __('land.expert_survey_next_btn') }}
                     <svg class="w-8 h-8 rtl:rotate-180 group-hover:translate-x-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
                 </button>
