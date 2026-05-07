@@ -17,25 +17,7 @@ class SettingForm
         return $schema
             ->components([
                 Tabs::make(__('admin.settings.label'))->columnSpanFull()->schema([
-                    Tab::make(__('admin.settings.tabs.general'))
-                        ->icon('heroicon-o-cog')
-                        ->schema([
-                            Grid::make(2)->schema([
-                                TextInput::make('site_name')
-                                    ->label(__('admin.settings.fields.site_name'))
-                                    ->columnSpanFull(),
-                                Textarea::make('site_description')
-                                    ->label(__('admin.settings.fields.site_description'))
-                                    ->columnSpanFull(),
-                                FileUpload::make('site_logo')
-                                    ->label(__('admin.settings.fields.site_logo'))
-                                    ->image()
-                                    ->directory('settings')
-                                    ->disk('public')
-                                    ->columnSpanFull(),
-                            ]),
-                        ]),
-
+             
                     Tab::make(__('admin.settings.tabs.contact'))
                         ->icon('heroicon-o-phone')
                         ->schema([

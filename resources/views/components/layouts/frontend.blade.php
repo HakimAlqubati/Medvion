@@ -237,7 +237,11 @@
     <x-frontend.footer />
 
     {{-- Floating WhatsApp Button --}}
-    <a href="https://wa.me/966500000000?text={{ urlencode(__('land.whatsapp_message')) }}"
+    @php
+        $floatWhatsapp = \App\Models\Setting::getSetting('whatsapp_number', \App\Models\Setting::getSetting('contact_phone', '966500000000'));
+        $floatWhatsapp = preg_replace('/[^0-9]/', '', $floatWhatsapp);
+    @endphp
+    <a href="https://wa.me/{{ $floatWhatsapp }}?text={{ urlencode(__('land.whatsapp_message')) }}"
         target="_blank" rel="noopener noreferrer"
         class="fixed bottom-8 end-8 z-50 flex items-center justify-center w-14 h-14 bg-primary text-white rounded-full shadow-lg hover:shadow-2xl hover:bg-primary-dark hover:-translate-y-1 transition-all duration-300 group"
         aria-label="{{ __('land.contact_whatsapp') }}">
