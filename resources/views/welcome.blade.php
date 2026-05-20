@@ -17,7 +17,7 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
 
-    <div class="bg-white max-w-2xl w-full rounded-2xl shadow-2xl overflow-hidden relative">
+    <div class="bg-white max-w-3xl w-full rounded-2xl shadow-2xl overflow-hidden relative">
         <!-- شريط علوي بلون تحذيري -->
         <div class="h-3 w-full bg-red-600"></div>
         
@@ -32,19 +32,34 @@
 
             <h1 class="text-3xl font-bold text-gray-900 mb-4">إشعار بتعليق خدمات الموقع</h1>
             
-            <div class="space-y-4 text-lg text-gray-600 leading-relaxed text-justify mt-8">
+            <div class="space-y-6 text-lg text-gray-600 leading-relaxed text-justify mt-8">
+                
                 <p>
-                    أود الإفادة بأنه قد تم <span class="font-bold text-red-600">تعليق خدمات هذا الموقع الإلكتروني</span> من قِبلي (كمطور للموقع). يأتي هذا الإجراء نظراً لتهرب المدعو (مراد مفلح) من سداد باقي المستحقات المالية المتفق عليها.
+                    أود الإفادة بأنه قد تم <span class="font-bold text-red-600">تعليق خدمات هذا الموقع الإلكتروني</span> من قِبلي (كمطور للموقع). يأتي هذا الإجراء لعدم التزام الطرف المعني (مراد مفلح) ببنود العقد المبرم، وقيامه بإرسال تقرير وملاحظات تقع بالكامل خارج نطاق المتطلبات المتفق عليها مسبقاً ولا تمت لها بأي صلة.
                 </p>
+
+                <!-- مربع توضيح الخلاف الفني -->
+                <div class="bg-red-50 border-r-4 border-red-500 p-5 rounded-l-lg text-gray-800 text-base md:text-lg text-right shadow-sm">
+                    <p class="mb-3 font-bold text-red-700">
+                        توضيح لموقف المطور:
+                    </p>
+                    <p class="mb-2">
+                        لقد تسبب هذا التصرف غير المهني في إعاقة سير العمل، مما دفعني لرفض التقرير بشكل قاطع والامتناع عن تنفيذ أي طلبات إضافية غير مدرجة في العقد. وبناءً على ذلك، اتضح لي جلياً أن هذا الإجراء يُعد <span class="font-bold text-gray-900">محاولة واضحة للتهرب من إتمام المشروع وإعاقة عملية التسليم والاستلام النهائي للموقع.</span>
+                    </p>
+                    <p>
+                        وعليه، قمت بإيقاف التواصل المباشر معه، وتمت إحاطة المحامي (المشرف على توقيع العقد بيننا) بكافة تفاصيل الخلاف ليتم اتخاذ الإجراءات اللازمة.
+                    </p>
+                </div>
+
                 <p>
-                    ولذلك، سيبقى الموقع معلقاً بشكل مؤقت ريثما يتم الدفع. وفي حال استمرار التهرب وعدم الالتزام، <span class="font-bold text-gray-900">سيتم الإيقاف النهائي للموقع وحذف النطاق (الدومين) بشكل كلي</span> بحلول نهاية شهر مايو (الموافق <span class="font-bold text-red-600">31-05-2026</span>).
+                    سيبقى الموقع معلقاً بشكل مؤقت. وفي حال استمرار هذا التعنت وعدم العودة لإتمام العمل بشكل عقلاني وبحسب المتفق عليه، <span class="font-bold text-gray-900">سيتم الإيقاف النهائي للموقع وحذف النطاق (الدومين) بشكل كلي</span> بحلول نهاية شهر مايو (الموافق <span class="font-bold text-red-600">31-05-2026</span>).
                 </p>
             </div>
 
             <hr class="my-8 border-gray-200">
 
             <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 text-right">
-                <p class="text-sm text-gray-500 mb-1">للتواصل وتسوية المعاملات المالية:</p>
+                <p class="text-sm text-gray-500 mb-1">للتواصل:</p>
                 <div class="flex items-center justify-between mt-4">
                     <div class="flex items-center space-x-3 space-x-reverse">
                         <div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">
