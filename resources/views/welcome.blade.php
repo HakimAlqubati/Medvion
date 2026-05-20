@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إشعار تعليق الخدمات | Medvion</title>
+    <title>الموقع معلق مؤقتاً | Medvion</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -17,39 +17,28 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
 
-    <div class="bg-white max-w-3xl w-full rounded-2xl shadow-2xl overflow-hidden relative">
-        <!-- شريط علوي بلون تحذيري -->
-        <div class="h-3 w-full bg-red-600"></div>
+    <div class="bg-white max-w-2xl w-full rounded-2xl shadow-2xl overflow-hidden relative">
+        <!-- شريط علوي بلون برتقالي/ذهبي هادئ يدل على التوقف المؤقت -->
+        <div class="h-3 w-full bg-yellow-500"></div>
         
         <div class="p-8 md:p-12 text-center">
             
-            <!-- أيقونة التحذير -->
-            <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-red-100 mb-6">
-                <svg class="h-12 w-12 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            <!-- أيقونة تنبيه هادئة -->
+            <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-yellow-50 mb-6">
+                <svg class="h-12 w-12 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
 
-            <h1 class="text-3xl font-bold text-gray-900 mb-4">إشعار بتعليق خدمات الموقع</h1>
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">نعتذر لكم، الموقع متوقف مؤقتاً</h1>
             
-            <div class="space-y-6 text-lg text-gray-600 leading-relaxed text-justify mt-8">
-                
-                <p>
-                    أود الإفادة بأنه قد تم <span class="font-bold text-red-600">تعليق خدمات هذا الموقع الإلكتروني مؤقتاً</span>. يأتي هذا الإجراء نتيجة لغياب الشفافية في التعامل من قِبل <span class="font-bold">(مالك الموقع)</span>، إثر قيامه بإرسال تقرير يتضمن طلبات وملاحظات تقع بالكامل خارج نطاق العقد والمتطلبات المتفق عليها مسبقاً.
+            <div class="text-lg text-gray-600 leading-relaxed text-center mt-6 mb-8">
+                <p class="mb-2">
+                    عذراً لعدم إمكانية الوصول إلى المنصة في الوقت الحالي.
                 </p>
-
-                <!-- مربع توضيح الخلاف الفني -->
-                <div class="bg-red-50 border-r-4 border-red-500 p-5 rounded-l-lg text-gray-800 text-base md:text-lg text-right shadow-sm">
-                    <p class="mb-3 font-bold text-red-700">
-                        توضيح لموقف المطور:
-                    </p>
-                    <p class="mb-2">
-                        لقد تسبب هذا التصرف غير المهني في إعاقة سير العمل وانزعاجي التام، مما دفعني لرفض التقرير بشكل قاطع والامتناع عن تنفيذ أي طلبات إضافية غير مدرجة في العقد الأساسي.
-                    </p>
-                    <p>
-                        وعليه، تم إيقاف التواصل المباشر، وإحالة الأمر للمحامي (المشرف على توقيع العقد) لاتخاذ اللازم. سيبقى الموقع معلقاً ريثما يتم الالتزام ببنود الاتفاق، وفي حال استمرار هذا التجاوز، <span class="font-bold text-gray-900">سيتم الإيقاف النهائي للموقع وإلغاء حجز النطاق (الدومين) بشكل كلي</span> بحلول نهاية شهر مايو (الموافق <span class="font-bold text-red-600">31-05-2026</span>).
-                    </p>
-                </div>
+                <p>
+                    تم تعليق خدمات الموقع بشكل مؤقت لحين <span class="font-bold text-gray-800">استكمال بعض الإجراءات التعاقدية والتنظيمية مع مالك الموقع</span>. نشكر لكم تفهمكم ونأمل أن تعود الخدمات للعمل في أقرب وقت.
+                </p>
             </div>
 
             <hr class="my-8 border-gray-200">
