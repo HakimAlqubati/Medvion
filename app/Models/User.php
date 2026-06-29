@@ -42,7 +42,7 @@ class User extends Authenticatable implements \Filament\Models\Contracts\Filamen
     protected function casts(): array
     {
         return [
-            'email_verified_at'  => 'datetime',
+            // 'email_verified_at'  => 'datetime',
             'password'           => 'hashed',
             'graduation_year'    => 'integer',
         ];
