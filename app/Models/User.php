@@ -22,6 +22,7 @@ use Spatie\Permission\Traits\HasRoles;
     'qualification',
     'graduation_year',
     'workplace',
+    'email_verified_at'
 ])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements \Filament\Models\Contracts\FilamentUser
@@ -42,7 +43,7 @@ class User extends Authenticatable implements \Filament\Models\Contracts\Filamen
     protected function casts(): array
     {
         return [
-            // 'email_verified_at'  => 'datetime',
+            'email_verified_at'  => 'datetime',
             'password'           => 'hashed',
             'graduation_year'    => 'integer',
         ];
