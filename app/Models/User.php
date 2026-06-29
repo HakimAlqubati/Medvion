@@ -24,14 +24,14 @@ use Spatie\Permission\Traits\HasRoles;
     'workplace',
 ])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements \Filament\Models\Contracts\FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasRoles;
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasAnyRole(['admin', 'editor', 'moderator']);
+        return $this->hasAnyRole(['admin', 'editor', 'moderator', 'super_admin', 'panel_user']);
     }
 
     /**
