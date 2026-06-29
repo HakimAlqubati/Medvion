@@ -19,11 +19,16 @@ class HeroSlideService
                 ->get();
         }
 
-        return Cache::remember('frontend.hero_slides', now()->addHours(24), function () {
+        $rows = Cache::remember('frontend.hero_slides', now()->addHours(24), function () {
             return HeroSlide::where('is_active', true)
                 ->orderBy('sort_order', 'asc')
-                ->get();
+                ->get()
+                ->map->getAttributes()
+                ->values()
+                ->all();
         });
+
+        return HeroSlide::hydrate($rows);
     }
 
     /**
