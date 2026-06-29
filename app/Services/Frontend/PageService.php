@@ -23,11 +23,14 @@ class PageService
                 ->first();
         }
 
-        return Cache::remember("frontend.page.{$slug}", now()->addHours(24), function () use ($slug) {
-            return Page::where('slug', $slug)
+        $attributes = Cache::remember("frontend.page.{$slug}", now()->addHours(24), function () use ($slug) {
+            $page = Page::where('slug', $slug)
                 ->where('is_active', true)
                 ->first();
+            return $page ? $page->getAttributes() : null;
         });
+
+        return $attributes ? Page::hydrate([$attributes])->first() : null;
     }
 
     /**
