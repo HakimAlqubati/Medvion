@@ -16,14 +16,19 @@ class BlogService
         $locale = app()->getLocale();
         $cacheKey = "blogs.latest.{$locale}.{$limit}";
 
-        $blogs = Cache::remember($cacheKey, now()->addHours(2), function () use ($limit) {
+        $rows = Cache::remember($cacheKey, now()->addHours(2), function () use ($limit) {
             return Blog::where('status', BlogStatus::PUBLISHED)
                 ->whereNotNull('published_at')
                 ->where('published_at', '<=', now())
                 ->orderBy('published_at', 'desc')
                 ->take($limit)
-                ->get();
+                ->get()
+                ->map->getAttributes()
+                ->values()
+                ->all();
         });
+
+        $blogs = Blog::hydrate($rows);
 
         return $blogs->map(fn($blog) => $this->prepareBlogImage($blog));
     }
