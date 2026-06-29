@@ -67,19 +67,16 @@
                 </button>
 
                 <div
-                    x-show="activeAccordion === {{ $index }}"
-                    x-transition:enter="transition-all ease-out duration-250"
-                    x-transition:enter-start="opacity-0 -translate-y-1"
-                    x-transition:enter-end="opacity-100 translate-y-0"
-                    x-transition:leave="transition-all ease-in duration-150"
-                    x-transition:leave-start="opacity-100 translate-y-0"
-                    x-transition:leave-end="opacity-0 -translate-y-1"
-                    class="overflow-hidden"
+                    class="grid transition-all duration-300 ease-in-out"
+                    style="grid-template-rows: 0fr; opacity: 0; visibility: hidden;"
+                    :style="activeAccordion === {{ $index }} ? 'grid-template-rows: 1fr; opacity: 1; visibility: visible;' : 'grid-template-rows: 0fr; opacity: 0; visibility: hidden;'"
                     x-cloak>
-                    <div class="px-6 pb-6 pt-1 text-base leading-relaxed {{ $altBg ? 'text-white/90' : 'text-gray-500' }}">
-                        <p class="ps-4 border-s-2 {{ $altBg ? 'border-white/30' : 'border-secondary/50' }}">
-                            {{ $item->answer }}
-                        </p>
+                    <div class="overflow-hidden">
+                        <div class="px-6 pb-6 pt-1 text-base leading-relaxed {{ $altBg ? 'text-white/90' : 'text-gray-500' }}">
+                            <p class="ps-4 border-s-2 {{ $altBg ? 'border-white/30' : 'border-secondary/50' }}">
+                                {{ $item->answer }}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
