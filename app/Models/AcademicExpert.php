@@ -24,4 +24,15 @@ class AcademicExpert extends Model
     {
         return $this->belongsTo(AcademicHeader::class, 'header_id');
     }
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            \App\Services\Frontend\AcademicExpertService::clearCache();
+        });
+
+        static::deleted(function () {
+            \App\Services\Frontend\AcademicExpertService::clearCache();
+        });
+    }
 }

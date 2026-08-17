@@ -18,6 +18,17 @@ class HeroSlide extends Model
         'is_active' => 'boolean',
     ];
 
+    protected static function booted()
+    {
+        static::saved(function () {
+            \App\Services\Frontend\HeroSlideService::clearCache();
+        });
+
+        static::deleted(function () {
+            \App\Services\Frontend\HeroSlideService::clearCache();
+        });
+    }
+
     /**
      * Intelligent Accessor for Image:
      * Returns the image if it exists, otherwise falls back to a default local image.

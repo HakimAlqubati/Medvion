@@ -5,9 +5,32 @@ namespace App\Services\Frontend;
 use App\Models\Course;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class CourseService
 {
+    /**
+     * Clear all cached data and component fragments for courses.
+     */
+    public static function clearCache(): void
+    {
+        Cache::forget('frontend.courses.latest.3');
+        Cache::forget('frontend.courses.latest.6');
+
+        $locales = ['ar', 'en'];
+        $authStates = ['guest', 'auth'];
+        $bgStates = ['normal_bg', 'alt_bg'];
+        $version = 'v1.0';
+
+        foreach ($locales as $locale) {
+            foreach ($authStates as $authState) {
+                foreach ($bgStates as $bgState) {
+                    Cache::forget("components.latest_courses.{$locale}.{$authState}.{$bgState}.{$version}");
+                }
+            }
+        }
+    }
+
     /**
      * Get the latest active courses with their categories.
      *

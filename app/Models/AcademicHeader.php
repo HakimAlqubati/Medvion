@@ -22,4 +22,15 @@ class AcademicHeader extends Model
     {
         return $this->hasMany(AcademicExpert::class, 'header_id');
     }
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            \App\Services\Frontend\AcademicExpertService::clearCache();
+        });
+
+        static::deleted(function () {
+            \App\Services\Frontend\AcademicExpertService::clearCache();
+        });
+    }
 }

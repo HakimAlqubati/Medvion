@@ -39,4 +39,36 @@ class PartnerCategory extends Model
     {
         return app()->getLocale() === 'ar' ? $this->name_ar : $this->name_en;
     }
+
+    protected static function booted()
+    {
+        static::creating(function ($category) {
+            if (\Illuminate\Support\Facades\Auth::check()) {
+                $category->created_by = \Illuminate\Support\Facades\Auth::id();
+                $category->updated_by = \Illuminate\Support\Facades\Auth::id();
+            }
+        });
+
+        static::updating(function ($category) {
+            if (\Illuminate\Support\Facades\Auth::check()) {
+                $category->updated_by = \Illuminate\Support\Facades\Auth::id();
+            }
+        });
+
+        static::saved(function () {
+            Partner::clearCache();
+        });
+
+        static::deleted(function () {
+            Partner::clearCache();
+        });
+
+        static::restored(function () {
+            Partner::clearCache();
+        });
+
+        static::forceDeleted(function () {
+            Partner::clearCache();
+        });
+    }
 }

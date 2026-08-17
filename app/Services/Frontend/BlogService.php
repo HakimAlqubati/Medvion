@@ -76,4 +76,21 @@ class BlogService
         }
         return $blog;
     }
+
+    /**
+     * Clear all cached data and component fragments for blogs.
+     */
+    public static function clearCache(): void
+    {
+        $locales = ['ar', 'en'];
+        $limits = [3, 4, 6, 8, 9, 10];
+
+        foreach ($locales as $locale) {
+            foreach ($limits as $limit) {
+                Cache::forget("blogs.latest.{$locale}.{$limit}");
+                Cache::forget("components.blogs.latest.{$locale}.{$limit}");
+            }
+            Cache::forget("components.blogs.latest.{$locale}.4");
+        }
+    }
 }

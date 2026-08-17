@@ -32,5 +32,13 @@ class FaqService
         // hydrate يستلم الـ raw attributes فتعمل الـ casts بشكل صحيح عند الوصول
         return Faq::hydrate($rows);
     }
+
+    /**
+     * Clear the FAQs cache.
+     */
+    public static function clearCache(): void
+    {
+        Cache::forget('faqs.active');
+    }
 }
 

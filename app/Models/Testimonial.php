@@ -19,4 +19,23 @@ class Testimonial extends Model
     protected $casts = [
         'status' => TestimonialStatus::class,
     ];
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            \App\Services\Frontend\TestimonialService::clearCache();
+        });
+
+        static::deleted(function () {
+            \App\Services\Frontend\TestimonialService::clearCache();
+        });
+
+        static::restored(function () {
+            \App\Services\Frontend\TestimonialService::clearCache();
+        });
+
+        static::forceDeleted(function () {
+            \App\Services\Frontend\TestimonialService::clearCache();
+        });
+    }
 }

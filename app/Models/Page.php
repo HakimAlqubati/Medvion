@@ -18,4 +18,15 @@ class Page extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    protected static function booted()
+    {
+        static::saved(function ($page) {
+            \App\Services\Frontend\PageService::clearCache($page->slug);
+        });
+
+        static::deleted(function ($page) {
+            \App\Services\Frontend\PageService::clearCache($page->slug);
+        });
+    }
 }

@@ -17,4 +17,15 @@ class Feature extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            \App\Services\Frontend\FeatureService::clearCache();
+        });
+
+        static::deleted(function () {
+            \App\Services\Frontend\FeatureService::clearCache();
+        });
+    }
 }

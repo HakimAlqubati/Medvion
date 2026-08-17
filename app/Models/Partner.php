@@ -39,4 +39,50 @@ class Partner extends Model
     {
         return app()->getLocale() === 'ar' ? $this->name_ar : $this->name_en;
     }
+
+    /**
+     * Clear all cached data and component fragments for partners.
+     */
+    public static function clearCache(): void
+    {
+        $locales = ['ar', 'en'];
+        $version = 'v1.0';
+
+        foreach ($locales as $locale) {
+            \Illuminate\Support\Facades\Cache::forget("frontend.partners.data.{$locale}.v1");
+            \Illuminate\Support\Facades\Cache::forget("components.partners.{$locale}.{$version}");
+        }
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($partner) {
+            if (\Illuminate\Support\Facades\Auth::check()) {
+                $partner->created_by = \Illuminate\Support\Facades\Auth::id();
+                $partner->updated_by = \Illuminate\Support\Facades\Auth::id();
+            }
+        });
+
+        static::updating(function ($partner) {
+            if (\Illuminate\Support\Facades\Auth::check()) {
+                $partner->updated_by = \Illuminate\Support\Facades\Auth::id();
+            }
+        });
+
+        static::saved(function () {
+            static::clearCache();
+        });
+
+        static::deleted(function () {
+            static::clearCache();
+        });
+
+        static::restored(function () {
+            static::clearCache();
+        });
+
+        static::forceDeleted(function () {
+            static::clearCache();
+        });
+    }
 }

@@ -66,5 +66,21 @@ class Course extends Model
                 $course->updated_by = Auth::id();
             }
         });
+
+        static::saved(function () {
+            \App\Services\Frontend\CourseService::clearCache();
+        });
+
+        static::deleted(function () {
+            \App\Services\Frontend\CourseService::clearCache();
+        });
+
+        static::restored(function () {
+            \App\Services\Frontend\CourseService::clearCache();
+        });
+
+        static::forceDeleted(function () {
+            \App\Services\Frontend\CourseService::clearCache();
+        });
     }
 }

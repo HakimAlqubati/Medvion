@@ -40,4 +40,15 @@ class TestimonialService
             return $item;
         });
     }
+
+    /**
+     * Clear cached testimonials for all locales.
+     */
+    public static function clearCache(): void
+    {
+        $locales = ['ar', 'en'];
+        foreach ($locales as $locale) {
+            Cache::forget("testimonials.active.{$locale}");
+        }
+    }
 }

@@ -48,4 +48,15 @@ class AcademicExpertService
 
         return $headerObj;
     }
+
+    /**
+     * Clear cached academic section data for all locales.
+     */
+    public static function clearCache(): void
+    {
+        $locales = ['ar', 'en'];
+        foreach ($locales as $locale) {
+            Cache::forget("academic.section.active.{$locale}");
+        }
+    }
 }

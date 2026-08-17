@@ -74,5 +74,21 @@ class Blog extends Model
                 $blog->updated_by = Auth::id();
             }
         });
+
+        static::saved(function () {
+            \App\Services\Frontend\BlogService::clearCache();
+        });
+
+        static::deleted(function () {
+            \App\Services\Frontend\BlogService::clearCache();
+        });
+
+        static::restored(function () {
+            \App\Services\Frontend\BlogService::clearCache();
+        });
+
+        static::forceDeleted(function () {
+            \App\Services\Frontend\BlogService::clearCache();
+        });
     }
 }
