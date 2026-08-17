@@ -7,7 +7,7 @@
         </div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
             <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">{{ $page_hero->title ?? __('land.about_hero_title') }}</h1>
-            <p class="text-white/75 text-lg max-w-2xl mx-auto">{{ $page_hero->content ?? __('land.about_hero_subtitle') }}</p>
+            <p class="text-white/75 text-lg max-w-2xl mx-auto">{{ trim(strip_tags($page_hero->content ?? '')) ?: __('land.about_hero_subtitle') }}</p>
         </div>
     </section>
 
@@ -23,7 +23,7 @@
                 </div>
                 <div>
                     <h2 class="text-2xl font-extrabold text-primary mb-4">{{ optional($definition)->title ?? __('land.about_definition_title') }}</h2>
-                    <p class="text-gray-600 leading-relaxed text-base">{{ optional($definition)->content ?? __('land.about_definition_body') }}</p>
+                    <p class="text-gray-600 leading-relaxed text-base">{{ trim(strip_tags(optional($definition)->content ?? '')) ?: __('land.about_definition_body') }}</p>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-extrabold text-primary mb-3">{{ optional($vision)->title ?? __('land.about_vision_title') }}</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm">{{ optional($vision)->content ?? __('land.about_vision_body') }}</p>
+                    <p class="text-gray-600 leading-relaxed text-sm">{{ trim(strip_tags(optional($vision)->content ?? '')) ?: __('land.about_vision_body') }}</p>
                 </div>
 
                 {{-- Mission --}}
@@ -59,7 +59,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-extrabold text-primary mb-3">{{ optional($mission)->title ?? __('land.about_mission_title') }}</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm">{{ optional($mission)->content ?? __('land.about_mission_body') }}</p>
+                    <p class="text-gray-600 leading-relaxed text-sm">{{ trim(strip_tags(optional($mission)->content ?? '')) ?: __('land.about_mission_body') }}</p>
                 </div>
 
             </div>
@@ -83,7 +83,7 @@
                             </svg>
                         </div>
                         <h4 class="font-extrabold text-primary mb-2">{{ $value->title }}</h4>
-                        <p class="text-gray-500 text-sm leading-relaxed">{{ $value->content }}</p>
+                        <p class="text-gray-500 text-sm leading-relaxed">{{ trim(strip_tags($value->content ?? '')) }}</p>
                     </div>
                 @empty
                     <div class="col-span-4 text-center text-gray-500">لا توجد سجلات حالياً</div>

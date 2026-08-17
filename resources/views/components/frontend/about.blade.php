@@ -21,7 +21,7 @@
                 </h2>
                 
                 <p class="text-lg md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8">
-                    {{ optional($summary)->content ?? __('land.about_section_subtitle') }}
+                    {{ trim(strip_tags(optional($summary)->content ?? '')) ?: __('land.about_section_subtitle') }}
                 </p>
                 
                 <div>
