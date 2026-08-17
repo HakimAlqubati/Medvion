@@ -41,5 +41,21 @@ class Impact extends Model
                 $model->save();
             }
         });
+
+        static::saved(function () {
+            \App\Services\Frontend\AboutService::clearImpactsCache();
+        });
+
+        static::deleted(function () {
+            \App\Services\Frontend\AboutService::clearImpactsCache();
+        });
+
+        static::restored(function () {
+            \App\Services\Frontend\AboutService::clearImpactsCache();
+        });
+
+        static::forceDeleted(function () {
+            \App\Services\Frontend\AboutService::clearImpactsCache();
+        });
     }
 }

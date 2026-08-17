@@ -30,6 +30,33 @@ class AboutService
     }
 
     /**
+     * Clear all cached data and component fragments for about sections.
+     */
+    public static function clearCache(): void
+    {
+        \Illuminate\Support\Facades\Cache::forget('frontend.about.home_summary');
+
+        // Clear component HTML fragment caches for all supported locales and background states
+        $locales = ['ar', 'en'];
+        $bgStates = ['normal_bg', 'alt_bg'];
+        $version = 'v1.0';
+
+        foreach ($locales as $locale) {
+            foreach ($bgStates as $bgState) {
+                \Illuminate\Support\Facades\Cache::forget("components.about.{$locale}.{$bgState}.{$version}");
+            }
+        }
+    }
+
+    /**
+     * Clear cached impacts data.
+     */
+    public static function clearImpactsCache(): void
+    {
+        \Illuminate\Support\Facades\Cache::forget('frontend.about.impacts');
+    }
+
+    /**
      * Get all page sections organized by their section keys.
      * Items like multiple 'values' will be grouped together.
      *

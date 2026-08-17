@@ -55,5 +55,21 @@ class About extends Model
                 $about->updated_by = Auth::id();
             }
         });
+
+        static::saved(function () {
+            \App\Services\Frontend\AboutService::clearCache();
+        });
+
+        static::deleted(function () {
+            \App\Services\Frontend\AboutService::clearCache();
+        });
+
+        static::restored(function () {
+            \App\Services\Frontend\AboutService::clearCache();
+        });
+
+        static::forceDeleted(function () {
+            \App\Services\Frontend\AboutService::clearCache();
+        });
     }
 }
