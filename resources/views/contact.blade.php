@@ -272,9 +272,14 @@
                     submitBtn.disabled = true;
                     submitText.innerHTML = "{!! __('land.contact_processing') !!}";
                     
+                    const formData = new FormData(form);
+                    if (formData.has('email')) {
+                        formData.set('email', formData.get('email').toString().trim().toLowerCase());
+                    }
+
                     fetch(form.action, {
                         method: 'POST',
-                        body: new FormData(form),
+                        body: formData,
                         headers: {
                             'Accept': 'application/json'
                         }
