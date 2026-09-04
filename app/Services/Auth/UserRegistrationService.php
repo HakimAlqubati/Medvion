@@ -39,6 +39,7 @@ class UserRegistrationService
         $user = User::create([
             'name'              => $data['name'],
             'email'             => $data['email'],
+            'user_type'         => \App\Enums\UserTypeEnum::STUDENT,
             'password'          => Hash::make($data['password']),
             'phone'             => $data['phone']            ?? null,
             'city'              => $data['city']             ?? null,

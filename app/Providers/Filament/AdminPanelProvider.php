@@ -179,6 +179,7 @@ class AdminPanelProvider extends PanelProvider
 
             ->authMiddleware([
                 Authenticate::class,
+                \App\Http\Middleware\EnsureAdminPanelAccess::class,
             ])
             ->plugin(
                 SpatieTranslatablePlugin::make()

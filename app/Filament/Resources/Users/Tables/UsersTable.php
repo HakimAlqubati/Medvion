@@ -25,10 +25,22 @@ class UsersTable
                     ->label(__('admin.users.fields.email'))
                     ->searchable()->copyable()
                     ->sortable(),
+                TextColumn::make("user_type")
+                    ->label(__('admin.users.fields.user_type'))
+                    ->badge()
+                    ->color(fn ($record) => match ($record->user_type?->value ?? $record->user_type) {
+                        'admin'      => 'danger',
+                        'instructor' => 'warning',
+                        default      => 'success',
+                    })
+                    ->formatStateUsing(fn ($record) => $record->user_type instanceof \App\Enums\UserTypeEnum ? $record->user_type->label() : (\App\Enums\UserTypeEnum::tryFrom($record->user_type)?->label() ?? $record->user_type))
+                    ->sortable()
+                    ->alignCenter(),
                 TextColumn::make("email_verified_at")
                     ->label(__('admin.users.fields.email_verified_at'))
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make("specialty")
                     ->label(__('admin.users.fields.specialty'))
                     ->state(fn ($record) => $record->specialization?->name ?? $record->specialty ?? '—')

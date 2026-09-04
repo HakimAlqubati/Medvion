@@ -81,6 +81,7 @@ return [
             'name_placeholder'       => 'Example: John Doe',
             'email'                  => 'Email Address',
             'email_placeholder'      => 'Example: user@example.com',
+            'user_type'              => 'Account Type',
             'password'               => 'Password',
             'password_placeholder'   => 'Enter a new password or leave blank to keep current',
             'password_hint'          => 'Minimum 8 characters • Leave blank to keep the current password',

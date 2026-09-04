@@ -14,6 +14,7 @@ use Spatie\Permission\Traits\HasRoles;
 #[Fillable([
     'name',
     'email',
+    'user_type',
     'password',
     'phone',
     'city',
@@ -34,8 +35,22 @@ class User extends Authenticatable implements \Filament\Models\Contracts\Filamen
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
-        return $this->hasAnyRole(['admin', 'editor', 'moderator', 'super_admin', 'panel_user']);
+        if ($panel->getId() === 'admin') {
+            return $this->user_type === \App\Enums\UserTypeEnum::ADMIN
+                && $this->hasAnyRole(['admin', 'editor', 'moderator', 'super_admin']);
+        }
+
+        return false;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->user_type === \App\Enums\UserTypeEnum::ADMIN;
+    }
+
+    public function isStudent(): bool
+    {
+        return $this->user_type === \App\Enums\UserTypeEnum::STUDENT;
     }
 
     public function specialization(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -61,6 +76,7 @@ class User extends Authenticatable implements \Filament\Models\Contracts\Filamen
             'graduation_year'    => 'integer',
             'specialization_id'  => 'integer',
             'qualification_id'   => 'integer',
+            'user_type'          => \App\Enums\UserTypeEnum::class,
         ];
     }
 

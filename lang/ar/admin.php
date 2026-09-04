@@ -81,6 +81,7 @@ return [
             'name_placeholder'          => 'مثال: أحمد محمد',
             'email'                     => 'البريد الإلكتروني',
             'email_placeholder'         => 'مثال: user@example.com',
+            'user_type'                 => 'نوع الحساب',
             'password'                  => 'كلمة المرور',
             'password_placeholder'      => 'ادخل كلمة مرور جديدة أو اتركها فارغة للإبقاء',
             'password_hint'             => 'بحد أدنى 8 أحرف • اتركها فارغة لعدم تغيير كلمة المرور الحالية',

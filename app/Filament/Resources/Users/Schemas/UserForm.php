@@ -41,6 +41,18 @@ class UserForm
                                 ->prefixIcon('heroicon-o-envelope'),
                         ]),
 
+                        Select::make('user_type')
+                            ->label(__('admin.users.fields.user_type'))
+                            ->options([
+                                \App\Enums\UserTypeEnum::STUDENT->value    => \App\Enums\UserTypeEnum::STUDENT->label(),
+                                \App\Enums\UserTypeEnum::ADMIN->value      => \App\Enums\UserTypeEnum::ADMIN->label(),
+                                // \App\Enums\UserTypeEnum::INSTRUCTOR->value => \App\Enums\UserTypeEnum::INSTRUCTOR->label(),
+                            ])
+                            ->default(\App\Enums\UserTypeEnum::STUDENT->value)
+                            ->required()
+                            ->prefixIcon('heroicon-o-identification')
+                            ->columnSpanFull(),
+
                         Select::make('roles')
                             ->label(__('admin.users.fields.roles'))
                             ->relationship('roles', 'name')
