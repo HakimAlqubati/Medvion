@@ -1,8 +1,8 @@
 <footer class="bg-primary-dark text-white pt-16 pb-8 mt-16 border-t-[6px] border-secondary relative overflow-hidden">
     @php
         $siteEmail = \App\Models\Setting::getSetting('contact_email', 'medvion04@gmail.com');
-        $sitePhone1 = \App\Models\Setting::getSetting('contact_phone', '733 989 589');
-        $sitePhone2 = \App\Models\Setting::getSetting('contact_phone_2', '785 153 261'); 
+        $sitePhone1 = \App\Models\Setting::getSetting('contact_phone', '733989589');
+        $sitePhone2 = \App\Models\Setting::getSetting('contact_phone_2', '785153261'); 
         $whatsapp = \App\Models\Setting::getSetting('whatsapp_number', $sitePhone1);
         
         $facebook = \App\Models\Setting::getSetting('facebook_url', '#');
