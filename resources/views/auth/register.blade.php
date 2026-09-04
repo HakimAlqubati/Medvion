@@ -174,6 +174,25 @@
             border-color: #0D9488;
             background: #f0fdfa;
         }
+        select.field-input {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: {{ app()->getLocale() === 'ar' ? 'left 14px center' : 'right 14px center' }};
+            background-size: 18px;
+            padding-{{ app()->getLocale() === 'ar' ? 'left' : 'right' }}: 42px;
+            cursor: pointer;
+        }
+        select.field-input:focus {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%231A52CE'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+        select.field-input option {
+            background-color: #ffffff;
+            color: #111827;
+            padding: 10px 14px;
+        }
         .field-error {
             font-size: 12px; color: #ef4444; margin-top: 5px;
             display: none; align-items: center; gap: 4px;
@@ -546,10 +565,18 @@
                         <label class="field-label" for="specialty">
                             {{ __('register.specialty') }} <span class="req">*</span>
                         </label>
-                        <input id="specialty" name="specialty" type="text"
-                               class="field-input"
-                               placeholder="{{ __('register.specialty_placeholder') }}"
-                               value="{{ old('specialty') }}">
+                        <select id="specialty" name="specialty" class="field-input">
+                            <option value="" disabled {{ old('specialty') ? '' : 'selected' }}>
+                                {{ __('register.select_specialty') }}
+                            </option>
+                            @if(isset($specializations))
+                                @foreach($specializations as $spec)
+                                    <option value="{{ $spec->id }}" {{ old('specialty') == $spec->id ? 'selected' : '' }}>
+                                        {{ $spec->getTranslation('name', app()->getLocale()) ?: $spec->name }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
                         <div class="field-error" id="err-specialty">
                             <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
                             <span id="err-specialty-text"></span>
@@ -561,10 +588,18 @@
                         <label class="field-label" for="qualification">
                             {{ __('register.qualification') }} <span class="req">*</span>
                         </label>
-                        <input id="qualification" name="qualification" type="text"
-                               class="field-input"
-                               placeholder="{{ __('register.qualification_placeholder') }}"
-                               value="{{ old('qualification') }}">
+                        <select id="qualification" name="qualification" class="field-input">
+                            <option value="" disabled {{ old('qualification') ? '' : 'selected' }}>
+                                {{ __('register.select_qualification') }}
+                            </option>
+                            @if(isset($qualifications))
+                                @foreach($qualifications as $qual)
+                                    <option value="{{ $qual->id }}" {{ old('qualification') == $qual->id ? 'selected' : '' }}>
+                                        {{ $qual->getTranslation('name', app()->getLocale()) ?: $qual->name }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
                         <div class="field-error" id="err-qualification">
                             <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
                             <span id="err-qualification-text"></span>
@@ -579,7 +614,7 @@
                         <input id="graduation_year" name="graduation_year" type="number"
                                class="field-input"
                                placeholder="{{ __('register.graduation_year_placeholder') }}"
-                               min="1970" max="{{ date('Y') }}"
+                               min="1970" max="{{ (int)date('Y') + 1 }}"
                                value="{{ old('graduation_year') }}">
                         <div class="field-error" id="err-graduation_year">
                             <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
@@ -846,6 +881,13 @@
         } finally {
             submitBtn.disabled = false;
             submitBtn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>{{ __("register.btn_submit") }}`;
+        }
+    });
+
+    ['specialty', 'qualification'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('change', () => setError(id, null));
         }
     });
 

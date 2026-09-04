@@ -29,6 +29,22 @@ class UsersTable
                     ->label(__('admin.users.fields.email_verified_at'))
                     ->searchable()
                     ->sortable(),
+                TextColumn::make("specialty")
+                    ->label(__('admin.users.fields.specialty'))
+                    ->state(fn ($record) => $record->specialization?->name ?? $record->specialty ?? '—')
+                    ->badge()
+                    ->color('info')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make("qualification")
+                    ->label(__('admin.users.fields.qualification'))
+                    ->state(fn ($record) => $record->qualificationRecord?->name ?? $record->qualification ?? '—')
+                    ->badge()
+                    ->color('gray')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make("created_at")
                     ->label(__('admin.users.fields.created_at'))
                     ->searchable()

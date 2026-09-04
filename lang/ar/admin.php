@@ -70,6 +70,10 @@ return [
             'personal_description' => 'الاسم وعنوان البريد الإلكتروني للمستخدم',
             'security'             => 'الأمان وكلمة المرور',
             'security_description' => 'إعدادات كلمة المرور وحالة التحقق',
+            'education'            => 'البيانات المهنية والتعليمية',
+            'education_description'=> 'التخصص المهني، المؤهل العلمي، وسنة التخرج',
+            'contact'              => 'العنوان والتواصل',
+            'contact_description'  => 'رقم الهاتف، المدينة، والعنوان التفصيلي',
         ],
 
         'fields' => [
@@ -84,7 +88,45 @@ return [
             'email_verified_at'         => 'تاريخ التحقق من البريد',
             'email_verified_at_hint'    => 'اتركها فارغة إذا لم يتم التحقق • اضبط تاريخًا لتفعيل الحساب يدويًا',
             'roles'                     => 'الأدوار والصلاحيات',
+            'specialty'                 => 'التخصص المهني',
+            'qualification'             => 'المؤهل العلمي',
+            'graduation_year'           => 'سنة التخرج',
+            'graduation_year_placeholder'=> 'مثال: 2024',
+            'workplace'                 => 'جهة العمل / الجامعة',
+            'workplace_placeholder'     => 'مثال: مستشفى الملك فهد...',
+            'phone'                     => 'رقم الهاتف',
+            'phone_placeholder'         => 'مثال: +966500000000',
+            'city'                      => 'المدينة',
+            'city_placeholder'          => 'مثال: الرياض، جدة...',
+            'address'                   => 'العنوان التفصيلي',
+            'address_placeholder'       => 'الحي، الشارع...',
             'created_at'                => 'تاريخ الإنشاء',
+        ],
+    ],
+    'specializations' => [
+        'label' => 'التخصص المهني',
+        'plural_label' => 'التخصصات المهنية',
+        'sections' => [
+            'info' => 'بيانات التخصص',
+            'settings' => 'الإعدادات والترتيب',
+        ],
+        'fields' => [
+            'name' => 'اسم التخصص',
+            'name_placeholder' => 'مثال: طب عام، صيدلة، تمريض...',
+            'users_count' => 'عدد المسجلين',
+        ],
+    ],
+    'qualifications' => [
+        'label' => 'المؤهل العلمي',
+        'plural_label' => 'المؤهلات العلمية',
+        'sections' => [
+            'info' => 'بيانات المؤهل',
+            'settings' => 'الإعدادات والترتيب',
+        ],
+        'fields' => [
+            'name' => 'اسم المؤهل',
+            'name_placeholder' => 'مثال: بكالوريوس، ماجستير، دكتوراه...',
+            'users_count' => 'عدد المسجلين',
         ],
     ],
     'faqs' => [

@@ -19,6 +19,8 @@ use App\Filament\Resources\Partners\PartnerResource;
 use App\Filament\Resources\Surveys\SurveyResource;
 use App\Filament\Resources\SurveySubmissions\SurveySubmissionResource;
 use App\Filament\Resources\Users\UserResource;
+use App\Filament\Resources\Specializations\SpecializationResource;
+use App\Filament\Resources\Qualifications\QualificationResource;
 use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Resources\Settings\SettingResource;
@@ -139,6 +141,8 @@ class AdminPanelProvider extends PanelProvider
                             // ->icon(Heroicon::OutlinedCog6Tooth)
                             ->items([
                                 ...(UserResource::canViewAny() ? UserResource::getNavigationItems() : []),
+                                ...(SpecializationResource::canViewAny() ? SpecializationResource::getNavigationItems() : []),
+                                ...(QualificationResource::canViewAny() ? QualificationResource::getNavigationItems() : []),
                                 ...(RoleResource::canViewAny() ? RoleResource::getNavigationItems() : []),
                             ]),
                         NavigationGroup::make(__('admin.navigation.groups.settings'))

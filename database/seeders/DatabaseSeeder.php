@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
             TeamMemberSeeder::class,
             ImpactSeeder::class,
             SurveySeeder::class,
+            SpecializationSeeder::class,
+            QualificationSeeder::class,
         ]);
     }
 }

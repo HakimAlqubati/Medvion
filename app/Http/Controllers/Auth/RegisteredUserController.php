@@ -24,7 +24,15 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $specializations = \App\Models\Specialization::where('is_active', true)
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
+        $qualifications = \App\Models\Qualification::where('is_active', true)
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
+        return view('auth.register', compact('specializations', 'qualifications'));
     }
 
     /**

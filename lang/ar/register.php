@@ -43,11 +43,13 @@ return [
 
     // ─── Step 3 fields ──────────────────────────────────────────────────────────
     'specialty'               => 'التخصص المهني',
-    'specialty_placeholder'   => 'مثال: طب عام، تمريض، صيدلة...',
+    'specialty_placeholder'   => 'اختر التخصص المهني من القائمة',
+    'select_specialty'        => 'اختر التخصص المهني...',
     'qualification'           => 'المؤهل العلمي',
-    'qualification_placeholder'=> 'مثال: بكالوريوس، ماجستير، دكتوراه...',
+    'qualification_placeholder'=> 'اختر المؤهل العلمي من القائمة',
+    'select_qualification'    => 'اختر المؤهل العلمي...',
     'graduation_year'         => 'سنة التخرج',
-    'graduation_year_placeholder' => 'مثال: 2020',
+    'graduation_year_placeholder' => 'مثال: 2024',
     'workplace'               => 'جهة العمل / الجامعة (اختياري)',
     'workplace_placeholder'   => 'مثال: مستشفى الملك فهد...',
 
@@ -63,11 +65,13 @@ return [
     'phone_required'          => 'رقم الهاتف مطلوب.',
     'phone_invalid'           => 'صيغة رقم الهاتف غير صحيحة.',
     'city_required'           => 'المدينة مطلوبة.',
-    'specialty_required'      => 'التخصص المهني مطلوب.',
-    'qualification_required'  => 'المؤهل العلمي مطلوب.',
+    'specialty_required'      => 'يرجى اختيار التخصص المهني.',
+    'specialty_invalid'       => 'التخصص المهني المختار غير صالح.',
+    'qualification_required'  => 'يرجى اختيار المؤهل العلمي.',
+    'qualification_invalid'   => 'المؤهل العلمي المختار غير صالح.',
     'graduation_year_required'=> 'سنة التخرج مطلوبة.',
     'graduation_year_invalid' => 'سنة التخرج يجب أن تكون رقماً صحيحاً.',
-    'graduation_year_range'   => 'سنة التخرج يجب أن تكون بين 1970 والسنة الحالية.',
+    'graduation_year_range'   => 'سنة التخرج يجب أن تكون سنة صالحة (بين 1970 وحتى السنة القادمة).',
 
     // ─── Success ────────────────────────────────────────────────────────────────
     'success_title'           => 'تم إنشاء الحساب بنجاح!',

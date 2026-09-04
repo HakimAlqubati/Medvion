@@ -70,6 +70,10 @@ return [
             'personal_description' => 'The user\'s full name and email address',
             'security'             => 'Security & Password',
             'security_description' => 'Password settings and verification status',
+            'education'            => 'Professional & Academic Information',
+            'education_description'=> 'Specialty, qualification, and graduation details',
+            'contact'              => 'Address & Contact',
+            'contact_description'  => 'Phone number, city, and street address',
         ],
 
         'fields' => [
@@ -84,7 +88,45 @@ return [
             'email_verified_at'      => 'Email Verified At',
             'email_verified_at_hint' => 'Leave blank if not verified • Set a date to manually activate the account',
             'roles'                  => 'Roles & Permissions',
+            'specialty'              => 'Specialty',
+            'qualification'          => 'Qualification',
+            'graduation_year'        => 'Graduation Year',
+            'graduation_year_placeholder'=> 'e.g. 2024',
+            'workplace'              => 'Workplace / University',
+            'workplace_placeholder'  => 'e.g. King Fahad Hospital...',
+            'phone'                  => 'Phone Number',
+            'phone_placeholder'      => 'e.g. +966500000000',
+            'city'                   => 'City',
+            'city_placeholder'       => 'e.g. Riyadh, Jeddah...',
+            'address'                => 'Address',
+            'address_placeholder'    => 'District, Street...',
             'created_at'             => 'Created At',
+        ],
+    ],
+    'specializations' => [
+        'label' => 'Specialization',
+        'plural_label' => 'Specializations',
+        'sections' => [
+            'info' => 'Specialization Information',
+            'settings' => 'Settings & Ordering',
+        ],
+        'fields' => [
+            'name' => 'Specialization Name',
+            'name_placeholder' => 'e.g. General Medicine, Pharmacy, Nursing...',
+            'users_count' => 'Enrolled Users',
+        ],
+    ],
+    'qualifications' => [
+        'label' => 'Qualification',
+        'plural_label' => 'Qualifications',
+        'sections' => [
+            'info' => 'Qualification Information',
+            'settings' => 'Settings & Ordering',
+        ],
+        'fields' => [
+            'name' => 'Qualification Name',
+            'name_placeholder' => 'e.g. Bachelor\'s, Master\'s, PhD...',
+            'users_count' => 'Enrolled Users',
         ],
     ],
     'faqs' => [

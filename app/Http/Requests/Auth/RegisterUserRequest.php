@@ -28,9 +28,9 @@ class RegisterUserRequest extends FormRequest
             'city'                  => ['required', 'string', 'max:100'],
             'address'               => ['nullable', 'string', 'max:300'],
             // Step 3
-            'specialty'             => ['required', 'string', 'max:150'],
-            'qualification'         => ['required', 'string', 'max:150'],
-            'graduation_year'       => ['required', 'integer', 'min:1970', 'max:' . date('Y')],
+            'specialty'             => ['required', 'exists:specializations,id'],
+            'qualification'         => ['required', 'exists:qualifications,id'],
+            'graduation_year'       => ['required', 'integer', 'min:1970', 'max:' . ((int)date('Y') + 1)],
             'workplace'             => ['nullable', 'string', 'max:200'],
         ];
     }
@@ -46,8 +46,13 @@ class RegisterUserRequest extends FormRequest
             'phone.required'           => __('register.phone_required'),
             'city.required'            => __('register.city_required'),
             'specialty.required'       => __('register.specialty_required'),
+            'specialty.exists'         => __('register.specialty_invalid'),
             'qualification.required'   => __('register.qualification_required'),
+            'qualification.exists'     => __('register.qualification_invalid'),
             'graduation_year.required' => __('register.graduation_year_required'),
+            'graduation_year.integer'  => __('register.graduation_year_invalid'),
+            'graduation_year.min'      => __('register.graduation_year_range'),
+            'graduation_year.max'      => __('register.graduation_year_range'),
         ];
     }
 }

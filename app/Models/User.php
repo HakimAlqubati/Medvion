@@ -18,7 +18,9 @@ use Spatie\Permission\Traits\HasRoles;
     'phone',
     'city',
     'address',
+    'specialization_id',
     'specialty',
+    'qualification_id',
     'qualification',
     'graduation_year',
     'workplace',
@@ -36,6 +38,16 @@ class User extends Authenticatable implements \Filament\Models\Contracts\Filamen
         return $this->hasAnyRole(['admin', 'editor', 'moderator', 'super_admin', 'panel_user']);
     }
 
+    public function specialization(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Specialization::class);
+    }
+
+    public function qualificationRecord(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Qualification::class, 'qualification_id');
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -47,6 +59,26 @@ class User extends Authenticatable implements \Filament\Models\Contracts\Filamen
             'email_verified_at'  => 'datetime',
             'password'           => 'hashed',
             'graduation_year'    => 'integer',
+            'specialization_id'  => 'integer',
+            'qualification_id'   => 'integer',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::saving(function ($user) {
+            if ($user->isDirty('specialization_id') && $user->specialization_id) {
+                $spec = Specialization::find($user->specialization_id);
+                if ($spec) {
+                    $user->specialty = $spec->name;
+                }
+            }
+            if ($user->isDirty('qualification_id') && $user->qualification_id) {
+                $qual = Qualification::find($user->qualification_id);
+                if ($qual) {
+                    $user->qualification = $qual->name;
+                }
+            }
+        });
     }
 }

@@ -93,6 +93,70 @@ class UserForm
 
                     ])->columnSpan(1),
 
+                // ── البيانات المهنية والتعليمية ─────────────────────────────
+                Section::make(__('admin.users.sections.education'))
+                    ->description(__('admin.users.sections.education_description'))
+                    ->icon('heroicon-o-academic-cap')
+                    ->schema([
+                        Grid::make(2)->schema([
+                            Select::make('specialization_id')
+                                ->label(__('admin.specializations.label'))
+                                ->relationship('specialization', 'name')
+                                ->searchable()
+                                ->preload()
+                                ->nullable()
+                                ->prefixIcon('heroicon-o-sparkles'),
+
+                            Select::make('qualification_id')
+                                ->label(__('admin.qualifications.label'))
+                                ->relationship('qualificationRecord', 'name')
+                                ->searchable()
+                                ->preload()
+                                ->nullable()
+                                ->prefixIcon('heroicon-o-academic-cap'),
+
+                            TextInput::make('graduation_year')
+                                ->label(__('admin.users.fields.graduation_year'))
+                                ->placeholder(__('admin.users.fields.graduation_year_placeholder'))
+                                ->numeric()
+                                ->minValue(1970)
+                                ->maxValue((int)date('Y') + 1)
+                                ->prefixIcon('heroicon-o-calendar'),
+
+                            TextInput::make('workplace')
+                                ->label(__('admin.users.fields.workplace'))
+                                ->placeholder(__('admin.users.fields.workplace_placeholder'))
+                                ->maxLength(200)
+                                ->prefixIcon('heroicon-o-building-office'),
+                        ]),
+                    ])->columnSpan(2),
+
+                // ── بيانات التواصل والعنوان ─────────────────────────────────
+                Section::make(__('admin.users.sections.contact'))
+                    ->description(__('admin.users.sections.contact_description'))
+                    ->icon('heroicon-o-phone')
+                    ->schema([
+                        TextInput::make('phone')
+                            ->label(__('admin.users.fields.phone'))
+                            ->placeholder(__('admin.users.fields.phone_placeholder'))
+                            ->tel()
+                            ->maxLength(30)
+                            ->prefixIcon('heroicon-o-phone'),
+
+                        TextInput::make('city')
+                            ->label(__('admin.users.fields.city'))
+                            ->placeholder(__('admin.users.fields.city_placeholder'))
+                            ->maxLength(100)
+                            ->prefixIcon('heroicon-o-map-pin'),
+
+                        TextInput::make('address')
+                            ->label(__('admin.users.fields.address'))
+                            ->placeholder(__('admin.users.fields.address_placeholder'))
+                            ->maxLength(300)
+                            ->columnSpanFull()
+                            ->prefixIcon('heroicon-o-home'),
+                    ])->columnSpan(1),
+
             ])
             ->columns(3);
     }

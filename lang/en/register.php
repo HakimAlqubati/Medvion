@@ -43,11 +43,13 @@ return [
 
     // ─── Step 3 fields ──────────────────────────────────────────────────────────
     'specialty'               => 'Professional Specialty',
-    'specialty_placeholder'   => 'e.g. General Medicine, Nursing, Pharmacy...',
+    'specialty_placeholder'   => 'Select your professional specialty from the list',
+    'select_specialty'        => 'Select Specialty...',
     'qualification'           => 'Academic Qualification',
-    'qualification_placeholder'=> 'e.g. Bachelor\'s, Master\'s, PhD...',
+    'qualification_placeholder'=> 'Select your academic qualification from the list',
+    'select_qualification'    => 'Select Qualification...',
     'graduation_year'         => 'Graduation Year',
-    'graduation_year_placeholder' => 'e.g. 2020',
+    'graduation_year_placeholder' => 'e.g. 2024',
     'workplace'               => 'Workplace / University (Optional)',
     'workplace_placeholder'   => 'e.g. King Fahad Hospital...',
 
@@ -63,11 +65,13 @@ return [
     'phone_required'          => 'Phone number is required.',
     'phone_invalid'           => 'Please enter a valid phone number.',
     'city_required'           => 'City is required.',
-    'specialty_required'      => 'Professional specialty is required.',
-    'qualification_required'  => 'Academic qualification is required.',
+    'specialty_required'      => 'Please select your professional specialty.',
+    'specialty_invalid'       => 'Selected professional specialty is invalid.',
+    'qualification_required'  => 'Please select your academic qualification.',
+    'qualification_invalid'   => 'Selected academic qualification is invalid.',
     'graduation_year_required'=> 'Graduation year is required.',
     'graduation_year_invalid' => 'Graduation year must be a valid number.',
-    'graduation_year_range'   => 'Graduation year must be between 1970 and the current year.',
+    'graduation_year_range'   => 'Graduation year must be valid (between 1970 and next year).',
 
     // ─── Success ────────────────────────────────────────────────────────────────
     'success_title'           => 'Account Created Successfully!',
