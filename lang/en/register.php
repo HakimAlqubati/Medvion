@@ -7,6 +7,9 @@ return [
     'welcome_sub'             => 'Create your account in 2 minutes and get instant access to training courses.',
     'already_registered'      => 'Already have an account?',
     'login_link'              => 'Sign In',
+    'register_with_google'    => 'Sign up with Google',
+    'or_with_email'           => 'or sign up with email',
+    'google_error'            => 'Unable to complete Google registration, please try again.',
 
     'step1_title'             => 'Basic Information',
     'step2_title'             => 'Address & Contact',

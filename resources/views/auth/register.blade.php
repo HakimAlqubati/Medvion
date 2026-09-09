@@ -251,6 +251,43 @@
         .btn-row .btn-primary { flex: 1; }
 
         /* ──────────────────────────────────────────
+           Google Button & Divider
+        ────────────────────────────────────────── */
+        .btn-google {
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            width: 100%; padding: 13px 20px;
+            background: #ffffff; color: #1f2937;
+            font-weight: 700; font-size: 14.5px;
+            border: 1.5px solid #e5e7eb; border-radius: 14px;
+            text-decoration: none; cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Tajawal', sans-serif;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .btn-google:hover {
+            background: #f9fafb; border-color: #cbd5e1;
+            color: #111827;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+            transform: translateY(-1px);
+        }
+        .btn-google:active { transform: translateY(0); }
+        .divider-with-text {
+            display: flex; align-items: center; text-align: center;
+            margin: 22px 0 20px; color: #9ca3af;
+            font-size: 13px; font-weight: 600;
+        }
+        .divider-with-text::before,
+        .divider-with-text::after {
+            content: ''; flex: 1; border-bottom: 1px solid #e5e7eb;
+        }
+        .divider-with-text:not(:empty)::before {
+            margin-inline-end: 14px;
+        }
+        .divider-with-text:not(:empty)::after {
+            margin-inline-start: 14px;
+        }
+
+        /* ──────────────────────────────────────────
            Logo
         ────────────────────────────────────────── */
         .logo-mark {
@@ -401,7 +438,24 @@
                 {{-- ─── STEP 1 ─────────────────────────────────────────── --}}
                 <div class="step-panel active" id="panel-1">
                     <h2 class="text-2xl font-extrabold text-gray-900 mb-1">{{ __('register.step1_title') }}</h2>
-                    <p class="text-gray-400 text-sm mb-7">{{ __('register.welcome_sub') }}</p>
+                    <p class="text-gray-400 text-sm mb-6">{{ __('register.welcome_sub') }}</p>
+
+                    {{-- Google Sign Up --}}
+                    <div class="mb-6">
+                        <a href="{{ route('auth.google') }}" class="btn-google">
+                            <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                            </svg>
+                            <span>{{ __('register.register_with_google') }}</span>
+                        </a>
+
+                        <div class="divider-with-text">
+                            <span>{{ __('register.or_with_email') }}</span>
+                        </div>
+                    </div>
 
                     {{-- Name --}}
                     <div class="field-group">
@@ -890,6 +944,13 @@
             el.addEventListener('change', () => setError(id, null));
         }
     });
+
+    @if (session('error'))
+        showToast(@json(session('error')), 'error');
+    @endif
+    @if (session('status'))
+        showToast(@json(session('status')), 'success');
+    @endif
 
 })();
 </script>
