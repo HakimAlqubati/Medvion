@@ -15,6 +15,7 @@ class ContactMessagesTable
     public static function configure(Table $table): Table
     {
         return $table
+        ->defaultSort('id','desc')
         ->striped()
             ->columns([
                 TextColumn::make('name')
