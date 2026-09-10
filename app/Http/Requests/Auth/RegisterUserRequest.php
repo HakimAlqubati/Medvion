@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Rules\YemenPhone;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -18,7 +19,7 @@ class RegisterUserRequest extends FormRequest
     {
         $rules = [
             // Step 2
-            'phone'           => ['required', 'string', 'regex:/^(70|71|73|77|78)\d{7}$/'],
+            'phone'           => ['required', new YemenPhone()],
             'city'            => ['required', 'string', 'max:100'],
             'address'         => ['nullable', 'string', 'max:300'],
             // Step 3

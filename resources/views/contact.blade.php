@@ -117,7 +117,7 @@
 
                         <h3 class="text-2xl sm:text-3xl font-bold text-white mb-8 text-center tracking-tight">{{ __('land.contact_form_title') }}</h3>
 
-                        <form id="contact-form" action="{{ route('contact.store') }}" method="POST" class="space-y-6 relative z-10">
+                        <form id="contact-form" action="{{ route('contact.store') }}" method="POST" class="space-y-6 relative z-10" novalidate>
                             @csrf
                             
                             {{-- Field Inputs with floating labels --}}
@@ -130,8 +130,8 @@
                                     </label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="email" id="email" name="email" required placeholder=" " 
-                                           class="cyber-input peer block w-full bg-white/[0.08] border border-white/20 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-secondary focus:bg-white/[0.12] transition-all placeholder-transparent shadow-inner">
+                                    <input type="email" id="email" name="email" dir="ltr" required placeholder=" " 
+                                           class="cyber-input peer block w-full text-left bg-white/[0.08] border border-white/20 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-secondary focus:bg-white/[0.12] transition-all placeholder-transparent shadow-inner">
                                     <label for="email" class="cyber-label absolute left-5 rtl:right-5 rtl:left-auto text-white/70 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-secondary peer-focus:bg-primary peer-focus:px-2 rounded">
                                         {{ __('land.contact_email') }}
                                     </label>
@@ -139,12 +139,13 @@
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="input-group">
-                                    <input type="text" id="phone" name="phone" dir="ltr" required placeholder=" " 
+                                <div class="input-group relative">
+                                    <input type="tel" id="phone" name="phone" dir="ltr" inputmode="numeric" maxlength="9" required placeholder=" " 
                                            class="cyber-input peer block w-full text-left bg-white/[0.08] border border-white/20 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-white focus:bg-white/[0.12] transition-all placeholder-transparent shadow-inner">
                                     <label for="phone" class="cyber-label absolute left-5 rtl:right-5 rtl:left-auto text-white/70 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-white peer-focus:bg-primary peer-focus:px-2 rounded">
                                         {{ __('land.contact_phone') }}
                                     </label>
+                                    <span id="carrier-badge" class="carrier-badge hidden absolute left-4 top-4 text-[11px] font-bold px-2 py-0.5 rounded-full pointer-events-none"></span>
                                 </div>
                                 <div class="input-group">
                                     <input type="text" id="subject" name="subject" required placeholder=" " 
@@ -226,6 +227,22 @@
             transition: background-color 5000s ease-in-out 0s;
         }
         
+        .carrier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2.5px 9px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 800;
+            transition: all 0.25s ease;
+            z-index: 10;
+        }
+        .carrier-ym    { background: rgba(59, 130, 246, 0.25); color: #93c5fd; border: 1px solid rgba(147, 197, 253, 0.5); }
+        .carrier-you   { background: rgba(245, 158, 11, 0.25); color: #fde68a; border: 1px solid rgba(253, 230, 138, 0.5); }
+        .carrier-saba  { background: rgba(239, 68, 68, 0.25); color: #fca5a5; border: 1px solid rgba(252, 165, 165, 0.5); }
+        .carrier-y     { background: rgba(13, 148, 136, 0.25); color: #99f6e4; border: 1px solid rgba(153, 246, 228, 0.5); }
+
         .glow-text {
             text-shadow: 0 0 40px rgba(255,255,255,0.1);
         }
@@ -268,6 +285,9 @@
     </style>
     @endpush
 
+    {{-- Shared Yemen Phone Script --}}
+    <script src="{{ asset('js/yemen-phone.js') }}"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('contact-form');
@@ -275,79 +295,179 @@
             const submitText = document.getElementById('submit-text');
             const successMsg = document.getElementById('success-message');
 
-            if(form) {
+            const phoneInput = document.getElementById('phone');
+            const carrierBadge = document.getElementById('carrier-badge');
+
+            // Live Yemen Phone formatting and carrier detection
+            if (phoneInput && window.YemenPhone) {
+                function updatePhone() {
+                    const clean = window.YemenPhone.clean(phoneInput.value);
+                    if (phoneInput.value !== clean) {
+                        phoneInput.value = clean;
+                    }
+                    const carrier = window.YemenPhone.getCarrier(clean);
+                    if (carrier && clean.length >= 2) {
+                        carrierBadge.textContent = carrier.name;
+                        carrierBadge.className = 'carrier-badge ' + carrier.cls + ' absolute left-4 top-4 text-[11px] font-bold px-2 py-0.5 rounded-full';
+                        carrierBadge.classList.remove('hidden');
+                    } else {
+                        carrierBadge.classList.add('hidden');
+                    }
+                }
+
+                phoneInput.addEventListener('input', updatePhone);
+                phoneInput.addEventListener('paste', () => setTimeout(updatePhone, 0));
+                if (phoneInput.value) updatePhone();
+            }
+
+            // Function to display cyber red validation errors
+            function showErrors(errors) {
+                let firstInput = null;
+                for (const field in errors) {
+                    const input = document.getElementById(field);
+                    if (input) {
+                        if (!firstInput) firstInput = input;
+                        const errorEl = document.createElement('p');
+                        errorEl.className = 'cyber-error text-xs font-bold text-red-400 mt-2 absolute -bottom-5 w-full';
+                        errorEl.innerText = errors[field][0];
+                        input.parentNode.appendChild(errorEl);
+
+                        // Change glow to red
+                        input.classList.remove('border-white/10', 'border-white/20', 'focus:border-primary', 'focus:border-secondary');
+                        input.classList.add('border-red-500/50', 'focus:border-red-500', 'shadow-[0_0_15px_rgba(239,68,68,0.3)]');
+                    }
+                }
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }
+
+            if (form) {
                 form.addEventListener('submit', function (e) {
                     e.preventDefault();
                     
-                    // Reset errors
+                    // Reset previous errors
                     document.querySelectorAll('.cyber-error').forEach(el => el.remove());
-                    
+                    form.querySelectorAll('input, textarea').forEach(input => {
+                        input.classList.remove('border-red-500/50', 'focus:border-red-500', 'shadow-[0_0_15px_rgba(239,68,68,0.3)]');
+                        input.classList.add('border-white/20');
+                    });
+
+                    // Smart client-side checks
+                    const nameVal    = (document.getElementById('name')?.value || '').trim();
+                    const emailVal   = (document.getElementById('email')?.value || '').trim().toLowerCase();
+                    const phoneVal   = (document.getElementById('phone')?.value || '').trim();
+                    const subjectVal = (document.getElementById('subject')?.value || '').trim();
+                    const messageVal = (document.getElementById('message')?.value || '').trim();
+
+                    const clientErrors = {};
+
+                    // Check Name: min 3 chars, letters only, no digits
+                    if (!nameVal) {
+                        clientErrors.name = ['الاسم الكامل مطلوب.'];
+                    } else if (nameVal.length < 3) {
+                        clientErrors.name = ['يجب ألا يقل الاسم عن 3 أحرف.'];
+                    } else if (/\d/.test(nameVal)) {
+                        clientErrors.name = ['الاسم يجب أن يحتوي على حروف فقط بدون أرقام.'];
+                    } else if (/(.)\1{3,}/u.test(nameVal)) {
+                        clientErrors.name = ['يرجى إدخال اسم حقيقي بدون تكرار عشوائي للأحرف.'];
+                    }
+
+                    // Check Email: format with valid domain and TLD (rejects sd@dd)
+                    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    if (!emailVal) {
+                        clientErrors.email = ['البريد الإلكتروني مطلوب.'];
+                    } else if (!emailRegex.test(emailVal)) {
+                        clientErrors.email = ['يرجى إدخال بريد إلكتروني صالح مع نطاق معتمد (مثل name@example.com).'];
+                    }
+
+                    // Check Phone: using shared YemenPhone validator
+                    if (!phoneVal) {
+                        clientErrors.phone = ['رقم الهاتف مطلوب.'];
+                    } else if (window.YemenPhone && !window.YemenPhone.isValid(phoneVal)) {
+                        clientErrors.phone = ['يجب أن يكون رقم جوال يمني مكون من 9 أرقام يبدأ بـ (77, 73, 78, 71, 70).'];
+                    }
+
+                    // Check Subject: min 4 chars, must contain letters, not purely numbers
+                    if (!subjectVal) {
+                        clientErrors.subject = ['موضوع الرسالة مطلوب.'];
+                    } else if (subjectVal.length < 4) {
+                        clientErrors.subject = ['يجب ألا يقل الموضوع عن 4 أحرف.'];
+                    } else if (/^\d+$/.test(subjectVal)) {
+                        clientErrors.subject = ['الموضوع يجب أن يحتوي على كلمات ذات معنى وليس أرقاماً فقط.'];
+                    }
+
+                    // Check Message: min 10 chars, not purely numbers
+                    if (!messageVal) {
+                        clientErrors.message = ['نص الرسالة مطلوب.'];
+                    } else if (messageVal.length < 10) {
+                        clientErrors.message = ['يرجى كتابة رسالة توضيحية لا تقل عن 10 أحرف.'];
+                    } else if (/^\d+$/.test(messageVal)) {
+                        clientErrors.message = ['الرسالة يجب أن تحتوي على شرح واضح وليس مجرد أرقام.'];
+                    }
+
+                    // If client-side errors exist, show them immediately
+                    if (Object.keys(clientErrors).length > 0) {
+                        showErrors(clientErrors);
+                        return;
+                    }
+
+                    // Proceed with Ajax Submission
                     const originalBtnText = submitText.innerHTML;
                     submitBtn.disabled = true;
                     submitText.innerHTML = "{!! __('land.contact_processing') !!}";
                     
                     const formData = new FormData(form);
-                    if (formData.has('email')) {
-                        formData.set('email', formData.get('email').toString().trim().toLowerCase());
+                    formData.set('email', emailVal);
+                    if (window.YemenPhone) {
+                        formData.set('phone', window.YemenPhone.clean(phoneVal));
                     }
 
                     fetch(form.action, {
                         method: 'POST',
                         body: formData,
                         headers: {
-                            'Accept': 'application/json'
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         }
                     })
-                    .then(res => res.json().then(data => ({status: res.status, body: data})))
+                    .then(res => res.json().then(data => ({ status: res.status, body: data })))
                     .then(response => {
-                        if(response.status === 422) {
-                            // High-tech red validation
-                            const errors = response.body.errors;
-                            for (const field in errors) {
-                                const input = document.getElementById(field);
-                                if(input) {
-                                    const errorEl = document.createElement('p');
-                                    errorEl.className = 'cyber-error text-xs font-bold text-red-400 mt-2 absolute -bottom-5 w-full';
-                                    errorEl.innerText = errors[field][0];
-                                    input.parentNode.appendChild(errorEl);
-                                    
-                                    // Change glow to red
-                                    input.classList.remove('border-white/10', 'focus:border-primary', 'focus:border-secondary');
-                                    input.classList.add('border-red-500/50', 'focus:border-red-500', 'shadow-[0_0_15px_rgba(239,68,68,0.3)]');
-                                }
-                            }
-                        } else if(response.status === 201 || response.status === 200) {
+                        if (response.status === 422) {
+                            showErrors(response.body.errors || {});
+                        } else if (response.status === 201 || response.status === 200) {
+                            form.reset();
+                            if (carrierBadge) carrierBadge.classList.add('hidden');
                             successMsg.style.display = 'flex';
                         } else {
-                            alert('SYSTEM ERROR: Connection interrupted.');
+                            alert(response.body?.message || 'تعذر إرسال الرسالة، يرجى المحاولة مرة أخرى.');
                         }
                     })
                     .catch(error => {
                         console.error('SYSTEM FAILURE:', error);
-                        alert('SYSTEM FAILURE: Network connection lost.');
+                        alert('تعذر الاتصال بالخادم، يرجى التحقق من اتصالك بالإنترنت والمحاولة مجدداً.');
                     })
                     .finally(() => {
                         submitBtn.disabled = false;
-                        if(successMsg.style.display === 'none') {
+                        if (successMsg.style.display === 'none') {
                             submitText.innerHTML = originalBtnText;
                         }
                     });
                 });
 
-                // Clear cyber red styling on input
+                // Clear cyber red styling on input typing
                 form.querySelectorAll('input, textarea').forEach(input => {
                     input.addEventListener('input', function() {
                         this.classList.remove('border-red-500/50', 'focus:border-red-500', 'shadow-[0_0_15px_rgba(239,68,68,0.3)]');
-                        this.classList.add('border-white/10');
-                        // fallback border focus based on element ID or generic class
-                        if(this.id === 'email' || this.id === 'subject') {
+                        this.classList.add('border-white/20');
+                        if (this.id === 'email' || this.id === 'subject') {
                             this.classList.add('focus:border-secondary');
                         } else {
                             this.classList.add('focus:border-primary');
                         }
                         
                         const error = this.parentNode.querySelector('.cyber-error');
-                        if(error) error.remove();
+                        if (error) error.remove();
                     });
                 });
             }

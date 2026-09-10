@@ -11,6 +11,7 @@
     <link href="https://fonts.bunny.net/css?family=tajawal:400,500,700,800&display=swap" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="{{ asset('js/yemen-phone.js') }}"></script>
 
     <style>
         /* ──────────────────────────────────────────
@@ -885,9 +886,8 @@
     let   current = isAuth ? 2 : 1;
 
     /* ── Show / hide field error ──────────────────────── */
-    const YEMEN_PHONE_REGEX = /^(70|71|73|77|78)\d{7}$/;
     function isValidYemenPhone(val) {
-        return YEMEN_PHONE_REGEX.test(val);
+        return window.YemenPhone ? window.YemenPhone.isValid(val) : /^(70|71|73|77|78)\d{7}$/.test(val);
     }
 
     function setError(field, msg) {
@@ -1160,124 +1160,23 @@
         }
     });
 
-    /* ── Real-time Yemeni Phone Mask & Carrier Detection ────────── */
-    const phoneInput   = document.getElementById('phone');
-    const phoneWrapper = document.getElementById('phone-wrapper');
-    const carrierBadge = document.getElementById('carrier-badge');
-    const statusIcon   = document.getElementById('phone-status-icon');
-    const phoneCounter = document.getElementById('phone-counter');
-
-    const YEMEN_CARRIERS = {
-        '77': { name: 'يمن موبايل', cls: 'carrier-ym' },
-        '78': { name: 'يمن موبايل', cls: 'carrier-ym' },
-        '73': { name: 'يو YOU',     cls: 'carrier-you' },
-        '71': { name: 'سبأفون',     cls: 'carrier-saba' },
-        '70': { name: 'واي Y',      cls: 'carrier-y' },
-    };
-
-    function handlePhoneInput() {
-        if (!phoneInput) return;
-
-        let val = phoneInput.value;
-
-        // Convert Eastern Arabic numerals (٠-٩)
-        const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-        val = val.replace(/[٠-٩]/g, d => arabicDigits.indexOf(d));
-
-        // Strip country code if pasted
-        val = val.replace(/^(\+?967|00967)/, '');
-
-        // Strip leading zero
-        if (val.startsWith('0') && val.length > 1) {
-            val = val.replace(/^0+/, '');
-        }
-
-        // Keep digits only
-        val = val.replace(/\D/g, '');
-
-        // Slice to 9 digits
-        val = val.slice(0, 9);
-        phoneInput.value = val;
-
-        // Counter
-        if (phoneCounter) {
-            phoneCounter.textContent = `${val.length}/9`;
-            phoneCounter.className = val.length === 9 
-                ? 'text-[11px] font-bold text-teal-600' 
-                : 'text-[11px] font-bold text-gray-400';
-        }
-
-        const prefix2 = val.slice(0, 2);
-        const carrier = YEMEN_CARRIERS[prefix2];
-
-        // Carrier Badge
-        if (carrier) {
-            if (carrierBadge) {
-                carrierBadge.textContent = carrier.name;
-                carrierBadge.className = `carrier-badge ${carrier.cls}`;
-                carrierBadge.classList.remove('hidden');
-            }
-        } else {
-            if (carrierBadge) {
-                carrierBadge.classList.add('hidden');
-            }
-        }
-
-        // Empty state
-        if (val.length === 0) {
-            setError('phone', null);
-            if (phoneWrapper) phoneWrapper.classList.remove('is-error', 'is-valid');
-            if (statusIcon) statusIcon.innerHTML = '';
-            return;
-        }
-
-        // Prefix error check if 2+ digits
-        if (val.length >= 2 && !carrier) {
-            setError('phone', '{{ __("register.phone_invalid") }}');
-            if (phoneWrapper) {
-                phoneWrapper.classList.add('is-error');
-                phoneWrapper.classList.remove('is-valid');
-            }
-            if (statusIcon) {
-                statusIcon.innerHTML = `<svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>`;
-            }
-            return;
-        }
-
-        setError('phone', null);
-
-        // Valid 9 digits
-        if (isValidYemenPhone(val)) {
-            if (phoneWrapper) {
-                phoneWrapper.classList.add('is-valid');
-                phoneWrapper.classList.remove('is-error');
-            }
-            if (statusIcon) {
-                statusIcon.innerHTML = `<svg class="w-5 h-5 text-teal-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>`;
-            }
-        } else {
-            if (phoneWrapper) phoneWrapper.classList.remove('is-valid', 'is-error');
-            if (statusIcon) statusIcon.innerHTML = '';
-        }
-    }
-
-    if (phoneInput) {
-        phoneInput.addEventListener('input', handlePhoneInput);
-        phoneInput.addEventListener('paste', () => setTimeout(handlePhoneInput, 0));
-        phoneInput.addEventListener('blur', function () {
-            const val = this.value.trim();
-            if (val.length > 0 && !isValidYemenPhone(val)) {
-                setError('phone', '{{ __("register.phone_invalid") }}');
-                if (phoneWrapper) {
-                    phoneWrapper.classList.add('is-error');
-                    phoneWrapper.classList.remove('is-valid');
+    /* ── Real-time Yemeni Phone Mask & Carrier Detection (Shared via YemenPhone) ── */
+    if (window.YemenPhone) {
+        window.YemenPhone.attach({
+            input: 'phone',
+            wrapper: 'phone-wrapper',
+            carrierBadge: 'carrier-badge',
+            counter: 'phone-counter',
+            statusIcon: 'phone-status-icon',
+            errorText: 'err-phone-text',
+            onValidate: function (valid, carrier, cleanVal) {
+                if (valid) {
+                    setError('phone', null);
                 }
             }
         });
-        if (phoneInput.value) {
-            handlePhoneInput();
-        }
     }
+
 
     @if (session('error'))
         showToast(@json(session('error')), 'error');
