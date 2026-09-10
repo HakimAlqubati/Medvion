@@ -576,39 +576,7 @@
                             </div>
                         </div>
 
-                        {{-- Name preview (Disabled) --}}
-                        <div class="field-group">
-                            <div class="flex items-center justify-between mb-1.5">
-                                <label class="field-label mb-0" for="name">
-                                    {{ __('register.name') }} <span class="req">*</span>
-                                </label>
-                                <span class="badge-locked">
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                                    {{ __('register.google_field_locked') }}
-                                </span>
-                            </div>
-                            <input type="text" id="name" class="field-input field-disabled"
-                                   placeholder="{{ __('register.google_field_placeholder') }}"
-                                   disabled readonly>
-                        </div>
-
-                        {{-- Email preview (Disabled) --}}
-                        <div class="field-group">
-                            <div class="flex items-center justify-between mb-1.5">
-                                <label class="field-label mb-0" for="email">
-                                    {{ __('register.email') }} <span class="req">*</span>
-                                </label>
-                                <span class="badge-locked">
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                                    {{ __('register.google_field_locked') }}
-                                </span>
-                            </div>
-                            <input type="email" id="email" class="field-input field-disabled"
-                                   placeholder="{{ __('register.google_field_placeholder') }}"
-                                   disabled readonly>
-                        </div>
-
-                        <div class="btn-row">
+                        <div class="btn-row mt-6">
                             <a href="{{ route('auth.google') }}" class="btn-google-primary">
                                 <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                                     <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>

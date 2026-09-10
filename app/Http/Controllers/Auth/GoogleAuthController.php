@@ -92,9 +92,8 @@ class GoogleAuthController extends Controller
                     ->with('status', __('register.google_success_complete_steps'));
             }
 
-            $redirectUrl = session()->pull('url.intended', route('courses.index'));
-
-            return redirect($redirectUrl);
+            session()->forget('url.intended');
+            return redirect()->route('courses.index');
 
         } catch (Throwable $e) {
             Log::error('Google User Processing Failed: ' . $e->getMessage());

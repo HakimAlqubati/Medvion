@@ -126,7 +126,8 @@ class RegisteredUserController extends Controller
             ], 422);
         }
 
-        $redirectUrl = session()->pull('url.intended', route('courses.index'));
+        session()->forget('url.intended');
+        $redirectUrl = route('courses.index');
 
         if ($request->expectsJson()) {
             return response()->json([
