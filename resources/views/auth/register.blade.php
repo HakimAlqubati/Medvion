@@ -560,9 +560,6 @@
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                                 {{ __('register.switch_account') }}
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                                @csrf
-                            </form>
                         </div>
 
                     @else
@@ -786,7 +783,7 @@
                             </svg>
                             {{ __('register.btn_prev') }}
                         </button>
-                        <button type="submit" id="btn-submit" class="btn-primary">
+                        <button type="button" id="btn-submit" class="btn-primary" onclick="submitRegistration()">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
                             </svg>
@@ -961,9 +958,7 @@
     };
 
     /* ── Final submit ─────────────────────────────────── */
-    document.getElementById('register-form').addEventListener('submit', async function (e) {
-        e.preventDefault();
-
+    window.submitRegistration = async function () {
         if (!isAuth) {
             showToast('{{ __("register.google_auth_required") }}');
             current = 1;
@@ -972,12 +967,27 @@
         }
 
         const submitBtn = document.getElementById('btn-submit');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>{{ __("register.btn_submitting") }}`;
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>{{ __("register.btn_submitting") }}`;
+        }
 
         try {
-            const formData = new FormData(this);
-            const res = await fetch(this.action, {
+            const formEl = document.getElementById('register-form');
+            const formData = new FormData(formEl);
+
+            // Ensure all fields from all steps are explicitly present
+            const fieldIds = ['name', 'email', 'phone', 'city', 'address', 'specialty', 'qualification', 'graduation_year', 'workplace'];
+            fieldIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.value !== undefined && el.value !== null && el.value !== '') {
+                    formData.set(id, el.value);
+                }
+            });
+
+            formData.set('_token', CSRF);
+
+            const res = await fetch(formEl.action, {
                 method: 'POST',
                 headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': CSRF },
                 body: formData,
@@ -1007,11 +1017,19 @@
             }
 
         } catch (e) {
+            console.error('Registration error:', e);
             showToast('Network error. Please try again.');
         } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>{{ __("register.btn_submit") }}`;
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>{{ __("register.btn_submit") }}`;
+            }
         }
+    };
+
+    document.getElementById('register-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        window.submitRegistration();
     });
 
     ['specialty', 'qualification'].forEach(id => {
@@ -1030,6 +1048,11 @@
 
 })();
 </script>
+
+{{-- Logout form placed outside main register form to prevent DOM hierarchy corruption --}}
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+    @csrf
+</form>
 
 </body>
 </html>
