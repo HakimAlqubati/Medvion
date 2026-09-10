@@ -85,6 +85,13 @@ class GoogleAuthController extends Controller
 
             Auth::login($user, true);
 
+            // If the user has not completed their profile steps, redirect to register
+            if (! $user->isProfileComplete()) {
+                return redirect()->route('register')
+                    ->with('google_registered', true)
+                    ->with('status', __('register.google_success_complete_steps'));
+            }
+
             $redirectUrl = session()->pull('url.intended', route('courses.index'));
 
             return redirect($redirectUrl);

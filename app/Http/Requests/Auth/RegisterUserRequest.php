@@ -3,10 +3,9 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
 /**
- * Final full-registration request — combines all step validations.
+ * Final full-registration request — validates the profile completion data.
  */
 class RegisterUserRequest extends FormRequest
 {
@@ -17,22 +16,27 @@ class RegisterUserRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
-            // Step 1
-            'name'                  => ['required', 'string', 'min:3', 'max:100'],
-            'email'                 => ['required', 'string', 'lowercase', 'email:rfc,dns', 'max:255', 'unique:users,email'],
-            'password'              => ['required', 'confirmed', Password::min(8)->letters()->numbers()],
-            'password_confirmation' => ['required'],
+        $rules = [
             // Step 2
-            'phone'                 => ['required', 'string', 'regex:/^[\+\d\s\-]{7,20}$/'],
-            'city'                  => ['required', 'string', 'max:100'],
-            'address'               => ['nullable', 'string', 'max:300'],
+            'phone'           => ['required', 'string', 'regex:/^[\+\d\s\-]{7,20}$/'],
+            'city'            => ['required', 'string', 'max:100'],
+            'address'         => ['nullable', 'string', 'max:300'],
             // Step 3
-            'specialty'             => ['required', 'exists:specializations,id'],
-            'qualification'         => ['required', 'exists:qualifications,id'],
-            'graduation_year'       => ['required', 'integer', 'min:1970', 'max:' . ((int)date('Y') + 1)],
-            'workplace'             => ['nullable', 'string', 'max:200'],
+            'specialty'       => ['required', 'exists:specializations,id'],
+            'qualification'   => ['required', 'exists:qualifications,id'],
+            'graduation_year' => ['required', 'integer', 'min:1970', 'max:' . ((int)date('Y') + 1)],
+            'workplace'       => ['nullable', 'string', 'max:200'],
         ];
+
+        if (auth()->check()) {
+            $rules['name']  = ['nullable', 'string', 'max:100'];
+            $rules['email'] = ['nullable', 'string', 'email'];
+        } else {
+            $rules['name']  = ['required', 'string', 'min:3', 'max:100'];
+            $rules['email'] = ['required', 'string', 'lowercase', 'email:rfc,dns', 'max:255', 'unique:users,email'];
+        }
+
+        return $rules;
     }
 
     public function messages(): array
@@ -41,9 +45,8 @@ class RegisterUserRequest extends FormRequest
             'name.required'            => __('register.name_required'),
             'email.required'           => __('register.email_required'),
             'email.unique'             => __('register.email_taken'),
-            'password.required'        => __('register.password_required'),
-            'password.confirmed'       => __('register.password_confirmed'),
             'phone.required'           => __('register.phone_required'),
+            'phone.regex'              => __('register.phone_invalid'),
             'city.required'            => __('register.city_required'),
             'specialty.required'       => __('register.specialty_required'),
             'specialty.exists'         => __('register.specialty_invalid'),

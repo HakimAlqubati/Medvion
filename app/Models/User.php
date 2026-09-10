@@ -55,6 +55,18 @@ class User extends Authenticatable implements \Filament\Models\Contracts\Filamen
         return $this->user_type === \App\Enums\UserTypeEnum::STUDENT;
     }
 
+    /**
+     * Determine if the user has completed all registration profile steps.
+     */
+    public function isProfileComplete(): bool
+    {
+        return ! empty($this->phone)
+            && ! empty($this->city)
+            && (! empty($this->specialization_id) || ! empty($this->specialty))
+            && (! empty($this->qualification_id) || ! empty($this->qualification))
+            && ! empty($this->graduation_year);
+    }
+
     public function specialization(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Specialization::class);

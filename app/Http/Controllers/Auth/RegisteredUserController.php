@@ -11,6 +11,7 @@ use App\Services\Auth\UserRegistrationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -22,8 +23,20 @@ class RegisteredUserController extends Controller
     /**
      * Display the multi-step registration view.
      */
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
+        if (Auth::check()) {
+            $user = Auth::user();
+
+            if ($user->isAdmin()) {
+                return redirect('/admin');
+            }
+
+            if ($user->isProfileComplete()) {
+                return redirect()->route('courses.index');
+            }
+        }
+
         $specializations = \App\Models\Specialization::where('is_active', true)
             ->orderBy('sort_order', 'asc')
             ->get();
@@ -42,8 +55,21 @@ class RegisteredUserController extends Controller
      */
     public function validateStep(Request $request, int $step): JsonResponse
     {
+        if ($step === 1) {
+            if (Auth::check()) {
+                return response()->json(['valid' => true]);
+            }
+
+            return response()->json([
+                'valid'   => false,
+                'message' => __('register.google_auth_required'),
+                'errors'  => [
+                    'google' => [__('register.google_auth_required')],
+                ],
+            ], 422);
+        }
+
         $requestClass = match ($step) {
-            1 => StepOneRequest::class,
             2 => StepTwoRequest::class,
             3 => StepThreeRequest::class,
             default => null,
@@ -89,14 +115,26 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterUserRequest $request): JsonResponse|RedirectResponse
     {
-        $this->registrationService->register($request->validated());
+        if (Auth::check()) {
+            $this->registrationService->completeRegistration(Auth::user(), $request->validated());
+        } else {
+            return response()->json([
+                'message' => __('register.google_auth_required'),
+                'errors'  => [
+                    'google' => [__('register.google_auth_required')],
+                ],
+            ], 422);
+        }
 
         $redirectUrl = session()->pull('url.intended', route('courses.index'));
 
         if ($request->expectsJson()) {
-            return response()->json(['redirect' => $redirectUrl]);
+            return response()->json([
+                'redirect' => $redirectUrl,
+                'message'  => __('register.success_body'),
+            ]);
         }
 
-        return redirect($redirectUrl);
+        return redirect($redirectUrl)->with('status', __('register.success_body'));
     }
 }

@@ -251,40 +251,74 @@
         .btn-row .btn-primary { flex: 1; }
 
         /* ──────────────────────────────────────────
-           Google Button & Divider
+           Google Button & Verified Card
         ────────────────────────────────────────── */
-        .btn-google {
+        .btn-google-primary {
             display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-            width: 100%; padding: 13px 20px;
+            width: 100%; padding: 15px 22px;
             background: #ffffff; color: #1f2937;
-            font-weight: 700; font-size: 14.5px;
-            border: 1.5px solid #e5e7eb; border-radius: 14px;
+            font-weight: 800; font-size: 15px;
+            border: 2px solid #e5e7eb; border-radius: 16px;
             text-decoration: none; cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: 'Tajawal', sans-serif;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
         }
-        .btn-google:hover {
-            background: #f9fafb; border-color: #cbd5e1;
-            color: #111827;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.07);
-            transform: translateY(-1px);
+        .btn-google-primary:hover {
+            background: #f8fafc; border-color: #3b82f6;
+            color: #0f172a;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
         }
-        .btn-google:active { transform: translateY(0); }
-        .divider-with-text {
-            display: flex; align-items: center; text-align: center;
-            margin: 22px 0 20px; color: #9ca3af;
-            font-size: 13px; font-weight: 600;
+        .btn-google-primary:active { transform: translateY(0); }
+
+        .google-verified-card {
+            background: linear-gradient(135deg, rgba(239,246,255,0.9) 0%, rgba(240,253,250,0.9) 100%);
+            border: 1.5px solid #bfdbfe;
+            border-radius: 16px;
+            padding: 14px 18px;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.06);
         }
-        .divider-with-text::before,
-        .divider-with-text::after {
-            content: ''; flex: 1; border-bottom: 1px solid #e5e7eb;
+
+        .google-notice-box {
+            background: #f8fafc;
+            border: 1.5px dashed #cbd5e1;
+            border-radius: 14px;
+            padding: 14px 16px;
         }
-        .divider-with-text:not(:empty)::before {
-            margin-inline-end: 14px;
+
+        .field-input.field-disabled, .field-input:disabled {
+            background: #f1f5f9 !important;
+            color: #1e293b !important;
+            border-color: #cbd5e1 !important;
+            cursor: not-allowed !important;
+            font-weight: 700;
         }
-        .divider-with-text:not(:empty)::after {
-            margin-inline-start: 14px;
+
+        .badge-verified {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 10px; border-radius: 9999px;
+            background: #ecfdf5; color: #047857;
+            border: 1px solid #a7f3d0;
+            font-size: 11.5px; font-weight: 700;
+        }
+
+        .badge-locked {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 3px 9px; border-radius: 9999px;
+            background: #f1f5f9; color: #64748b;
+            border: 1px solid #e2e8f0;
+            font-size: 11px; font-weight: 700;
+        }
+
+        .step-prompt-banner {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0fdfa 100%);
+            border: 1.5px solid #bae6fd;
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 22px;
+            font-size: 13.5px; font-weight: 700; color: #0369a1;
         }
 
         /* ──────────────────────────────────────────
@@ -330,6 +364,10 @@
     </style>
 </head>
 <body>
+@php
+    $isAuth = Auth::check();
+    $currentUser = Auth::user();
+@endphp
 
 {{-- Toast container --}}
 <div id="toast-container" aria-live="polite"></div>
@@ -437,118 +475,166 @@
 
                 {{-- ─── STEP 1 ─────────────────────────────────────────── --}}
                 <div class="step-panel active" id="panel-1">
-                    <h2 class="text-2xl font-extrabold text-gray-900 mb-1">{{ __('register.step1_title') }}</h2>
-                    <p class="text-gray-400 text-sm mb-6">{{ __('register.welcome_sub') }}</p>
-
-                    {{-- Google Sign Up --}}
-                    <div class="mb-6">
-                        <a href="{{ route('auth.google') }}" class="btn-google">
-                            <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
-                                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
-                                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
-                                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
-                                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
-                            </svg>
-                            <span>{{ __('register.register_with_google') }}</span>
-                        </a>
-
-                        <div class="divider-with-text">
-                            <span>{{ __('register.or_with_email') }}</span>
-                        </div>
+                    <div class="flex items-center justify-between mb-1">
+                        <h2 class="text-2xl font-extrabold text-gray-900">{{ __('register.step1_title') }}</h2>
+                        @if($isAuth)
+                            <span class="badge-verified">
+                                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                {{ __('register.google_verified_badge') }}
+                            </span>
+                        @endif
                     </div>
+                    <p class="text-gray-400 text-sm mb-6">
+                        {{ $isAuth ? __('register.step1_google_sub') : __('register.google_only_notice') }}
+                    </p>
 
-                    {{-- Name --}}
-                    <div class="field-group">
-                        <label class="field-label" for="name">
-                            {{ __('register.name') }} <span class="req">*</span>
-                        </label>
-                        <input id="name" name="name" type="text"
-                               class="field-input" autocomplete="name"
-                               placeholder="{{ __('register.name_placeholder') }}"
-                               value="{{ old('name') }}">
-                        <div class="field-error" id="err-name">
-                            <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-                            <span id="err-name-text"></span>
+                    @if($isAuth)
+                        {{-- Verified Google Account Card --}}
+                        <div class="google-verified-card mb-6">
+                            <div class="flex items-center gap-3.5">
+                                @if($currentUser->avatar)
+                                    <img src="{{ $currentUser->avatar }}" alt="{{ $currentUser->name }}" class="w-12 h-12 rounded-full border-2 border-white shadow-sm shrink-0 object-cover">
+                                @else
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold flex items-center justify-center text-lg shadow-sm shrink-0">
+                                        {{ mb_substr($currentUser->name, 0, 1) }}
+                                    </div>
+                                @endif
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center gap-2 mb-0.5">
+                                        <p class="font-extrabold text-gray-900 text-sm truncate">{{ $currentUser->name }}</p>
+                                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800">Google</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 truncate">{{ $currentUser->email }}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    {{-- Email --}}
-                    <div class="field-group">
-                        <label class="field-label" for="email">
-                            {{ __('register.email') }} <span class="req">*</span>
-                        </label>
-                        <input id="email" name="email" type="email"
-                               class="field-input" autocomplete="username"
-                               placeholder="{{ __('register.email_placeholder') }}"
-                               value="{{ old('email') }}">
-                        <div class="field-error" id="err-email">
-                            <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-                            <span id="err-email-text"></span>
+                        {{-- Name (Disabled / Verified) --}}
+                        <div class="field-group">
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label class="field-label mb-0" for="name">
+                                    {{ __('register.name') }} <span class="req">*</span>
+                                </label>
+                                <span class="badge-verified">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    {{ __('register.google_field_locked') }}
+                                </span>
+                            </div>
+                            <input id="name_display" type="text"
+                                   class="field-input field-disabled"
+                                   value="{{ $currentUser->name }}" disabled readonly>
+                            <input type="hidden" id="name" name="name" value="{{ $currentUser->name }}">
                         </div>
-                    </div>
 
-                    {{-- Password --}}
-                    <div class="field-group">
-                        <label class="field-label" for="password">
-                            {{ __('register.password') }} <span class="req">*</span>
-                        </label>
-                        <div class="password-wrapper">
-                            <input id="password" name="password" type="password"
-                                   class="field-input" autocomplete="new-password"
-                                   placeholder="{{ __('register.password_placeholder') }}"
-                                   id="password">
-                            <button type="button" class="pw-toggle" onclick="togglePw('password', this)" aria-label="Toggle password">
-                                <svg id="eye-pw" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        {{-- Email (Disabled / Verified) --}}
+                        <div class="field-group">
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label class="field-label mb-0" for="email">
+                                    {{ __('register.email') }} <span class="req">*</span>
+                                </label>
+                                <span class="badge-verified">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    {{ __('register.google_field_locked') }}
+                                </span>
+                            </div>
+                            <input id="email_display" type="email"
+                                   class="field-input field-disabled"
+                                   value="{{ $currentUser->email }}" disabled readonly>
+                            <input type="hidden" id="email" name="email" value="{{ $currentUser->email }}">
+                        </div>
+
+                        <div class="btn-row">
+                            <button type="button" id="btn-next-1" class="btn-primary" onclick="goNext(1)">
+                                {{ __('register.btn_continue_to_step2') }}
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="{{ app()->getLocale() === 'ar' ? 'M15 19l-7-7 7-7' : 'M9 5l7 7-7 7' }}"/>
+                                </svg>
                             </button>
                         </div>
-                        {{-- Strength meter --}}
-                        <div class="strength-bars" id="strength-bars">
-                            <div class="strength-bar" id="sb-1"></div>
-                            <div class="strength-bar" id="sb-2"></div>
-                            <div class="strength-bar" id="sb-3"></div>
-                            <div class="strength-bar" id="sb-4"></div>
-                        </div>
-                        <div class="strength-label text-gray-400" id="strength-label"></div>
-                        <div class="field-error" id="err-password">
-                            <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-                            <span id="err-password-text"></span>
-                        </div>
-                    </div>
 
-                    {{-- Confirm password --}}
-                    <div class="field-group">
-                        <label class="field-label" for="password_confirmation">
-                            {{ __('register.password_confirmation') }} <span class="req">*</span>
-                        </label>
-                        <div class="password-wrapper">
-                            <input id="password_confirmation" name="password_confirmation" type="password"
-                                   class="field-input" autocomplete="new-password"
-                                   placeholder="{{ __('register.confirm_placeholder') }}">
-                            <button type="button" class="pw-toggle" onclick="togglePw('password_confirmation', this)" aria-label="Toggle confirm password">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            </button>
+                        <div class="mt-4 text-center">
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                               class="text-xs text-gray-400 hover:text-red-500 font-semibold transition inline-flex items-center gap-1">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                                {{ __('register.switch_account') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                @csrf
+                            </form>
                         </div>
-                        <div class="field-error" id="err-password_confirmation">
-                            <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-                            <span id="err-password_confirmation-text"></span>
-                        </div>
-                    </div>
 
-                    <div class="btn-row">
-                        <button type="button" id="btn-next-1" class="btn-primary" onclick="goNext(1)">
-                            {{ __('register.btn_next') }}
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="{{ app()->getLocale() === 'ar' ? 'M15 19l-7-7 7-7' : 'M9 5l7 7-7 7' }}"/>
-                            </svg>
-                        </button>
-                    </div>
+                    @else
+                        {{-- Guest State: Google Auth required --}}
+                        <div class="google-notice-box mb-6">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-gray-800">{{ __('register.google_only_title') }}</p>
+                                    <p class="text-xs text-gray-500 leading-relaxed mt-0.5">{{ __('register.google_only_notice') }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Name preview (Disabled) --}}
+                        <div class="field-group">
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label class="field-label mb-0" for="name">
+                                    {{ __('register.name') }} <span class="req">*</span>
+                                </label>
+                                <span class="badge-locked">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                    {{ __('register.google_field_locked') }}
+                                </span>
+                            </div>
+                            <input type="text" id="name" class="field-input field-disabled"
+                                   placeholder="{{ __('register.google_field_placeholder') }}"
+                                   disabled readonly>
+                        </div>
+
+                        {{-- Email preview (Disabled) --}}
+                        <div class="field-group">
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label class="field-label mb-0" for="email">
+                                    {{ __('register.email') }} <span class="req">*</span>
+                                </label>
+                                <span class="badge-locked">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                    {{ __('register.google_field_locked') }}
+                                </span>
+                            </div>
+                            <input type="email" id="email" class="field-input field-disabled"
+                                   placeholder="{{ __('register.google_field_placeholder') }}"
+                                   disabled readonly>
+                        </div>
+
+                        <div class="btn-row">
+                            <a href="{{ route('auth.google') }}" class="btn-google-primary">
+                                <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+                                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                                </svg>
+                                <span>{{ __('register.register_with_google') }}</span>
+                            </a>
+                        </div>
+                    @endif
                 </div>
 
                 {{-- ─── STEP 2 ─────────────────────────────────────────── --}}
                 <div class="step-panel" id="panel-2">
+                    <div class="step-prompt-banner">
+                        <svg class="w-5 h-5 text-blue-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span>{{ __('register.step_of') }} 2 / 3: {{ __('register.step2_banner_prompt') }}</span>
+                    </div>
+
                     <h2 class="text-2xl font-extrabold text-gray-900 mb-1">{{ __('register.step2_title') }}</h2>
                     <p class="text-gray-400 text-sm mb-7">{{ __('register.phone_placeholder') }}</p>
+
 
                     {{-- Phone --}}
                     <div class="field-group">
@@ -611,6 +697,11 @@
 
                 {{-- ─── STEP 3 ─────────────────────────────────────────── --}}
                 <div class="step-panel" id="panel-3">
+                    <div class="step-prompt-banner">
+                        <svg class="w-5 h-5 text-teal-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span>{{ __('register.step_of') }} 3 / 3: {{ __('register.step3_banner_prompt') }}</span>
+                    </div>
+
                     <h2 class="text-2xl font-extrabold text-gray-900 mb-1">{{ __('register.step3_title') }}</h2>
                     <p class="text-gray-400 text-sm mb-7">{{ __('register.specialty_placeholder') }}</p>
 
@@ -723,45 +814,10 @@
 (function () {
     'use strict';
 
-    const CSRF  = document.querySelector('meta[name="csrf-token"]').content;
-    const STEPS = 3;
-    let   current = 1;
-
-    /* ── Password strength ────────────────────────────── */
-    const pwLabels = {
-        weak:   '{{ __("register.strength_weak") }}',
-        fair:   '{{ __("register.strength_fair") }}',
-        good:   '{{ __("register.strength_good") }}',
-        strong: '{{ __("register.strength_strong") }}',
-    };
-    const pwColors = { weak:'#ef4444', fair:'#f59e0b', good:'#3b82f6', strong:'#10b981' };
-
-    document.getElementById('password').addEventListener('input', function () {
-        const val = this.value;
-        let score = 0;
-        if (val.length >= 8) score++;
-        if (/[A-Z]/.test(val)) score++;
-        if (/[0-9]/.test(val)) score++;
-        if (/[^A-Za-z0-9]/.test(val)) score++;
-
-        const levels = ['', 'weak', 'fair', 'good', 'strong'];
-        const level  = score > 0 ? levels[score] : '';
-
-        for (let i = 1; i <= 4; i++) {
-            const bar = document.getElementById('sb-' + i);
-            bar.className = 'strength-bar';
-            if (level && i <= score) bar.classList.add(level);
-        }
-        const lbl = document.getElementById('strength-label');
-        lbl.textContent = level ? pwLabels[level] : '';
-        lbl.style.color = level ? pwColors[level] : '#9ca3af';
-    });
-
-    /* ── Toggle password visibility ──────────────────── */
-    window.togglePw = function (fieldId, btn) {
-        const inp = document.getElementById(fieldId);
-        inp.type = inp.type === 'password' ? 'text' : 'password';
-    };
+    const CSRF   = document.querySelector('meta[name="csrf-token"]').content;
+    const STEPS  = 3;
+    const isAuth = {{ $isAuth ? 'true' : 'false' }};
+    let   current = isAuth ? 2 : 1;
 
     /* ── Show / hide field error ──────────────────────── */
     function setError(field, msg) {
@@ -782,7 +838,7 @@
 
     function clearStepErrors(step) {
         const fields = {
-            1: ['name','email','password','password_confirmation'],
+            1: ['name','email'],
             2: ['phone','city'],
             3: ['specialty','qualification','graduation_year'],
         }[step] || [];
@@ -792,7 +848,7 @@
     /* ── Collect form data ────────────────────────────── */
     function collectStep(step) {
         const names = {
-            1: ['name','email','password','password_confirmation'],
+            1: ['name','email'],
             2: ['phone','city','address'],
             3: ['specialty','qualification','graduation_year','workplace'],
         }[step] || [];
@@ -809,23 +865,29 @@
     function updateStepper(active) {
         for (let s = 1; s <= STEPS; s++) {
             const dot  = document.getElementById('dot-' + s);
+            if (!dot) continue;
             dot.classList.remove('active', 'done');
-            if (s < active)      dot.classList.add('done');
+            if (s < active)        dot.classList.add('done');
             else if (s === active) dot.classList.add('active');
             if (s < STEPS) {
                 const line = document.getElementById('line-' + s);
-                line.classList.toggle('done', s < active);
+                if (line) line.classList.toggle('done', s < active);
             }
         }
     }
 
-    function showPanel(step) {
+    function showPanel(step, shouldScroll = true) {
         document.querySelectorAll('.step-panel').forEach((p, i) => {
             p.classList.toggle('active', i + 1 === step);
         });
         updateStepper(step);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (shouldScroll) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
+
+    // Set initial view
+    showPanel(current, false);
 
     /* ── Toast ────────────────────────────────────────── */
     function showToast(msg, type = 'error') {
@@ -839,6 +901,14 @@
 
     /* ── AJAX step validation ─────────────────────────── */
     async function validateStepAjax(step) {
+        if (step === 1) {
+            if (isAuth) {
+                return true;
+            }
+            showToast('{{ __("register.google_auth_required") }}');
+            return false;
+        }
+
         const btn = document.getElementById('btn-next-' + step);
         if (btn) { btn.disabled = true; }
 
@@ -894,6 +964,13 @@
     document.getElementById('register-form').addEventListener('submit', async function (e) {
         e.preventDefault();
 
+        if (!isAuth) {
+            showToast('{{ __("register.google_auth_required") }}');
+            current = 1;
+            showPanel(1);
+            return;
+        }
+
         const submitBtn = document.getElementById('btn-submit');
         submitBtn.disabled = true;
         submitBtn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>{{ __("register.btn_submitting") }}`;
@@ -914,20 +991,19 @@
             }
 
             if (res.status === 422 && data.errors) {
-                // Find which step the first error belongs to and go there
-                const step1Fields = ['name','email','password','password_confirmation'];
                 const step2Fields = ['phone','city','address'];
                 const firstErrorField = Object.keys(data.errors)[0];
 
                 let targetStep = 3;
-                if (step1Fields.includes(firstErrorField)) targetStep = 1;
-                else if (step2Fields.includes(firstErrorField)) targetStep = 2;
+                if (step2Fields.includes(firstErrorField)) targetStep = 2;
 
                 current = targetStep;
                 showPanel(current);
 
                 Object.entries(data.errors).forEach(([field, msgs]) => setError(field, msgs[0]));
                 showToast(Object.values(data.errors).flat()[0]);
+            } else if (data.message) {
+                showToast(data.message);
             }
 
         } catch (e) {

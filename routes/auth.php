@@ -12,23 +12,26 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
+// Google OAuth routes
+Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])
+    ->name('auth.google');
+
+Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback'])
+    ->name('auth.google.callback');
+
+// Multi-step Registration routes (accessible to guests and authenticated Google users with incomplete profiles)
+Route::get('register', [RegisteredUserController::class, 'create'])
+    ->name('register');
+
+Route::post('register', [RegisteredUserController::class, 'store'])
+    ->name('register.store');
+
+// AJAX step validation — called from multi-step form JS
+Route::post('register/validate-step/{step}', [RegisteredUserController::class, 'validateStep'])
+    ->where('step', '[1-3]')
+    ->name('register.validate-step');
+
 Route::middleware('guest')->group(function () {
-    Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])
-        ->name('auth.google');
-
-    Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback'])
-        ->name('auth.google.callback');
-
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
-
-    Route::post('register', [RegisteredUserController::class, 'store']);
-
-    // AJAX step validation — called from multi-step form JS
-    Route::post('register/validate-step/{step}', [RegisteredUserController::class, 'validateStep'])
-        ->where('step', '[1-3]')
-        ->name('register.validate-step');
-
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 

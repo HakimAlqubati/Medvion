@@ -58,4 +58,42 @@ class UserRegistrationService
 
         return $user;
     }
+
+    /**
+     * Complete registration profile for an authenticated Google user.
+     *
+     * @param  User  $user
+     * @param  array<string, mixed>  $data
+     * @return User
+     */
+    public function completeRegistration(User $user, array $data): User
+    {
+        $spec = null;
+        if (! empty($data['specialty'])) {
+            $spec = is_numeric($data['specialty'])
+                ? \App\Models\Specialization::find($data['specialty'])
+                : \App\Models\Specialization::where('name->ar', $data['specialty'])->orWhere('name->en', $data['specialty'])->first();
+        }
+
+        $qual = null;
+        if (! empty($data['qualification'])) {
+            $qual = is_numeric($data['qualification'])
+                ? \App\Models\Qualification::find($data['qualification'])
+                : \App\Models\Qualification::where('name->ar', $data['qualification'])->orWhere('name->en', $data['qualification'])->first();
+        }
+
+        $user->update([
+            'phone'             => $data['phone']            ?? $user->phone,
+            'city'              => $data['city']             ?? $user->city,
+            'address'           => $data['address']          ?? $user->address,
+            'specialization_id' => $spec?->id                ?? $user->specialization_id,
+            'specialty'         => $spec ? ($spec->getTranslation('name', 'ar') ?: $spec->name) : ($data['specialty'] ?? $user->specialty),
+            'qualification_id'  => $qual?->id                ?? $user->qualification_id,
+            'qualification'     => $qual ? ($qual->getTranslation('name', 'ar') ?: $qual->name) : ($data['qualification'] ?? $user->qualification),
+            'graduation_year'   => $data['graduation_year']  ?? $user->graduation_year,
+            'workplace'         => $data['workplace']        ?? $user->workplace,
+        ]);
+
+        return $user;
+    }
 }
