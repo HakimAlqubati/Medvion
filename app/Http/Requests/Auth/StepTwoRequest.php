@@ -17,7 +17,7 @@ class StepTwoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone'   => ['required', 'string', 'regex:/^[\+\d\s\-]{7,20}$/'],
+            'phone'   => ['required', 'string', 'regex:/^(70|71|73|77|78)\d{7}$/'],
             'city'    => ['required', 'string', 'max:100'],
             'address' => ['nullable', 'string', 'max:300'],
         ];

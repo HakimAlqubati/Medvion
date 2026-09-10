@@ -50,9 +50,9 @@ return [
 
     // ─── Step 2 fields ──────────────────────────────────────────────────────────
     'phone'                   => 'Phone / WhatsApp',
-    'phone_placeholder'       => 'e.g. +966 5X XXX XXXX',
+    'phone_placeholder'       => '77XXXXXXX',
     'city'                    => 'City',
-    'city_placeholder'        => 'e.g. Riyadh, Jeddah, Makkah...',
+    'city_placeholder'        => 'e.g. Sanaa, Aden, Taiz...',
     'address'                 => 'Detailed Address (Optional)',
     'address_placeholder'     => 'District, Street...',
 
@@ -66,7 +66,7 @@ return [
     'graduation_year'         => 'Graduation Year',
     'graduation_year_placeholder' => 'e.g. 2024',
     'workplace'               => 'Workplace / University (Optional)',
-    'workplace_placeholder'   => 'e.g. King Fahad Hospital...',
+    'workplace_placeholder'   => 'e.g. Al-Thawra Hospital...',
 
     // ─── Validation messages ────────────────────────────────────────────────────
     'name_required'           => 'Full name is required.',
@@ -78,7 +78,7 @@ return [
     'password_confirmed'      => 'Passwords do not match.',
     'password_min'            => 'Password must be at least 8 characters.',
     'phone_required'          => 'Phone number is required.',
-    'phone_invalid'           => 'Please enter a valid phone number.',
+    'phone_invalid'           => 'Must be a valid 9-digit Yemeni phone number starting with (77, 73, 78, 71, 70).',
     'city_required'           => 'City is required.',
     'specialty_required'      => 'Please select your professional specialty.',
     'specialty_invalid'       => 'Selected professional specialty is invalid.',

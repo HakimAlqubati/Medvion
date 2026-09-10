@@ -322,6 +322,84 @@
         }
 
         /* ──────────────────────────────────────────
+           Yemeni Phone Input
+        ────────────────────────────────────────── */
+        .phone-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: stretch;
+            border-radius: 14px;
+            border: 1.5px solid #e5e7eb;
+            background: #f9fafb;
+            transition: all 0.25s ease;
+            overflow: hidden;
+        }
+        .phone-input-wrapper:focus-within {
+            border-color: #1A52CE;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(26,82,206,0.1);
+        }
+        .phone-input-wrapper.is-error {
+            border-color: #ef4444;
+            background: #fff5f5;
+        }
+        .phone-input-wrapper.is-valid {
+            border-color: #0D9488;
+            background: #f0fdfa;
+        }
+        .phone-country-prefix {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 14px;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #475569;
+            background: #f1f5f9;
+            border-{{ app()->getLocale() === 'ar' ? 'left' : 'right' }}: 1.5px solid #e2e8f0;
+            user-select: none;
+            flex-shrink: 0;
+        }
+        .phone-field {
+            border: none !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            flex: 1;
+            padding: 13px 14px;
+            outline: none !important;
+        }
+        .phone-status-icon {
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .phone-helper-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 6px;
+            gap: 8px;
+        }
+        .carrier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2.5px 9px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 800;
+            transition: all 0.25s ease;
+        }
+        .carrier-ym    { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+        .carrier-you   { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+        .carrier-saba  { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+        .carrier-y     { background: #f0fdfa; color: #0f766e; border: 1px solid #99f6e4; }
+
+        /* ──────────────────────────────────────────
            Logo
         ────────────────────────────────────────── */
         .logo-mark {
@@ -598,18 +676,40 @@
                     </div>
 
                     <h2 class="text-2xl font-extrabold text-gray-900 mb-1">{{ __('register.step2_title') }}</h2>
-                    <p class="text-gray-400 text-sm mb-7">{{ __('register.phone_placeholder') }}</p>
-
+                    <p class="text-gray-400 text-sm mb-7">{{ __('register.step2_banner_prompt') }}</p>
 
                     {{-- Phone --}}
                     <div class="field-group">
-                        <label class="field-label" for="phone">
-                            {{ __('register.phone') }} <span class="req">*</span>
-                        </label>
-                        <input id="phone" name="phone" type="tel"
-                               class="field-input"
-                               placeholder="{{ __('register.phone_placeholder') }}"
-                               value="{{ old('phone') }}">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <label class="field-label mb-0" for="phone">
+                                {{ __('register.phone') }} <span class="req">*</span>
+                            </label>
+                            <span id="carrier-badge" class="carrier-badge hidden"></span>
+                        </div>
+
+                        <div class="phone-input-wrapper" id="phone-wrapper">
+                            <div class="phone-country-prefix">
+                                <span>🇾🇪</span>
+                                <span dir="ltr">+967</span>
+                            </div>
+                            <input id="phone" name="phone" type="tel"
+                                   inputmode="numeric"
+                                   autocomplete="tel"
+                                   maxlength="9"
+                                   dir="ltr"
+                                   class="phone-field"
+                                   placeholder="77XXXXXXX"
+                                   value="{{ old('phone') }}">
+                            <div class="phone-status-icon" id="phone-status-icon"></div>
+                        </div>
+
+                        <div class="phone-helper-row">
+                            <span class="text-[11px] text-gray-400">
+                                يبدأ بـ: <strong class="text-gray-600">77, 78, 73, 71, 70</strong> (9 أرقام)
+                            </span>
+                            <span id="phone-counter" class="text-[11px] font-bold text-gray-400">0/9</span>
+                        </div>
+
                         <div class="field-error" id="err-phone">
                             <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
                             <span id="err-phone-text"></span>
@@ -785,19 +885,32 @@
     let   current = isAuth ? 2 : 1;
 
     /* ── Show / hide field error ──────────────────────── */
+    const YEMEN_PHONE_REGEX = /^(70|71|73|77|78)\d{7}$/;
+    function isValidYemenPhone(val) {
+        return YEMEN_PHONE_REGEX.test(val);
+    }
+
     function setError(field, msg) {
         const wrap = document.getElementById('err-' + field);
         const txt  = document.getElementById('err-' + field + '-text');
         const inp  = document.getElementById(field);
+        const pwrap = field === 'phone' ? document.getElementById('phone-wrapper') : null;
         if (!wrap) return;
         if (msg) {
             txt.textContent = msg;
             wrap.classList.add('show');
             inp && inp.classList.add('is-error');
             inp && inp.classList.remove('is-valid');
+            if (pwrap) {
+                pwrap.classList.add('is-error');
+                pwrap.classList.remove('is-valid');
+            }
         } else {
             wrap.classList.remove('show');
             inp && inp.classList.remove('is-error');
+            if (pwrap) {
+                pwrap.classList.remove('is-error');
+            }
         }
     }
 
@@ -874,6 +987,34 @@
             return false;
         }
 
+        if (step === 2) {
+            const phoneEl  = document.getElementById('phone');
+            const phoneVal = phoneEl ? phoneEl.value.trim() : '';
+
+            if (!phoneVal) {
+                setError('phone', '{{ __("register.phone_required") }}');
+                showToast('{{ __("register.phone_required") }}');
+                phoneEl && phoneEl.focus();
+                return false;
+            }
+
+            if (!isValidYemenPhone(phoneVal)) {
+                setError('phone', '{{ __("register.phone_invalid") }}');
+                showToast('{{ __("register.phone_invalid") }}');
+                phoneEl && phoneEl.focus();
+                return false;
+            }
+
+            const cityEl  = document.getElementById('city');
+            const cityVal = cityEl ? cityEl.value.trim() : '';
+            if (!cityVal) {
+                setError('city', '{{ __("register.city_required") }}');
+                showToast('{{ __("register.city_required") }}');
+                cityEl && cityEl.focus();
+                return false;
+            }
+        }
+
         const btn = document.getElementById('btn-next-' + step);
         if (btn) { btn.disabled = true; }
 
@@ -931,6 +1072,18 @@
             showToast('{{ __("register.google_auth_required") }}');
             current = 1;
             showPanel(1);
+            return;
+        }
+
+        // Pre-validate phone
+        const phoneEl  = document.getElementById('phone');
+        const phoneVal = phoneEl ? phoneEl.value.trim() : '';
+        if (!isValidYemenPhone(phoneVal)) {
+            current = 2;
+            showPanel(2);
+            setError('phone', '{{ __("register.phone_invalid") }}');
+            showToast('{{ __("register.phone_invalid") }}');
+            phoneEl && phoneEl.focus();
             return;
         }
 
@@ -1006,6 +1159,125 @@
             el.addEventListener('change', () => setError(id, null));
         }
     });
+
+    /* ── Real-time Yemeni Phone Mask & Carrier Detection ────────── */
+    const phoneInput   = document.getElementById('phone');
+    const phoneWrapper = document.getElementById('phone-wrapper');
+    const carrierBadge = document.getElementById('carrier-badge');
+    const statusIcon   = document.getElementById('phone-status-icon');
+    const phoneCounter = document.getElementById('phone-counter');
+
+    const YEMEN_CARRIERS = {
+        '77': { name: 'يمن موبايل', cls: 'carrier-ym' },
+        '78': { name: 'يمن موبايل', cls: 'carrier-ym' },
+        '73': { name: 'يو YOU',     cls: 'carrier-you' },
+        '71': { name: 'سبأفون',     cls: 'carrier-saba' },
+        '70': { name: 'واي Y',      cls: 'carrier-y' },
+    };
+
+    function handlePhoneInput() {
+        if (!phoneInput) return;
+
+        let val = phoneInput.value;
+
+        // Convert Eastern Arabic numerals (٠-٩)
+        const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+        val = val.replace(/[٠-٩]/g, d => arabicDigits.indexOf(d));
+
+        // Strip country code if pasted
+        val = val.replace(/^(\+?967|00967)/, '');
+
+        // Strip leading zero
+        if (val.startsWith('0') && val.length > 1) {
+            val = val.replace(/^0+/, '');
+        }
+
+        // Keep digits only
+        val = val.replace(/\D/g, '');
+
+        // Slice to 9 digits
+        val = val.slice(0, 9);
+        phoneInput.value = val;
+
+        // Counter
+        if (phoneCounter) {
+            phoneCounter.textContent = `${val.length}/9`;
+            phoneCounter.className = val.length === 9 
+                ? 'text-[11px] font-bold text-teal-600' 
+                : 'text-[11px] font-bold text-gray-400';
+        }
+
+        const prefix2 = val.slice(0, 2);
+        const carrier = YEMEN_CARRIERS[prefix2];
+
+        // Carrier Badge
+        if (carrier) {
+            if (carrierBadge) {
+                carrierBadge.textContent = carrier.name;
+                carrierBadge.className = `carrier-badge ${carrier.cls}`;
+                carrierBadge.classList.remove('hidden');
+            }
+        } else {
+            if (carrierBadge) {
+                carrierBadge.classList.add('hidden');
+            }
+        }
+
+        // Empty state
+        if (val.length === 0) {
+            setError('phone', null);
+            if (phoneWrapper) phoneWrapper.classList.remove('is-error', 'is-valid');
+            if (statusIcon) statusIcon.innerHTML = '';
+            return;
+        }
+
+        // Prefix error check if 2+ digits
+        if (val.length >= 2 && !carrier) {
+            setError('phone', '{{ __("register.phone_invalid") }}');
+            if (phoneWrapper) {
+                phoneWrapper.classList.add('is-error');
+                phoneWrapper.classList.remove('is-valid');
+            }
+            if (statusIcon) {
+                statusIcon.innerHTML = `<svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>`;
+            }
+            return;
+        }
+
+        setError('phone', null);
+
+        // Valid 9 digits
+        if (isValidYemenPhone(val)) {
+            if (phoneWrapper) {
+                phoneWrapper.classList.add('is-valid');
+                phoneWrapper.classList.remove('is-error');
+            }
+            if (statusIcon) {
+                statusIcon.innerHTML = `<svg class="w-5 h-5 text-teal-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>`;
+            }
+        } else {
+            if (phoneWrapper) phoneWrapper.classList.remove('is-valid', 'is-error');
+            if (statusIcon) statusIcon.innerHTML = '';
+        }
+    }
+
+    if (phoneInput) {
+        phoneInput.addEventListener('input', handlePhoneInput);
+        phoneInput.addEventListener('paste', () => setTimeout(handlePhoneInput, 0));
+        phoneInput.addEventListener('blur', function () {
+            const val = this.value.trim();
+            if (val.length > 0 && !isValidYemenPhone(val)) {
+                setError('phone', '{{ __("register.phone_invalid") }}');
+                if (phoneWrapper) {
+                    phoneWrapper.classList.add('is-error');
+                    phoneWrapper.classList.remove('is-valid');
+                }
+            }
+        });
+        if (phoneInput.value) {
+            handlePhoneInput();
+        }
+    }
 
     @if (session('error'))
         showToast(@json(session('error')), 'error');

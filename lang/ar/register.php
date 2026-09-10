@@ -50,9 +50,9 @@ return [
 
     // ─── Step 2 fields ──────────────────────────────────────────────────────────
     'phone'                   => 'رقم الهاتف / واتساب',
-    'phone_placeholder'       => 'مثال: +966 5X XXX XXXX',
+    'phone_placeholder'       => '77XXXXXXX',
     'city'                    => 'المدينة',
-    'city_placeholder'        => 'مثال: الرياض، جدة، مكة...',
+    'city_placeholder'        => 'مثال: صنعاء، عدن، تعز...',
     'address'                 => 'العنوان التفصيلي (اختياري)',
     'address_placeholder'     => 'الحي، الشارع...',
 
@@ -66,7 +66,7 @@ return [
     'graduation_year'         => 'سنة التخرج',
     'graduation_year_placeholder' => 'مثال: 2024',
     'workplace'               => 'جهة العمل / الجامعة (اختياري)',
-    'workplace_placeholder'   => 'مثال: مستشفى الملك فهد...',
+    'workplace_placeholder'   => 'مثال: مستشفى الثورة...',
 
     // ─── Validation messages ────────────────────────────────────────────────────
     'name_required'           => 'الاسم الكامل مطلوب.',
@@ -78,7 +78,7 @@ return [
     'password_confirmed'      => 'كلمتا المرور غير متطابقتين.',
     'password_min'            => 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.',
     'phone_required'          => 'رقم الهاتف مطلوب.',
-    'phone_invalid'           => 'صيغة رقم الهاتف غير صحيحة.',
+    'phone_invalid'           => 'يجب أن يكون رقم جوال يمني مكون من 9 أرقام يبدأ بـ (77, 73, 78, 71, 70).',
     'city_required'           => 'المدينة مطلوبة.',
     'specialty_required'      => 'يرجى اختيار التخصص المهني.',
     'specialty_invalid'       => 'التخصص المهني المختار غير صالح.',
