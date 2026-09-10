@@ -145,7 +145,7 @@
                                     <label for="phone" class="cyber-label absolute left-5 rtl:right-5 rtl:left-auto text-white/70 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-white peer-focus:bg-primary peer-focus:px-2 rounded">
                                         {{ __('land.contact_phone') }}
                                     </label>
-                                    <span id="carrier-badge" class="carrier-badge hidden absolute left-4 top-4 text-[11px] font-bold px-2 py-0.5 rounded-full pointer-events-none"></span>
+                                    <span id="carrier-badge" class="carrier-badge hidden"></span>
                                 </div>
                                 <div class="input-group">
                                     <input type="text" id="subject" name="subject" required placeholder=" " 
@@ -195,6 +195,10 @@
                             <p class="text-white/60 text-lg leading-relaxed max-w-sm">
                                 {{ __('land.contact_success_body') }}
                             </p>
+
+                            <button type="button" id="send-another-btn" class="mt-8 inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold transition-all">
+                                <span>{{ app()->getLocale() === 'ar' ? 'إرسال رسالة أخرى' : 'Send another message' }}</span>
+                            </button>
                         </div>
 
                     </div>
@@ -212,12 +216,8 @@
         .input-group {
             position: relative;
         }
-        .cyber-label {
-            top: -0.65rem;
-            pointer-events: none;
-        }
+
         .cyber-input {
-            /* Fix autocomplete background colors overlapping transparency */
             background-color: rgba(255,255,255,0.04) !important;
             color-scheme: dark;
         }
@@ -226,8 +226,59 @@
             -webkit-text-fill-color: white !important;
             transition: background-color 5000s ease-in-out 0s;
         }
-        
+
+        /* Floating Cyber Label System */
+        .cyber-label {
+            position: absolute;
+            pointer-events: none;
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+
+        /* Directional alignment for floating labels */
+        [dir="rtl"] .cyber-label,
+        html[dir="rtl"] .cyber-label {
+            right: 1.25rem;
+            left: auto;
+        }
+        [dir="ltr"] .cyber-label,
+        html[dir="ltr"] .cyber-label {
+            left: 1.25rem;
+            right: auto;
+        }
+
+        /* 1. Empty & unfocused state: label rests inside input like a sleek placeholder */
+        .cyber-input:placeholder-shown ~ .cyber-label {
+            top: 1rem !important;
+            font-size: 0.95rem !important;
+            color: rgba(255, 255, 255, 0.6) !important;
+            background: transparent !important;
+            padding: 0 !important;
+        }
+
+        /* 2. Focused OR has entered text: label floats up smoothly to top border */
+        .cyber-input:focus ~ .cyber-label,
+        .cyber-input:not(:placeholder-shown) ~ .cyber-label {
+            top: -0.65rem !important;
+            font-size: 0.75rem !important;
+            color: #ffffff !important;
+            background-color: #1A52CE !important; /* Platform Primary */
+            padding: 0 0.5rem !important;
+            border-radius: 0.25rem !important;
+        }
+
+        /* Teal accent on focus for email & subject */
+        #email:focus ~ .cyber-label,
+        #subject:focus ~ .cyber-label {
+            color: #14B8A6 !important;
+        }
+
+        /* Phone Carrier Badge (Discreet chip inside right side of phone input) */
         .carrier-badge {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
             display: inline-flex;
             align-items: center;
             gap: 4px;
@@ -237,11 +288,24 @@
             font-weight: 800;
             transition: all 0.25s ease;
             z-index: 10;
+            pointer-events: none;
         }
         .carrier-ym    { background: rgba(59, 130, 246, 0.25); color: #93c5fd; border: 1px solid rgba(147, 197, 253, 0.5); }
         .carrier-you   { background: rgba(245, 158, 11, 0.25); color: #fde68a; border: 1px solid rgba(253, 230, 138, 0.5); }
         .carrier-saba  { background: rgba(239, 68, 68, 0.25); color: #fca5a5; border: 1px solid rgba(252, 165, 165, 0.5); }
         .carrier-y     { background: rgba(13, 148, 136, 0.25); color: #99f6e4; border: 1px solid rgba(153, 246, 228, 0.5); }
+
+        .cyber-error {
+            position: absolute;
+            bottom: -1.35rem;
+            left: 0;
+            right: 0;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #f87171;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+        }
 
         .glow-text {
             text-shadow: 0 0 40px rgba(255,255,255,0.1);
@@ -266,11 +330,11 @@
         }
         
         .animate-fade-in {
-            animation: fadeIn 0.6s ease-out forwards;
+            animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
+            from { opacity: 0; transform: scale(0.96); }
             to { opacity: 1; transform: scale(1); }
         }
 
@@ -308,10 +372,12 @@
                     const carrier = window.YemenPhone.getCarrier(clean);
                     if (carrier && clean.length >= 2) {
                         carrierBadge.textContent = carrier.name;
-                        carrierBadge.className = 'carrier-badge ' + carrier.cls + ' absolute left-4 top-4 text-[11px] font-bold px-2 py-0.5 rounded-full';
+                        carrierBadge.className = 'carrier-badge ' + carrier.cls;
                         carrierBadge.classList.remove('hidden');
+                        carrierBadge.style.display = 'inline-flex';
                     } else {
                         carrierBadge.classList.add('hidden');
+                        carrierBadge.style.display = 'none';
                     }
                 }
 
@@ -328,7 +394,7 @@
                     if (input) {
                         if (!firstInput) firstInput = input;
                         const errorEl = document.createElement('p');
-                        errorEl.className = 'cyber-error text-xs font-bold text-red-400 mt-2 absolute -bottom-5 w-full';
+                        errorEl.className = 'cyber-error';
                         errorEl.innerText = errors[field][0];
                         input.parentNode.appendChild(errorEl);
 
@@ -428,16 +494,28 @@
                         body: formData,
                         headers: {
                             'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         }
                     })
-                    .then(res => res.json().then(data => ({ status: res.status, body: data })))
+                    .then(async res => {
+                        let data;
+                        try {
+                            data = await res.json();
+                        } catch (err) {
+                            data = { message: 'استجابة غير متوقعة من الخادم.' };
+                        }
+                        return { status: res.status, ok: res.ok, body: data };
+                    })
                     .then(response => {
                         if (response.status === 422) {
                             showErrors(response.body.errors || {});
-                        } else if (response.status === 201 || response.status === 200) {
+                        } else if (response.ok || response.status === 201 || response.status === 200) {
                             form.reset();
-                            if (carrierBadge) carrierBadge.classList.add('hidden');
+                            if (carrierBadge) {
+                                carrierBadge.classList.add('hidden');
+                                carrierBadge.style.display = 'none';
+                            }
                             successMsg.style.display = 'flex';
                         } else {
                             alert(response.body?.message || 'تعذر إرسال الرسالة، يرجى المحاولة مرة أخرى.');
@@ -470,6 +548,17 @@
                         if (error) error.remove();
                     });
                 });
+
+                // Reset and send another message button
+                const sendAnotherBtn = document.getElementById('send-another-btn');
+                if (sendAnotherBtn) {
+                    sendAnotherBtn.addEventListener('click', function () {
+                        successMsg.style.display = 'none';
+                        submitText.innerHTML = "{{ __('land.contact_submit') }}";
+                        const firstInput = document.getElementById('name');
+                        if (firstInput) firstInput.focus();
+                    });
+                }
             }
         });
     </script>
