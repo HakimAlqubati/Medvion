@@ -3,6 +3,14 @@
         {{ __('land.contact_page_title') }}
     </x-slot:title>
 
+    @php
+        $siteEmail = $siteEmail ?? (\App\Models\Setting::getSetting('contact_email') ?: 'medvion04@gmail.com');
+        $sitePhone = $sitePhone ?? (\App\Models\Setting::getSetting('contact_phone') ?: '733989589');
+        $whatsapp = $whatsapp ?? (\App\Models\Setting::getSetting('whatsapp_number') ?: $sitePhone);
+        $whatsappClean = preg_replace('/[^0-9]/', '', $whatsapp);
+        $emailParts = explode('@', $siteEmail);
+    @endphp
+
     {{-- =========================================================
          FUTURISTIC CONTACT PAGE - YEAR 2'000'000 AD THEME
          ========================================================= --}}
@@ -59,7 +67,7 @@
                     <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-startperspective-1000">
                         
                         {{-- WhatsApp / Support Card --}}
-                        <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="floating-card group relative flex items-center gap-5 p-6 rounded-3xl border border-white/10 bg-white/[0.08] backdrop-blur-xl transition-all duration-500 hover:bg-white/[0.15] hover:border-white/30 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)]">
+                        <a href="https://wa.me/{{ $whatsappClean }}" target="_blank" rel="noopener noreferrer" class="floating-card group relative flex items-center gap-5 p-6 rounded-3xl border border-white/10 bg-white/[0.08] backdrop-blur-xl transition-all duration-500 hover:bg-white/[0.15] hover:border-white/30 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)]">
                             <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/30 group-hover:scale-110 transition-transform duration-500">
                                 <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -67,13 +75,13 @@
                             </div>
                             <div class="text-start">
                                 <p class="text-xs uppercase tracking-widest text-white/90 mb-1 font-semibold">{{ __('land.contact_whatsapp') }}</p>
-                                <p class="font-bold text-white text-lg drop-shadow-sm">{{ __('land.contact_whatsapp_desc') }}</p>
+                                <p class="font-bold text-white text-lg font-mono drop-shadow-sm" dir="ltr">{{ $whatsapp }}</p>
                             </div>
                             <div class="absolute inset-0 rounded-3xl border border-white/0 group-hover:border-white/10 transition-colors duration-500 pointer-events-none"></div>
                         </a>
 
                         {{-- Email Card --}}
-                        <a href="mailto:support@medvion.com" class="floating-card delay-100 group relative flex items-center gap-5 p-6 rounded-3xl border border-white/10 bg-white/[0.08] backdrop-blur-xl transition-all duration-500 hover:bg-white/[0.15] hover:border-secondary/40 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(13,148,136,0.2)]">
+                        <a href="mailto:{{ $siteEmail }}" class="floating-card delay-100 group relative flex items-center gap-5 p-6 rounded-3xl border border-white/10 bg-white/[0.08] backdrop-blur-xl transition-all duration-500 hover:bg-white/[0.15] hover:border-secondary/40 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(13,148,136,0.2)]">
                             <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary to-teal-700 flex items-center justify-center shadow-lg shadow-secondary/30 group-hover:scale-110 transition-transform duration-500">
                                 <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -81,7 +89,13 @@
                             </div>
                             <div class="text-start">
                                 <p class="text-xs uppercase tracking-widest text-white/90 mb-1 font-semibold">{{ __('land.contact_support_email') }}</p>
-                                <p class="font-bold text-white text-lg font-mono drop-shadow-sm">hello<span class="text-secondary-light">@</span>medvion.com</p>
+                                <p class="font-bold text-white text-lg font-mono drop-shadow-sm">
+                                    @if(count($emailParts) === 2)
+                                        {{ $emailParts[0] }}<span class="text-secondary-light">@</span>{{ $emailParts[1] }}
+                                    @else
+                                        {{ $siteEmail }}
+                                    @endif
+                                </p>
                             </div>
                         </a>
 

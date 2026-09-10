@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\StoreContactMessageRequest;
+use App\Models\Setting;
 use App\Services\Frontend\ContactService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
@@ -15,7 +16,11 @@ class ContactController extends Controller
      */
     public function index(): View
     {
-        return view('contact');
+        $siteEmail = Setting::getSetting('contact_email') ?: 'medvion04@gmail.com';
+        $sitePhone = Setting::getSetting('contact_phone') ?: '733989589';
+        $whatsapp = Setting::getSetting('whatsapp_number') ?: $sitePhone;
+
+        return view('contact', compact('siteEmail', 'whatsapp'));
     }
 
     /**
