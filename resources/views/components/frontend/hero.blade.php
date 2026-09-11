@@ -28,14 +28,15 @@
     class="relative overflow-hidden bg-[#020b18] min-h-[100svh] md:min-h-screen flex items-end md:items-center"
     dir="{{ $isRtl ? 'rtl' : 'ltr' }}"
 >
-    {{-- Background video --}}
+    {{-- Background video with instant poster & lifecycle management --}}
     <div class="absolute inset-0 z-0 overflow-hidden bg-[#020b18]">
         <video 
-            autoplay 
+            id="hero-bg-video"
             loop 
             muted 
             playsinline 
-            preload="auto"
+            preload="none"
+            poster="{{ asset('images/hero-bg.png') }}"
             class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none hero-bg-video"
         >
             <source src="{{ asset('video/hero.mp4') }}" type="video/mp4">
@@ -144,7 +145,6 @@
 }
 
 .hero-bg-video {
-    will-change: transform, opacity;
     backface-visibility: hidden;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
@@ -259,4 +259,64 @@
     }
 }
 </style>
+@endpush
+
+@push('scripts')
+<script>
+(() => {
+    const video = document.getElementById('hero-bg-video');
+    const hero = document.getElementById('hero-root');
+    if (!video || !hero) return;
+
+    // Respect accessibility & power saving
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
+    let isHeroVisible = false;
+
+    const safePlay = () => {
+        if (video.paused && isHeroVisible && !document.hidden) {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Browser policy / low power handling fails silently
+                });
+            }
+        }
+    };
+
+    const safePause = () => {
+        if (!video.paused) {
+            video.pause();
+        }
+    };
+
+    // Native lightweight observer: 0% CPU overhead while scrolling downstream
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            isHeroVisible = entry.isIntersecting;
+            if (isHeroVisible) {
+                safePlay();
+            } else {
+                safePause();
+            }
+        });
+    }, {
+        rootMargin: '120px 0px 120px 0px',
+        threshold: 0.05
+    });
+
+    observer.observe(hero);
+
+    // Save GPU & Battery when tab is switched/minimized
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            safePause();
+        } else if (isHeroVisible) {
+            safePlay();
+        }
+    }, { passive: true });
+})();
+</script>
 @endpush
