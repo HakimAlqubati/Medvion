@@ -1,7 +1,4 @@
-<x-layouts.frontend>
-    <x-slot:title>
-        {{ __('land.contact_page_title') }}
-    </x-slot:title>
+<x-layouts.frontend :title="__('land.contact_page_title')" canonical="https://medvion.org/contact">
 
     @php
         $siteEmail = $siteEmail ?? (\App\Models\Setting::getSetting('contact_email') ?: 'medvion04@gmail.com');

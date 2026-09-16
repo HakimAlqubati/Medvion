@@ -1,2 +1,34 @@
+# Medvion Platform - Search Engine Crawling Rules
+# Primary Domain: https://medvion.org/
+
 User-agent: *
-Disallow:
+Allow: /
+Allow: /about
+Allow: /contact
+Allow: /blogs
+Allow: /blogs/*
+Allow: /expert-board
+Allow: /privacy-policy
+Allow: /terms-conditions
+Allow: /build/
+Allow: /storage/
+Allow: /images/
+Allow: /fonts/
+Allow: /css/
+Allow: /js/
+
+# Disallow administrative, authenticated, and private routes
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /courses/
+Disallow: /courses/*
+Disallow: /livewire/
+Disallow: /locale/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://medvion.org/sitemap.xml
+
+# Host directive
+Host: medvion.org

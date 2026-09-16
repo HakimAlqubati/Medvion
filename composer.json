@@ -17,6 +17,7 @@
         "laravel/tinker": "^3.0",
         "spatie/laravel-backup": "^10.2",
         "spatie/laravel-permission": "^7.2",
+        "spatie/laravel-sitemap": "^8.0",
         "spatie/laravel-translatable": "^6.13"
     },
     "require-dev": {

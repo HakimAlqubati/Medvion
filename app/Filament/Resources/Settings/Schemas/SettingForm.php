@@ -56,6 +56,36 @@ class SettingForm
                             ]),
                         ]),
 
+                    Tab::make(__('admin.settings.tabs.seo'))
+                        ->icon('heroicon-o-globe-alt')
+                        ->schema([
+                            Grid::make(2)->schema([
+                                TextInput::make('meta_title')
+                                    ->label(__('admin.settings.fields.meta_title'))
+                                    ->placeholder('منصة Medvion | التدريب والتأهيل الصحي الرقمي')
+                                    ->columnSpanFull(),
+                                Textarea::make('meta_description')
+                                    ->label(__('admin.settings.fields.meta_description'))
+                                    ->rows(3)
+                                    ->columnSpanFull(),
+                                TextInput::make('meta_keywords')
+                                    ->label(__('admin.settings.fields.meta_keywords'))
+                                    ->columnSpanFull(),
+                                TextInput::make('google_site_verification')
+                                    ->label(__('admin.settings.fields.google_site_verification'))
+                                    ->columnSpan(1),
+                                TextInput::make('bing_site_verification')
+                                    ->label(__('admin.settings.fields.bing_site_verification'))
+                                    ->columnSpan(1),
+                                FileUpload::make('og_image')
+                                    ->label(__('admin.settings.fields.og_image'))
+                                    ->image()
+                                    ->directory('settings')
+                                    ->disk('public')
+                                    ->columnSpanFull(),
+                            ]),
+                        ]),
+
                 ])
             ]);
     }

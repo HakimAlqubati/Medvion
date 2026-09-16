@@ -1,4 +1,18 @@
-<x-layouts.frontend :title="(__('land.blog_section_title') ?? 'Medvion Blog') . ' | منصة Medvion'">
+@php
+    $blogIndexTitle = __('land.blog_section_title') ?? 'مدونة منصة Medvion | مقالات صحية وطبية';
+    $blogIndexDesc = __('land.blog_section_subtitle') ?? 'اطلع على أحدث المقالات والرؤى الطبية والصحية المتخصصة في التدريب والتأهيل الصحي الرقمي.';
+    $breadcrumbs = [
+        ['name' => __('land.nav_home') ?? 'الرئيسية', 'url' => 'https://medvion.org/'],
+        ['name' => $blogIndexTitle, 'url' => 'https://medvion.org/blogs'],
+    ];
+@endphp
+
+<x-layouts.frontend 
+    :title="$blogIndexTitle"
+    :description="$blogIndexDesc"
+    canonical="https://medvion.org/blogs"
+    :breadcrumbs="$breadcrumbs"
+>
 
     {{-- Hero Section --}}
     <section class="relative bg-gradient-to-br from-primary-dark via-primary to-primary-light text-white pt-44 pb-20 lg:pt-52 lg:pb-28">

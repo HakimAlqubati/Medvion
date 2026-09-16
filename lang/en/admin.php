@@ -501,6 +501,7 @@ return [
             'general' => 'General Settings',
             'contact' => 'Contact Settings',
             'social'  => 'Social Settings',
+            'seo'     => 'Search Engines (SEO)',
         ],
         'fields' => [
             'site_name' => 'Site Name',
@@ -514,6 +515,12 @@ return [
             'twitter_url' => 'Twitter URL',
             'instagram_url' => 'Instagram URL',
             'linkedin_url' => 'LinkedIn URL',
+            'meta_title' => 'Meta Title (Search Engine Title)',
+            'meta_description' => 'Meta Description (Search Engine Description)',
+            'meta_keywords' => 'Meta Keywords',
+            'google_site_verification' => 'Google Search Console Verification Code',
+            'bing_site_verification' => 'Bing Webmaster Verification Code',
+            'og_image' => 'Default Social Share Image (OG Image)',
         ],
     ],
 ];

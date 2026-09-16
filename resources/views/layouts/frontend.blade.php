@@ -1,11 +1,35 @@
+@props([
+    'title' => null,
+    'description' => null,
+    'keywords' => null,
+    'image' => null,
+    'type' => 'website',
+    'canonical' => null,
+    'publishedTime' => null,
+    'modifiedTime' => null,
+    'author' => null,
+    'breadcrumbs' => null,
+])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ __('land.meta_description') }}">
-    <title>{{ $title ?? __('land.title') }}</title>
+
+    {{-- SEO & Search Engine Optimization --}}
+    <x-seo 
+        :title="$title" 
+        :description="$description" 
+        :keywords="$keywords" 
+        :image="$image" 
+        :type="$type" 
+        :canonical="$canonical" 
+        :published-time="$publishedTime" 
+        :modified-time="$modifiedTime" 
+        :author="$author" 
+        :breadcrumbs="$breadcrumbs" 
+    />
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=tajawal:400,500,700,800&display=swap" rel="stylesheet" />
@@ -13,7 +37,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        body { font-family: 'Tajawal', sans-serif; background: #030a18; }
+        body { font-family: 'Tajawal', sans-serif; }
     </style>
 
     @stack('styles')

@@ -501,6 +501,7 @@ return [
             'general' => 'الإعدادات العامة',
             'contact' => 'إعدادات التواصل',
             'social'  => 'التواصل الاجتماعي',
+            'seo'     => 'محركات البحث (SEO)',
         ],
         'fields' => [
             'site_name' => 'اسم الموقع',
@@ -515,6 +516,12 @@ return [
             'twitter_url' => 'رابط تويتر',
             'instagram_url' => 'رابط إنستغرام',
             'linkedin_url' => 'رابط لينكد إن',
+            'meta_title' => 'عنوان الموقع لمحركات البحث (Meta Title)',
+            'meta_description' => 'الوصف الافتراضي لمحركات البحث (Meta Description)',
+            'meta_keywords' => 'الكلمات المفتاحية (Meta Keywords)',
+            'google_site_verification' => 'كود التحقق من Google Search Console',
+            'bing_site_verification' => 'كود التحقق من Bing Webmaster',
+            'og_image' => 'صورة المشاركة الافتراضية للشبكات ومحركات البحث (OG Image)',
         ],
     ],
 ];

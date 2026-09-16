@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\CourseController;
 use App\Http\Controllers\Frontend\CourseRegistrationController;
+use App\Http\Controllers\Frontend\SitemapController;
 use App\Http\Controllers\Frontend\SurveyController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,9 @@ Route::post('/expert-board', [SurveyController::class, 'store'])->name('expert-b
 // ─── Blog ────────────────────────────────────────────────────────────
 Route::get('/blogs', [\App\Http\Controllers\Frontend\BlogController::class, 'index'])->name('blogs.index');
 Route::get('/blogs/{slug}', [\App\Http\Controllers\Frontend\BlogController::class, 'show'])->name('blogs.show');
+
+// ─── SEO & Sitemap ───────────────────────────────────────────────────
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // ─── Courses — Authentication required ────────────────────────────────────────
 

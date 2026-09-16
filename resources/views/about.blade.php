@@ -1,4 +1,13 @@
-<x-layouts.frontend :title="($page_hero->title ?? __('land.about_page_title')) . ' | منصة Medvion'">
+@php
+    $aboutTitle = $page_hero->title ?? __('land.about_page_title') ?? 'من نحن | منصة Medvion';
+    $aboutDesc = trim(strip_tags($page_hero->content ?? '')) ?: __('land.about_hero_subtitle');
+@endphp
+
+<x-layouts.frontend 
+    :title="$aboutTitle"
+    :description="$aboutDesc"
+    canonical="https://medvion.org/about"
+>
 
     {{-- About Hero --}}
     <section class="relative bg-gradient-to-br from-primary-dark via-primary to-primary-light text-white pt-44 pb-20 lg:pt-52 lg:pb-28">

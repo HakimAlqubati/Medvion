@@ -1,4 +1,27 @@
-<x-layouts.frontend :title="$blog->title . ' | منصة Medvion'">
+@php
+    $blogTitle = is_array($blog->title) ? ($blog->title[app()->getLocale()] ?? $blog->title['ar'] ?? '') : $blog->title;
+    $blogDesc = is_array($blog->short_description) ? ($blog->short_description[app()->getLocale()] ?? $blog->short_description['ar'] ?? '') : $blog->short_description;
+    $blogImage = $blog->main_image ? asset('storage/' . $blog->main_image) : null;
+    $authorName = $blog->creator?->name ?? 'منصة Medvion';
+    $canonicalUrl = "https://medvion.org/blogs/{$blog->slug}";
+    $breadcrumbs = [
+        ['name' => __('land.nav_home') ?? 'الرئيسية', 'url' => 'https://medvion.org/'],
+        ['name' => __('land.blogs') ?? 'المدونة والمقالات', 'url' => 'https://medvion.org/blogs'],
+        ['name' => (string) $blogTitle, 'url' => $canonicalUrl],
+    ];
+@endphp
+
+<x-layouts.frontend 
+    :title="$blogTitle"
+    :description="$blogDesc"
+    :image="$blogImage"
+    type="article"
+    :canonical="$canonicalUrl"
+    :published-time="$blog->published_at"
+    :modified-time="$blog->updated_at"
+    :author="$authorName"
+    :breadcrumbs="$breadcrumbs"
+>
 
     {{-- Article Hero Section --}}
     <section class="relative pt-32 pb-16 lg:pt-40 lg:pb-24 bg-white overflow-hidden">

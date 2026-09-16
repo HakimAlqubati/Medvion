@@ -1,7 +1,4 @@
-<x-layouts.frontend>
-    <x-slot:title>
-        {{ $page->title }}
-    </x-slot:title>
+<x-layouts.frontend :title="$page->title" canonical="https://medvion.org/terms-conditions">
 
     <section class="bg-gray-50 pt-40 pb-12 md:pt-48 md:pb-20 border-b border-gray-200">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

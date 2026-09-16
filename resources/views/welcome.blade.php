@@ -1,4 +1,8 @@
-<x-layouts.frontend :title="__('land.title')">
+<x-layouts.frontend 
+    :title="__('land.title')" 
+    :description="__('land.meta_description')"
+    canonical="https://medvion.org/"
+>
     <x-frontend.hero :slides="$slides" />
     <x-frontend.about :alt-bg="false" />
     <x-frontend.features :alt-bg="true" :features="$features" />

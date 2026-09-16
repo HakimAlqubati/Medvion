@@ -4,9 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ __('land.expert_survey_title') }} | Medvion Elite</title>
-    
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+
+    <x-seo 
+        :title="__('land.expert_survey_title') . ' | Medvion Elite'"
+        description="شارك في استبيان الخبراء والأكاديميين لدى منصة Medvion للمساهمة في تطوير البرامج التدريبية والتأهيلية."
+        canonical="https://medvion.org/expert-board"
+    />
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=tajawal:400,500,700,800&display=swap" rel="stylesheet" />
 

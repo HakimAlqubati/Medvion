@@ -77,18 +77,22 @@ class Blog extends Model
 
         static::saved(function () {
             \App\Services\Frontend\BlogService::clearCache();
+            try { \App\Services\Frontend\SitemapService::generateToFile(); } catch (\Throwable $e) {}
         });
 
         static::deleted(function () {
             \App\Services\Frontend\BlogService::clearCache();
+            try { \App\Services\Frontend\SitemapService::generateToFile(); } catch (\Throwable $e) {}
         });
 
         static::restored(function () {
             \App\Services\Frontend\BlogService::clearCache();
+            try { \App\Services\Frontend\SitemapService::generateToFile(); } catch (\Throwable $e) {}
         });
 
         static::forceDeleted(function () {
             \App\Services\Frontend\BlogService::clearCache();
+            try { \App\Services\Frontend\SitemapService::generateToFile(); } catch (\Throwable $e) {}
         });
     }
 }
