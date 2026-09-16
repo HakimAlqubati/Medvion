@@ -48,6 +48,6 @@ return [
     | Search Engine Verifications
     |--------------------------------------------------------------------------
     */
-    'google_site_verification' => env('GOOGLE_SITE_VERIFICATION', null),
+    'google_site_verification' => env('GOOGLE_SITE_VERIFICATION', 'oR3bR6gYVt17dllF9wKN0_qu1f5xXIyAHaPY4mpYrxg'),
     'bing_site_verification'   => env('BING_SITE_VERIFICATION', null),
 ];
