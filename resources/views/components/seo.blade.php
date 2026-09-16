@@ -59,6 +59,22 @@
     $googleVerification = Setting::getSetting('google_site_verification', config('seo.google_site_verification'));
     $bingVerification = Setting::getSetting('bing_site_verification', config('seo.bing_site_verification'));
 
+    if (!empty($googleVerification)) {
+        if (preg_match('/content=["\']([^"\']+)["\']/i', $googleVerification, $matches)) {
+            $googleVerification = $matches[1];
+        } else {
+            $googleVerification = trim(strip_tags($googleVerification));
+        }
+    }
+
+    if (!empty($bingVerification)) {
+        if (preg_match('/content=["\']([^"\']+)["\']/i', $bingVerification, $matches)) {
+            $bingVerification = $matches[1];
+        } else {
+            $bingVerification = trim(strip_tags($bingVerification));
+        }
+    }
+
     // Social handles & contacts
     $twitterHandle = config('seo.twitter_handle', '@MedvionOrg');
     $facebookUrl = Setting::getSetting('facebook_url');
